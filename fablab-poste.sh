@@ -199,6 +199,24 @@ else
   sed -i 's|LD_LIBRARY_PATH="/home/tomate/mightyscape/papercraft_unfold/admesh/linux/.libs:|LD_LIBRARY_PATH="$progdir:|' \
     "$ADMESH_WRAPPER" >>"$JOURNAL" 2>&1 && ok "admesh : chemin LD_LIBRARY_PATH corrigé"
 
+  # Correction papercraft_unfold.py :
+  # 1. fstl : prévisualisation Qt5 ignorée si Qt5 absent (sandbox Flatpak)
+  # 2. bounding_box : try/except pour incompatibilité API inkex 1.4 (_Element lxml brut)
+  PU="$MS_DIR/extensions/fablabchemnitz/papercraft_unfold/papercraft_unfold.py"
+  python3 - "$PU" >>"$JOURNAL" 2>&1 <<'PYFIX'
+import sys
+path = sys.argv[1]
+src = open(path).read()
+old  = '            p = Popen(fstl_cmd, shell=True)\n            p.wait()'
+new  = '            try:\n                p = Popen(fstl_cmd, shell=True, stderr=PIPE)\n                p.wait()\n                if p.returncode != 0:\n                    inkex.utils.debug("fstl viewer unavailable (Qt5 missing?) \xe2\x80\x94 skipping preview")\n            except Exception:\n                pass'
+old2 = '            bbox = inkex.elements._selected.ElementList.bounding_box(doc)'
+new2 = '            try:\n                bbox = inkex.elements._selected.ElementList.bounding_box(doc)\n            except (ValueError, AttributeError, TypeError):\n                bbox = None'
+if old in src:  src = src.replace(old, new)
+if old2 in src: src = src.replace(old2, new2)
+open(path, 'w').write(src)
+PYFIX
+  ok "papercraft_unfold.py : fstl et bounding_box corrigés"
+
   # uv : gestionnaire Python rapide (installé en tant qu'utilisateur)
   if [[ ! -f "$HOME_UTIL/.local/bin/uv" ]]; then
     en_tant_que bash -c 'curl -LsSf https://astral.sh/uv/install.sh | sh' >>"$JOURNAL" 2>&1

@@ -115,6 +115,34 @@ ADMESH_WRAPPER="$MIGHTYSCAPE_DIR/extensions/fablabchemnitz/papercraft_unfold/adm
 sed -i 's|LD_LIBRARY_PATH="/home/tomate/mightyscape/papercraft_unfold/admesh/linux/.libs:|LD_LIBRARY_PATH="$progdir:|' \
     "$ADMESH_WRAPPER" && success "admesh : chemin LD_LIBRARY_PATH corrigé"
 
+# Correction papercraft_unfold.py :
+# 1. fstl (prévisualisation Qt5) : ignoré silencieusement si Qt5 absent (sandbox Flatpak)
+# 2. bounding_box : API inkex 1.4 incompatible avec _Element lxml brut → try/except
+PU="$MIGHTYSCAPE_DIR/extensions/fablabchemnitz/papercraft_unfold/papercraft_unfold.py"
+# Fix fstl : ajouter try/except autour du Popen
+python3 - "$PU" <<'PYFIX'
+import re, sys
+path = sys.argv[1]
+src = open(path).read()
+old = '''            p = Popen(fstl_cmd, shell=True)
+            p.wait()'''
+new = '''            try:
+                p = Popen(fstl_cmd, shell=True, stderr=PIPE)
+                p.wait()
+                if p.returncode != 0:
+                    inkex.utils.debug("fstl viewer unavailable (Qt5 missing?) — skipping preview")
+            except Exception:
+                pass'''
+old2 = '            bbox = inkex.elements._selected.ElementList.bounding_box(doc)'
+new2 = '''            try:\n                bbox = inkex.elements._selected.ElementList.bounding_box(doc)\n            except (ValueError, AttributeError, TypeError):\n                bbox = None'''
+if old in src:
+    src = src.replace(old, new)
+if old2 in src:
+    src = src.replace(old2, new2)
+open(path, 'w').write(src)
+print("papercraft_unfold.py patché")
+PYFIX
+
 # ------------------------------------------------------------
 # 5. Environnement virtuel Python
 # ------------------------------------------------------------
