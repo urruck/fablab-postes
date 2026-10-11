@@ -121,11 +121,18 @@ success "Renommage terminé."
 
 TRANSLATE_SCRIPT="$SCRIPT_DIR/translate_inx.py"
 if [[ -f "$TRANSLATE_SCRIPT" ]]; then
-    info "Traduction en français de toutes les extensions..."
+    info "Traduction en français de toutes les extensions (passe 1)..."
     python3 "$TRANSLATE_SCRIPT" "$MIGHTYSCAPE_DIR/extensions/fablabchemnitz"
-    success "Traduction terminée."
+    success "Traduction passe 1 terminée."
 else
     warn "translate_inx.py introuvable dans $SCRIPT_DIR — traduction ignorée."
+fi
+
+FIX_SCRIPT="$SCRIPT_DIR/fix_patterns_inx.py"
+if [[ -f "$FIX_SCRIPT" ]]; then
+    info "Correction des patterns résiduels (passe 2)..."
+    python3 "$FIX_SCRIPT" "$MIGHTYSCAPE_DIR/extensions/fablabchemnitz"
+    success "Traduction passe 2 terminée."
 fi
 
 # Correction du wrapper admesh : le chemin LD_LIBRARY_PATH est codé en dur
