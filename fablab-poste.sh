@@ -6,8 +6,9 @@
 #  Le script détecte le système et s'adapte tout seul.
 #
 #  Usage :
-#    1. Mettre ce script dans un dossier, avec un sous-dossier "paquets/"
-#       contenant le .deb de xTool Studio (ex. paquets/xTool-Studio_x.y.z.deb)
+#    1. Récupérer le dépôt : git clone https://github.com/urruck/fablab-postes.git
+#       (xTool Studio est téléchargé tout seul depuis le cloud du CSC ;
+#       un .deb déposé dans "paquets/" est utilisé en priorité)
 #    2. Ouvrir un terminal dans ce dossier puis lancer :
 #         sudo bash fablab-poste.sh
 #    3. Redémarrer à la fin (pour les droits Arduino notamment)
@@ -30,6 +31,10 @@ JOURNAL="/var/log/fablab-install.log"
 
 # Guide FreeCAD de Lachiver (parcours web)
 LIEN_TUTOS_LACHIVER="https://freecad.lachiver.fr/v26.3/guideW/co/ParcoursWeb.html"
+
+# Partage Nextcloud du CSC contenant les .deb de xTool Studio pour Linux.
+# Le script y prend automatiquement la version la plus récente.
+XTOOL_PARTAGE="https://cloud.csc49.fr/index.php/s/6FxRn57Lnpda7ds"
 
 # ---------------------------------------------------------------------
 #  Outils internes
@@ -181,19 +186,62 @@ else
 fi
 
 # =====================================================================
-titre "3. Découpe laser : xTool Studio (paquet local) + VisiCut"
+titre "3. Découpe laser : xTool Studio + VisiCut"
 # =====================================================================
+# xTool Studio n'est pas dans les dépôts : on prend d'abord un .deb déposé
+# dans paquets/, sinon on télécharge la version la plus récente depuis le
+# partage Nextcloud du CSC (XTOOL_PARTAGE, en haut du script).
+xtool_telecharger() {
+  local base jeton liste fichier url
+  base="${XTOOL_PARTAGE%%/index.php/s/*}"; base="${base%%/s/*}"
+  jeton="${XTOOL_PARTAGE##*/s/}"; jeton="${jeton%%[/?]*}"
+  mkdir -p "$DOSSIER_PAQUETS"
+  # 1. Lister les .deb du partage (WebDAV public de Nextcloud, ancienne puis nouvelle adresse)
+  for dav in "$base/public.php/webdav/" "$base/public.php/dav/files/$jeton/"; do
+    liste="$(curl -fsS -m 30 -X PROPFIND -H "Depth: 1" -u "$jeton:" "$dav" 2>>"$JOURNAL" \
+      | grep -oiE '<d:href>[^<]+\.deb</d:href>' | sed -E 's#</?d:href>##g')"
+    [[ -n "$liste" ]] || continue
+    # Garder les paquets xTool si le dossier en contient d'autres, puis la version la plus haute
+    if grep -qi xtool <<<"$liste"; then liste="$(grep -i xtool <<<"$liste")"; fi
+    url="$base$(sort -V <<<"$liste" | tail -n1)"
+    fichier="$DOSSIER_PAQUETS/$(basename "$url" | sed 's/%20/_/g')"
+    echo "  Téléchargement de $(basename "$fichier")..." | tee -a "$JOURNAL" >&2
+    if curl -fL -m 1800 --retry 2 -u "$jeton:" -o "$fichier" "$url" 2>>"$JOURNAL"; then
+      echo "$fichier"; return 0
+    fi
+    rm -f "$fichier"
+  done
+  # 2. Secours : télécharger tout le dossier en zip et prendre le .deb le plus récent
+  local zip="$DOSSIER_PAQUETS/xtool-partage.zip"
+  echo "  Téléchargement du dossier partagé complet (zip)..." | tee -a "$JOURNAL" >&2
+  if curl -fL -m 3600 --retry 2 -o "$zip" "$base/index.php/s/$jeton/download" 2>>"$JOURNAL" \
+     && unzip -oj -qq "$zip" '*.deb' -d "$DOSSIER_PAQUETS" >>"$JOURNAL" 2>&1; then
+    rm -f "$zip"
+    find "$DOSSIER_PAQUETS" -maxdepth 1 -iname '*.deb' | sort -V | tail -n1
+    return 0
+  fi
+  rm -f "$zip"
+  return 1
+}
+
 shopt -s nullglob nocaseglob
 DEBS_XTOOL=("$DOSSIER_PAQUETS"/*xtool*.deb)
-shopt -u nocaseglob
+shopt -u nocaseglob nullglob
 if (( ${#DEBS_XTOOL[@]} )); then
-  for deb in "${DEBS_XTOOL[@]}"; do
-    if apt-get install -y "$deb" >>"$JOURNAL" 2>&1; then ok "xTool Studio ($(basename "$deb"))"; else ko "xTool Studio ($(basename "$deb"))"; fi
-  done
+  DEB_XTOOL="$(printf '%s\n' "${DEBS_XTOOL[@]}" | sort -V | tail -n1)"
+  echo "  Paquet xTool local trouvé : $(basename "$DEB_XTOOL")" | tee -a "$JOURNAL"
 else
-  ko "xTool Studio : aucun .deb trouvé dans $DOSSIER_PAQUETS"
+  DEB_XTOOL="$(xtool_telecharger | tail -n1)"
 fi
-shopt -u nullglob
+if [[ -n "${DEB_XTOOL:-}" && -f "$DEB_XTOOL" ]]; then
+  if apt-get install -y "$DEB_XTOOL" >>"$JOURNAL" 2>&1; then
+    ok "xTool Studio ($(basename "$DEB_XTOOL"))"
+  else
+    ko "xTool Studio : échec d'installation de $(basename "$DEB_XTOOL")"
+  fi
+else
+  ko "xTool Studio : téléchargement impossible depuis $XTOOL_PARTAGE (déposer le .deb dans paquets/)"
+fi
 
 deb_depuis_github "VisiCut" "t-oster/VisiCut" "\.deb$"
 

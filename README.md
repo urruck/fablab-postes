@@ -21,9 +21,13 @@ qu'Ubuntu 24.04, il prévient et demande confirmation.
 ```bash
 git clone https://github.com/urruck/fablab-postes.git
 cd fablab-postes
-# Copier le .deb de xTool Studio dans le dossier paquets/
 sudo bash fablab-poste.sh
 ```
+
+xTool Studio est téléchargé automatiquement depuis le cloud du CSC
+(version la plus récente du partage). Pour une installation sans
+internet ou avec une version précise, déposez le .deb dans `paquets/` :
+il sera utilisé en priorité.
 
 Redémarrez ensuite le poste. Le script ne s'arrête pas sur une erreur :
 il affiche à la fin ce qui reste à reprendre à la main.
@@ -34,7 +38,7 @@ Journal complet : `/var/log/fablab-install.log`
 | Domaine | Logiciels |
 |---|---|
 | Vectoriel | Inkscape, Ink/Stitch (broderie), MightyScape (extensions du FabLab Chemnitz) |
-| Découpe laser | xTool Studio (paquet local), VisiCut |
+| Découpe laser | xTool Studio (téléchargé depuis le cloud du CSC), VisiCut |
 | 3D et CAO | FreeCAD, Blender, OpenSCAD, MeshLab, LibreCAD, Sweet Home 3D |
 | Impression 3D | PrusaSlicer, Ultimaker Cura, OrcaSlicer |
 | Électronique | Arduino IDE 2, KiCad, Fritzing, Thonny, esptool |

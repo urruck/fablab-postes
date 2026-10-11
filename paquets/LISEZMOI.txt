@@ -1,5 +1,9 @@
-Déposez ici le paquet .deb de xTool Studio pour Linux
-(nom contenant "xtool", par exemple xTool-Studio_x.y.z_amd64.deb).
+Ce dossier reçoit le paquet .deb de xTool Studio pour Linux.
 
-Ce paquet n'est pas publié dans le dépôt : il est exclu par .gitignore,
-car il ne peut pas être redistribué librement.
+Par défaut, le script le télécharge tout seul depuis le cloud du CSC
+(version la plus récente du partage) et le range ici.
+
+Pour imposer une version précise ou installer sans internet, déposez
+vous-même le .deb ici (nom contenant "xtool") : il sera utilisé en priorité.
+
+Les .deb ne sont jamais publiés sur GitHub (exclus par .gitignore).
