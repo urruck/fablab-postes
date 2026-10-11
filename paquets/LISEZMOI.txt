@@ -1,0 +1,5 @@
+Déposez ici le paquet .deb de xTool Studio pour Linux
+(nom contenant "xtool", par exemple xTool-Studio_x.y.z_amd64.deb).
+
+Ce paquet n'est pas publié dans le dépôt : il est exclu par .gitignore,
+car il ne peut pas être redistribué librement.

@@ -1,0 +1,4 @@
+# Paquets logiciels locaux (xTool Studio, etc.) : jamais publiés
+paquets/*.deb
+paquets/*.AppImage
+*.log
