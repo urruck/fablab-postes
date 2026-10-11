@@ -127,7 +127,7 @@ src = open(path).read()
 old = '''            p = Popen(fstl_cmd, shell=True)
             p.wait()'''
 new = '''            try:
-                p = Popen(fstl_cmd, shell=True, stderr=PIPE)
+                p = Popen(fstl_cmd, shell=True, stderr=subprocess.DEVNULL)
                 p.wait()
                 if p.returncode != 0:
                     inkex.utils.debug("fstl viewer unavailable (Qt5 missing?) — skipping preview")

@@ -208,7 +208,7 @@ import sys
 path = sys.argv[1]
 src = open(path).read()
 old  = '            p = Popen(fstl_cmd, shell=True)\n            p.wait()'
-new  = '            try:\n                p = Popen(fstl_cmd, shell=True, stderr=PIPE)\n                p.wait()\n                if p.returncode != 0:\n                    inkex.utils.debug("fstl viewer unavailable (Qt5 missing?) \xe2\x80\x94 skipping preview")\n            except Exception:\n                pass'
+new  = '            try:\n                p = Popen(fstl_cmd, shell=True, stderr=subprocess.DEVNULL)\n                p.wait()\n                if p.returncode != 0:\n                    inkex.utils.debug("fstl viewer unavailable (Qt5 missing?) \xe2\x80\x94 skipping preview")\n            except Exception:\n                pass'
 old2 = '            bbox = inkex.elements._selected.ElementList.bounding_box(doc)'
 new2 = '            try:\n                bbox = inkex.elements._selected.ElementList.bounding_box(doc)\n            except (ValueError, AttributeError, TypeError):\n                bbox = None'
 if old in src:  src = src.replace(old, new)
