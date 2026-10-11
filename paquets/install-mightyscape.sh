@@ -108,6 +108,13 @@ else
 fi
 success "MightyScape cloné dans $MIGHTYSCAPE_DIR"
 
+# Correction du wrapper admesh : le chemin LD_LIBRARY_PATH est codé en dur
+# avec le chemin de la machine du développeur (/home/tomate/...). On le
+# remplace par $progdir qui est calculé dynamiquement par libtool.
+ADMESH_WRAPPER="$MIGHTYSCAPE_DIR/extensions/fablabchemnitz/papercraft_unfold/admesh/linux/admesh"
+sed -i 's|LD_LIBRARY_PATH="/home/tomate/mightyscape/papercraft_unfold/admesh/linux/.libs:|LD_LIBRARY_PATH="$progdir:|' \
+    "$ADMESH_WRAPPER" && success "admesh : chemin LD_LIBRARY_PATH corrigé"
+
 # ------------------------------------------------------------
 # 5. Environnement virtuel Python
 # ------------------------------------------------------------

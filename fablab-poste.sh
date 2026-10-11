@@ -191,6 +191,14 @@ else
   rm -rf "$MS_DIR/extensions/fablabchemnitz/color_harmony"
   ok "MightyScape : sous-menu renommé FabLab Boc@l, color_harmony retiré"
 
+  # Correction admesh : le wrapper libtool a un chemin LD_LIBRARY_PATH codé en
+  # dur avec le chemin du développeur original (/home/tomate/...). On le
+  # remplace par $progdir calculé dynamiquement, sans quoi papercraft_unfold
+  # échoue avec "libadmesh.so.1: cannot open shared object file".
+  ADMESH_WRAPPER="$MS_DIR/extensions/fablabchemnitz/papercraft_unfold/admesh/linux/admesh"
+  sed -i 's|LD_LIBRARY_PATH="/home/tomate/mightyscape/papercraft_unfold/admesh/linux/.libs:|LD_LIBRARY_PATH="$progdir:|' \
+    "$ADMESH_WRAPPER" >>"$JOURNAL" 2>&1 && ok "admesh : chemin LD_LIBRARY_PATH corrigé"
+
   # uv : gestionnaire Python rapide (installé en tant qu'utilisateur)
   if [[ ! -f "$HOME_UTIL/.local/bin/uv" ]]; then
     en_tant_que bash -c 'curl -LsSf https://astral.sh/uv/install.sh | sh' >>"$JOURNAL" 2>&1
