@@ -122,7 +122,9 @@ apt-get update >>"$JOURNAL" 2>&1
 apt-get -y full-upgrade >>"$JOURNAL" 2>&1 && ok "Système à jour" || ko "Mise à jour système"
 
 apt_install software-properties-common curl wget git unzip p7zip-full \
-  python3-venv python3-pip python3-tk flatpak ffmpeg htop
+  python3-venv python3-pip python3-tk flatpak ffmpeg htop \
+  python3.10 python3.10-dev python3.10-venv \
+  cmake ninja-build
 
 # Logithèque : Zorin et Ubuntu (GNOME) affichent les applis Flatpak via ce
 # greffon. Linux Mint gère déjà Flatpak dans sa propre logithèque.
@@ -138,51 +140,136 @@ flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.f
   >>"$JOURNAL" 2>&1 && ok "Dépôt Flathub" || ko "Dépôt Flathub"
 
 # =====================================================================
-titre "2. Dessin vectoriel : Inkscape + Ink/Stitch + MightyScape (FabLab Chemnitz)"
+titre "2. Dessin vectoriel : Inkscape + Ink/Stitch + MightyScape (FabLab Boc@l)"
 # =====================================================================
-# Inkscape en version .deb récente (pas de snap ni flatpak : Ink/Stitch
-# et MightyScape fonctionnent mal avec ces versions)
-add-apt-repository -y ppa:inkscape.dev/stable >>"$JOURNAL" 2>&1
-apt-get update >>"$JOURNAL" 2>&1
-apt_install inkscape
+# Inkscape via Flatpak : mises à jour automatiques, compatible MightyScape
+# et Ink/Stitch (testé sur Flatpak 1.4+).
+flatpak_install "Inkscape" org.inkscape.Inkscape
 
-# Ink/Stitch (broderie machine) : dernier .deb officiel
-deb_depuis_github "Ink/Stitch" "inkstitch/inkstitch" "amd64\.deb$"
+# Ink/Stitch (broderie machine) : installé dans le répertoire d'extensions Flatpak
+INKSTITCH_URL="$(github_derniere_version "inkstitch/inkstitch" "linux\.sh$")"
+if [[ -n "$INKSTITCH_URL" ]]; then
+  INKSTITCH_SH="/tmp/inkstitch-install.sh"
+  curl -fsSL -o "$INKSTITCH_SH" "$INKSTITCH_URL" >>"$JOURNAL" 2>&1
+  chmod +x "$INKSTITCH_SH"
+  en_tant_que bash "$INKSTITCH_SH" >>"$JOURNAL" 2>&1 && ok "Ink/Stitch" || ko "Ink/Stitch"
+  rm -f "$INKSTITCH_SH"
+else
+  deb_depuis_github "Ink/Stitch" "inkstitch/inkstitch" "amd64\.deb$"
+fi
 
-# MightyScape : ~240 extensions du FabLab Chemnitz (découpe laser, boîtes,
-# chemins, papercraft...). Menu Extensions > FabLab Chemnitz
-EXT_DIR="$HOME_UTIL/.config/inkscape/extensions"
+# ------------------------------------------------------------------
+# MightyScape : ~240 extensions Boc@l (découpe laser, boîtes, tracés,
+# papercraft, 3D...). Menu Inkscape : Extensions > FabLab Boc@l
+# ------------------------------------------------------------------
+
+# Chemin extensions : Flatpak si disponible, sinon apt
+if flatpak list 2>/dev/null | grep -q "org.inkscape.Inkscape"; then
+  INK_USER_DIR="$(en_tant_que flatpak run org.inkscape.Inkscape --user-data-directory 2>/dev/null)"
+  EXT_DIR="${INK_USER_DIR}/extensions"
+else
+  EXT_DIR="$HOME_UTIL/.config/inkscape/extensions"
+fi
 MS_DIR="$EXT_DIR/mightyscape-1.2"
+
 en_tant_que mkdir -p "$EXT_DIR"
 if [[ -d "$MS_DIR/.git" ]]; then
-  en_tant_que git -C "$MS_DIR" pull >>"$JOURNAL" 2>&1
+  en_tant_que git -C "$MS_DIR" pull >>"$JOURNAL" 2>&1 && ok "MightyScape mis à jour"
 else
-  en_tant_que git clone --depth 1 https://github.com/eridur-de/mightyscape-1.2.git "$MS_DIR" >>"$JOURNAL" 2>&1
+  en_tant_que git clone --depth 1 https://github.com/eridur-de/mightyscape-1.2.git "$MS_DIR" \
+    >>"$JOURNAL" 2>&1 && ok "MightyScape cloné"
 fi
-if [[ -d "$MS_DIR" ]]; then
-  ok "MightyScape téléchargé"
-  # Environnement Python dédié, qui garde l'accès aux modules système (inkex)
-  en_tant_que python3 -m venv --system-site-packages "$MS_DIR/venv" >>"$JOURNAL" 2>&1
-  # Installation ligne par ligne : un module récalcitrant ne bloque pas les autres
-  sed '/^#/d;/^\s*$/d' "$MS_DIR/requirements.txt" | while read -r module; do
-    en_tant_que "$MS_DIR/venv/bin/pip" install --quiet --no-cache-dir "$module" >>"$JOURNAL" 2>&1 \
-      || echo "  (module non installé : $module)" >>"$JOURNAL"
+
+if [[ ! -d "$MS_DIR" ]]; then
+  ko "MightyScape : clonage impossible";
+else
+
+  # Personnalisation Boc@l : renommer le sous-menu et supprimer color_harmony
+  # (dépend de PyQt4 obsolète)
+  find "$MS_DIR/extensions/fablabchemnitz" -name "*.inx" \
+    -exec sed -i 's/FabLab Chemnitz/FabLab Boc@l/g' {} \; >>"$JOURNAL" 2>&1
+  rm -rf "$MS_DIR/extensions/fablabchemnitz/color_harmony"
+  ok "MightyScape : sous-menu renommé FabLab Boc@l, color_harmony retiré"
+
+  # uv : gestionnaire Python rapide (installé en tant qu'utilisateur)
+  if [[ ! -f "$HOME_UTIL/.local/bin/uv" ]]; then
+    en_tant_que bash -c 'curl -LsSf https://astral.sh/uv/install.sh | sh' >>"$JOURNAL" 2>&1
+  fi
+  UV_CMD="$HOME_UTIL/.local/bin/uv"
+
+  # Environnement virtuel Python 3.10 isolé dans le dossier MightyScape
+  # (python3.10-dev et cmake sont requis pour compiler openmesh)
+  en_tant_que bash -c "
+    export UV_PROJECT_ENVIRONMENT='$MS_DIR'
+    '$UV_CMD' venv --python python3.10 --allow-existing '$MS_DIR'
+  " >>"$JOURNAL" 2>&1
+  PYTHON="$MS_DIR/bin/python3"
+
+  ms_pip() {
+    en_tant_que "$UV_CMD" pip install --python "$PYTHON" "$@" >>"$JOURNAL" 2>&1 \
+      && ok "Python: $*" || ko "Python: $*"
+  }
+
+  # Traitement d'image : export_selection_as, image_triangulation, kvec,
+  #   laser_check, low_poly_2, ocr, pixel2svg, pixels2objects, primitive,
+  #   raster_perspective, webp_import, imagetracerjs
+  ms_pip Pillow
+
+  # Calcul numérique (base de la quasi-totalité des extensions de tracé)
+  ms_pip numpy
+
+  # Analyse couleurs par clustering (color_harmony core → conservé pour usage futur)
+  ms_pip scikit-learn
+
+  # Graphes : paperfold (spanning tree pour le dépliage de maillages 3D)
+  ms_pip networkx
+
+  # Maillages 3D C++ : import_3d_mesh, paperfold, slic3r_stl_input
+  # → nécessite python3.10-dev + cmake + ninja-build pour compiler depuis les sources
+  echo "  Compilation openmesh (~90s)..." | tee -a "$JOURNAL"
+  ms_pip pybind11 openmesh
+
+  # Rendu 3D interactif : papercraft_unfold (prévisualisation OpenGL du modèle)
+  ms_pip pygame PyOpenGL
+
+  # Simulation optique : extension raytracing (lancer de rayons paraxial)
+  ms_pip raytracing
+
+  # Mise à jour MightyScape depuis Inkscape (bouton Upgrade MightyScape)
+  ms_pip GitPython
+
+  # Export multi-format avec interface Qt : output_pro
+  ms_pip PyQt5
+
+  # Optimisation de tracés vectoriels pour découpeuse laser / traceur
+  ms_pip vpype trimesh lxml
+
+  # Dépendances restantes des requirements.txt individuels (best-effort)
+  find "$MS_DIR/extensions/fablabchemnitz" -name "requirements.txt" | while read -r req; do
+    en_tant_que "$UV_CMD" pip install --python "$PYTHON" -r "$req" >>"$JOURNAL" 2>&1 || true
   done
-  # Indiquer à Inkscape d'utiliser cet interpréteur Python
-  PREFS="$HOME_UTIL/.config/inkscape/preferences.xml"
+  ok "MightyScape : dépendances Python installées"
+
+  # Configurer Inkscape pour utiliser le Python du venv MightyScape
+  PREFS="${INK_USER_DIR:-$HOME_UTIL/.config/inkscape}/preferences.xml"
+  PREF_VALUE="$MS_DIR/bin/python3"
   if [[ ! -f "$PREFS" ]]; then
+    en_tant_que mkdir -p "$(dirname "$PREFS")"
     en_tant_que bash -c "cat > '$PREFS'" <<EOF
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<inkscape xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" version="1">
-  <group id="extensions" python-interpreter="$MS_DIR/venv/bin/python3" />
+<inkscape version="1">
+  <group id="extensions" python-interpreter="$PREF_VALUE" />
 </inkscape>
 EOF
     ok "Interpréteur Python MightyScape réglé dans Inkscape"
+  elif grep -q "python-interpreter" "$PREFS"; then
+    sed -i "s|python-interpreter=\"[^\"]*\"|python-interpreter=\"$PREF_VALUE\"|" "$PREFS"
+    ok "Interpréteur Python MightyScape mis à jour dans Inkscape"
   else
-    echo "  Préférences Inkscape existantes : régler à la main Édition > Préférences > Système > Interpréteur Python = $MS_DIR/venv/bin/python3" | tee -a "$JOURNAL"
+    sed -i "s|id=\"extensions\"|id=\"extensions\" python-interpreter=\"$PREF_VALUE\"|" "$PREFS"
+    ok "Interpréteur Python MightyScape ajouté dans Inkscape"
   fi
-else
-  ko "MightyScape"
+
 fi
 
 # =====================================================================
@@ -414,7 +501,7 @@ POLITIQUE=$(cat <<EOF
         "Folder": "Découpe laser"
       },
       {
-        "Title": "Doc MightyScape (FabLab Chemnitz)",
+        "Title": "Doc MightyScape (FabLab Boc@l)",
         "URL": "https://y.stadtfabrikanten.org/mightyscape-overview",
         "Placement": "toolbar",
         "Folder": "Découpe laser"
