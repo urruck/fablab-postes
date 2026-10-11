@@ -1,9 +1,11 @@
 #!/bin/bash
 # ============================================================
 #  install-mightyscape.sh
-#  Installation de MightyScape (extensions FabLab Chemnitz)
-#  pour Inkscape sur Ubuntu/Debian — Boc@l FabLab
+#  Installation de MightyScape pour Inkscape sur Ubuntu/Debian
+#  Boc@l FabLab Chemillé
 # ============================================================
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 set -e
 
@@ -25,7 +27,7 @@ echo "/ /|_/ / / _ \`/ _ \/ __/ // /\ \/ __/ _ \`/ _ \/ -_)"
 echo "/_/  /_/_/\_, /_//_/\__/\_, /___/\__/\_,_/ .__/\__/ "
 echo "         /___/         /___/            /_/          "
 echo -e "${NF}"
-echo -e "${CL}MightyScape — Collection d'extensions FabLab Chemnitz pour Inkscape${NF}"
+echo -e "${CL}MightyScape — Collection d'extensions pour Inkscape${NF}"
 echo -e "${CL}Script d'installation — Boc\@l FabLab Chemillé${NF}\n"
 
 # ------------------------------------------------------------
@@ -107,6 +109,24 @@ else
     git clone --depth=1 https://github.com/eridur-de/mightyscape-1.2.git "$MIGHTYSCAPE_DIR"
 fi
 success "MightyScape cloné dans $MIGHTYSCAPE_DIR"
+
+# ------------------------------------------------------------
+# 4b. Renommage FabLab Chemnitz → FabLab Boc@l + traduction FR
+# ------------------------------------------------------------
+
+info "Renommage FabLab Chemnitz → FabLab Boc@l dans les menus..."
+find "$MIGHTYSCAPE_DIR/extensions/fablabchemnitz" -name "*.inx" \
+    -exec sed -i 's|FabLab Chemnitz|FabLab Boc@l|g' {} \;
+success "Renommage terminé."
+
+TRANSLATE_SCRIPT="$SCRIPT_DIR/translate_inx.py"
+if [[ -f "$TRANSLATE_SCRIPT" ]]; then
+    info "Traduction en français de toutes les extensions..."
+    python3 "$TRANSLATE_SCRIPT" "$MIGHTYSCAPE_DIR/extensions/fablabchemnitz"
+    success "Traduction terminée."
+else
+    warn "translate_inx.py introuvable dans $SCRIPT_DIR — traduction ignorée."
+fi
 
 # Correction du wrapper admesh : le chemin LD_LIBRARY_PATH est codé en dur
 # avec le chemin de la machine du développeur (/home/tomate/...). On le
@@ -247,5 +267,5 @@ echo -e "  Python utilisé        : ${CL}$("$PYTHON" --version)${NF}"
 echo -e "  Nombre d'extensions   : ${CL}$(ls "$MIGHTYSCAPE_DIR/extensions/fablabchemnitz/" | wc -l)${NF}"
 echo ""
 echo -e "  ${CY}Relancez Inkscape — toutes les extensions apparaissent${NF}"
-echo -e "  ${CY}dans le menu : Extensions → FabLab Chemnitz${NF}"
+echo -e "  ${CY}dans le menu : Extensions → FabLab Boc\@l${NF}"
 echo ""
