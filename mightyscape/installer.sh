@@ -89,7 +89,7 @@ rm -rf "$TMP_SITE"
 ( cd "$TMP_SITE" && rm -rf numpy numpy-* numpy.libs PIL pillow-* pillow.libs lxml lxml-* bin )
 mkdir -p "$SITE" && cp -a "$TMP_SITE/." "$SITE/" && rm -rf "$TMP_SITE"
 flatpak run --command=python3 "$FLATPAK_ID" -c \
-  'import boxes, vpype, vpype_occult, scipy, shapely, svgpathtools, networkx, pyclipper, ezdxf, cv2' \
+  'import boxes, vpype, occult, scipy, shapely, svgpathtools, networkx, pyclipper, ezdxf, cv2' \
   >/dev/null 2>&1 && ok "Bibliothèques Python : $SITE" || warn "Certaines bibliothèques ne se chargent pas dans Inkscape."
 
 # ---------------------------------------------------------------------
