@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+<name>Engrenages (Gears)</name>
+<id>info.festi.boxes.py.Gears</id>
+<param name="generator" type="string" gui-hidden="true">gears</param>
+<param name="tab" type="notebook"><page name="tab_0" gui-text="Engrenages"><param name="teeth1" type="int" max="9999" gui-text="dents 1" gui-description="nombre de dents">12</param>
+<param name="shaft1" type="float" precision="2" max="9999" gui-text="arbre 1" gui-description="diamètre de l'arbre 1">6.0</param>
+<param name="dpercentage1" type="float" precision="2" max="9999" gui-text="méplat 1" gui-description="pourcentage du méplat de l'arbre 1 (100 pour un arbre rond)">75</param>
+<param name="teeth2" type="int" max="9999" gui-text="dents 2" gui-description="nombre de dents de l'autre taille d'engrenage">32</param>
+<param name="shaft2" type="float" precision="2" max="9999" gui-text="arbre 2" gui-description="diamètre de l'arbre 2 (zéro pour le même que l'arbre 1)">0.0</param>
+<param name="dpercentage2" type="float" precision="2" max="9999" gui-text="méplat 2" gui-description="pourcentage du méplat de l'arbre 2 (zéro pur le même que l'arbre 1)">0</param>
+<param name="modulus" type="float" precision="2" max="9999" gui-text="module" gui-description="taille des dents (diamètre / nb de dents) en mm">2</param>
+<param name="pressure_angle" type="float" precision="2" max="9999" gui-text="angle de pression" gui-description="angle de contact des dents (en degé)">20</param>
+<param name="profile_shift" type="float" precision="2" max="9999" gui-text="glissement de profil" gui-description="en pourcentage du module">20</param>
+</page>
+<page name="tab_1" gui-text="Par défaut"><param name="thickness" type="float" precision="2" max="9999" gui-text="épaisseur" gui-description="épaisseur du matériau (en mm) [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#thickness)">3.0</param>
+<param name="tabs" type="float" precision="2" max="9999" gui-text="brides" gui-description="largeur des attaches qui retiennent les pièces dans la plaque (en mm) (pas partout) [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#tabs)">0.0</param>
+<param name="qr_code" type="bool" gui-text="qr_code" gui-description="Ajouter un QR code avec le lien ou la ligne de commande au résultat">false</param>
+<param name="debug" type="bool" gui-text="débogage" gui-description="dessiner les boîtes englobantes de certaines structures [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#debug)">false</param>
+<param name="labels" type="bool" gui-text="étiquettes" gui-description="étiqueter les pièces (si possible)">true</param>
+<param name="reference" type="float" precision="2" max="9999" gui-text="référence" gui-description="dessiner un rectangle de référence de la longueur donnée (en mm) (0 pour désactiver) [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#reference)">100.0</param>
+<param name="inner_corners" type="optiongroup" appearance="combo" gui-text="inner_corners" gui-description="style des angles intérieurs [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#inner-corners)">
+<option value="loop">boucle</option>
+<option value="corner">angle</option>
+<option value="backarc">arc inversé</option>
+    </param>
+<param name="burn" type="float" precision="2" max="9999" gui-text="brûlage" gui-description="correction de brûlure (en mm) (plus grand = assemblage plus serré) [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#burn)">0.1</param>
+</page>
+<page name="tab_2" gui-text="Exemple">
+<image>./Gears-thumb.jpg</image>
+</page>
+</param>
+<label appearance="url">https://boxes.hackerspace-bamberg.de/Gears</label>
+<effect>
+    <object-type>all</object-type>
+    <effects-menu>
+        <submenu name="FabLab Boc@l"><submenu name="Boîtes (Boxes.py)"><submenu name="Pièces et tests" /></submenu></submenu></effects-menu>
+    <icon>Gears-thumb.svg</icon>
+</effect>
+<script>
+    <command location="inx" interpreter="python">boxes_proxy.py</command>
+</script>
+</inkscape-extension>

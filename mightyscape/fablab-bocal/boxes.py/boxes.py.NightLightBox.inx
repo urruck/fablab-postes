@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+<name>Veilleuse à plaques (NightLightBox)</name>
+<id>info.festi.boxes.py.NightLightBox</id>
+<param name="generator" type="string" gui-hidden="true">nightlightbox</param>
+<param name="tab" type="notebook"><page name="tab_0" gui-text="Veilleuse à plaques"><param name="BoxStyle" type="optiongroup" appearance="combo" gui-text="Style de boîte" gui-description="style de la fermeture avant">
+<option value="minimalist">minimaliste</option>
+<option value="large face">grande façade</option>
+<option value="extra customizable face">façade très personnalisable</option>
+    </param>
+<param name="PlateVisibleWidth" type="float" precision="2" max="9999" gui-text="Largeur visible de la plaque" gui-description="largeur de la fenêtre du panneau avant en mm">150.0</param>
+<param name="PlateVisibleHeight" type="float" precision="2" max="9999" gui-text="Hauteur visible de la plaque" gui-description="hauteur de la fenêtre du panneau avant en mm">75.0</param>
+<param name="WoodPlatesCount" type="int" max="9999" gui-text="Nombre de plaques en bois" gui-description="Nombre de plaques décoratives en bois">3</param>
+<param name="WoodPlateThickness" type="float" precision="2" max="9999" gui-text="Épaisseur des plaques en bois" gui-description="Épaisseur des plaques en bois en mm">5.0</param>
+<param name="DiffuserPlateThickness" type="float" precision="2" max="9999" gui-text="Épaisseur du diffuseur" gui-description="Épaisseur de la plaque diffusante en acrylique du fond, en mm">5.0</param>
+<param name="BackgroundDepth" type="float" precision="2" max="9999" gui-text="Profondeur du fond" gui-description="Profondeur de la zone du fond pour l'électronique et les LED, en mm">40.0</param>
+<param name="InterPlateSpacing" type="float" precision="2" max="9999" gui-text="Espace entre les plaques" gui-description="Espace entre les plaques décoratives en mm">10</param>
+<param name="hooks" type="bool" gui-text="crochets" gui-description="ajouter des crochets aux plaques décoratives (permet des plaques à une seule face)">false</param>
+<param name="Margin" type="float" precision="2" max="9999" gui-text="Marge" gui-description="Marge pour les pièces mobiles en mm">0.5</param>
+</page>
+<page name="tab_1" gui-text="Par défaut"><param name="thickness" type="float" precision="2" max="9999" gui-text="épaisseur" gui-description="épaisseur du matériau (en mm) [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#thickness)">3.0</param>
+<param name="tabs" type="float" precision="2" max="9999" gui-text="brides" gui-description="largeur des attaches qui retiennent les pièces dans la plaque (en mm) (pas partout) [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#tabs)">0.0</param>
+<param name="qr_code" type="bool" gui-text="qr_code" gui-description="Ajouter un QR code avec le lien ou la ligne de commande au résultat">false</param>
+<param name="debug" type="bool" gui-text="débogage" gui-description="dessiner les boîtes englobantes de certaines structures [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#debug)">false</param>
+<param name="labels" type="bool" gui-text="étiquettes" gui-description="étiqueter les pièces (si possible)">true</param>
+<param name="reference" type="float" precision="2" max="9999" gui-text="référence" gui-description="dessiner un rectangle de référence de la longueur donnée (en mm) (0 pour désactiver) [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#reference)">100.0</param>
+<param name="inner_corners" type="optiongroup" appearance="combo" gui-text="inner_corners" gui-description="style des angles intérieurs [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#inner-corners)">
+<option value="loop">boucle</option>
+<option value="corner">angle</option>
+<option value="backarc">arc inversé</option>
+    </param>
+<param name="burn" type="float" precision="2" max="9999" gui-text="brûlage" gui-description="correction de brûlure (en mm) (plus grand = assemblage plus serré) [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#burn)">0.1</param>
+</page>
+<page name="tab_2" gui-text="Assemblages à entures"><param name="FingerJoint_style" type="optiongroup" appearance="combo" gui-text="style" gui-description="style des entures">
+<option value="rectangular">rectangulaire</option>
+<option value="springs">ressorts</option>
+<option value="barbs">crans</option>
+<option value="snap">clipsable</option>
+    </param>
+<param name="FingerJoint_surroundingspaces" type="float" precision="2" max="9999" gui-text="espaces autour" gui-description="espace au début et à la fin, en multiple des espaces normaux">1.0</param>
+<param name="FingerJoint_bottom_lip" type="float" precision="2" max="9999" gui-text="bottom_lip" gui-description="hauteur des lèvres inférieures qui dépassent (multiples de l'épaisseur), FingerHoleEdge seulement !">0.0</param>
+<param name="FingerJoint_edge_width" type="float" precision="2" max="9999" gui-text="largeur de bord" gui-description="espace sous les trous du FingerHoleEdge (multiples de l'épaisseur)">1.0</param>
+<param name="FingerJoint_extra_length" type="float" precision="2" max="9999" gui-text="extra_length" gui-description="matière en plus à poncer pour enlever les traces de brûlure (multiples de l'épaisseur)">0.0</param>
+<param name="FingerJoint_finger" type="float" precision="2" max="9999" gui-text="créneau" gui-description="largeur des entures (multiples de l'épaisseur)">2.0</param>
+<param name="FingerJoint_play" type="float" precision="2" max="9999" gui-text="jeu" gui-description="espace en plus pour que les entures entrent et sortent (multiples de l'épaisseur)">0.0</param>
+<param name="FingerJoint_space" type="float" precision="2" max="9999" gui-text="espace" gui-description="espace entre les entures (multiples de l'épaisseur)">2.0</param>
+<param name="FingerJoint_width" type="float" precision="2" max="9999" gui-text="largeur" gui-description="largeur des trous d'entures (multiples de l'épaisseur)">1.0</param>
+</page>
+<page name="tab_3" gui-text="Bords empilables"><param name="Stackable_angle" type="int" max="9999" gui-text="angle" gui-description="angle intérieur des pieds">60</param>
+<param name="Stackable_bottom_stabilizers" type="float" precision="2" max="9999" gui-text="bottom_stabilizers" gui-description="hauteur des bandes à coller à l'intérieur des bords du bas (multiples de l'épaisseur)">0.0</param>
+<param name="Stackable_height" type="float" precision="2" max="9999" gui-text="hauteur" gui-description="hauteur des pieds (multiples de l'épaisseur)">2.0</param>
+<param name="Stackable_holedistance" type="float" precision="2" max="9999" gui-text="distance des trous" gui-description="distance entre les trous d'entures et le bord du bas (multiples de l'épaisseur)">1.0</param>
+<param name="Stackable_width" type="float" precision="2" max="9999" gui-text="largeur" gui-description="largeur des pieds (multiples de l'épaisseur)">4.0</param>
+</page>
+<page name="tab_4" gui-text="Charnières et axes de charnière"><param name="Hinge_grip_percentage" type="int" max="9999" gui-text="grip_percentage" gui-description="grip_percentage">0</param>
+<param name="Hinge_outset" type="bool" gui-text="débord" gui-description="faire un débord du couvercle sur les côtés (similaire à OutSetEdge)">true</param>
+<param name="Hinge_pinwidth" type="float" precision="2" max="9999" gui-text="largeur de l'axe" gui-description="Régler à la valeur inférieure pour avoir des disques entourant les axes">0.4</param>
+<param name="Hinge_axle" type="float" precision="2" max="9999" gui-text="axe" gui-description="diamètre du trou de l'axe (multiples de l'épaisseur)">2.5</param>
+<param name="Hinge_grip_length" type="int" max="9999" gui-text="grip_length" gui-description="longueur fixe des prises sur les couvercles (multiples de l'épaisseur)">0</param>
+<param name="Hinge_hingestrength" type="int" max="9999" gui-text="solidité de la charnière" gui-description="épaisseur de l'arc qui maintient l'axe (multiples de l'épaisseur)">1</param>
+</page>
+<page name="tab_5" gui-text="Verrou du diffuseur de la veilleuse, pour empêcher l'accès à l'électronique"><param name="DiffuserPlateTLockScrewDiameter" type="float" precision="2" max="9999" gui-text="Diamètre de la vis du verrou du diffuseur" gui-description="Diamètre du trou de la vis de verrouillage du diffuseur acrylique du fond, en mm">3.0</param>
+<param name="DiffuserPlateTLockScrewLength" type="float" precision="2" max="9999" gui-text="Longueur de la vis du verrou du diffuseur" gui-description="Longueur de la vis de verrouillage du diffuseur acrylique du fond, en mm">20.0</param>
+<param name="DiffuserPlateTLockNutThickness" type="float" precision="2" max="9999" gui-text="Épaisseur de l'écrou du verrou du diffuseur" gui-description="Épaisseur de l'écrou de verrouillage du diffuseur acrylique du fond, en mm">2.1</param>
+<param name="DiffuserPlateTLockNutWidth" type="float" precision="2" max="9999" gui-text="Largeur de l'écrou du verrou du diffuseur" gui-description="Largeur de l'écrou de verrouillage du diffuseur acrylique du fond, en mm">5.1</param>
+</page>
+<page name="tab_6" gui-text="Options de l'arrière de la veilleuse (trous pour connecteurs, marquage)"><param name="BackExtraHoles" type="string" gui-text="Trous arrière supplémentaires" gui-description="trous en plus pour connecteurs ou boutons ; une ligne par trou ; premier paramètre R pour rectangle ou C pour cercle ; puis positions X et Y du centre du trou, puis taille X et Y du rectangle ou diamètre du cercle, le tout en mm ; paramètres séparés par des espaces">R 20 15 11.5 8
+C 11.58 15 3
+C 28.42 15 3</param>
+</page>
+<page name="tab_7" gui-text="Exemple">
+<image>./NightLightBox-thumb.jpg</image>
+</page>
+</param>
+<label appearance="url">https://boxes.hackerspace-bamberg.de/NightLightBox</label>
+<effect>
+    <object-type>all</object-type>
+    <effects-menu>
+        <submenu name="FabLab Boc@l"><submenu name="Boîtes (Boxes.py)"><submenu name="Objets divers" /></submenu></submenu></effects-menu>
+    <icon>NightLightBox-thumb.svg</icon>
+</effect>
+<script>
+    <command location="inx" interpreter="python">boxes_proxy.py</command>
+</script>
+</inkscape-extension>

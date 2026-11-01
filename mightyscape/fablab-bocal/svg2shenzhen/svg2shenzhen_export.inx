@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Svg2Shenzhen - Export KiCad</name>
+    <id>fablabchemnitz.de.svg2shenzhen_export</id>
+	<label>Exporter le dessin au format circuit imprimé KiCad</label>
+    <param name="path" type="path" mode="folder" gui-text="Chemin d'export">~/</param>
+    <param name="filetype" type="optiongroup" appearance="combo" gui-text="Exporter les calques en...">
+       <option value="kicad_pcb">KICAD - circuit imprimé</option>
+       <option value="kicad_module">KICAD - module</option>
+       <option value="png">PNG - image</option>
+    </param>
+    <param name="threshold" type="int" min="0" max="255" gui-text="Seuil (par défaut : 5)">5</param>
+    <param name="dpi" type="int" min="0" max="2000" gui-text="Résolution d'export en ppp (par défaut : 600)">600</param>
+    <param name="autoflatten" type="bool" gui-text="Aplatir automatiquement les Béziers du calque Edge.Cuts ?">true</param>
+    <param name="debug" type="bool" gui-text="Mode débogage ?">false</param>
+    <param name="openfactory" type="bool" gui-text="Ouvrir PCBWay après l'export ?">true</param>
+    <param name="openkicad" type="bool" gui-text="Ouvrir KiCad après l'export ?">false</param>
+    <effect needs-live-preview="false">
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Import et export" /></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">svg2shenzhen/export.py</command>
+    </script>
+</inkscape-extension>

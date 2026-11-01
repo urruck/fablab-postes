@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Échelle verticale / horizontale</name>
+    <id>fablabchemnitz.de.vertical_horizontal_scale</id>
+    <param name="tab" type="notebook">
+        <page name="global" gui-text="Forme">
+            <label appearance="header">Général</label>
+            <param name="type" type="optiongroup" appearance="combo" gui-text="Type :">
+                <option value="straight">Droite</option>
+                <option value="circular">Circulaire</option>
+            </param>
+            <param name="unit" type="optiongroup" appearance="combo" gui-text="Unité :">
+                <option value="mm">mm</option>
+                <option value="cm">cm</option>
+                <option value="in">pouce</option>
+                <option value="px">pixel</option>
+                <option value="pt">point</option>
+            </param>
+            <param name="useref" type="bool" gui-text="Origine au centre de la boîte englobante">false</param>
+            <param name="insidetf" type="bool" gui-text="Inverser intérieur / extérieur">false</param>
+            <label appearance="header">Droite</label>
+            <param name="rotate" type="optiongroup" appearance="combo" gui-text="Orientation :">
+                <option value="0">Verticale</option>
+                <option value="90">Horizontale</option>
+            </param>
+            <label appearance="header">Circulaire</label>
+            <param name="radius" type="float" gui-text="Rayon (unités) :" min="0.000000001" max="32000">50.0</param>
+            <label>0° est en haut. Valeurs positives dans le sens horaire.</label>
+            <param name="scaleradbegin" type="float" gui-text="Début (degrés) :" min="-360.0" max="360.0">0</param>
+            <param name="scaleradcount" type="float" gui-text="Étendue (degrés) :" min="-360.0" max="360.0">90</param>
+            <param name="radmark" type="bool" gui-text="Marquer l'origine">true</param>
+        </page>
+        <page name="labelopt" gui-text="Étiquettes">
+            <param name="drawalllabels" type="bool" gui-text="Afficher toutes les étiquettes">true</param>
+            <label appearance="header">Nombres</label>
+            <param name="scalefrom" type="int" gui-text="Nombre de départ :" min="-32000" max="32000">0</param>
+            <param name="scaleto" type="int" gui-text="Nombre d'arrivée :" min="-32000" max="32000">40</param>
+            <param name="mathexpression" type="string" gui-text="Expression mathématique (nombre = « n ») :" />
+            <param name="reverse" type="bool" gui-text="Ordre inversé">false</param>
+            <label appearance="header">Format</label>
+            <param name="fontsize" type="float" gui-text="Taille de police (unités) :" min="1" max="32000">3</param>
+            <param name="suffix" type="string" gui-text="Suffixe des étiquettes :" />
+            <param name="ishorizontal" type="bool" gui-text="Étiquettes horizontales (circulaire seulement)">false</param>
+            <param name="fliplabel" type="bool" gui-text="Inverser l'orientation">false</param>
+            <label appearance="header">Décalage (relatif à l'orientation des étiquettes) :</label>
+            <param name="labeloffseth" type="float" gui-text="Horizontal (unités) :" min="-32000" max="32000">0</param>
+            <param name="labeloffsetv" type="float" gui-text="Vertical (unités) :" min="-32000" max="32000">0</param>
+        </page>
+        <page name="lineopt" gui-text="Lignes">
+            <label appearance="header">Toutes les lignes</label>
+            <param name="units_per_line" type="float" gui-text="Unités par ligne (droite seulement) :" min="0.00001" max="99999.9000">1.00000</param>
+            <label appearance="header">Ligne perpendiculaire</label>
+            <param name="perpline" type="bool" gui-text="Dessiner la ligne perpendiculaire">false</param>
+            <param name="perplinestrokewidth" type="float" gui-text="Épaisseur du contour (unités) :" min="0.001" max="32000">0.2</param>
+            <param name="perplineoffset" type="float" gui-text="Décalage (unités) :" min="-32000" max="32000">0</param>
+            <label appearance="header">Ligne d'étiquette</label>
+            <param name="labellinelength" type="float" gui-text="Longueur (unités) :" min="1" max="32000">5.0</param>
+            <param name="labellinestrokewidth" type="float" gui-text="Épaisseur du contour (unités) :" min="0.001" max="32000">0.4</param>
+            <param name="mark0" type="int" gui-text="Dessiner toutes les x lignes (numérotation basée dessus) :" min="0" max="32000">10</param>
+            <label appearance="header">Ligne longue</label>
+            <param name="mark1wid" type="int" gui-text="Longueur (pourcentage de la ligne d'étiquette) :" min="0" max="200">85</param>
+            <param name="longlinestrokewidth" type="float" gui-text="Épaisseur du contour (unités) :" min="0.001" max="32000">0.2</param>
+            <param name="mark1" type="int" gui-text="Dessiner toutes les x lignes :" min="0" max="32000">5</param>
+            <label appearance="header">Ligne courte</label>
+            <param name="mark2wid" type="int" gui-text="Longueur (pourcentage de la ligne d'étiquette) :" min="0" max="200">60</param>
+            <param name="shortlinestrokewidth" type="float" gui-text="Épaisseur du contour (unités) :" min="0.001" max="32000">0.2</param>
+            <param name="mark2" type="int" gui-text="Dessiner toutes les x lignes :" min="0" max="32000">1</param>
+        </page>
+    </param>
+    <effect>
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Mécanique et graduations" /></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">vertical_horizontal_scale.py</command>
+    </script>
+</inkscape-extension>

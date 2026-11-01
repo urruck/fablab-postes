@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Grille à croisillons (qlocktwo)</name>
+    <id>fablabchemnitz.de.grid_strip_creator</id>
+    <param name="length" type="float" min="0.0" max="500.0" precision="3" gui-text="Longueur">230.0</param>
+    <param name="width" type="float" min="0.0" max="500.0" precision="3" gui-text="Largeur">20.0</param>
+    <param name="cellnumx" type="int" min="2" max="50" gui-text="Nombre de cases horizontales">11</param>
+    <param name="cellnumy" type="int" min="2" max="50" gui-text="Nombre de cases verticales">10</param>
+    <param name="scalecells" type="bool" gui-text="Ajuster la largeur des cases sur la longueur">false</param>
+    <param name="cellheight" type="float" min="0.0" max="100.0" precision="3" gui-text="Hauteur des cases">12.5</param>
+    <param name="cellwidth" type="float" min="0.0" max="100.0" precision="3" gui-text="Largeur des cases">12.5</param>
+    <param name="notchdepth" type="float" min="0.0" max="100.0" precision="3" gui-text="Profondeur de l'encoche en plus">1.0</param>
+    <param name="notchwidth" type="float" min="0.0" max="100.0" precision="3" gui-text="Largeur de l'encoche en plus">10.0</param>
+    <param name="notchhorizontal" type="bool" gui-text="Encoche en plus sur la bande horizontale">false</param>
+    <param name="notchvertical" type="bool" gui-text="Encoche en plus sur la bande verticale">false</param>
+    
+    <param name="notch2width" type="float" min="0.0" max="100.0" precision="3" gui-text="Largeur des encoches de la grille">3.0</param>
+    <param name="notchxcorner" type="bool" gui-text="Encoche en plus au coin des bandes horizontales">false</param>
+    <param name="notchycorner" type="bool" gui-text="Encoche en plus au coin de la bande verticale">false</param>
+    <effect>
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Boîtes (autres modèles)"><submenu name="À encoches" /></submenu></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">grid_strip_creator.py</command>
+    </script>
+</inkscape-extension>

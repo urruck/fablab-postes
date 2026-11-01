@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Créateur de plans bleus (blueprint)</name>
+    <id>fablabchemnitz.de.blueprint_maker</id>
+    <param name="palette" type="optiongroup" appearance="combo" gui-text="Palette :">
+        <option value="blueprint">Plan bleu</option>
+        <option value="black">Écran</option>
+        <option value="white">Papier</option>
+        <option value="laser">Laser</option>
+    </param>
+    <param name="stroke_width" precision="4" type="float" min="0.001" max="10.000" gui-text="Épaisseur de trait :">1.000</param>
+    <param name="stroke_units" type="optiongroup" appearance="combo" gui-text="Unité du trait :">
+        <option value="millimeters">mm</option>
+        <option value="centimeters">cm</option>
+        <option value="points">pt</option>
+        <option value="pixels">px</option>
+    </param>
+    <effect>
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Chemins"><submenu name="Modifier" /></submenu></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">blueprint_maker.py</command>
+    </script>
+</inkscape-extension>

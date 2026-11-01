@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Translation parallèle</name>
+    <id>fablabchemnitz.de.parallel_translation</id>
+    <param name="tab" type="notebook">
+        <page name="info" gui-text="Infos">
+            <label xml:space="preserve">Parallel-Translation v1.0 (c) 2021 Christian Vogt
+Cette extension permet des translations parallèles et des alignements de lignes droites sélectionnées. Ces lignes peuvent être des chemins simples (avec seulement un nœud de début et de fin) ou des segments de chemins plus grands.
+
+Cet onglet affiche des informations sur les chemins / lignes sélectionnés.
+Pour appliquer la translation à tous les chemins / lignes sélectionnés, utilisez l'onglet « Translation ».
+Pour aligner un groupe sur un chemin / une ligne, utilisez l'onglet « Alignement de groupe ».
+Pour transformer une ligne / un chemin en groupe d'alignement, utilisez l'onglet « Objet vers groupe ».
+
+Un groupe d'alignement doit contenir un objet qui marque son « centre de rotation ». L'extension le reconnaît à sa couleur de remplissage, réglable dans l'onglet « Alignement de groupe ». Lors de l'alignement, le centre de rotation du groupe est placé au milieu du chemin / de la ligne choisi(e), et le groupe pivote autour de ce centre.</label>
+        </page>
+        <page name="translation" gui-text="Translation">
+            <param name="copyMode" type="optiongroup" appearance="combo" gui-text="Le déplacement s'applique à :">
+                <option value="none">l'objet seul (sans copie)</option>
+                <option value="copy">une copie de l'objet</option>
+                <option value="obj">l'objet, en gardant une copie</option>
+            </param>
+            <hbox>
+                <label>Distance de déplacement :</label>
+                <spacer size="expand" />
+                <param name="distance" type="float" precision="3" min="-9999" max="9999" gui-text=" ">0</param>
+                <param name="distUnit" type="optiongroup" appearance="combo" gui-text=" ">
+                    <option value="px">px</option>
+                    <option value="pt">pt</option>
+                    <option value="in">in</option>
+                    <option value="mm">mm</option>
+                    <option value="cm">cm</option>
+                    <option value="pc">pc</option>
+                </param>
+            </hbox>
+            <param name="reverse" type="bool" gui-text="Déplacer dans le sens opposé">false</param>
+            <hbox>
+                <param name="useFixedAngle" type="bool" gui-text="Utiliser un angle de translation fixe de :">false</param>
+                <spacer size="expand" />
+                <param name="fixedAngle" type="float" precision="2" min="-360" max="360" gui-text=" ">0</param>
+                <label>degrés</label>
+            </hbox>
+        </page>
+        <page name="align" gui-text="Alignement de groupe">
+            <param name="copyModeA" type="optiongroup" appearance="combo" gui-text="L'alignement s'applique à :">
+                <option value="none">le groupe seul (sans copie)</option>
+                <option value="copy">une copie du groupe</option>
+                <option value="obj">le groupe, en gardant une copie</option>
+            </param>
+            <param name="lengthModeA" type="optiongroup" appearance="combo" gui-text="Ajustement de la largeur du groupe :" gui-description="Choisit comment adapter la largeur du groupe à la longueur du chemin">
+                <option value="none">pas d'ajustement</option>
+                <option value="scale">étirer / redimensionner le groupe</option>
+                <option value="endpoints">ajuster les extrémités des lignes</option>
+            </param>
+            <param name="endpTol" type="int" min="0" max="49" appearance="full" gui-text="Tolérance des extrémités" gui-description="Détermine quels nœuds sont déplacés en mode « ajuster les extrémités des lignes » : distance maximale d'un nœud au bord du groupe pour être déplacé (en pourcentage de la largeur du groupe)">15</param>
+            <param name="colorA" type="color" appearance="colorbutton" gui-text="Couleur de remplissage de l'objet centre de rotation :" gui-description="Couleur de remplissage de l'objet qui marque le centre de rotation du groupe.">0x20f020ff</param>
+            <param name="rmFromGroup" type="bool" gui-text="Retirer l'objet centre de rotation du groupe aligné">false</param>
+            <param name="reverseA" type="bool" gui-text="Tourner le groupe de 180 degrés en plus" gui-description="Utile si les nœuds de début et de fin du chemin de référence sont inversés.">false</param>
+        </page>
+        <page name="group" gui-text="Objet vers groupe">
+            <hbox>
+                <label>Taille de l'objet centre de rotation :</label>
+                <spacer size="expand" />
+                <param name="ctSize" type="float" precision="3" min="-9999" max="9999" gui-text=" ">1</param>
+                <param name="ctSzUnit" type="optiongroup" appearance="combo" gui-text=" ">
+                    <option value="px">px</option>
+                    <option value="pt">pt</option>
+                    <option value="in">in</option>
+                    <option value="mm">mm</option>
+                    <option value="cm">cm</option>
+                    <option value="pc">pc</option>
+                </param>
+            </hbox>
+            <param name="reverseG" type="bool" gui-text="Tourner le groupe de 180 degrés en plus" gui-description="Utile si les nœuds de début et de fin du segment de référence sont inversés.">false</param>
+        </page>
+    </param>
+    <effect>
+        <object-type>path</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Transformations" /></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">parallel_translation.py</command>
+    </script>
+</inkscape-extension>

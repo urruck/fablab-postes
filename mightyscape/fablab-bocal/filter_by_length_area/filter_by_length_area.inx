@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Filtrer par longueur / surface</name>
+    <id>fablabchemnitz.de.filter_by_length_area</id>
+    <param name="tab" type="notebook">
+        <page name="tab_settings" gui-text="Filtrer par longueur / surface">
+            <label appearance="header">Réglages généraux</label>
+            <param name="debug" type="bool" gui-text="Activer le débogage">false</param>
+            <param name="apply_transformations" type="bool" gui-text="Appliquer les transformations (nécessite l'extension correspondante)" gui-description="Appelle l'extension « Appliquer les transformations ». Évite les décalages de géométrie">false</param>
+            <param name="breakapart" type="bool" gui-text="Séparer les chemins sélectionnés en segments" gui-description="Fait Ctrl + Maj + K pour séparer les chemins en morceaux">true</param>
+            <param name="breakapart_total" type="bool" gui-text="Couper les segments en lignes" gui-description="Donne les meilleurs résultats pour le filtrage nœuds / &lt;intervalle&gt;">true</param>
+            <hbox>
+                <vbox>
+                    <label appearance="header">Seuil</label>
+                    <param name="unit" gui-text="Unité" type="optiongroup" appearance="combo" gui-description="L'unité s'applique à l'intervalle et aux seuils">
+                        <option value="mm">mm</option>
+                        <option value="cm">cm</option>
+                        <option value="px">px</option>
+                        <option value="pt">pt</option>
+                        <option value="pc">pc</option>
+                        <option value="in">in</option>
+                    </param>
+                    <param name="nodes_interval" type="float" min="0.000" max="99999.000" precision="3" gui-text="Intervalle">10.000</param>
+                    <separator />
+                    <param name="min_filter_enable" type="bool" gui-text="Activer le filtrage min.">false</param>
+                    <param name="min_threshold" type="float" min="0.000" precision="3" max="10000000.000" gui-text="Longueur ou surface min.">1.000</param>
+                    <param name="min_nodes" type="int" min="0" max="99999" gui-text="Nœuds / &lt;intervalle&gt; min.">2</param>
+                    <param name="max_filter_enable" type="bool" gui-text="Activer le filtrage max.">false</param>
+                    <param name="max_threshold" type="float" min="0.000" precision="3" max="10000000.000" gui-text="Longueur ou surface max.">10000000.000</param>
+                    <param name="max_nodes" type="int" min="0" max="99999" gui-text="Nœuds / &lt;intervalle&gt; max.">10000000</param>
+                    <param name="precision" type="int" min="0" max="16" gui-text="Précision">3</param>
+                </vbox>
+                <separator />
+                <vbox>
+                    <label appearance="header">Filtre</label>
+                    <param name="measure" type="optiongroup" appearance="combo" gui-text="Par">
+                        <option value="length">Longueur (unité)</option>
+                        <option value="nodes">Nœuds par longueur (unité)</option>
+                        <option value="area">Surface (unité²)</option>
+                    </param>
+                    <label appearance="header">Actions</label>
+                    <param name="delete" type="bool" gui-text="Supprimer">false</param>
+                    <hbox>
+                        <param name="color_mode" type="optiongroup" appearance="combo" gui-text="Mode de couleur">
+                            <option value="none">Aucun</option>
+                            <option value="colorize_rainbow">Colorer (effet arc-en-ciel)</option>
+                            <option value="colorize_single">Colorer (couleur unique)</option>
+                        </param>
+                        <param name="color_single" type="color" appearance="colorbutton" gui-text="Couleur unique">0xff00ffff</param>
+                    </hbox>
+                    <hbox>
+                        <param name="sort_by_value" type="bool" gui-text="Trier par valeur">false</param>
+                        <param name="reverse_sort_value" type="bool" gui-text="Inverser">false</param>
+                    </hbox>
+                    <hbox>
+                        <param name="sort_by_id" type="bool" gui-text="Trier par identifiant">false</param>
+                        <param name="reverse_sort_id" type="bool" gui-text="Inverser">false</param>
+                    </hbox>
+                    <param name="rename_ids" type="bool" gui-text="Renommer (identifiants)">false</param>
+                    <hbox>
+                        <param name="set_labels" type="bool" gui-text="Définir les étiquettes" gui-description="Ajoute le type et la valeur à l'étiquette de l'élément">false</param>
+                        <param name="remove_labels" type="bool" gui-text="Retirer les étiquettes" gui-description="Retirer les étiquettes (nettoyage après un passage précédent)">false</param>
+                    </hbox>
+                    <param name="group" type="bool" gui-text="Grouper les éléments">false</param>
+                    <param name="cleanup" type="bool" gui-text="Nettoyer les groupes / calques inutilisés" gui-description="Appelle l'extension « Supprimer les groupes vides » si elle est disponible">false</param>
+                </vbox>
+            </hbox>
+            <label appearance="header">Astuces</label>
+            <label>Chemins seulement ! Les rectangles et autres éléments ne sont pas gérés. Sans sélection, tout le document est analysé.
+Si aucun filtre n'est activé, les actions s'appliquent aussi à toute la sélection ou à tout le document.</label>
+        </page>
+        <page name="tab_about" gui-text="À propos">
+            <label appearance="header">Filtrer par longueur / surface</label>
+            <label>Un outil pour filtrer les chemins selon différents critères, avec plusieurs actions possibles.</label>
+            <label>2020 - 2023 / écrit par Mario Voigt (Stadtfabrikanten e.V. / FabLab Chemnitz)</label>
+            <spacer />
+            <label appearance="header">Documentation en ligne</label>
+            <label appearance="url">https://y.stadtfabrikanten.org/filterbylengtharea</label>
+            <spacer />
+            <label appearance="header">Contribuer</label>
+            <label appearance="url">https://gitea.fablabchemnitz.de/FabLab_Chemnitz/mightyscape-1.2</label>
+            <label appearance="url">mailto:mario.voigt@stadtfabrikanten.org</label>
+            <spacer />
+            <label appearance="header">Collection d'extensions MightyScape</label>
+            <label>Ce logiciel fait partie de la collection d'extensions MightyScape pour Inkscape, sous licence GNU GPL v3</label>
+            <label appearance="url">https://y.stadtfabrikanten.org/mightyscape-overview</label>
+        </page>
+        <page name="tab_donate" gui-text="Faire un don">
+            <label appearance="header">Café + pizza</label>
+            <label>Nous sommes les Stadtfabrikanten, qui font vivre le FabLab Chemnitz depuis 2016. Un FabLab est un atelier ouvert qui donne accès à des machines et des outils numériques : imprimantes 3D, découpeuses laser, fraiseuses CNC.</label>
+            <spacer />           
+            <label>Vous aimez notre travail et voulez nous soutenir ? Vous pouvez faire un don à notre association de différentes façons :</label>
+            <label appearance="url">https://y.stadtfabrikanten.org/donate</label>
+            <spacer />
+            <label>Merci d'utiliser notre extension et de nous aider !</label>
+            <image>../000_about_fablabchemnitz.svg</image>
+        </page>
+    </param>
+    <effect>
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Chemins"><submenu name="Couper et nettoyer" /></submenu></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">filter_by_length_area.py</command>
+    </script>
+</inkscape-extension>

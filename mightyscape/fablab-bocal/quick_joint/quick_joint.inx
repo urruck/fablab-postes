@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Assemblage rapide (Quick Joint)</name>
+    <id>fablabchemnitz.de.quick_joint</id>
+    <label xml:space="preserve">Ajoute des languettes ou des fentes d'assemblage à l'objet sélectionné !</label>
+    <label xml:space="preserve">Version 0.5</label>
+    <param name="activetab" type="notebook">
+        <page name="tabpage" gui-text="Languettes">
+            <param name="side" type="int" min="0" max="512" gui-text="Côté :">0</param>
+            <param name="numtabs" type="int" min="1" max="512" gui-text="Nombre de languettes :">1</param>
+            <param name="tSlotNutHeight" type="float" min="0.01" max="99999.00" precision="2" gui-text="Hauteur de l'écrou (rainure en T) :">1.80</param>
+            <param name="tSlotNutWidth" type="float" min="0.01" max="99999.00" precision="2" gui-text="Largeur de l'écrou (rainure en T) :">5.50</param>
+            <param name="tSlotScrewWidth" type="float" min="0.01" max="99999.00" precision="2" gui-text="Largeur de la vis (rainure en T) :">3.10</param>
+            <param name="tSlotScrewDepth" type="float" min="0.01" max="99999.00" precision="2" gui-text="Profondeur de la vis (rainure en T) :">10.00</param>
+
+        </page>
+        <page name="slotpage" gui-text="Fentes">
+            <param name="numslots" type="int" min="1" max="512" gui-text="Nombre de fentes :">1</param>
+            <param name="tSlotHoleDiameter" type="float" min="0.01" max="99999.00" precision="2" gui-text="Diamètre du trou (rainure en T) :">3.00</param>
+        </page>
+    </param>
+    <param name="thickness" type="float" min="0.0" max="1000.0" precision="3" gui-text="Épaisseur du matériau :">3.0</param>
+    <param name="kerf" type="float" min="0.0" max="1000.0" precision="5" gui-text="Trait de coupe laser :">0.14</param>
+    <param name="units" type="optiongroup" appearance="combo" gui-text="Unités :">
+        <option value="mm">mm</option>
+        <option value="px">px</option>
+        <option value="pt">pt</option>
+        <option value="in">in</option>
+        <option value="cm">cm</option>
+    </param>
+    <param name="featureStart" type="bool" gui-text="Élément au début">false</param>
+    <param name="featureEnd" type="bool" gui-text="Élément à la fin">false</param>
+    <param name="flipside" type="bool" gui-text="Inverser le côté">false</param>
+    <param name="tSlotEnable" type="bool" gui-text="Utiliser les dimensions de rainure en T">false</param>
+    <effect needs-live-preview="true">
+        <object-type>path</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Boîtes (autres modèles)"><submenu name="À encoches" /></submenu></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">quick_joint.py</command>
+    </script>
+</inkscape-extension>

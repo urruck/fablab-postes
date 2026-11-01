@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+	<name>Agiter les dégradés</name>
+	<id>fablabchemnitz.de.jitter_gradients</id>
+	<param name="jitter_amount" type="int" min="1" max="1000" gui-text="Intensité de l'agitation" gui-description="Relative à la distance entre les nœuds du dégradé">0</param>
+	<effect>
+		<object-type>all</object-type>
+		<effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Couleurs" /></submenu></effects-menu>
+	</effect>
+	<script>
+		<command location="inx" interpreter="python">jitter_gradients.py</command>
+	</script>
+</inkscape-extension>

@@ -1,0 +1,124 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Vérification avant découpe laser</name>
+    <id>fablabchemnitz.de.laser_check</id>
+    <param name="tab" type="notebook">
+        <page name="tab_checks" gui-text="Vérifications">
+            <label appearance="header">Remarque : sans sélection, tout le document est analysé !</label>
+            <separator />
+            <param name="show_issues_only" type="bool" gui-text="Afficher seulement les problèmes possibles" gui-description="Raccourcit un peu le rapport">false</param>
+            <param name="show_expert_tips" type="bool" gui-text="Afficher les conseils d'expert" gui-description="Affiche des conseils pour résoudre les problèmes">false</param>
+            <separator />
+            <param name="checks" type="optiongroup" appearance="combo" gui-text="Choix des vérifications">
+                <option value="check_all">Tout vérifier</option>
+                <option value="check_section">Vérifier la sélection</option>
+            </param>
+            <separator />
+            <label appearance="header">Vérifications personnalisées</label>
+            <hbox>
+                <vbox>
+                    <param name="basic_checks" type="bool" gui-text="Vérifications par défaut" gui-description="Vérifications de base : canevas, échelle, viewBox, ...">true</param>
+                    <param name="filesize_max" type="float" min="0.000" max="9999.000" precision="3" gui-text="Taille de fichier maximale autorisée (Ko)">2048</param>
+                    <separator /> 
+                    <param name="bbox" type="bool" gui-text="Boîte englobante" gui-description="Vérifie si un élément touche le bord du canevas ou en sort complètement">false</param>
+                    <param name="bbox_offset" type="float" min="0.000" max="9999.000" precision="3" gui-text="Marge minimale requise (mm)">5.000</param>
+                    <separator />
+                    <param name="cutting_estimation" type="bool" gui-text="Estimation du temps de découpe">false</param>
+                    <param name="cutting_speedfactors" type="string" gui-text="Facteurs de vitesse (%)" gui-description="Liste de vitesses (%) séparées par des espaces, pour le calcul">100 90 80 70 60 50 40 30 20 10 9 8 7 6 5 4 3 2 1</param>
+                    <separator />
+                    <param name="elements_outside_canvas" type="bool" gui-text="Éléments hors du canevas">false</param>
+                    <separator />
+                    <param name="groups_and_layers" type="bool" gui-text="Groupes et calques">false</param>
+                    <param name="nest_depth_max" type="int" min="0" max="9999" gui-text="Profondeur maximale autorisée">2</param>
+                    <separator />
+                    <param name="clones" type="bool" gui-text="Clones">false</param>
+                    <param name="clippaths" type="bool" gui-text="Découpes (clip)">false</param>
+                    <separator />
+                    <param name="images" type="bool" gui-text="Images">false</param>
+                    <param name="min_image_dpi" type="int" min="0" max="9999" gui-text="Résolution minimale (ppp)">300</param>
+                    <param name="max_image_dpi" type="int" min="0" max="9999" gui-text="Résolution maximale (ppp)">1200</param>
+                    <separator />
+                    <param name="texts" type="bool" gui-text="Textes">false</param>
+                    <param name="filters" type="bool" gui-text="Filtres">false</param>
+                </vbox>
+                <separator />    
+                <vbox>
+                    <param name="lowlevelstrokes" type="bool" gui-text="Contours bas niveau">false</param>
+                    <separator />
+                    <param name="stroke_colors" type="bool" gui-text="Couleurs de contour">false</param>
+                    <param name="stroke_colors_max" type="int" min="0" max="9999" gui-text="Maximum autorisé">3</param>
+                    <param name="style_types" type="bool" gui-text="Types de style">false</param>
+                    <separator />
+                    <param name="stroke_widths" type="bool" gui-text="Épaisseurs de contour">false</param>
+                    <param name="stroke_widths_max" type="int" min="0" max="9999" gui-text="Maximum autorisé">1</param>
+                    <separator />
+                    <param name="opacities" type="bool" gui-text="Opacités" gui-description="Vérifie la présence des attributs opacity, stroke-opacity et fill-opacity">false</param>
+                    <param name="cosmestic_dashes" type="bool" gui-text="Pointillés décoratifs">false</param>
+                    <param name="invisible_shapes" type="bool" gui-text="Formes invisibles">false</param>
+                    <param name="non_path_shapes" type="bool" gui-text="Formes qui ne sont pas des chemins">false</param>
+                    <param name="pointy_paths" type="bool" gui-text="Chemins pointus">false</param>
+                    <param name="combined_paths" type="bool" gui-text="Chemins combinés">false</param>
+                    <param name="transformations" type="bool" gui-text="Transformations">false</param>
+                    <separator />
+                    <param name="short_paths" type="bool" gui-text="Chemins courts">false</param>
+                    <param name="short_paths_min" type="float" min="0.000" max="9999.000" precision="3" gui-text="Signaler sous cette longueur (mm)">1.000</param>
+                    <separator />
+                    <param name="nodes_per_path" type="bool" gui-text="Nombre maximal de nœuds par chemin">false</param>
+                    <param name="nodes_per_path_max" type="int" min="0" max="99999" gui-text="Nœuds max. par &lt;intervalle&gt; mm">2</param>
+                    <param name="nodes_per_path_interval" type="float" min="0.000" max="99999.000" precision="3" gui-text="Intervalle">10.000</param>
+                </vbox>
+            </hbox>
+        </page>
+        <page name="tab_setup" gui-text="Réglages machine">
+            <label appearance="header">Paramètres de la machine</label>
+            <param name="machine_size" gui-text="Machine / taille (mm)" type="optiongroup" appearance="combo">
+                <option value="406x305">406 x 305 mm (Zing 16)</option>
+                <option value="610x305">610 x 305 mm (Zing 24 / Fusion Edge 12)</option>    
+                <option value="812x508">812 x 508 mm (Fusion Pro 32 / Fusion M2 32)</option>
+                <option value="1016x711">1016 x 711 mm (Fusion M2 40)</option>
+                <option value="1219x914">1219 x 914 mm (Fusion Pro 48)</option>
+            </param>
+            <param name="max_cutting_speed" type="float" min="1.000" max="9999.000" precision="2" gui-text="Vitesse de découpe maximale (mm/s)">120.0</param>
+            <param name="max_travel_speed" type="float" min="1.000" max="9999.000" precision="2" gui-text="Vitesse de déplacement maximale (mm/s)">450.0</param>
+            <param name="job_time_offset" type="float" min="0.000" max="9999.000" precision="2" gui-text="Temps ajouté par travail (s)" gui-description="Le laser ne démarre pas immédiatement : il y a un délai.">0.0</param>
+            <param name="price_per_minute_gross" type="float" min="0.0" max="9999.0" precision="2" gui-text="Prix par minute € (TTC)">2.0</param>
+            <param name="round_times" type="bool" gui-text="Arrondir à 30/60 secondes" gui-description="Pour le calcul du prix">true</param>
+            <param name="vector_grid_xy" type="float" min="0.0" max="9999.0" precision="2" gui-text="Grille vectorielle (mm)">12.0</param>
+            <param name="co2_power" type="float" min="0.0" max="9999.0" precision="2" gui-text="Puissance CO2 (watts)">60.0</param>
+        </page>
+        <page name="tab_about" gui-text="À propos">
+            <label appearance="header">Vérification avant découpe laser</label>
+            <label>Un outil pour repérer les problèmes fréquents dans les dessins vectoriels, en particulier pour la découpe laser.</label>
+            <label>2021 / écrit par Mario Voigt (Stadtfabrikanten e.V. / FabLab Chemnitz)</label>
+            <spacer />
+            <label appearance="header">Documentation en ligne</label>
+            <label appearance="url">https://y.stadtfabrikanten.org/laser-check</label>
+            <spacer />
+            <label appearance="header">Contribuer</label>
+            <label appearance="url">https://gitea.fablabchemnitz.de/FabLab_Chemnitz/mightyscape-1.2</label>
+            <label appearance="url">mailto:mario.voigt@stadtfabrikanten.org</label>
+            <spacer />
+            <label appearance="header">Collection d'extensions MightyScape</label>
+            <label>Ce logiciel fait partie de la collection d'extensions MightyScape pour Inkscape, sous licence GNU GPL v3</label>
+            <label appearance="url">https://y.stadtfabrikanten.org/mightyscape-overview</label>
+        </page>
+        <page name="tab_donate" gui-text="Faire un don">
+            <label appearance="header">Café + pizza</label>
+            <label>Nous sommes les Stadtfabrikanten, qui font vivre le FabLab Chemnitz depuis 2016. Un FabLab est un atelier ouvert qui donne accès à des machines et des outils numériques : imprimantes 3D, découpeuses laser, fraiseuses CNC.</label>
+            <spacer />           
+            <label>Vous aimez notre travail et voulez nous soutenir ? Vous pouvez faire un don à notre association de différentes façons :</label>
+            <label appearance="url">https://y.stadtfabrikanten.org/donate</label>
+            <spacer />
+            <label>Merci d'utiliser notre extension et de nous aider !</label>
+            <image>../000_about_fablabchemnitz.svg</image>
+        </page>
+    </param>
+    <effect needs-live-preview="false">
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Découpe laser et traceur" /></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">laser_check.py</command>
+    </script>
+</inkscape-extension>

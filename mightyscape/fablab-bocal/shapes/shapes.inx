@@ -1,0 +1,231 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Formes</name>
+    <id>fablabchemnitz.de.shapes</id>
+    <label>Crée des formes à partir de la boîte englobante ou de la position des nœuds des objets sélectionnés</label>
+    <param name="tab" type="notebook">
+        <page name="bbox" gui-text="Depuis la boîte englobante">
+            <param type="notebook" name="tab_from_bb">
+                <page name="chamfer" gui-text="Depuis les coins">
+                    <hbox>
+                        <param type="optiongroup" appearance="combo" name="chamfertype" gui-text="Type :">
+                            <option value="chamfer">Chanfrein</option>
+                            <option value="rect">Rectangle intérieur</option>
+                            <option value="round">Arrondi intérieur</option>
+                            <option value="starcorners">Étoile</option>
+                            <option value="crosscorners">Coins croisés</option>
+                            <option value="deflaterect">Dégonfler</option>
+                            <option value="spiralrect">Spirale rectangulaire</option>
+                            <option value="letterenvelope">Enveloppe de lettre</option>
+                        </param>
+                        <spacer />
+                        <vbox>
+                            <param type="float" name="size" min="0.0" max="1000.0" gui-text="Taille :">20</param>
+                            <param type="bool" name="fromCornersInv" gui-text="Inverser (pour chanfrein et arrondi)">false</param>
+                            <param type="optiongroup" name="crosscornersshape" gui-text="Forme des coins croisés :" appearance="combo">
+                                <option value="quads">Quadrilatères</option>
+                                <option value="tris">Triangles</option>
+                                <option value="round">Arrondi</option>
+                            </param>
+                            <param type="optiongroup" name="envelopetype" gui-text="Type d'enveloppe :" appearance="combo">
+                                <option value="rect">Rectangle</option>
+                                <option value="rectreg">Rectangle régulier</option>
+                                <option value="rounded">Arrondie</option>
+                                <option value="roundedreg">Arrondie régulière</option>
+                            </param>
+                        </vbox>
+                    </hbox>
+                </page>
+                <page name="mid" gui-text="Depuis le milieu">
+                    <hbox>
+                        <param type="optiongroup" appearance="combo" name="midtype" gui-text="Type :">
+                            <option value="rombus">Losange</option>
+                            <option value="cross">Croix</option>
+                            <option value="starcenter">Étoile</option>
+                            <option value="deflaterombus">Dégonfler</option>
+                        </param>
+                        <spacer />
+                        <spacer />
+                        <spacer />
+                        <vbox>
+                            <param type="float" name="midsize" min="0.0" max="1000.0" gui-text="Taille :">20</param>
+                        </vbox>
+                    </hbox>
+                </page>
+                <page name="spikes" gui-text="Pointes">
+                    <hbox>
+                        <vbox>
+                            <param name="spikestype" type="optiongroup" appearance="combo" gui-text="Forme :">
+                                <option value="tri">Triangle</option>
+                                <option value="trirect">Rectangle</option>
+                                <option value="squ">Carré</option>
+                                <option value="rnd">Arrondie</option>
+                                <option value="wav">Vague</option>
+                                <option value="tab">Patte de papercraft</option>
+                            </param>
+                            <param name="spikesize" type="float" min="0.1" max="1000.0" gui-text="Taille :">2.0</param>
+                            <param name="spikesep" type="float" min="-1000.0" max="1000.0" gui-text="Distance :">0.0</param>
+                            <param name="spikeheight" type="float" min="-1000.0" max="1000.0" gui-text="Hauteur :">0.0</param>
+                        </vbox>
+                        <vbox>
+                            <param name="spikesdir" type="optiongroup" appearance="combo" gui-text="Direction :" indent="1">
+                                <option value="out">Extérieur</option>
+                                <option value="ins">Intérieur</option>
+                                <option value="alt">Alterner</option>
+                            </param>
+                            <param name="spikesdirt" type="optiongroup" appearance="combo" gui-text="Haut :" indent="1">
+                                <option value="pre">Prédéfini</option>
+                                <option value="non">Aucun</option>
+                                <option value="out">Extérieur</option>
+                                <option value="ins">Intérieur</option>
+                                <option value="alt">Alterner</option>
+                                <option value="void">Vide</option>
+                            </param>
+                            <param name="spikesdirr" type="optiongroup" appearance="combo" gui-text="Droite :" indent="1">
+                                <option value="pre">Prédéfini</option>
+                                <option value="non">Aucun</option>
+                                <option value="out">Extérieur</option>
+                                <option value="ins">Intérieur</option>
+                                <option value="alt">Alterner</option>
+                                <option value="void">Vide</option>
+                            </param>
+                            <param name="spikesdirb" type="optiongroup" appearance="combo" gui-text="Bas :" indent="1">
+                                <option value="pre">Prédéfini</option>
+                                <option value="non">Aucun</option>
+                                <option value="out">Extérieur</option>
+                                <option value="ins">Intérieur</option>
+                                <option value="alt">Alterner</option>
+                                <option value="void">Vide</option>
+                            </param>
+                            <param name="spikesdirl" type="optiongroup" appearance="combo" gui-text="Gauche :" indent="1">
+                                <option value="pre">Prédéfini</option>
+                                <option value="non">Aucun</option>
+                                <option value="out">Extérieur</option>
+                                <option value="ins">Intérieur</option>
+                                <option value="alt">Alterner</option>
+                                <option value="void">Vide</option>
+                            </param>
+                        </vbox>
+                    </hbox>
+                </page>
+                <page name="triangles" gui-text="Triangles">
+                    <param name="tritype" type="optiongroup" appearance="combo" gui-text="Type">
+                        <option value="isosceles">Isocèle</option>
+                        <option value="equi">Équilatéral</option>
+                        <option value="rect">Rectangle</option>
+                        <option value="trii">Depuis 3 nœuds : triangle inscrit</option>
+                        <option value="circi">Depuis 3 nœuds : cercle inscrit</option>
+                        <option value="circe">Depuis 3 nœuds : cercle circonscrit</option>
+                    </param>
+                    <param name="trihside" type="bool" gui-text="Aligné à droite">false</param>
+                    <param name="trivside" type="bool" gui-text="Aligné en haut">false</param>
+                </page>
+                <page name="arrow" gui-text="Flèches">
+                    <param name="arrowtype" type="optiongroup" appearance="combo" gui-text="Type de flèche :">
+                        <option value="arrowfilled">Pleine</option>
+                        <option value="arrowstick">Bâton</option>
+                    </param>
+                    <param name="headWidth" type="float" min="0.1" max="1000.0" gui-text="Largeur">20.0</param>
+                    <param name="headHeight" type="float" min="0.1" max="1000.0" gui-text="Hauteur">40.0</param>
+                    <param name="arrowWidth" type="float" min="0.1" max="1000.0" gui-text="Largeur de la queue :">10.0</param>
+                </page>
+            </param>
+        </page>
+        <page name="extra" gui-text="Joindre des cercles">
+            <param name="joincirctype" type="optiongroup" appearance="combo" gui-text="Fonction :">
+                <option value="tangent">Tangente</option>
+                <option value="tangentinside">Tangente intérieure</option>
+                <option value="blob">Goutte</option>
+                <option value="oval">Ovale</option>
+            </param>
+            <param name="joinradius" type="float" min="0.0" max="1000.0" gui-text="Rayon de jonction :">0.0</param>
+            <param name="joincircleonlyrect" type="bool" gui-text="Joindre seulement les formes">false</param>
+        </page>
+        <page name="arches" gui-text="Arcs">
+            <param name="arch" type="optiongroup" appearance="combo" gui-text="Type :">
+                <option value="3c">Anse de panier</option>
+                <option value="rnd">Arrondi</option>
+                <option value="segmental">Segmentaire</option>
+                <option value="horseshoe">Outrepassé</option>
+                <option value="roundedhorseshoe">Outrepassé arrondi</option>
+                <option value="roundrampant">Rampant</option>
+                <option value="trefoil">Trilobé</option>
+                <option value="reverseogee">Talon renversé</option>
+                <option value="threepointed">Brisé à trois pointes</option>
+                <option value="multifoil">Polylobé</option>
+                <option value="ogee">En accolade</option>
+            </param>
+            <param name="archmax" type="float" min="0.01" max="1000.0" gui-text="Grand rayon :">30</param>
+            <param name="archmin" type="float" min="0.01" max="1000.0" gui-text="Petit rayon :">3</param>
+            <param name="archfoils" type="int" min="2" max="100" gui-text="Lobes :">3</param>
+            <param name="helpbuild" type="bool" gui-text="Afficher les guides de construction">false</param>
+        </page>
+        <page name="nodes" gui-text="Depuis les nœuds">
+            <hbox>
+                <param name="obj" type="optiongroup" appearance="combo" gui-text="Ajouter :">
+                    <option value="s">Carré</option>
+                    <option value="c">Cercle</option>
+                    <option value="number">Numéroter</option>
+                    <option value="coords">Coordonnées des nœuds</option>
+                    <option value="obj">Objet</option>
+                    <option value="def">Dégonfler</option>
+                    <option value="tabs">Languettes</option>
+                </param>
+                <param name="objid" type="string" gui-text="Identifiant de l'objet" />
+            </hbox>
+            <hbox>
+                <param name="reverse" type="bool" gui-text="Inverser le chemin">false</param>
+            </hbox>
+            <hbox>
+                <param name="objsize" type="float" min="0.01" max="1000.0" gui-text="Diamètre / côté / hauteur de patte :">3</param>
+                <param name="tabsize" type="float" min="0.01" max="1000.0" gui-text="Taille de la patte :">3</param>
+            </hbox>
+            <hbox>
+                <label appearance="header">Position -</label>
+                <param name="posh" type="optiongroup" appearance="combo" gui-text="Horizontale :">
+                    <option value="0">Centre</option>
+                    <option value="1">Gauche</option>
+                    <option value="-1">Droite</option>
+                </param>
+                <param name="posv" type="optiongroup" appearance="combo" gui-text="Verticale :">
+                    <option value="0">Centre</option>
+                    <option value="-1">Bas</option>
+                    <option value="1">Haut</option>
+                </param>
+            </hbox>
+            <hbox>
+                <param name="reducey" type="float" min="0.00" max="1000.0" gui-text="Réduire la taille sur l'axe Y (%) :">0.00</param>
+                <param name="ordery" type="bool" gui-text="Ordre z selon la position Y">false</param>
+            </hbox>
+            <param name="fntsize" type="float" min="0.1" max="100.0" gui-text="Taille de police (numéros / coordonnées) :">10</param>
+            <param name="maxdecimals" type="int" min="1" max="6" gui-text="Nombre de décimales (coordonnées) :">6</param>
+        </page>
+    </param>
+    <hbox>
+        <vbox>
+            <param name="incdec" type="float" min="-1000.0" max="1000.0" gui-text="Agrandir / réduire :">0.0</param>
+        </vbox>
+        <vbox>
+            <param name="unit" gui-text="Unité des valeurs :" type="optiongroup" appearance="combo">
+                <option value="px">px</option>
+                <option value="pt">pt</option>
+                <option value="in">in</option>
+                <option value="cm">cm</option>
+                <option value="mm">mm</option>
+            </param>
+        </vbox>
+    </hbox>
+    <hbox>
+        <param name="squareselection" type="bool" gui-text="Rendre l'objet résultant carré">false</param>
+        <param name="copyfill" type="bool" gui-text="Copier le remplissage de la sélection">false</param>
+    </hbox>
+    <param name="deleteorigin" type="bool" gui-text="Supprimer l'objet d'origine">false</param>
+    <effect needs-live-preview="true">
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Formes et motifs"><submenu name="À partir d'objets" /></submenu></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">shapes.py</command>
+    </script>
+</inkscape-extension>

@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Hypar à N côtés</name>
+    <id>org.inkscape.Origami_patterns.pleat_hypar</id>
+    <param name="active-tab" type="notebook">
+        <page name="options" gui-text="Options">
+            <param name="pattern" type="optiongroup" appearance="combo" gui-text="Type d'hypar">
+                <option value="classic">Hypar classique</option>
+                <option value="asymmetric">Triangulation asymétrique</option>
+                <option value="alternate_asymmetric">Triangulation asymétrique alternée</option>
+            </param>
+            <param name="radius" type="float" max="10000" precision="3" gui-text="Rayon du polygone">100.0</param>
+            <param name="units" type="optiongroup" appearance="combo" gui-text="Unités">
+                <option value="mm">mm</option>
+                <option value="cm">cm</option>
+                <option value="in">in</option>
+                <option value="pt">pt</option>
+                <option value="px">px</option>
+            </param>
+            <param name="sides" type="int" min="3" max="100" gui-text="Nombre de côtés du polygone">4</param>
+            <param name="rings" type="int" min="1" max="100" gui-text="Nombre d'anneaux">7</param>
+            <param name="simplify_center" type="bool" gui-text="Simplifier le centre (sans doute inadapté aux nombres de côtés impairs)">false</param>
+            <label>Réalise un hypar (approximation classique du paraboloïde hyperbolique). L'hypar classique est le plus facile à plier, mais il n'est pas pliable de façon rigide. Plus d'informations : Demaine, E. D., Demaine, M. L., Hart, V., Price, G. N., and Tachi, T. (2011). (Non)Existence of Pleated Folds: How Paper Folds Between Creases. Graphs and Combinatorics, 27(3), 377–397. https://doi.org/10.1007/s00373-011-1025-2</label>
+            <param name="simulation_mode" type="bool" gui-text="Mode simulation">true</param>
+        </page>
+        <page name="mountains" gui-text="Plis montagne">
+            <param name="mountain_bool" type="bool" gui-text="Dessiner les plis montagne ?">true</param>
+            <param name="mountain_bool_only" type="bool" gui-text="Dessiner SEULEMENT les plis montagne ?">false</param>
+            <param name="mountain_dashes_bool" type="bool" gui-text="Contours en pointillés ?">true</param>
+            <param name="mountain_dashes_len" type="float" min="0.1" max="10" appearance="full" precision="2" gui-text="Plis montagne : longueur tiret + espace">1</param>
+            <param name="mountain_dashes_duty" type="float" min="0.1" max="1" appearance="full" precision="2" gui-text="Plis montagne : part du tiret">0.5</param>
+            <param name="mountain_stroke_width" type="float" min="0.01" max="3" appearance="full" gui-text="Épaisseur des plis montagne">0.1</param>
+            <param name="mountain_stroke_color" type="color" gui-text="Couleur des plis montagne :">4278190335</param>
+        </page>
+        <page name="valleys" gui-text="Plis vallée">
+            <param name="valley_bool" type="bool" gui-text="Dessiner les plis vallée ?">true</param>
+            <param name="valley_bool_only" type="bool" gui-text="Dessiner SEULEMENT les plis vallée ?">false</param>
+            <param name="valley_dashes_bool" type="bool" gui-text="Contours en pointillés ?">true</param>
+            <param name="valley_dashes_len" type="float" min="0.1" max="10" appearance="full" precision="2" gui-text="Plis vallée : longueur tiret + espace">1</param>
+            <param name="valley_dashes_duty" type="float" min="0.1" max="1" appearance="full" precision="2" gui-text="Plis vallée : part du tiret">0.25</param>
+            <param name="valley_stroke_width" type="float" min="0.01" max="3" appearance="full" gui-text="Épaisseur des plis vallée">0.1</param>
+            <param name="valley_stroke_color" type="color" gui-text="Couleur des plis vallée :">65535</param>
+        </page>
+        <page name="universal" gui-text="Plis universels">
+            <param name="universal_bool" type="bool" gui-text="Dessiner les plis universels ?">true</param>
+            <param name="universal_bool_only" type="bool" gui-text="Dessiner SEULEMENT les plis universels ?">false</param>
+            <param name="universal_dashes_bool" type="bool" gui-text="Contours en pointillés ?">false</param>
+            <param name="universal_dashes_len" type="float" min="0.1" max="10" appearance="full" precision="2" gui-text="Plis universels : longueur tiret + espace">1</param>
+            <param name="universal_dashes_duty" type="float" min="0.1" max="1" appearance="full" precision="2" gui-text="Plis universels : part du tiret">0.25</param>
+            <param name="universal_stroke_width" type="float" min="0.01" max="3" appearance="full" gui-text="Épaisseur des plis universels">0.1</param>
+            <param name="universal_stroke_color" type="color" gui-text="Couleur des plis universels :">4278255615</param>
+        </page>
+        <page name="edge" gui-text="Bord">
+            <param name="edge_bool" type="bool" gui-text="Dessiner les bords ?">true</param>
+            <param name="edge_bool_only" type="bool" gui-text="Dessiner SEULEMENT les bords ?">false</param>
+            <param name="edge_single_path" type="bool" gui-text="Bords en un seul chemin ?">true</param>
+            <param name="edge_dashes_bool" type="bool" gui-text="Contours en pointillés ?">false</param>
+            <param name="edge_dashes_len" type="float" min="0.1" max="10" appearance="full" precision="2" gui-text="Bords : longueur tiret + espace">1</param>
+            <param name="edge_dashes_duty" type="float" min="0.1" max="1" appearance="full" precision="2" gui-text="Bords : part du tiret">0.25</param>
+            <param name="edge_stroke_width" type="float" min="0.01" max="3" appearance="full" gui-text="Épaisseur des bords">0.1</param>
+            <param name="edge_stroke_color" type="color" gui-text="Couleur des bords :">255</param>
+        </page>
+        <page name="vertices" gui-text="Sommets">
+            <param name="vertex_bool" type="bool" gui-text="Dessiner les sommets ?">true</param>
+            <param name="vertex_bool_only" type="bool" gui-text="Dessiner SEULEMENT les sommets ?">false</param>
+            <param name="vertex_radius" type="float" min="0.01" max="50" appearance="full" gui-text="Rayon des sommets">0.1</param>
+            <param name="vertex_stroke_width" type="float" min="0.01" max="3" appearance="full" gui-text="Épaisseur du contour des sommets">0.1</param>
+            <param name="vertex_stroke_color" type="color" gui-text="Couleur des sommets :">255</param>
+        </page>
+    </param>
+    <effect>
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Papier et origami"><submenu name="Origami" /></submenu></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">OrigamiPatterns/Hypar.py</command>
+    </script>
+</inkscape-extension>

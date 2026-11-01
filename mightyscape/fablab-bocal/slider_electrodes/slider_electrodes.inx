@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Électrodes de curseur tactile</name>
+    <id>fablabchemnitz.de.slider_electrodes</id>
+    <param name="count" type="int" gui-text="Nombre d'électrodes :" min="1" max="50">5</param>
+    <param name="spikes" type="int" gui-text="Nombre de pointes :" min="1" max="10">5</param>
+    <effect>
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Formes et motifs"><submenu name="Textures et effets" /></submenu></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">slider_electrodes.py</command>
+    </script>
+</inkscape-extension>

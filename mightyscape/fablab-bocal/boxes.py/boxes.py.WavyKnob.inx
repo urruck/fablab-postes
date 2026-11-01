@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+<name>Bouton cannelé (WavyKnob)</name>
+<id>info.festi.boxes.py.WavyKnob</id>
+<param name="generator" type="string" gui-hidden="true">wavyknob</param>
+<param name="tab" type="notebook"><page name="tab_0" gui-text="Bouton cannelé"><param name="diameter" type="float" precision="2" max="9999" gui-text="diamètre" gui-description="Diamètre du bouton (mm)">50.0</param>
+<param name="serrations" type="int" max="9999" gui-text="cannelures" gui-description="Nombre de cannelures">20</param>
+<param name="serrationangle" type="float" precision="2" max="9999" gui-text="angle cannelage" gui-description="Une valeur plus grande donne une cannelure plus profonde (degré)">45.0</param>
+<param name="bolthole" type="float" precision="2" max="9999" gui-text="trou du boulon" gui-description="Diamètre du trou du boulon (mm)">6.0</param>
+<param name="dhole" type="float" precision="2" max="9999" gui-text="méplat" gui-description="méplat en fraction du diamètre">1.0</param>
+<param name="hexhead" type="float" precision="2" max="9999" gui-text="tête hex" gui-description="Largeur de la tête hexagonale du boulon (mm)">10.0</param>
+</page>
+<page name="tab_1" gui-text="Par défaut"><param name="thickness" type="float" precision="2" max="9999" gui-text="épaisseur" gui-description="épaisseur du matériau (en mm) [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#thickness)">3.0</param>
+<param name="tabs" type="float" precision="2" max="9999" gui-text="brides" gui-description="largeur des attaches qui retiennent les pièces dans la plaque (en mm) (pas partout) [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#tabs)">0.0</param>
+<param name="qr_code" type="bool" gui-text="qr_code" gui-description="Ajouter un QR code avec le lien ou la ligne de commande au résultat">false</param>
+<param name="debug" type="bool" gui-text="débogage" gui-description="dessiner les boîtes englobantes de certaines structures [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#debug)">false</param>
+<param name="labels" type="bool" gui-text="étiquettes" gui-description="étiqueter les pièces (si possible)">true</param>
+<param name="reference" type="float" precision="2" max="9999" gui-text="référence" gui-description="dessiner un rectangle de référence de la longueur donnée (en mm) (0 pour désactiver) [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#reference)">100.0</param>
+<param name="inner_corners" type="optiongroup" appearance="combo" gui-text="inner_corners" gui-description="style des angles intérieurs [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#inner-corners)">
+<option value="loop">boucle</option>
+<option value="corner">angle</option>
+<option value="backarc">arc inversé</option>
+    </param>
+<param name="burn" type="float" precision="2" max="9999" gui-text="brûlage" gui-description="correction de brûlure (en mm) (plus grand = assemblage plus serré) [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#burn)">0.1</param>
+</page>
+<page name="tab_2" gui-text="Exemple">
+<image>./WavyKnob-thumb.jpg</image>
+</page>
+</param>
+<label appearance="url">https://boxes.hackerspace-bamberg.de/WavyKnob</label>
+<effect>
+    <object-type>all</object-type>
+    <effects-menu>
+        <submenu name="FabLab Boc@l"><submenu name="Boîtes (Boxes.py)"><submenu name="Pièces et tests" /></submenu></submenu></effects-menu>
+    <icon>WavyKnob-thumb.svg</icon>
+</effect>
+<script>
+    <command location="inx" interpreter="python">boxes_proxy.py</command>
+</script>
+</inkscape-extension>

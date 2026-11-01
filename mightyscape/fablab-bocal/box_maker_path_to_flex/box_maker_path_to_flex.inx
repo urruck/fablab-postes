@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Générateur de boîte - Chemin vers bande flexible</name>
+    <id>fablabchemnitz.de.box_maker_path_to_flex</id>
+    <param name="unit" type="optiongroup" appearance="combo" gui-text="Unité">
+        <option value="mm">mm</option>
+        <option value="cm">cm</option>
+        <option value="in">in</option>
+        <option value="pt">pt</option>
+        <option value="px">px</option>
+        <option value="pc">pc</option>
+    </param>
+    <param name="thickness" type="float" min="1.0" max="10.0" gui-text="Épaisseur du matériau">3.0</param>
+    <param name="zc" type="float" min="15.0" max="1000.0" gui-text="Hauteur de la structure">50.0</param>
+    <param name="notch_interval" type="int" min="2" max="10" gui-text="Intervalle entre encoches">2</param>
+    <param name="max_size_flex" type="float" min="200.0" max="100000.0" gui-text="Limiter la longueur de la bande flexible">1000.0</param>
+    <param name="Mode_Debug" type="bool" gui-text="Afficher les informations de débogage">true</param>
+    <effect>
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Boîtes (autres modèles)"><submenu name="À encoches" /></submenu></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">box_maker_path_to_flex.py</command>
+    </script>
+</inkscape-extension>

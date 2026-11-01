@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Fractales IFS</name>
+    <id>fablabchemnitz.de.ifs_fractals</id>
+    <param name="tab" type="notebook">
+        <page name="Options" gui-text="Options">
+	    <param name="iter" type="int" min="0" max="100" gui-text="Nombre d'itérations :">3</param>
+	    <label appearance="header">Matrices de transformation</label>
+	    <param name="tab" type="notebook">
+	      <page name="0" gui-text="1">
+		<param name="xform0" type="bool" gui-text="Activée :">true</param>
+		<param name="A0" type="float" min="-10000" max="10000" precision="3" gui-text="A:">0.5</param>
+		<param name="B0" type="float" min="-10000" max="10000" precision="3" gui-text="B:">0</param>
+		<param name="C0" type="float" min="-10000" max="10000" precision="3" gui-text="C:">0</param>
+		<param name="D0" type="float" min="-10000" max="10000" precision="3" gui-text="D:">0.5</param>
+		<param name="E0" type="float" min="-10000" max="10000" precision="3" gui-text="E:">0</param>
+		<param name="F0" type="float" min="-10000" max="10000" precision="3" gui-text="F:">0</param>
+	      </page>
+	      <page name="1" gui-text="2">
+		<param name="xform1" type="bool" gui-text="Activée :">false</param>
+		<param name="A1" type="float" min="-10000" max="10000" precision="3" gui-text="A:">0.5</param>
+		<param name="B1" type="float" min="-10000" max="10000" precision="3" gui-text="B:">0</param>
+		<param name="C1" type="float" min="-10000" max="10000" precision="3" gui-text="C:">0</param>
+		<param name="D1" type="float" min="-10000" max="10000" precision="3" gui-text="D:">0.5</param>
+		<param name="E1" type="float" min="-10000" max="10000" precision="3" gui-text="E:">1</param>
+		<param name="F1" type="float" min="-10000" max="10000" precision="3" gui-text="F:">0</param>
+	      </page>
+	      <page name="2" gui-text="3">
+		<param name="xform2" type="bool" gui-text="Activée :">false</param>
+		<param name="A2" type="float" min="-10000" max="10000" precision="3" gui-text="A:">0.5</param>
+		<param name="B2" type="float" min="-10000" max="10000" precision="3" gui-text="B:">0</param>
+		<param name="C2" type="float" min="-10000" max="10000" precision="3" gui-text="C:">0</param>
+		<param name="D2" type="float" min="-10000" max="10000" precision="3" gui-text="D:">0.5</param>
+		<param name="E2" type="float" min="-10000" max="10000" precision="3" gui-text="E:">0.5</param>
+		<param name="F2" type="float" min="-10000" max="10000" precision="3" gui-text="F:">1</param>
+	      </page>
+	      <page name="3" gui-text="4">
+		<param name="xform3" type="bool" gui-text="Activée :">false</param>
+		<param name="A3" type="float" min="-10000" max="10000" precision="3" gui-text="A:">0.5</param>
+		<param name="B3" type="float" min="-10000" max="10000" precision="3" gui-text="B:">0</param>
+		<param name="C3" type="float" min="-10000" max="10000" precision="3" gui-text="C:">0</param>
+		<param name="D3" type="float" min="-10000" max="10000" precision="3" gui-text="D:">0.5</param>
+		<param name="E3" type="float" min="-10000" max="10000" precision="3" gui-text="E:">0</param>
+		<param name="F3" type="float" min="-10000" max="10000" precision="3" gui-text="F:">0</param>
+	      </page>
+	      <page name="4" gui-text="5">
+		<param name="xform4" type="bool" gui-text="Activée :">false</param>
+		<param name="A4" type="float" min="-10000" max="10000" precision="3" gui-text="A:">0.5</param>
+		<param name="B4" type="float" min="-10000" max="10000" precision="3" gui-text="B:">0</param>
+		<param name="C4" type="float" min="-10000" max="10000" precision="3" gui-text="C:">0</param>
+		<param name="D4" type="float" min="-10000" max="10000" precision="3" gui-text="D:">0.5</param>
+		<param name="E4" type="float" min="-10000" max="10000" precision="3" gui-text="E:">0</param>
+		<param name="F4" type="float" min="-10000" max="10000" precision="3" gui-text="F:">0</param>
+	      </page>
+	    </param>
+        </page>
+        <page name="Help" gui-text="Aide">
+	  <label>Applique un système de fonctions itérées en répétant une ou plusieurs opérations « dupliquer et transformer » sur les objets sélectionnés.</label>
+	  <label>Les transformations sont données par des matrices, sous la même forme que dans la fenêtre Transformer ; chacune doit être contractante (c'est-à-dire réduire).</label>
+	  <label>Par exemple, avec N transformations, la première itération fait N copies transformées, puis N² copies de celles-ci, et ainsi de suite, soit (N^(I+1)-1)/(N-1) copies au total.</label>
+        </page>
+    </param>
+    <effect>
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Formes et motifs"><submenu name="À partir d'objets" /></submenu></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">ifs_fractals.py</command>
+    </script>
+</inkscape-extension>

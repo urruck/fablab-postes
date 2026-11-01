@@ -1,0 +1,174 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Importeur DXF/DWG</name>
+    <id>fablabchemnitz.de.dxf_dwg_importer</id>
+	<param name="tab" type="notebook">
+		<page name="tab_general" gui-text="Entrée / général">
+        <label>L'analyseur est le cœur de la chaîne de conversion : le résultat varie beaucoup selon le choix. Vous pouvez obtenir des résultats absents ou mauvais (mauvaise échelle, import interrompu, lignes manquantes ou en double, mauvaise rotation…). Conseil sérieux : demandez à la personne qui vous a donné le fichier une cote que vous pourrez comparer au fichier converti pour vérifier les dimensions.</label>
+            <param name="dxf_to_svg_parser" gui-text="Analyseur DXF vers SVG" type="optiongroup" appearance="combo">
+                <option value="skymakerolof">skymakerolof DXF (bonne qualité, quelques artefacts de polygones)</option>
+                <option value="sk1">sk1 UniConverter (meilleur résultat, mais échoue sur toute entité inconnue ou non filtrée)</option>
+                <option value="ezdxf">ezdxf (meilleure qualité, beaucoup de nœuds isolés)</option>
+                <option value="kabeja">kabeja (bibliothèque Java)</option>
+                <option value="vpype_dxf">vpype-dxf (remarque : « Filtrer les entités avec ezdxf » désactivé)</option>
+                <option value="legacy">ancien importeur d'Inkscape</option>
+            </param>
+            <param name="resizetoimport" type="bool" gui-text="Redimensionner le canevas à la boîte englobante du dessin importé">true</param>
+            <param name="extraborder" type="float" precision="3" gui-text="Ajouter une bordure autour du canevas ajusté">0.0</param>
+            <param name="extraborder_units" type="optiongroup" appearance="combo" gui-text="Unités du décalage de bordure">
+               <option value="mm">mm</option>
+               <option value="cm">cm</option>
+               <option value="in">in</option>
+               <option value="pt">pt</option>
+               <option value="px">px</option>
+            </param>
+            <param name="inputfile" type="path" gui-text="Fichier à importer (*.dxf, .dwg)" gui-description="Chemin complet du fichier, ex. « /home/utilisateur/Documents/plan.dxf »" filetypes="dxf,dwg" mode="file">C:\Users\</param>
+            <param name="opendironerror" type="bool" gui-text="Ouvrir le dossier de sortie en cas d'erreur de conversion">true</param>
+            </page>
+		<page name="tab_dwg_dxf" gui-text="DWG vers DXF / DXF vers DXF">
+            <label appearance="header">Open Design Alliance (ODA) File Converter</label>
+            <param name="oda_skip_dxf_to_dxf" type="bool" gui-text="Ne pas faire la conversion ODA de DXF vers DXF (garder le fichier tel quel)" gui-description="Saute ODA File Converter si le fichier est déjà un DXF. Sans effet pour un DWG. Fait gagner quelques secondes et évite parfois des erreurs.">false</param>
+            <param name="oda_fileconverter" type="path" gui-text="Programme ODAFileConverter" gui-description="Chemin complet du programme « ODAFileConverter ». Sous Linux, en général « /usr/bin/ODAFileConverter » ; sous Windows « C:\Program Files\ODA\OdaFileConverter_title XX.Y.Z\ODAFileConverter.exe »" filetypes="" mode="file">C:\Program Files\ODA\ODAFileConverter_title 21.6.0\ODAFileConverter.exe</param>
+            <param name="oda_keepconverted_dxf" type="bool" gui-text="Garder le DXF converti par ODA" gui-description="Place une copie du DXF converti dans le dossier du fichier d'entrée.">true</param>
+            <param name="oda_outputformat" gui-text="Version AutoCAD en sortie" type="optiongroup" appearance="combo">
+                <option value="ACAD2018_DXF">2018 ASCII DXF</option>
+                <option value="ACAD2013_DXF">2013 ASCII DXF</option>
+                <option value="ACAD2010_DXF">2010 ASCII DXF</option>
+                <option value="ACAD2007_DXF">2007 ASCII DXF</option>
+                <option value="ACAD2004_DXF">2004 ASCII DXF</option>
+                <option value="ACAD2000_DXF">2000 ASCII DXF</option>
+                <option value="ACAD14_DXF">R14 ASCII DXF</option>
+                <option value="ACAD13_DXF">R13 ASCII DXF</option>
+                <option value="ACAD12_DXF">R12 ASCII DXF</option>
+                <option value="ACAD10_DXF">R10 ASCII DXF</option>
+                <option value="ACAD9_DXF">R9 ASCII DXF</option>
+                       
+            </param>
+            <param name="oda_hidewindow" type="bool" gui-text="Masquer la fenêtre ODA (Windows seulement)" gui-description="Masque la fenêtre ODA. Ne fonctionne pas sous Linux.">true</param>
+            <param name="oda_audit_repair" type="bool" gui-text="Faire un audit (réparation automatique)">true</param>
+        </page>
+		<page name="tab_dxf_svg" gui-text="DXF vers SVG">
+            <label appearance="header">Prétraitement DXF vers DXF avec ezdxf (filtre)</label>
+            <separator />
+            <param name="ezdxf_preprocessing" type="bool" gui-text="Filtrer les entités avec ezdxf (conseillé avec sk1 UniConverter)">true</param>
+            <label>Remarque : s'applique quel que soit le convertisseur DXF vers SVG choisi. Le prétraitement a aussi lieu si ezdxf est choisi pour la conversion DXF vers SVG (ezdxf tourne alors deux fois : une pour filtrer, une pour convertir).</label>
+            <param name="ezdfx_keep_preprocessed" type="bool" gui-text="Garder le DXF prétraité par ezdxf" gui-description="Place une copie du DXF converti dans le dossier du fichier d'entrée.">true</param>
+            <param name="ezdxf_output_version" type="optiongroup" appearance="combo" gui-text="Version ezdxf en sortie">
+                <option value="SAME">Identique à la version AutoCAD en sortie</option>
+                <option value="R2018">2018 ASCII DXF</option>
+                <option value="R2013">2013 ASCII DXF</option>
+                <option value="R2010">2010 ASCII DXF</option>
+                <option value="R2007">2007 ASCII DXF</option>
+                <option value="R2004">2004 ASCII DXF</option>
+                <option value="R2000">2000 ASCII DXF</option>
+            </param>   
+            <label appearance="header">Filtre d'entités ezdxf</label>
+            <label>Quels types d'entités filtrer ? Seuls ceux de la liste sont possibles pour l'instant.</label>
+            <param name="allentities" type="bool" gui-text="Garder tous les types listés (ignorer la sélection du filtre)">false</param>
+            <label>Ou cocher les types d'entités à garder. Les éléments cochés ne seront pas supprimés.</label>
+            <hbox>
+                <hbox>
+                    <label appearance="header">Gérées par sk1</label>
+                    <separator />
+                    <vbox>
+                        <param type="bool" gui-text="3DFACE" name="THREE_DFACE">true</param>
+                        <param type="bool" gui-text="ARC" name="ARC">true</param>
+                        <param type="bool" gui-text="BLOCK" name="BLOCK">true</param>
+                        <param type="bool" gui-text="CIRCLE" name="CIRCLE">true</param>
+                        <param type="bool" gui-text="ELLIPSE" name="ELLIPSE">true</param>
+                        <param type="bool" gui-text="LINE" name="LINE">true</param>
+                        <param type="bool" gui-text="LWPOLYLINE" name="LWPOLYLINE">true</param>
+                        <param type="bool" gui-text="POINT" name="POINT">true</param>
+                    </vbox>                                         
+                    <separator />                                    
+                    <vbox>                                          
+                        <param type="bool" gui-text="POLYLINE" name="POLYLINE">true</param>
+                        <param type="bool" gui-text="POP_TRAFO" name="POP_TRAFO">true</param>
+                        <param type="bool" gui-text="SEQEND" name="SEQEND">true</param>
+                        <param type="bool" gui-text="SOLID" name="SOLID">true</param>
+                        <param type="bool" gui-text="SPLINE" name="SPLINE">true</param>                
+                        <param type="bool" gui-text="TABLE" name="TABLE">true</param>
+                        <param type="bool" gui-text="VERTEX" name="VERTEX">true</param>
+                        <param type="bool" gui-text="VIEWPORT" name="VIEWPORT">true</param>
+                    </vbox>
+                </hbox>
+                <hbox>
+                    <label appearance="header">Autres entités</label>
+                    <separator />
+                    <vbox>
+                        <param type="bool" gui-text="3DSOLID" name="THREE_DSOLID">true</param>
+                        <param type="bool" gui-text="ATTRIB" name="ATTRIB">true</param>
+                        <param type="bool" gui-text="BODY" name="BODY">true</param>
+                        <param type="bool" gui-text="ARC_DIMENSION" name="ARC_DIMENSION">true</param>
+                        <param type="bool" gui-text="HATCH" name="HATCH">true</param>
+                        <param type="bool" gui-text="IMAGE" name="IMAGE">true</param>
+                        <param type="bool" gui-text="INSERT" name="INSERT">true</param>
+                        <param type="bool" gui-text="MESH" name="MESH">true</param>
+                    </vbox>
+                    <separator />
+                    <vbox>  
+                        <param type="bool" gui-text="MTEXT" name="MTEXT">true</param>
+                        <param type="bool" gui-text="RAY" name="RAY">true</param>
+                        <param type="bool" gui-text="REGION" name="REGION">true</param>
+                        <param type="bool" gui-text="SHAPE" name="SHAPE">true</param>
+                        <param type="bool" gui-text="SURFACE" name="SURFACE">true</param>
+                        <param type="bool" gui-text="TRACE" name="TRACE">true</param>
+                        <param type="bool" gui-text="UNDERLAY" name="UNDERLAY">true</param>
+                        <param type="bool" gui-text="XLINE" name="XLINE">true</param>
+                    </vbox>
+                </hbox>
+            </hbox>
+            <spacer />
+            <label appearance="header">sk1 UniConvertor 1.1.X</label>
+            <separator />
+            <param name="sk1_uniconverter" type="path" gui-text="programme uniconvertor" gui-description="Chemin complet du programme « uniconvertor »" filetypes="cmd" mode="file">C:\Program Files (x86)\sK1 Project\UniConvertor-1.1.6\uniconvertor.cmd</param>
+            <label appearance="header">vpype-dxf</label>
+            <separator />
+			<param name="vpype_quantization" type="float" min="0.001" max="99999.000" precision="3" gui-text="Quantification" gui-description="Longueur maximale des segments qui approchent les courbes (par défaut 0,1 mm)">0.100</param>	
+    		<param name="vpype_simplify" type="bool" gui-text="Simplifier les courbes" gui-description="Appliquer un algorithme de simplification aux courbes">false</param>
+ 			<param name="vpype_parallel" type="bool" gui-text="Conversion des courbes multiprocessus" gui-description="Activer le multiprocessus pour convertir les courbes.">false</param>
+        </page>
+        <page name="tab_about" gui-text="À propos">
+            <label appearance="header">Importeur DXF/DWG</label>
+            <label>Une chaîne d'outils étonnante ODA File Converter / sk1 UniConverter / ezdxf. Mais elle fonctionne ! L'outil le plus polyvalent à ce jour pour importer dans Inkscape les fichiers AutoCAD tant détestés.</label>
+            <label>2020 - 2024 / écrit par Mario Voigt (Stadtfabrikanten e.V. / FabLab Chemnitz)</label>
+            <spacer />
+            <label appearance="header">Documentation en ligne</label>
+            <label appearance="url">https://y.stadtfabrikanten.org/dxfdwgimporter</label>
+            <spacer />
+            <label appearance="header">Contribuer</label>
+            <label appearance="url">https://gitea.fablabchemnitz.de/FabLab_Chemnitz/mightyscape-1.2</label>
+            <label appearance="url">mailto:mario.voigt@stadtfabrikanten.org</label>
+            <spacer />
+            <label appearance="header">Modules tiers</label>
+            <label appearance="url">https://github.com/mozman/ezdxf</label>
+            <label appearance="url">http://kabeja.sourceforge.net</label>
+            <label appearance="url">https://github.com/skymakerolof/dxf</label>
+            <label appearance="url">https://github.com/sk1project/uniconvertor</label>
+            <label appearance="url">https://github.com/abey79/vpype</label>
+            <label appearance="url">https://github.com/tatarize/vpype-dxf</label>
+            <spacer />
+            <label appearance="header">Collection d'extensions MightyScape</label>
+            <label>Ce logiciel fait partie de la collection d'extensions MightyScape pour Inkscape, sous licence GNU GPL v3</label>
+            <label appearance="url">https://y.stadtfabrikanten.org/mightyscape-overview</label>
+        </page>
+        <page name="tab_donate" gui-text="Faire un don">
+            <label appearance="header">Café + pizza</label>
+            <label>Nous sommes les Stadtfabrikanten, qui font vivre le FabLab Chemnitz depuis 2016. Un FabLab est un atelier ouvert qui donne accès à des machines et des outils numériques : imprimantes 3D, découpeuses laser, fraiseuses CNC.</label>
+            <spacer />           
+            <label>Vous aimez notre travail et voulez nous soutenir ? Vous pouvez faire un don à notre association de différentes façons :</label>
+            <label appearance="url">https://y.stadtfabrikanten.org/donate</label>
+            <spacer />
+            <label>Merci d'utiliser notre extension et de nous aider !</label>
+            <image>../000_about_fablabchemnitz.svg</image>
+        </page>
+    </param>
+    <effect needs-live-preview="true">
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Import et export" /></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">dxf_dwg_importer.py</command>
+    </script>
+</inkscape-extension>

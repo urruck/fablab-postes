@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Gris vers monochrome transparent</name>
+    <id>fablabchemnitz.de.grey_to_monoalpha</id>
+    <param name="tab" type="notebook">
+        <page name="main_page" gui-text="Paramètres">
+            <vbox>
+                <hbox>
+                    <param name="color_picker_mono" type="color" appearance="colorbutton" gui-text="Couleur unique">0x000000ff</param>
+                </hbox>
+                <hbox>
+                    <param name="apply_to_type_radio" type="optiongroup" appearance="radio" gui-text="Appliquer à">
+                        <option value="fill_and_stroke">Remplissage et contour</option>
+                        <option value="fill">Remplissage seulement</option>
+                        <option value="stroke">Contour seulement</option>
+                    </param>
+                </hbox>
+                <hbox>
+                    <label>Seuil d'opacité</label>
+                    <param name="opacity_lower_threshold" type="float" min="0" max="0.9" gui-text="Bas" gui-description="opacity_lower_threshold">0</param>
+                    <param name="opacity_upper_threshold" type="float" min="0.05" max="1" gui-text="Haut" gui-description="opacity_upper_threshold">1</param>
+                </hbox>
+            </vbox>
+        </page>
+        <page name="about_page" gui-text="À propos">
+            <label>Gris vers monochrome transparent - une extension Inkscape</label>
+            <label>Inkscape 1.1 +</label>
+            <label appearance="url">https://gitlab.com/inklinea/</label>
+            <label xml:space="preserve">▶ Convertit une image en niveaux de gris en monochrome à opacité variable
+▶ Seuil réglable pour éviter les aplats
+▶ S'applique au contour, au remplissage ou aux deux</label>
+        </page>
+    </param>
+    <effect>
+        <object-type>path</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Couleurs" /></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">grey_to_monoalpha.py</command>
+    </script>
+</inkscape-extension>

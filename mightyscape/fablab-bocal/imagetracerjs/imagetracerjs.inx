@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Imagetracer.js</name>
+    <id>fablabchemnitz.de.imagetracerjs</id>
+    <param name="tab" type="notebook">
+        <page name="tab_general" gui-text="Imagetracer.js">
+            <hbox>
+                <vbox>
+                    <label appearance="header">Vectorisation</label>
+                    <separator />
+                    <param name="keeporiginal" type="bool" gui-text="Garder l'image d'origine sur le canevas">false</param>
+                    <param name="ltres" type="float" min="0.0" gui-text="Seuil d'erreur des lignes droites">1.0</param>
+                    <param name="qtres" type="float" min="0.0" gui-text="Seuil d'erreur des splines quadratiques">1.0</param>
+                    <param name="pathomit" type="int" min="0" max="9999" gui-text="Réduction du bruit : ignorer les chemins de bord plus courts que">8</param>           
+                    <param name="rightangleenhance" type="bool" gui-text="Renforcer les angles droits">true</param>
+                    <spacer />
+                    <label appearance="header">Quantification des couleurs et calques</label>
+                    <separator />
+                    <param name="colorsampling" appearance="combo" type="optiongroup" gui-text="Échantillonnage des couleurs">
+                       <option value="0">désactivé, création d'une palette</option>
+                       <option value="1">échantillonnage aléatoire</option>
+                       <option value="2">échantillonnage déterministe</option>
+                    </param>           
+                    <param name="numberofcolors" type="int" min="1" max="9999" gui-text="Nombre de couleurs de la palette">16</param>
+                    <param name="mincolorratio" type="int" gui-text="Taux de variation aléatoire des couleurs">0</param>
+                    <param name="colorquantcycles" type="int" min="1" max="20" gui-text="Nombre de répétitions de la quantification des couleurs">3</param>   
+                    <param name="layering" appearance="combo" type="optiongroup" gui-text="Calques">
+                       <option value="0">séquentiel</option>
+                       <option value="1">parallèle</option>
+                    </param>   
+                </vbox>
+                <spacer />
+                <separator />
+                <spacer />
+                <vbox>
+                    <label appearance="header">Rendu SVG</label>
+                    <separator />
+                    <param name="strokewidth" type="float" min="0.0" max="9999" gui-text="Épaisseur de contour SVG">1.0</param>
+                    <param name="linefilter" type="bool" gui-text="Filtre de lignes anti-bruit">false</param>
+                    
+                    <param name="roundcoords" type="int" min="0" max="10" gui-text="Nombre de décimales pour l'arrondi">1</param>
+                    <param name="viewbox" type="bool" gui-text="Redimensionner à la viewBox SVG">false</param>
+                    <param name="desc" type="bool" gui-text="Descriptions SVG">false</param> 
+                    <spacer />
+                    <label appearance="header">Prétraitement par flou</label>
+                    <separator />
+                    <param name="blurradius" type="int" min="1" max="5" gui-text="Flou gaussien sélectif avant traitement">0</param>
+                    <param name="blurdelta" type="float" min="0.0" max="9999" gui-text="Seuil de différence RVBA pour le flou gaussien sélectif">20.0</param>
+                </vbox>
+            </hbox>
+        </page>
+        <page name="tab_about" gui-text="À propos">
+            <label appearance="header">Imagetracer.js</label>
+            <label>imagetracerjs - vectoriseur simple d'images matricielles, écrit en JavaScript et adapté à Inkscape. Il transforme votre belle image en un tracé SVG encore plus beau, avec des zones de remplissage séparées (découpées en surfaces comme un puzzle).</label>
+            <label>2020 - 2023 / écrit par Mario Voigt (Stadtfabrikanten e.V. / FabLab Chemnitz)</label>
+            <spacer />
+            <label appearance="header">Documentation en ligne</label>
+            <label appearance="url">https://y.stadtfabrikanten.org/imagetracerjs</label>
+            <spacer />
+            <label appearance="header">Contribuer</label>
+            <label appearance="url">https://gitea.fablabchemnitz.de/FabLab_Chemnitz/mightyscape-1.2</label>
+            <label appearance="url">mailto:mario.voigt@stadtfabrikanten.org</label>
+            <spacer />
+            <label appearance="header">Modules tiers</label>
+            <label appearance="url">https://github.com/jankovicsandras/imagetracerjs</label>
+            <spacer />
+            <label appearance="header">Collection d'extensions MightyScape</label>
+            <label>Ce logiciel fait partie de la collection d'extensions MightyScape pour Inkscape, sous licence GNU GPL v3</label>
+            <label appearance="url">https://y.stadtfabrikanten.org/mightyscape-overview</label>
+        </page>
+        <page name="tab_donate" gui-text="Faire un don">
+            <label appearance="header">Café + pizza</label>
+            <label>Nous sommes les Stadtfabrikanten, qui font vivre le FabLab Chemnitz depuis 2016. Un FabLab est un atelier ouvert qui donne accès à des machines et des outils numériques : imprimantes 3D, découpeuses laser, fraiseuses CNC.</label>
+            <spacer />           
+            <label>Vous aimez notre travail et voulez nous soutenir ? Vous pouvez faire un don à notre association de différentes façons :</label>
+            <label appearance="url">https://y.stadtfabrikanten.org/donate</label>
+            <spacer />
+            <label>Merci d'utiliser notre extension et de nous aider !</label>
+            <image>../000_about_fablabchemnitz.svg</image>
+        </page>
+    </param>
+    <effect needs-live-preview="true">
+        <object-type>all</object-type>
+		<effects-menu>
+         <submenu name="FabLab Boc@l"><submenu name="Images et vectorisation" /></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">imagetracerjs.py</command>
+    </script>
+</inkscape-extension>

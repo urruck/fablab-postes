@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Touche de guitare</name>
+    <id>fablabchemnitz.de.guitar_fretboard</id>
+    <param name="scale" type="string" gui-text="Diapason :">25.00in</param>
+    <param name="lnut" type="string" gui-text="Largeur au sillet :">43mm</param>
+    <param name="l12" type="string" gui-text="Largeur à la 12e frette :">53mm</param>
+    <param name="numfret" type="int" min="1" max="36" gui-text="Nombre de frettes :">22</param>
+    <param name="fbext" type="string" gui-text="Prolongement sous la dernière frette :">8mm</param>
+    <param name="fretwidth" type="string" gui-text="Largeur des frettes :">2mm</param>
+    <effect>
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Mécanique et graduations" /></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">guitar_fretboard.py</command>
+    </script>
+</inkscape-extension>

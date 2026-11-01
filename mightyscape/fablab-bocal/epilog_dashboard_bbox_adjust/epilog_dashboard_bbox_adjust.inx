@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+	<name>Ajustement de cadre pour Epilog Dashboard</name>
+	<id>fablabchemnitz.de.epilog_dashboard_bbox_adjust</id>
+    <param name="tab" type="notebook">
+        <page name="tab_settings" gui-text="Paramètres">
+            <label appearance="header">À propos de la sélection</label>
+            <label>Le résultat dépend de la sélection. Sans sélection, tout le document est traité !</label>
+            <param name="apply_transformations" type="bool" gui-text="Appliquer les transformations (nécessite l'extension correspondante)" gui-description="Appelle l'extension « Appliquer les transformations ». Évite les décalages de géométrie">false</param>
+            <param name="offset" type="float" min="0.0" max="1000.0" precision="3" gui-text="Décalage XY (mm) depuis le coin supérieur gauche">1.0</param>
+            <param name="removal" gui-text="Suppression d'éléments" type="optiongroup" appearance="combo" gui-description="Supprime tous les éléments hors de la boîte englobante ou de la sélection. Les objets en partie hors du canevas sont aussi supprimés si vous avez choisi « hors du canevas »">
+                <option value="none">aucun</option>
+                <option value="outside_canvas">hors du canevas</option>    
+                <option value="outside_selection">hors de la sélection</option>
+            </param>
+            <param name="use_machine_size" type="bool" gui-text="Utiliser la taille de la machine (sinon bordure symétrique)">false</param>
+            <param name="machine_size" gui-text="Machine / taille (mm)" type="optiongroup" appearance="combo">
+                <option value="406x305">406 x 305 mm (Zing 16)</option>
+                <option value="610x305">610 x 305 mm (Zing 24 / Fusion Edge 12)</option>    
+                <option value="610x610">610 x 610 mm (Fusion Pro 24)</option>
+                <option value="812x508">812 x 508 mm (Fusion Pro 32 / Fusion M2 32)</option>
+                <option value="914x610">914 x 610 mm (Fusion Pro 36)</option>
+                <option value="1016x711">1016 x 711 mm (Fusion M2 40)</option>
+                <option value="1219x914">1219 x 914 mm (Fusion Pro 48)</option>
+            </param>
+            <param name="debug" type="bool" gui-text="Informations de débogage">false</param>
+            <param name="skip_errors" type="bool" gui-text="Ignorer les erreurs">false</param>
+        </page>
+        <page name="tab_about" gui-text="À propos">
+            <label appearance="header">Ajustement de cadre pour Epilog Dashboard</label>
+            <label>Élargit le document pour envoyer correctement toutes les lignes à Epilog Dashboard. Remarque : sans sélection, tout le document est traité.</label>
+            <label>2021 - 2023 / écrit par Mario Voigt (Stadtfabrikanten e.V. / FabLab Chemnitz)</label>
+            <spacer />
+            <label appearance="header">Documentation en ligne</label>
+            <label appearance="url">https://y.stadtfabrikanten.org/epilogbboxadjust</label>
+            <spacer />
+            <label appearance="header">Contribuer</label>
+            <label appearance="url">https://gitea.fablabchemnitz.de/FabLab_Chemnitz/mightyscape-1.2</label>
+            <label appearance="url">mailto:mario.voigt@stadtfabrikanten.org</label>
+            <spacer />
+            <label appearance="header">Collection d'extensions MightyScape</label>
+            <label>Ce logiciel fait partie de la collection d'extensions MightyScape pour Inkscape, sous licence GNU GPL v3</label>
+            <label appearance="url">https://y.stadtfabrikanten.org/mightyscape-overview</label>
+        </page>
+        <page name="tab_donate" gui-text="Faire un don">
+            <label appearance="header">Café + pizza</label>
+            <label>Nous sommes les Stadtfabrikanten, qui font vivre le FabLab Chemnitz depuis 2016. Un FabLab est un atelier ouvert qui donne accès à des machines et des outils numériques : imprimantes 3D, découpeuses laser, fraiseuses CNC.</label>
+            <spacer />           
+            <label>Vous aimez notre travail et voulez nous soutenir ? Vous pouvez faire un don à notre association de différentes façons :</label>
+            <label appearance="url">https://y.stadtfabrikanten.org/donate</label>
+            <spacer />
+            <label>Merci d'utiliser notre extension et de nous aider !</label>
+            <image>../000_about_fablabchemnitz.svg</image>
+        </page>
+    </param>
+	<effect needs-document="true" needs-live-preview="true">
+		<object-type>all</object-type>
+		<effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Découpe laser et traceur" /></submenu></effects-menu>
+        <menu-tip>Widen the document to send all lines properly to Epilog Dashboard</menu-tip>
+	</effect>
+	<script>
+		<command location="inx" interpreter="python">epilog_dashboard_bbox_adjust.py</command>
+	</script>
+</inkscape-extension>

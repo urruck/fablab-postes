@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+	<name>Aimanter les points des objets</name>
+	<id>fablabchemnitz.de.snap_object_points</id>
+	<param name="max_dist" type="float" min="0.001" max="999999.000" precision="3" gui-text="Distance d'aimantation maximale">25</param>
+        <param name="unit" type="optiongroup" appearance="combo" gui-text="Unité de distance">
+            <option value="mm">mm</option>
+            <option value="cm">cm</option>
+            <option value="in">in</option>
+            <option value="pt">pt</option>
+            <option value="px">px</option>
+            <option value="pc">pc</option>
+        </param>
+	<param name="controls" type="bool" gui-text="Aimanter les points de contrôle">true</param>
+	<param name="ends" type="bool" gui-text="Aimanter les extrémités">true</param>
+	<param name="first_only" type="bool" gui-text="Modifier seulement le premier chemin sélectionné">false</param>
+	<label>Cet effet aimante les points de chaque objet sélectionné aux points voisins des autres objets sélectionnés.</label>
+    <effect>
+		<object-type>path</object-type>
+			<effects-menu>
+				<submenu name="FabLab Boc@l"><submenu name="Chemins"><submenu name="Modifier" /></submenu></submenu></effects-menu>
+	</effect>
+	<script>
+		<command location="inx" interpreter="python">snap_object_points.py</command>
+	</script>
+</inkscape-extension>

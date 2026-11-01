@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Mettre à la taille</name>
+    <id>fablabchemnitz.de.scale_to_size</id>
+    <param name="unit" gui-text="Unité" type="optiongroup" appearance="combo">
+        <option value="mm">mm</option>
+        <option value="cm">cm</option>
+        <option value="in">in</option>
+        <option value="pt">pt</option>
+        <option value="px">px</option>
+    </param>
+    <param name="expected_size" type="float" precision="3" min="0.001" max="10000.000" gui-text="Taille voulue :">100.000</param>
+    <param name="copies" type="int" min="0" max="99999" gui-text="Nombre de copies" gui-description="0 = seul l'élément d'origine est transformé.">0</param>
+    <param name="scale_increment" type="float" precision="3" min="-10000.000" max="10000.000" gui-text="Pas d'agrandissement (dans l'unité choisie) :">0.000</param>
+    <param name="scale_type" type="optiongroup" appearance="combo" gui-text="Type de mise à l'échelle :">
+        <option value="Horizontal">Horizontale</option>
+        <option value="Vertical">Verticale</option>
+        <option value="Uniform">Uniforme</option>
+    </param>
+    <param name="keep_aspect" type="bool" gui-text="Garder les proportions" gui-description="Ne s'applique pas à la mise à l'échelle uniforme.">true</param>
+    <label>Cet effet mesure les chemins sélectionnés et les met à la taille voulue. Ne fonctionne pas sur les objets (il faut les convertir en chemins) !</label>
+    <effect>
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Transformations" /></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">scale_to_size.py</command>
+    </script>
+</inkscape-extension>

@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Motif de Fibonacci</name>
+    <id>fablabchemnitz.de.fibonacci_pattern</id>
+	<param name="FirstRadius" type="int" min="1" max="500" gui-text="Premier rayon :">2</param>
+	<param name="LastRadius" type="int" min="1" max="500" gui-text="Dernier rayon :">5</param>
+	<param name="NumberOfNodes" type="int" min="200" max="2000" gui-text="Nombre de nœuds :">400</param>
+	<param name="SpreadFactor" type="int" min="1" max="100" gui-text="Facteur d'étalement :">20</param>
+    <effect>
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Formes et motifs"><submenu name="Générateurs" /></submenu></submenu></effects-menu>						    		
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">fibonacci_pattern.py</command>
+    </script>
+</inkscape-extension>

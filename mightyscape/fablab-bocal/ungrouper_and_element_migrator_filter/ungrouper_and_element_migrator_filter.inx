@@ -1,0 +1,136 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Dégroupeur et filtre d'éléments</name>
+    <id>fablabchemnitz.de.ungrouper_and_element_migrator_filter</id>
+    <param name="tab" type="notebook">
+        <page name="tab_settings" gui-text="Paramètres">
+            <label appearance="header">Types d'éléments à garder</label>
+            <hbox>
+                <vbox>
+                    <label appearance="header">Géométrie</label>
+                    <param name="circle" type="bool" gui-text="circle">true</param>
+                    <param name="ellipse" type="bool" gui-text="ellipse">true</param>
+                    <param name="line" type="bool" gui-text="ligne">true</param>
+                    <param name="path" type="bool" gui-text="path">true</param>
+                    <param name="polyline" type="bool" gui-text="polyline">true</param>
+                    <param name="polygon" type="bool" gui-text="polygon">true</param>
+                    <param name="rect" type="bool" gui-text="rect">true</param>
+                </vbox>
+                <separator />
+                <vbox>
+                    <label appearance="header">Texte</label>
+                    <param name="text" type="bool" gui-text="text">true</param>
+                    <param name="tspan" type="bool" gui-text="tspan">true</param>
+                    <param name="flowRoot" type="bool" gui-text="flowRoot">true</param>
+                    <param name="flowRegion" type="bool" gui-text="flowRegion">true</param>
+                    <param name="flowPara" type="bool" gui-text="flowPara">true</param>
+                    <separator />
+                    <label appearance="header">Police</label>
+                    <param name="font" type="bool" gui-text="font">true</param>
+                    <param name="fontFace" type="bool" gui-text="font-face">true</param>
+                    <param name="glyph" type="bool" gui-text="glyph">true</param>
+                </vbox>
+                <separator />
+                <vbox>
+                    <label appearance="header">Dégradés</label>
+                    <param name="linearGradient" type="bool" gui-text="linearGradient">true</param>
+                    <param name="radialGradient" type="bool" gui-text="radialGradient">true</param>
+                    <param name="meshGradient" type="bool" gui-text="meshGradient">true</param>
+                    <param name="meshRow" type="bool" gui-text="meshRow">true</param>
+                    <param name="meshPatch" type="bool" gui-text="meshPatch">true</param>
+                    <param name="stop" type="bool" gui-text="stop">true</param>
+                </vbox>
+                <separator />
+                <vbox>
+                    <label appearance="header">Objets / divers</label>
+        			<hbox>
+        				<vbox>
+        					
+        					
+        					<param name="clipPath" type="bool" gui-text="clipPath">true</param>
+                            <param name="defs" type="bool" gui-text="defs">true</param>
+                            <param name="desc" type="bool" gui-text="desc">true</param>
+        					<param name="image" type="bool" gui-text="image">true</param>
+                            <param name="guide" type="bool" gui-text="guide">true</param>
+        					<param name="mask" type="bool" gui-text="mask">true</param>
+        					<param name="marker" type="bool" gui-text="marker">true</param>
+                            <param name="page" type="bool" gui-text="inkscape:page">true</param>
+                            <param name="perspective" type="bool" gui-text="inkscape:perspective">true</param>
+                            <param name="pathEffect" type="bool" gui-text="inkscape:path-effect">true</param>
+                        </vbox>
+                    <spacer />
+                        <vbox>
+        					<param name="pattern" type="bool" gui-text="pattern">true</param>
+                            <param name="script" type="bool" gui-text="script">true</param>
+                            <param name="style" type="bool" gui-text="style">true</param>
+        					<param name="switch" type="bool" gui-text="interrupteur">true</param>
+        					<param name="symbol" type="bool" gui-text="symbol">true</param>
+        					<param name="use" type="bool" gui-text="use">true</param>
+                            <param name="rdfRDF" type="bool" gui-text="rdf:RDF">true</param>
+                            <param name="ccWork" type="bool" gui-text="cc:Work">true</param>
+                            <param name="metadata" type="bool" gui-text="metadata">true</param>
+        				</vbox>
+        			</hbox>
+                </vbox>
+                <separator />
+                <vbox>
+                    <label appearance="header">Autre structure XML</label>
+                    <param name="comments" type="bool" gui-text="commentaires">true</param>
+                    <param name="tails" type="bool" gui-text="espaces de fin (tails)" gui-description="ex. retours à la ligne, espaces après une balise XML">true</param>
+                </vbox>  
+            </hbox>
+            <separator />
+            <param name="operationmode" type="optiongroup" appearance="combo" gui-text="Mode de fonctionnement">
+                <option value="ungroup_only">Dégrouper (aplatir) seulement</option>
+                <option value="ungroup_and_filter">Dégrouper (aplatir) + filtrer (supprimer)</option>
+                <option value="filter_only">Filtrer (supprimer) seulement</option>
+            </param>
+            <param name="parsechildren" type="bool" gui-text="Agir sur les enfants de la sélection">true</param>
+            <param name="showdroplist" type="bool" gui-text="Afficher la liste des éléments supprimés">false</param>
+            <param name="shownewgroupname" type="bool" gui-text="Afficher le nom du nouveau groupe" gui-description="Aide à mieux repérer le résultat.">false</param>
+            <param name="apply_transformations" type="bool" gui-text="Appliquer les transformations (nécessite l'extension correspondante)" gui-description="Appelle l'extension « Appliquer les transformations ». Évite les décalages de géométrie">false</param>
+            <param name="cleanup" gui-text="Nettoyer les groupes inutilisés (nécessite l'extension correspondante)" type="bool" gui-description="Appelle l'extension « Supprimer les groupes vides » si elle est disponible">true</param>
+            <param name="migrate_to" type="optiongroup" appearance="combo" gui-text="Déplacer vers">
+                <option value="group">un nouveau groupe</option>
+                <option value="layer">un nouveau calque</option>
+            </param>
+        </page>
+        <page name="tab_about" gui-text="À propos">
+            <label appearance="header">Dégroupeur et filtre d'éléments</label>
+            <label>Agit sur la sélection, ou sur tout le document si rien n'est sélectionné. Permet d'aplatir les éléments en un seul groupe et d'en supprimer au passage.</label>
+            <label>En mode filtre, les éléments non cochés sont supprimés. Les groupes avec transformations peuvent donner des résultats inattendus : lancez d'abord l'extension « Appliquer les transformations ».</label>
+            <label>2020 - 2024 / écrit par Mario Voigt (Stadtfabrikanten e.V. / FabLab Chemnitz)</label>
+            <spacer />
+            <label appearance="header">Documentation en ligne</label>
+            <label appearance="url">https://y.stadtfabrikanten.org/migrategroups</label>
+            <spacer />
+            <label appearance="header">Contribuer</label>
+            <label appearance="url">https://gitea.fablabchemnitz.de/FabLab_Chemnitz/mightyscape-1.2</label>
+            <label appearance="url">mailto:mario.voigt@stadtfabrikanten.org</label>
+            <spacer />
+            <label appearance="header">Collection d'extensions MightyScape</label>
+            <label>Ce logiciel fait partie de la collection d'extensions MightyScape pour Inkscape, sous licence GNU GPL v3</label>
+            <label appearance="url">https://y.stadtfabrikanten.org/mightyscape-overview</label>
+        </page>
+        <page name="tab_donate" gui-text="Faire un don">
+            <label appearance="header">Café + pizza</label>
+            <label>Nous sommes les Stadtfabrikanten, qui font vivre le FabLab Chemnitz depuis 2016. Un FabLab est un atelier ouvert qui donne accès à des machines et des outils numériques : imprimantes 3D, découpeuses laser, fraiseuses CNC.</label>
+            <spacer />           
+            <label>Vous aimez notre travail et voulez nous soutenir ? Vous pouvez faire un don à notre association de différentes façons :</label>
+            <label appearance="url">https://y.stadtfabrikanten.org/donate</label>
+            <spacer />
+            <label>Merci d'utiliser notre extension et de nous aider !</label>
+            <image>../000_about_fablabchemnitz.svg</image>
+        </page>
+    </param>
+    <effect needs-live-preview="true">
+        <object-type>path</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Calques et groupes" /></submenu></effects-menu>
+       <menu-tip>Parses selection and puts all elements into single group. If you have a cluster with lots of groups and elements you will clean up this way (one top level group, all elements below it). You can also use it to filter unwanted SVG elements.</menu-tip>
+       <icon>icon.svg</icon>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">ungrouper_and_element_migrator_filter.py</command>
+    </script>
+</inkscape-extension>

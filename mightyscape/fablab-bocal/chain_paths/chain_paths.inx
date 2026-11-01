@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Enchaîner les chemins</name>
+    <id>fablabchemnitz.de.chain_paths</id>
+    <param name="chain_epsilon" type="float" min="0.001" max="999.999" precision="3" gui-text="Distance max. de raccordement">0.01</param>
+    <param name="units" type="optiongroup" appearance="combo" gui-text=" ">
+        <option value="mm">mm</option>
+        <option value="cm">cm</option>
+        <option value="in">in</option>
+        <option value="pt">pt</option>
+        <option value="px">px</option>
+    </param>
+    <param name="snap_ends" type="bool" gui-text="Souder les extrémités raccordées" gui-description="Fusionne les deux nœuds en un seul">false</param>
+    <param name="close_loops" type="bool" gui-text="Fermer les boucles (début / fin d'un même chemin)">true</param>
+    <param name="limit" type="int" min="0" max="99999" gui-text="Nombre maximal d'éléments à traiter" gui-description="Plus il y a d'éléments sélectionnés, plus le traitement est lent. Mieux vaut répéter par petites étapes. 0 = sélection illimitée, sinon la sélection est tronquée.">2000</param>
+    <param name="debug" type="bool" gui-text="Informations de débogage">false</param>
+    
+    <label appearance="url">https://github.com/fablabnbg/inkscape-chain-paths</label>
+    <label>Version 0.7</label>
+    <effect needs-live-preview="true">
+        <object-type>path</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Chemins"><submenu name="Joindre et ordonner" /></submenu></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">chain_paths.py</command>
+    </script>
+</inkscape-extension>

@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+   <name>Export LaserDraw (zip)</name>
+   <id>fablabchemnitz.de.laserdraw_export.zip</id>
+   
+   <label>La mise en forme permet de séparer un dessin en fichiers de découpe et de gravure. Lignes rouges : découpe ; lignes bleues : gravure ; noir : gravure raster.</label>
+   
+   <param name="resolution" type="int" min="100" max="1000" gui-text="Résolution de l'image raster">1000</param>
+   <param name="margin" type="float" precision="1" min="0" max="9999" gui-text="Taille de marge LaserDraw">2.0</param>
+   <param name="txt2paths" type="bool" gui-text="Convertir le texte en chemins">false</param>
+   
+   <param name="inkscape_version" type="optiongroup" appearance="combo" gui-text="Version d'Inkscape :">
+      <option value="100">1.00 ou plus récente</option>
+      <option value="92">0.92 à 0.99</option>
+      <option value="91">0.91 ou plus ancienne</option>
+   </param>
+   <output>
+      <extension>.zip</extension>
+      <mimetype>application/x-zip</mimetype>
+      <filetypename>Laser Draw LYZ (ZIP)(*.zip)</filetypename>
+      <filetypetooltip>LaserDraw LYZ Output Zipped</filetypetooltip>
+      <dataloss>true</dataloss>
+   </output>
+   <script>
+      <command location="inx" interpreter="python">lyz_export.py</command>
+      <helper_extension>org.inkscape.output.svg.inkscape</helper_extension>
+   </script>
+</inkscape-extension>

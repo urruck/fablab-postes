@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+	<name>Supprimer les attributs obsolètes</name>
+	<id>fablabchemnitz.de.remove_obsolete_attributes</id>
+	<label>Retire les attributs « sodipodi:absref », « sodipodi:docbase » et « sodipodi:docname » de tous les éléments. Ils contiennent des chemins absolus vers des ressources, ce qui peut poser un problème de sécurité.</label>
+	<param name="removeAbsref" type="bool" gui-text="Retirer sodipodi:absref">true</param>
+	<param name="removeDocbase" type="bool" gui-text="Retirer sodipodi:docbase">true</param>
+	<param name="removeDocname" type="bool" gui-text="Retirer sodipodi:docname">true</param>
+	<effect>
+		<object-type>all</object-type>
+		<effects-menu>
+			<submenu name="FabLab Boc@l"><submenu name="Divers" /></submenu></effects-menu>
+	</effect>
+	<script>
+		<command location="inx" interpreter="python">remove_obsolete_attributes.py</command>
+	</script>
+</inkscape-extension>

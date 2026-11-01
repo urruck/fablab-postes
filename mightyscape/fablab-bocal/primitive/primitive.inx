@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Primitive (Michael Fogleman)</name>
+    <id>fablabchemnitz.de.primitive</id>
+    <param name="tab" type="notebook">
+        <page name="tab_general" gui-text="Primitive">
+            <label appearance="header">Paramètres</label>
+            <separator />
+            <param name="keeporiginal" type="bool" gui-text="Garder l'image d'origine sur le canevas">false</param>
+            <param name="cliprect" type="bool" gui-text="Dessiner le rectangle de découpe">true</param>	
+            <param name="n" type="int" min="0" max="99999" gui-text="Nombre de formes">100</param>
+            <param name="m" appearance="combo" type="optiongroup" gui-text="Mode"> 
+                <option value="0">Mélange</option>
+                <option value="1">Triangle</option>
+                <option value="2">Rectangle</option>
+                <option value="3">Ellipse</option>
+                <option value="4">Cercle</option>
+                <option value="5">Rectangle pivoté</option>
+                <option value="6">Béziers</option>
+                <option value="7">Ellipse pivotée</option>
+                <option value="8">Polygone</option>
+            </param>
+            <param name="rep" type="int" min="0" max="99999" gui-text="Formes en plus par itération" gui-description="Ajoute N formes à chaque itération avec une recherche réduite (surtout utile pour les Béziers)">0</param>
+            <param name="r" type="int" min="1" max="99999" gui-text="Redimensionner avant traitement (px)">256</param>
+            <param name="s" type="int" min="1" max="99999" gui-text="Taille de l'image de sortie (px)">1024</param>    
+            <param name="a" type="int" min="0" max="255" gui-text="Opacité des couleurs" gui-description="0 pour laisser l'algorithme choisir l'opacité de chaque forme">128</param>  
+            <param name="bg_enabled" type="bool" gui-text="Utiliser la couleur moyenne comme fond de départ">true</param>
+            <param name="bg" type="color" appearance="colorbutton" gui-text="Couleur de fond de départ" gui-description="Désactivez le fond moyen de départ pour utiliser cette option">255</param>    
+            <param name="j" type="int" min="0" max="32" gui-text="Nombre de processus parallèles" gui-description="Par défaut (0) : tous les cœurs">0</param>    
+        </page>
+        <page name="tab_about" gui-text="À propos">
+            <label appearance="header">Primitive (Michael Fogleman)</label>
+            <label>Primitive - reproduit des images avec des formes géométriques simples, écrit en Go et adapté à Inkscape.</label>
+            <label>2020 - 2023 / écrit par Mario Voigt (Stadtfabrikanten e.V. / FabLab Chemnitz)</label>
+            <spacer />
+            <label appearance="header">Documentation en ligne</label>
+            <label appearance="url">https://y.stadtfabrikanten.org/primitive</label>
+            <spacer />
+            <label appearance="header">Contribuer</label>
+            <label appearance="url">https://gitea.fablabchemnitz.de/FabLab_Chemnitz/mightyscape-1.2</label>
+            <label appearance="url">mailto:mario.voigt@stadtfabrikanten.org</label>
+            <spacer />
+            <label appearance="header">Modules tiers</label>
+            <label appearance="url">https://github.com/fogleman/primitive</label>
+            <spacer />
+            <label appearance="header">Collection d'extensions MightyScape</label>
+            <label>Ce logiciel fait partie de la collection d'extensions MightyScape pour Inkscape, sous licence GNU GPL v3</label>
+            <label appearance="url">https://y.stadtfabrikanten.org/mightyscape-overview</label>
+        </page>
+        <page name="tab_donate" gui-text="Faire un don">
+            <label appearance="header">Café + pizza</label>
+            <label>Nous sommes les Stadtfabrikanten, qui font vivre le FabLab Chemnitz depuis 2016. Un FabLab est un atelier ouvert qui donne accès à des machines et des outils numériques : imprimantes 3D, découpeuses laser, fraiseuses CNC.</label>
+            <spacer />           
+            <label>Vous aimez notre travail et voulez nous soutenir ? Vous pouvez faire un don à notre association de différentes façons :</label>
+            <label appearance="url">https://y.stadtfabrikanten.org/donate</label>
+            <spacer />
+            <label>Merci d'utiliser notre extension et de nous aider !</label>
+            <image>../000_about_fablabchemnitz.svg</image>
+        </page>
+    </param>
+    <effect needs-live-preview="true">
+        <object-type>all</object-type>
+		<effects-menu>
+         <submenu name="FabLab Boc@l"><submenu name="Images et vectorisation" /></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">primitive.py</command>
+    </script>
+</inkscape-extension>

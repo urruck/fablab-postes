@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Sinus et dentelle</name>
+    <id>fablabchemnitz.de.sine_and_lace</id>
+    <param name="tab" type="notebook">
+        <page name="splash" gui-text="Sinus et dentelle">
+            <param name="nWidth" type="int" min="1" max="10000" gui-text="Largeur (pixels)">3200</param>
+            <param name="nHeight" type="int" min="1" max="10000" gui-text="Hauteur (pixels)">100</param>
+            <param name="fCycles" type="float" min="0.0001" max="10000" precision="5" gui-text="Nombre de cycles (périodes)">10</param>
+            <param name="nrN" type="int" min="-100" max="100" gui-text="Angle de départ à 2 pi ( n / m ) ; n =">0</param>
+            <param name="nrM" type="int" min="-100" max="100" gui-text="Angle de départ à 2 pi ( n / m ) ; m =">0</param>
+            <param name="fRecess" type="float" min="0" max="100" precision="5" gui-text="Retrait par rapport à l'enveloppe en pourcentage">2</param>
+            <param name="nSamples" type="int" min="2" max="100000" gui-text="Nombre de points d'échantillonnage">1000</param>
+            <param name="nOffsetX" type="int" min="-10000" max="10000" gui-text="Coordonnée x de départ (pixels)">0</param>
+            <param name="nOffsetY" type="int" min="-10000" max="10000" gui-text="Coordonnée y de départ (pixels)">500</param>
+            <param name="bLace" type="bool" gui-text="Dentelle">true</param>
+            <param name="bSpline" type="bool" gui-text="Spline">false</param>
+        </page>
+        <page name="info" gui-text="À propos...">
+            <label xml:space="preserve">Cette extension dessine des motifs sinusoïdaux et « dentelle »
+dont la période est un multiple donné
+de la largeur du document ou d'une largeur choisie.
+En sélectionnant deux motifs déjà dessinés,
+on peut en inscrire un troisième entre eux.
+On ne peut pas inscrire un motif dans un motif
+lui-même inscrit.
+
+Cette extension se trouve sur Thingiverse :
+Thing #24594.
+
+Sine and Lace v0.9
+Dan Newman (dan newman @ mtbaldy us)
+12 juin 2012</label>
+        </page>
+    </param>
+    <effect>
+        <object-type>path</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Formes et motifs"><submenu name="Générateurs" /></submenu></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">sine_and_lace.py</command>
+    </script>
+</inkscape-extension>

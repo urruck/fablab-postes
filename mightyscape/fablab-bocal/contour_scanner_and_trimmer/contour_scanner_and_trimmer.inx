@@ -1,0 +1,187 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Analyse et rognage de contours</name>
+    <id>fablabchemnitz.de.contour_scanner_and_trimmer</id>
+    <param name="nb_main" type="notebook">
+        <page name="tab_settings_and_actions" gui-text="Réglages et actions">
+            <param name="nb_settings_and_actions" type="notebook">
+                <page name="tab_settings" gui-text="Paramètres">
+                    <label appearance="header">Entrée / sortie</label>
+                    <param name="show_debug" type="bool" gui-text="Afficher les infos de débogage">false</param>
+                    <param name="break_apart" type="bool" gui-text="Séparer les chemins d'entrée" gui-description="Sépare les chemins d'entrée en sous-chemins. Modifie les chemins d'origine : conversion en coordonnées absolues, et création possible de nouveaux chemins.">false</param>   
+                    <param name="handle_groups" type="bool" gui-text="Traiter les groupes" gui-description="Cherche aussi les chemins dans les groupes de la sélection. Remarque : les résultats ont une autre structure (moins détaillée à cause du groupement et de la conversion des chemins absolus en relatifs) que pour des chemins sélectionnés directement. La coloration des chemins sans intersection sera aussi différente.">false</param> 
+                    <param name="flattenbezier" type="bool" gui-text="Quantification (aplatir les courbes de Bézier en (poly)lignes)" gui-description="Convertir les courbes de Bézier en (poly)lignes.">true</param>  
+                    <param name="flatness" type="float" min="0.001" max="99999.000" precision="3" gui-text="Planéité (tolérance)" gui-description="Planéité minimale = 0,001. Plus la valeur est petite, plus les segments sont fins (quantification). Une valeur élevée peut casser la continuité des lignes (par défaut : 0,1).">0.100</param>
+                    <param name="decimals" type="int" min="0" max="16" gui-text="Décimales" gui-description="Précision des lignes subdivisées / rognées par shapely (par défaut : 3)">3</param>
+                    <param name="snap_tolerance" type="float" min="0.01" max="10.0" gui-text="Tolérance d'aimantation" gui-description="Tolérance d'aimantation des points d'intersection sur les chemins (par défaut : 0,1)">0.1</param>
+                    <param name="collinear_filter_epsilon" type="float" min="0.000000001" max="1.0" precision="9" gui-text="Epsilon du filtre de lignes colinéaires" gui-description="par défaut : 0,01">0.01</param>
+                    <label appearance="header">Style général</label>
+                    <param name="strokewidth" min="0.0" max="10000.0" precision="3" gui-text="Épaisseur du contour (px)" gui-description="S'applique aux lignes subdivisées et rognées" type="float">1.0</param>
+                    <param name="dotsize_intersections" type="int" min="0" max="10000" gui-text="Taille des points d'intersection (px)" gui-description="Pour les auto-intersections et les intersections globales">30</param>
+                    <param name="removefillsetstroke" type="bool" gui-text="Retirer le remplissage et définir un contour" gui-description="Modifie le style du chemin d'origine">false</param>
+                    <param name="subsplit_style" type="optiongroup" appearance="combo" gui-text="Style des lignes subdivisées">
+                        <option value="default">Style de subdivision par défaut</option>
+                        <option value="apply_from_highlightings">Appliquer les styles de surlignage</option>
+                        <option value="apply_from_original">Appliquer les styles des chemins d'origine</option>
+                    </param>
+                    <param name="trimmed_style" type="optiongroup" appearance="combo" gui-text="Style des lignes rognées">
+                        <option value="apply_from_trimmed">Appliquer les styles de rognage par défaut</option>
+                        <option value="apply_from_original">Appliquer les styles des chemins d'origine</option>
+                    </param>    
+                </page>
+                <page name="tab_removing" gui-text="Suppression">
+                    <label appearance="header">S'applique aux chemins d'origine et aux lignes subdivisées</label>
+                    <param name="remove_relative" type="bool" gui-text="commandes relatives">false</param>
+                    <param name="remove_absolute" type="bool" gui-text="commandes absolues">false</param>     
+                    <param name="remove_rel_abs_mixed" type="bool" gui-text="commandes relatives / absolues mêlées" gui-description="relatives et absolues combinées">false</param>
+                    <param name="remove_polylines" type="bool" gui-text="(poly)lignes">false</param>
+                    <param name="remove_beziers" type="bool" gui-text="Béziers">false</param>
+                    <param name="remove_poly_bez_mixed" type="bool" gui-text="chemins mêlant (poly)lignes et Béziers" gui-description="(poly)lignes et Béziers combinées">false</param>               
+                    <param name="remove_opened" type="bool" gui-text="ouverts">false</param>
+                    <param name="remove_closed" type="bool" gui-text="fermé">false</param>
+                    <param name="remove_self_intersecting" type="bool" gui-text="auto-sécants">false</param>
+                    <label appearance="header">S'applique aux lignes subdivisées seulement</label>
+                    <param name="filter_subsplit_collinear" type="bool" gui-text="Filtrer les lignes colinéaires superposées" gui-description="Supprime les doublons en fusionnant les segments superposés en lignes plus longues. Impossible sur les chemins d'origine, car cette routine ne gère pas les courbes de Bézier.">true</param>     
+                    <param name="filter_subsplit_collinear_action" type="optiongroup" appearance="combo" gui-text="Que faire des lignes colinéaires superposées ?">
+                        <option value="remove">supprimer</option>
+                        <option value="separate_group">mettre dans un groupe à part</option>
+                    </param>
+                    <label appearance="header">S'applique aux chemins d'origine seulement</label>
+                    <param name="delete_original_after_split_trim" type="bool" gui-text="Supprimer les chemins d'origine après subdivision / rognage">false</param>
+                </page>
+                <page name="tab_highlighting" gui-text="Surlignage">
+                    <label appearance="header">S'applique aux chemins d'origine et aux lignes subdivisées</label>
+                    <param name="highlight_relative" type="bool" gui-text="commandes relatives">false</param>
+                    <param name="highlight_absolute" type="bool" gui-text="commandes absolues">false</param>
+                    <param name="highlight_rel_abs_mixed" type="bool" gui-text="commandes relatives / absolues mêlées" gui-description="relatives et absolues combinées">false</param>  
+                    <param name="highlight_polylines" type="bool" gui-text="(poly)lignes">false</param>
+                    <param name="highlight_beziers" type="bool" gui-text="Béziers">false</param>
+                    <param name="highlight_poly_bez_mixed" type="bool" gui-text="chemins mêlant (poly)lignes et Béziers" gui-description="(poly)lignes et Béziers combinées">false</param>
+                    <param name="highlight_opened" type="bool" gui-text="ouverts">false</param>
+                    <param name="highlight_closed" type="bool" gui-text="fermé">false</param>
+                    <param name="highlight_self_intersecting" type="bool" gui-text="auto-sécants" gui-description="Nécessite l'option « Dessiner les lignes subdivisées » (activée automatiquement). Remplace les autres couleurs de surlignage (si ces options sont activées)">false</param>
+                    <label appearance="header">S'applique aux lignes subdivisées seulement</label>
+                    <param name="draw_subsplit" type="bool" gui-text="Dessiner les lignes subdivisées" gui-description="Dessine les (poly)lignes générées à partir de tous les chemins d'entrée">false</param> 
+                    <param name="highlight_duplicates" type="bool" gui-text="doublons">false</param>
+                    <param name="highlight_merges" type="bool" gui-text="fusions" gui-description="Nécessite l'option « Supprimer les lignes colinéaires superposées » (activée automatiquement)">false</param>
+                    <label appearance="header">Points d'intersection</label>
+                    <param name="visualize_self_intersections" type="bool" gui-text="points d'auto-intersection" gui-description="Placés en arrière-plan (ordre z) par les intersections globales et les lignes rognées (si activées)">false</param> 
+                    <param name="visualize_global_intersections" type="bool" gui-text="points d'intersection globaux" gui-description="Contiendra aussi les auto-intersections ! Les intersections globales ne s'affichent que si « Dessiner les lignes rognées » est activé !">false</param> 
+                </page>
+                <page name="tab_trimming" gui-text="Rognage">
+                    <label appearance="header">Réglages généraux du rognage</label>
+                    <param name="trimming_path_types" type="optiongroup" appearance="combo" gui-text="Sélection du rognage" gui-description="Traiter les chemins ouverts par les autres chemins ouverts, les fermés par les autres fermés, ou tous par tous. Ne s'applique pas aux chemins qui se coupent eux-mêmes !">
+                        <option value="both">tous : tous les chemins</option>
+                        <option value="open_paths">ouverts : chemins ouverts</option>
+                        <option value="closed_paths">fermés : chemins fermés</option>
+                    </param>
+                    <param name="draw_trimmed" type="bool" gui-text="Dessiner les lignes rognées">false</param>
+                    <separator />
+                    <param name="combine_nonintersects" type="bool" gui-text="Enchaîner et combiner les lignes sans intersection" gui-description="Colore tous les segments de chemin sans intersection (« lignes sans intersection »). Si tout le chemin est sans intersection, il reçoit une autre couleur (« chemins sans intersection »).">true</param> 
+                    <param name="remove_trim_duplicates" type="bool" gui-text="Supprimer les lignes rognées en double" gui-description="Sans effet si « Filtrer les lignes colinéaires superposées » est activé, car les doublons sont déjà filtrés.">true</param>
+                    <param name="reverse_trim_removal_order" type="bool" gui-text="Inverser l'ordre de suppression des lignes rognées" gui-description="Inverse l'ordre de suppression. Utile pour conserver certains styles d'éléments">false</param>
+                    <param name="remove_subsplit_after_trimming" type="bool" gui-text="Supprimer les lignes subdivisées après rognage" gui-description="Conseillé si « Filtrer les lignes colinéaires superposées » est activé">true</param>
+                    <param name="bezier_trimming" type="bool" gui-text="Rogner les Béziers d'origine (ne fonctionne pas encore)" gui-description="Si activé, tente de couper les Béziers d'origine aux points d'intersection en trouvant les bons segments et en calculant les paramètres t depuis les lignes subdivisées rognées. Ne fonctionne pas encore : affiche seulement des infos de débogage si le débogage est activé.">true</param>
+                </page>
+                <page name="tab_bentleyottmann" gui-text="Bentley-Ottmann">
+                    <label appearance="header">Réglages du balayage</label>
+                    <param name="bent_ott_use_ignore_segment_endings" type="bool" gui-text="Ignorer les extrémités de segments" gui-description="Ignorer les intersections de segments lorsque leurs deux extrémités forment le point d'intersection">true</param>
+                    <param name="bent_ott_use_debug" type="bool" gui-text="Débogage">false</param>
+                    <param name="bent_ott_use_verbose" type="bool" gui-text="Détaillé" gui-description="Active automatiquement « Afficher les infos de débogage »">false</param>
+                    <param name="bent_ott_use_paranoid" type="bool" gui-text="Vérifications approfondies">false</param>
+                    <param name="bent_ott_use_vertical" type="bool" gui-text="Gérer les segments verticaux">true</param>
+                    <param name="bent_ott_number_type" type="optiongroup" appearance="combo" gui-text="Type de nombres">
+                        <option value="native">natif (par défaut)</option>
+                        <option value="numpy">numpy</option>
+                    </param>
+                </page>
+                <page name="tab_colors" gui-text="Couleurs">
+                    <hbox>
+                        <vbox>
+                            <label appearance="header">Lignes subdivisées</label>
+                            <param name="color_subsplit" type="color" appearance="colorbutton" gui-text="lignes subdivisées">1630897151</param>
+                            <label appearance="header">Structure des chemins</label>
+                            <param name="color_relative" type="color" appearance="colorbutton" gui-text="chemins en commandes relatives">3419879935</param>
+                            <param name="color_absolute" type="color" appearance="colorbutton" gui-text="chemins en commandes absolues">1592519679</param>
+                            <param name="color_rel_abs_mixed" type="color" appearance="colorbutton" gui-text="chemins en commandes relatives / absolues mêlées" gui-description="relatives et absolues combinées">3351636735</param>
+                            <param name="color_polyline" type="color" appearance="colorbutton" gui-text="chemins en (poly)lignes">4289703935</param>
+                            <param name="color_bezier" type="color" appearance="colorbutton" gui-text="chemins en Béziers">258744063</param>
+                            <param name="color_poly_bez_mixed" type="color" appearance="colorbutton" gui-text="chemins mêlant (poly)lignes et Béziers" gui-description="(poly)lignes et Béziers combinées">4118348031</param>
+                            <param name="color_opened" type="color" appearance="colorbutton" gui-text="chemins ouverts">4012452351</param>
+                            <param name="color_closed" type="color" appearance="colorbutton" gui-text="chemins fermés">2330080511</param>
+                        </vbox>
+                        <separator />
+                        <vbox>
+                            <label appearance="header">Doublons et fusions</label>
+                            <param name="color_duplicates" type="color" appearance="colorbutton" gui-text="doublons" gui-description="Couleur des segments superposés / lignes en double">897901823</param>
+                            <param name="color_merges" type="color" appearance="colorbutton" gui-text="fusions" gui-description="Couleur des fusions remplacées">869366527</param>
+                            <label appearance="header">Intersections</label>
+                            <param name="color_self_intersecting_paths" type="color" appearance="colorbutton" gui-text="chemins auto-sécants">2593756927</param>
+                            <param name="color_self_intersections" type="color" appearance="colorbutton" gui-text="points des chemins auto-sécants">6320383</param>
+                            <param name="color_global_intersections" type="color" appearance="colorbutton" gui-text="points d'intersection globaux">4239343359</param>
+                            <label appearance="header">Rognage</label>
+                            <param name="color_trimmed" type="color" appearance="colorbutton" gui-text="lignes rognées">3227634687</param>
+                            <param name="color_combined" type="color" appearance="colorbutton" gui-text="lignes sans intersection" gui-description="Colorer les lignes non rognées autrement que les rognées. Ne s'applique pas si « Style d'origine pour les lignes rognées » est activé">1923076095</param>
+                            <param name="color_nonintersected" type="color" appearance="colorbutton" gui-text="chemins sans intersection" gui-description="Colorer tout le chemin s'il n'est rogné nulle part. Ne s'applique pas si « Style d'origine pour les lignes rognées » est activé">3045284607</param>  
+                        </vbox>
+                    </hbox>
+                </page>
+             </param>
+        </page>
+        <page name="tab_tips" gui-text="Astuces">
+            <label xml:space="preserve">- Permet de séparer les types de contours par couleur
+ - Trouve les lignes superposées / colinéaires / sécantes ou auto-sécantes
+   (algorithme de Bentley-Ottmann)
+ - Fonctionne avec les chemins qui ont des effets de chemin (LPE)
+
+Astuces :
+ - Sans sélection, tout le document est traité, groupes compris. Avec une sélection, cochez ou non le traitement des groupes.
+ - Convertissez d'abord les contours et objets en chemins
+ - Ne fonctionne pas sur les clones : il faut d'abord les délier
+ - Utilisez des extensions pour filtrer les chemins courts / inutiles
+ - Utilisez des extensions pour purger ou réparer les chemins invalides
+ - Utilisez « Chemin &gt; Simplifier » ou Ctrl + L pour simplifier le résultat rogné. Avec une quantification fine, les chemins simplifiés seront presque identiques à l'original (sauf la position des points de contrôle)</label>
+            <label appearance="header">Ne sélectionnez pas trop de chemins à la fois avec une quantification fine. Cette extension est lente et peut calculer pendant des heures avec des réglages extrêmes.</label>
+        </page>
+        <page name="tab_about" gui-text="À propos">
+            <label appearance="header">Analyse et rognage de contours</label>
+            <label>Un outil pour analyser, aplatir, subdiviser et rogner des lignes.</label>
+            <label>2020 - 2025 / écrit par Mario Voigt (Stadtfabrikanten e.V. / FabLab Chemnitz)</label>
+            <spacer />
+            <label appearance="header">Documentation en ligne</label>
+            <label appearance="url">https://y.stadtfabrikanten.org/contourscannerandtrimmer</label>
+            <spacer />
+            <label appearance="header">Contribuer</label>
+            <label appearance="url">https://gitea.fablabchemnitz.de/FabLab_Chemnitz/mightyscape-1.2</label>
+            <label appearance="url">mailto:mario.voigt@stadtfabrikanten.org</label>
+            <spacer />
+            <label appearance="header">Modules tiers</label>
+            <label appearance="url">https://github.com/ideasman42/isect_segments-bentley_ottmann</label>
+            <label appearance="url">https://gist.github.com/sbma44/dc34e5005d9827aa7b1c8c11e68b0c6b</label>
+            <spacer />
+            <label appearance="header">Collection d'extensions MightyScape</label>
+            <label>Ce logiciel fait partie de la collection d'extensions MightyScape pour Inkscape, sous licence GNU GPL v3</label>
+            <label appearance="url">https://y.stadtfabrikanten.org/mightyscape-overview</label>
+        </page>
+        <page name="tab_donate" gui-text="Faire un don">
+            <label appearance="header">Café + pizza</label>
+            <label>Nous sommes les Stadtfabrikanten, qui font vivre le FabLab Chemnitz depuis 2016. Un FabLab est un atelier ouvert qui donne accès à des machines et des outils numériques : imprimantes 3D, découpeuses laser, fraiseuses CNC.</label>
+            <spacer />           
+            <label>Vous aimez notre travail et voulez nous soutenir ? Vous pouvez faire un don à notre association de différentes façons :</label>
+            <label appearance="url">https://y.stadtfabrikanten.org/donate</label>
+            <spacer />
+            <label>Merci d'utiliser notre extension et de nous aider !</label>
+            <image>../000_about_fablabchemnitz.svg</image>
+        </page>
+    </param>
+    <effect needs-live-preview="true">
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Chemins"><submenu name="Couper et nettoyer" /></submenu></submenu></effects-menu>
+       <menu-tip>Find open, contours and self-intersecting contours and checks for a set of other attributes.</menu-tip>
+       <icon>icon.svg</icon>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">contour_scanner_and_trimmer.py</command>
+    </script>
+</inkscape-extension>

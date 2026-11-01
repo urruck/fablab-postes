@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Cône en tôle (développé)</name>
+    <id>fablabchemnitz.de.sheet_metal_conus</id>
+    <param name="units" gui-text="Unités" type="optiongroup" appearance="combo">
+        <option value="mm">mm</option>
+        <option value="cm">cm</option>
+        <option value="in">in</option>
+        <option value="px">px</option>
+        <option value="pt">pt</option>
+    </param>
+    <param name="diaBase" type="float" precision="3" min="0" max="10000000000" gui-text="Diamètre de base :">300.0</param>
+    <param name="diaCut" type="float" precision="3" min="0" max="10000000000" gui-text="Diamètre de coupe :">100.0</param>
+    <param name="heightCone" type="float" precision="3" min="0" max="10000000000" gui-text="Hauteur du cône :">200.0</param>
+    <param name="strokeWidth" type="float" precision="2" min="0.001" max="10000000000" gui-text="Épaisseur de trait (en unités) :">0.4</param>
+    <param name="verbose" type="bool" gui-text="Dessiner les cotes.">false</param>
+    <label xml:space="preserve">Construit le développé à plat (plan de découpe de la tôle)
+qui se roule ou se plie en cône ou en tronc de cône.
+Si le diamètre de coupe vaut 0, le cône n'est pas tronqué.</label>
+    <param name="strokeColour" type="color" appearance="colorbutton" gui-text="Couleur du trait :">255</param>
+    <effect>
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Boîtes (autres modèles)"><submenu name="Carton et papier" /></submenu></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">sheet_metal_conus.py</command>
+    </script>
+</inkscape-extension>

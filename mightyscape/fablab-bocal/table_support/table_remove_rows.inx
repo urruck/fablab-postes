@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Rangées sélectionnées</name>
+    <id>fablabchemnitz.de.table_remove_rows</id>
+    <effect>
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Tableaux"><submenu name="Supprimer" /></submenu></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">table_remove_rows.py</command>
+    </script>
+</inkscape-extension>

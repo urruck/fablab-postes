@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Convertir en braille localisé</name>
+    <id>fablabchemnitz.de.braille_l18n</id>
+    <param name="locale" gui-text="Alphabet :" type="optiongroup" appearance="combo">
+        <option value="en">Anglais (ASCII)</option>
+        <option value="es">Espagnol</option>
+        <option value="fr">Français</option>
+        <option value="de">Allemand</option>
+        <option value="gl">Galicien</option>
+        <option value="eu">Basque</option>
+        <option value="ca">Catalan / valencien</option>
+    </param>
+    <effect>
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Texte" /></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">braille_l18n.py</command>
+    </script>
+</inkscape-extension>

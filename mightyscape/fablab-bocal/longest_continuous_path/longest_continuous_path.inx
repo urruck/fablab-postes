@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Plus long chemin continu</name>
+    <id>fablabchemnitz.de.optimize_path</id>
+    <param name="tolerance" type="float" min="0.0" max="100.0" gui-text="Tolérance de fusion :">0.10</param>
+    <param name="overwriteRule" type="optiongroup" appearance="radio" gui-text="Retour en arrière :">
+        <option value="0">Autoriser</option>
+        <option value="1">Autoriser un peu</option>
+        <option value="2">Ne pas autoriser</option>
+    </param>
+    <param name="enableLog" type="bool" gui-text="Afficher le journal de débogage">false</param>
+    <param name="keepSelected" type="bool" gui-text="Conserver les éléments sélectionnés">false</param>
+    <effect>
+        <object-type>path</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Chemins"><submenu name="Joindre et ordonner" /></submenu></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">longest_continuous_path.py</command>
+    </script>
+</inkscape-extension>

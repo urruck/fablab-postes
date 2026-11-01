@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+   <name>Distorsion en barillet</name>
+   <id>fablabchemnitz.de.barrel_distorsion</id>
+   <param name="lambda_coef" type="float" min="-1000.0" max="0.0" precision="2" gui-text="Paramètre lambda">-1.0</param>
+   <effect>
+      <object-type>all</object-type>
+      <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Transformations" /></submenu></effects-menu>
+   </effect>
+   <script>
+      <command location="inx" interpreter="python">barrel_distorsion.py</command>
+   </script>
+</inkscape-extension>

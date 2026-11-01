@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+  <name>Intersections de chemins</name>
+  <id>fablabchemnitz.de.path_intersections</id>
+  <label>Ce greffon, appelé à l'origine « Precut », a été retrouvé au fin fond du web. Adapté à Python 3 pour Inkscape 1.0, il trouve les intersections de chemins dans tout le document SVG et les marque par de petits carrés.</label>
+  <param name="color" type="color" appearance="colorbutton" gui-text="Couleur de signalement des erreurs ?">4012452351</param>
+  <effect>
+    <object-type>all</object-type>
+    <effects-menu>
+			<submenu name="FabLab Boc@l"><submenu name="Chemins"><submenu name="Couper et nettoyer" /></submenu></submenu></effects-menu>
+  </effect>
+  <script>
+    <command location="inx" interpreter="python">path_intersections.py</command>
+  </script>
+</inkscape-extension>

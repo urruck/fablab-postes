@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Supprimer les groupes vides</name>
+    <id>fablabchemnitz.de.remove_empty_groups</id>
+    <effect needs-live-preview="false">
+        <object-type>path</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Calques et groupes" /></submenu></effects-menu>
+       <menu-tip>It will just clean the whole document from groups without content (dangling groups). Also applies for layers.</menu-tip>
+       <icon>icon.svg</icon>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">remove_empty_groups.py</command>
+    </script>
+</inkscape-extension>

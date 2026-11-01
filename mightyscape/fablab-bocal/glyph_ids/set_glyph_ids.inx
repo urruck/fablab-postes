@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Identifiants de glyphes - Définir</name>
+    <id>fablabchemnitz.de.glyph_ids.set_glyph_ids</id>
+    <param type="notebook" name="tab">
+        <page name="setGlyphIDs" gui-text="Identifiants de glyphes - définir">
+            <label>L'identifiant de chaque chemin sélectionné reçoit un caractère de la chaîne ci-dessous.</label>
+            <label>Les identifiants sont attribués de gauche à droite (selon la boîte englobante).</label>
+            <param name="characters" type="string" gui-text="Caractères :">abc</param>
+        </page>
+        <page name="help" gui-text="Informations">
+        <label appearance="header">Pour plus d'informations</label>
+        <label appearance="url">https://gitlab.com/EllenWasbo/inkscape-extension-getsetGlyphIDs</label>
+        <label>et</label>
+        <label appearance="url">http://cutlings.wasbo.net/inkscape-extension-automate-glyph-ids/</label>
+        </page>
+    </param>
+    <effect>
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Texte" /></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">set_glyph_ids.py</command>
+    </script>
+</inkscape-extension>

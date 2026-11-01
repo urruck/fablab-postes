@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Supprimer les segments de ligne en double</name>
+    <id>fablabchemnitz.de.remove_duplicate_line_segments</id>
+    <param type="notebook" name="tab">
+        <page name="options" gui-text="Options">
+            <label>Supprime les segments de ligne en double des chemins sélectionnés.</label>
+            <param name="selfPath" type="bool" gui-text="Comparer aussi chaque chemin avec lui-même.">false</param>
+            <label>Attention : les segments plus petits que la tolérance ci-dessous peuvent disparaître</label>
+            <param name="minUse" type="bool" gui-text="Supprimer aussi les segments dont les nœuds et points de contrôle diffèrent de moins de">false</param>
+            <param name="tolerance" indent="3" type="float" precision="2" min="0" max="9999" gui-text="Tolérance">0.01</param>
+            <label>Unité définie dans le document (Fichier &gt; Propriétés du document).</label>
+            <param name="interp" type="bool" gui-text="Le segment restant est une moyenne des segments correspondants.">false</param>
+        </page>
+        <page name="help" gui-text="Informations">
+            <label>Les segments en double (coordonnées strictement identiques) sont toujours supprimés.</label>
+            <label appearance="header">Pour plus d'informations</label>
+            <label appearance="url">https://gitlab.com/EllenWasbo/inkscape-extension-removeduplicatelines</label>
+        </page>
+    </param>
+    <effect>
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Chemins"><submenu name="Couper et nettoyer" /></submenu></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">remove_duplicate_line_segments.py</command>
+    </script>
+</inkscape-extension>

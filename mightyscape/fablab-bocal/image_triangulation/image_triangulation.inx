@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+	<name>Triangulation d'image</name>
+	<id>fablabchemnitz.de.image_triangulation</id>
+	<param name="tab" type="notebook">
+		<page name="tab" gui-text="Options">
+			<param name="num_points" type="int" min="20" max="10000" gui-text="Points échantillonnés :">150</param>
+			<param name="edge_thresh_min" type="int" min="0" max="255" gui-text="Détection de contours min">200</param>
+			<param name="edge_thresh_max" type="int" min="0" max="255" gui-text="Détection de contours max">255</param>
+			<param name="gradient_fill" type="bool" gui-text="Remplissage en dégradé">false</param>
+			<param name="add_corners" type="bool" gui-text="Ajouter les coins">false</param>
+		</page>
+	</param>
+
+	<effect>
+		<object-type>all</object-type>
+		<effects-menu>
+         <submenu name="FabLab Boc@l"><submenu name="Images et vectorisation" /></submenu></effects-menu>
+	</effect>
+	<script>
+		<command location="inx" interpreter="python">image_triangulation.py</command>
+	</script>
+</inkscape-extension>

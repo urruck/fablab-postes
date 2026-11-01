@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Normaliser l'échelle du dessin</name>
+    <id>fablabchemnitz.de.normalize_drawing_scale</id>
+    <label appearance="header">Remet aussi l'origine de la viewBox à x0,y0</label>
+    <param name="target_scale" type="float" min="0.001" max="9999.000" precision="3" gui-text="Échelle cible (%)" gui-description="Par défaut : 100 %">100.0</param>
+    <effect needs-live-preview="false">
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Transformations" /></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">normalize_drawing_scale.py</command>
+    </script>
+</inkscape-extension>

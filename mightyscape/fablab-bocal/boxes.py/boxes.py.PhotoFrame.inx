@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+<name>Cadre photo (PhotoFrame)</name>
+<id>info.festi.boxes.py.PhotoFrame</id>
+<param name="generator" type="string" gui-hidden="true">photoframe</param>
+<param name="tab" type="notebook"><page name="tab_0" gui-text="Cadre photo"><param name="x" type="float" precision="2" max="9999" gui-text="x" gui-description="Largeur de la photo, sans bordure">100</param>
+<param name="y" type="float" precision="2" max="9999" gui-text="y" gui-description="Hauteur de la photo, sans bordure">150</param>
+<param name="golden_mat" type="bool" gui-text="golden_mat" gui-description="Utiliser le nombre d'or pour calculer la largeur du passe-partout">true</param>
+<param name="matting_w" type="float" precision="2" max="9999" gui-text="matting_w" gui-description="Largeur du passe-partout sur les côtés de la photo">0</param>
+<param name="matting_h" type="float" precision="2" max="9999" gui-text="matting_h" gui-description="Largeur du passe-partout en haut et en bas de la photo">0</param>
+<param name="matting_overlap" type="float" precision="2" max="9999" gui-text="matting_overlap" gui-description="Recouvrement de la photo par le passe-partout, ex. 2 mm si la photo a une bordure, 5 mm sinon">2</param>
+<param name="glass_w" type="float" precision="2" max="9999" gui-text="glass_w" gui-description="Largeur du verre ou de l'acrylique prédécoupé">0</param>
+<param name="glass_h" type="float" precision="2" max="9999" gui-text="glass_h" gui-description="Hauteur du verre ou de l'acrylique prédécoupé">0</param>
+<param name="frame_w" type="float" precision="2" max="9999" gui-text="frame_w" gui-description="Largeur de la bordure du cadre autour du passe-partout">20.0</param>
+<param name="guide_fudge" type="float" precision="2" max="9999" gui-text="guide_fudge" gui-description="Jeu dans la glissière pour faire entrer le passe-partout / le verre">2.0</param>
+<param name="frame_overlap" type="float" precision="2" max="9999" gui-text="frame_overlap" gui-description="Recouvrement du cadre pour maintenir le passe-partout / le verre">5.0</param>
+<param name="split_front" type="bool" gui-text="split_front" gui-description="Découper la façade en rectangles fins pour économiser la matière">true</param>
+</page>
+<page name="tab_1" gui-text="Par défaut"><param name="thickness" type="float" precision="2" max="9999" gui-text="épaisseur" gui-description="épaisseur du matériau (en mm) [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#thickness)">3.0</param>
+<param name="tabs" type="float" precision="2" max="9999" gui-text="brides" gui-description="largeur des attaches qui retiennent les pièces dans la plaque (en mm) (pas partout) [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#tabs)">0.0</param>
+<param name="qr_code" type="bool" gui-text="qr_code" gui-description="Ajouter un QR code avec le lien ou la ligne de commande au résultat">false</param>
+<param name="debug" type="bool" gui-text="débogage" gui-description="dessiner les boîtes englobantes de certaines structures [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#debug)">false</param>
+<param name="labels" type="bool" gui-text="étiquettes" gui-description="étiqueter les pièces (si possible)">true</param>
+<param name="reference" type="float" precision="2" max="9999" gui-text="référence" gui-description="dessiner un rectangle de référence de la longueur donnée (en mm) (0 pour désactiver) [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#reference)">100.0</param>
+<param name="inner_corners" type="optiongroup" appearance="combo" gui-text="inner_corners" gui-description="style des angles intérieurs [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#inner-corners)">
+<option value="loop">boucle</option>
+<option value="corner">angle</option>
+<option value="backarc">arc inversé</option>
+    </param>
+<param name="burn" type="float" precision="2" max="9999" gui-text="brûlage" gui-description="correction de brûlure (en mm) (plus grand = assemblage plus serré) [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#burn)">0.1</param>
+</page>
+<page name="tab_2" gui-text="Bord de fixation"><param name="Mounting_d_head" type="float" precision="2" max="9999" gui-text="d_head" gui-description="diamètre de tête de la vis de fixation (en mm)">8.0</param>
+<param name="Mounting_d_shaft" type="float" precision="2" max="9999" gui-text="d_shaft" gui-description="diamètre de tige de la vis de fixation (en mm)">4.0</param>
+<param name="Mounting_margin" type="float" precision="2" max="9999" gui-text="marge" gui-description="espace minimal sans trou à gauche et à droite (fraction de la longueur du bord)">0.125</param>
+<param name="Mounting_num" type="int" max="9999" gui-text="nombre" gui-description="nombre de trous de fixation (entier)">3</param>
+<param name="Mounting_side" type="optiongroup" appearance="combo" gui-text="côté" gui-description="côté de la boîte (toutes les combinaisons n'ont pas de sens...)">
+<option value="back">arrière</option>
+<option value="left">gauche</option>
+<option value="right">droite</option>
+<option value="front">devant</option>
+    </param>
+<param name="Mounting_style" type="optiongroup" appearance="combo" gui-text="style" gui-description="style du bord">
+<option value="straight edge, within">bord droit, intérieur</option>
+<option value="straight edge, extended">bord droit, prolongé</option>
+<option value="mounting tab">patte de fixation</option>
+    </param>
+</page>
+<page name="tab_3" gui-text="Assemblages en queue d'aronde"><param name="DoveTail_angle" type="int" max="9999" gui-text="angle" gui-description="De combien les créneaux doivent s'élargir (-80 à 80)">50</param>
+<param name="DoveTail_depth" type="float" precision="2" max="9999" gui-text="profondeur" gui-description="saillie des queues d'aronde hors du bord / dans le bord (multiples de l'épaisseur)">1.0</param>
+<param name="DoveTail_radius" type="float" precision="2" max="9999" gui-text="rayon" gui-description="rayon des quatre coins (multiples de l'épaisseur)">0.2</param>
+<param name="DoveTail_size" type="int" max="9999" gui-text="taille" gui-description="distance entre les milieux de deux queues d'aronde (multiples de l'épaisseur)">2</param>
+</page>
+<page name="tab_4" gui-text="Exemple">
+<image>./PhotoFrame-thumb.jpg</image>
+</page>
+</param>
+<label appearance="url">https://boxes.hackerspace-bamberg.de/PhotoFrame</label>
+<effect>
+    <object-type>all</object-type>
+    <effects-menu>
+        <submenu name="FabLab Boc@l"><submenu name="Boîtes (Boxes.py)"><submenu name="Objets divers" /></submenu></submenu></effects-menu>
+    <icon>PhotoFrame-thumb.svg</icon>
+</effect>
+<script>
+    <command location="inx" interpreter="python">boxes_proxy.py</command>
+</script>
+</inkscape-extension>

@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Créer un tableau</name>
+    <id>fablabchemnitz.de.table_create</id>
+    <param name="tab" type="notebook">
+        <page name="options" gui-text="Options">
+            <param name="cols" type="int" gui-text="Nombre de colonnes :">2</param>
+            <param name="rows" type="int" gui-text="Nombre de rangées :">2</param>
+            <param name="width" type="string" gui-text="Largeur des cellules :">100mm</param>
+            <param name="height" type="string" gui-text="Hauteur des cellules :">20mm</param>
+            <label>TRÈS IMPORTANT : le tableau créé ne contient pas de texte. Pour modifier le texte d'une cellule, sélectionnez-la puis, dans le menu Extensions, choisissez FabLab Boc@l &gt; Tableaux &gt; Modifier &gt; Texte des cellules sélectionnées</label>
+        </page>
+        <page name="help" gui-text="Aide">
+            <label>C'est la première étape pour utiliser les tableaux : créer un tableau. Saisissez le nombre de rangées, le nombre de colonnes et la largeur et la hauteur de chaque cellule. La largeur du tableau vaut le nombre de colonnes × la largeur d'une cellule, et sa hauteur le nombre de rangées × la hauteur d'une cellule. Pour donner une largeur et une hauteur précises au tableau après sa création, sélectionnez-le puis choisissez dans le menu Extensions &gt; FabLab Boc@l &gt; Tableaux &gt; Modifier &gt; Largeur et hauteur du tableau sélectionné. Vous pouvez indiquer l'unité (mm, cm, in, px, etc.). Sans unité, la taille est en pixels. Ne mettez pas d'espace entre la valeur et l'unité.</label>
+        </page>
+    </param>
+    <effect>
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Tableaux" /></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">table_create.py</command>
+    </script>
+</inkscape-extension>

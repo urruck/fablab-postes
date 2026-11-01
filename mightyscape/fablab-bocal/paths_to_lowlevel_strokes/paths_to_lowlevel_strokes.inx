@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Chemins vers contours bas niveau</name>
+    <id>fablabchemnitz.de.paths_to_lowlevel_strokes</id>
+    <param name="flattenbezier" type="bool" gui-text="Quantification (aplatir les courbes de Bézier en polylignes)">true</param> 
+    <param name="flatness" type="float" min="0.001" max="99999.000" precision="3" gui-text="Planéité (tolérance)" gui-description="Planéité minimale = 0,001. Plus la valeur est petite, plus les segments sont fins.">0.100</param>
+    <param name="decimals" type="int" min="0" max="16" gui-text="Décimales" gui-description="Précision">3</param>
+    <param name="keep_style" type="bool" gui-text="Garder le style">true</param> 
+    <effect needs-live-preview="true">
+        <object-type>path</object-type>
+		<effects-menu>
+         <submenu name="FabLab Boc@l"><submenu name="Chemins"><submenu name="Modifier" /></submenu></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">paths_to_lowlevel_strokes.py</command>
+    </script>
+</inkscape-extension>

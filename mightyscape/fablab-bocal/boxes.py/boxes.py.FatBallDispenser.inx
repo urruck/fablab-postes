@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+<name>Distributeur de boules de graisse (FatBallDispenser)</name>
+<id>info.festi.boxes.py.FatBallDispenser</id>
+<param name="generator" type="string" gui-hidden="true">fatballdispenser</param>
+<param name="tab" type="notebook"><page name="tab_0" gui-text="Distributeur de boules de graisse"><param name="sides" type="int" max="9999" gui-text="côtés" gui-description="Nombre de côtés du plan au sol.">6</param>
+<param name="pole_diameter" type="float" precision="2" max="9999" gui-text="pole_diameter" gui-description="Diamètre des poteaux.">8.0</param>
+<param name="ball_diameter" type="float" precision="2" max="9999" gui-text="ball_diameter" gui-description="Diamètre des boules de graisse. Ajouter quelques mm pour qu'elles passent librement">75.0</param>
+<param name="balcony_width" type="float" precision="2" max="9999" gui-text="balcony_width" gui-description="Largeur de la zone à l'extérieur des poteaux.">15.0</param>
+<param name="balcony_height" type="float" precision="2" max="9999" gui-text="balcony_height" gui-description="Hauteur du balcon en mm. 0 si aucune paroi n'est nécessaire.">20.0</param>
+<param name="drain_hole_diameter" type="float" precision="2" max="9999" gui-text="drain_hole_diameter" gui-description="Diamètre du trou dans le plancher (pour évacuer l'eau de pluie)&#10;                    en mm. 0 si inutile.">5.0</param>
+<param name="pole_clearance" type="float" precision="2" max="9999" gui-text="pole_clearance" gui-description="Distance minimale entre un poteau et le trou central&#10;                    de remplissage du plafond, en mm.">9.0</param>
+<param name="slide_clearance" type="float" precision="2" max="9999" gui-text="slide_clearance" gui-description="Jeu entre les pièces qui coulissent l'une dans l'autre&#10;                    dans le mécanisme de verrouillage, en mm.">1.0</param>
+<param name="spacer_width" type="float" precision="2" max="9999" gui-text="spacer_width" gui-description="Largeur de l'entretoise (pièce du mécanisme de verrouillage) en mm.">15.0</param>
+<param name="pole_clearance_factor" type="float" precision="2" max="9999" gui-text="pole_clearance_factor" gui-description="Part du jeu des poteaux utilisée pour&#10;                    le mécanisme de verrouillage.">0.9</param>
+<param name="roof_overhang" type="float" precision="2" max="9999" gui-text="roof_overhang" gui-description="Combien le toit est plus large que le plancher.">20.0</param>
+<param name="roof_height" type="float" precision="2" max="9999" gui-text="roof_height" gui-description="Hauteur du toit en mm.">50.0</param>
+<param name="roof_hole_diameter" type="float" precision="2" max="9999" gui-text="roof_hole_diameter" gui-description="Diamètre du trou du toit en mm.&#10;                    0 si vous ne voulez pas d'attache.">5.0</param>
+<param name="roof_maintenance_clearance" type="float" precision="2" max="9999" gui-text="roof_maintenance_clearance" gui-description="Distance entre un coin du bas du toit et le trou d'entretien, en mm.">20.0</param>
+<param name="roof_support_fraction" type="float" precision="2" max="9999" gui-text="roof_support_fraction" gui-description="Rayon de la pièce de support du toit, en fraction du rayon du toit.">0.3</param>
+</page>
+<page name="tab_1" gui-text="Par défaut"><param name="thickness" type="float" precision="2" max="9999" gui-text="épaisseur" gui-description="épaisseur du matériau (en mm) [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#thickness)">3.0</param>
+<param name="tabs" type="float" precision="2" max="9999" gui-text="brides" gui-description="largeur des attaches qui retiennent les pièces dans la plaque (en mm) (pas partout) [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#tabs)">0.0</param>
+<param name="qr_code" type="bool" gui-text="qr_code" gui-description="Ajouter un QR code avec le lien ou la ligne de commande au résultat">false</param>
+<param name="debug" type="bool" gui-text="débogage" gui-description="dessiner les boîtes englobantes de certaines structures [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#debug)">false</param>
+<param name="labels" type="bool" gui-text="étiquettes" gui-description="étiqueter les pièces (si possible)">true</param>
+<param name="reference" type="float" precision="2" max="9999" gui-text="référence" gui-description="dessiner un rectangle de référence de la longueur donnée (en mm) (0 pour désactiver) [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#reference)">100.0</param>
+<param name="inner_corners" type="optiongroup" appearance="combo" gui-text="inner_corners" gui-description="style des angles intérieurs [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#inner-corners)">
+<option value="loop">boucle</option>
+<option value="corner">angle</option>
+<option value="backarc">arc inversé</option>
+    </param>
+<param name="burn" type="float" precision="2" max="9999" gui-text="brûlage" gui-description="correction de brûlure (en mm) (plus grand = assemblage plus serré) [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#burn)">0.1</param>
+</page>
+<page name="tab_2" gui-text="Exemple">
+<image>./FatBallDispenser-thumb.jpg</image>
+</page>
+</param>
+<label appearance="url">https://boxes.hackerspace-bamberg.de/FatBallDispenser</label>
+<effect>
+    <object-type>all</object-type>
+    <effects-menu>
+        <submenu name="FabLab Boc@l"><submenu name="Boîtes (Boxes.py)"><submenu name="Objets divers" /></submenu></submenu></effects-menu>
+    <icon>FatBallDispenser-thumb.svg</icon>
+</effect>
+<script>
+    <command location="inx" interpreter="python">boxes_proxy.py</command>
+</script>
+</inkscape-extension>

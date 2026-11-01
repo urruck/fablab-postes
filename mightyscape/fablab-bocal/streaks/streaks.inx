@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Traînées</name>
+    <id>fablabchemnitz.de.streaks</id>
+    <param type="notebook" name="Nmain">
+        <page name="top" gui-text="Couleur">
+            <label appearance="header">Remplit un rectangle d'une texture de segments verticaux.</label>
+            <param name="strokeColor" type="color" appearance="colorbutton" gui-text="Couleur des lignes">255</param>
+            <separator />
+            <param name="strokeWidth" type="int" gui-text="Épaisseur des lignes (px)">2</param>
+        </page>
+        <page name="main" gui-text="Principal">
+            <param max="256" name="blur" type="int" gui-text="Flou">2</param>
+            <param max="1000" name="linno" type="int" gui-text="Nombre de colonnes">50</param>
+            <param name="xrand" type="bool" gui-text="Lignes aléatoires">true</param>
+            <separator />
+            <param name="pagep" type="bool" gui-text="Rectangle par défaut à la taille de la page ?">true</param>
+            <param max="10000" name="cusx" type="int" gui-text="Taille personnalisée x">500</param>
+            <param max="10000" name="cusy" type="int" gui-text="Taille personnalisée y">500</param>
+        </page>
+        <page name="vert" gui-text="Chaque colonne">
+            <param min="1" max="256" name="segLen" type="int" gui-text="Nombre de segments">8</param>
+            <param name="yrand" type="bool" gui-text="Longueurs aléatoires">true</param>
+            <param name="dashp" type="bool" gui-text="Utiliser des tirets ?">true</param>
+            <param name="blankp" type="bool" gui-text="Utiliser des espaces ?">true</param>
+            <param name="dotp" type="bool" gui-text="Utiliser des points ?">true</param>
+            <param max="1000" name="dots" type="int" gui-text="Points par hauteur">100</param>
+            <label>Fixe la taille d'un point par rapport à la hauteur totale. Plus la valeur est grande, plus le point est court.</label>
+        </page>
+    </param>
+    <effect>
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Formes et motifs"><submenu name="Textures et effets" /></submenu></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">streaks.py</command>
+    </script>
+</inkscape-extension>

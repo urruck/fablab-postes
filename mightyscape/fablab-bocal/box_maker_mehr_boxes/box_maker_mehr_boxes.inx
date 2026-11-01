@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Générateur de boîte - Boîtes Mehr</name>
+    <id>fablabchemnitz.de.box_maker_mehr_boxes</id>
+    <param name="page" type="notebook">
+        <page name="page_1" gui-text="Tailles">
+            <hbox>
+                <vbox>
+                    <param name="unit" gui-text="Unité" type="optiongroup" appearance="combo">
+                        <option value="mm">mm</option>
+                        <option value="cm">cm</option>
+                        <option value="in">in</option>
+                    </param>
+                    <label appearance="header">Options de taille</label>
+                    <param name="inside" type="optiongroup" appearance="combo" gui-text="Dimensions de la boîte">
+                        <option value="1">Intérieur</option>
+                        <option value="0">Extérieur</option>
+                    </param>
+                    <label appearance="header">Options du matériau</label>
+                    <param name="thickness" type="float" precision="2" min="0.0" max="10000.0" gui-text="Épaisseur du matériau">4.0</param>
+                    <param name="kerf" type="float" precision="3" min="0.0" max="10000.0" gui-text="Diamètre du faisceau">0.2</param>
+                    <param name="spacing" type="float" precision="2" min="0.0" max="10000.0" gui-text="Espace entre les pièces">1.0</param>
+                </vbox>
+                <spacer />
+                <vbox>
+                    <param name="X_size" type="float" precision="2" min="0.0" max="1000000.0" gui-text="Longueur sur l'axe X">100.0</param>
+                    <param name="Y_size" type="float" precision="2" min="0.0" max="1000000.0" gui-text="Longueur sur l'axe Y">100.0</param>
+                    <param name="Z_size" type="float" precision="2" min="0.0" max="1000000.0" gui-text="Longueur sur l'axe Z">100.0</param>
+                    <label appearance="header">Options des languettes</label>
+                    <param name="tab_mode" gui-text="Mode des languettes" type="optiongroup" appearance="combo">
+                        <option value="number">nombre</option>
+                        <option value="size">taille</option>
+                    </param>
+                    <label>... pour le mode « taille »</label>
+                    <param name="tab_size" type="float" precision="2" min="0.0" max="10000.0" gui-text="taille de languette visée">4.0</param>
+                    <label>... pour le mode « nombre »</label>
+                    <param name="X_tabs" type="int" min="0" max="100000" gui-text="Languettes sur l'axe X">3</param>
+                    <param name="Y_tabs" type="int" min="0" max="100000" gui-text="Languettes sur l'axe Y">3</param>
+                    <param name="Z_tabs" type="int" min="0" max="100000" gui-text="Languettes sur l'axe Z">3</param>
+                </vbox>
+            </hbox>
+        </page>
+        <page name="page_2" gui-text="Faces à dessiner">
+            <param name="d_top" type="bool" gui-text="Dessiner le dessus (XxY)">true</param>
+            <param name="d_bottom" type="bool" gui-text="Dessiner le dessous (XxY)">true</param>
+            <param name="d_left" type="bool" gui-text="Dessiner le côté gauche (YxZ)">true</param>
+            <param name="d_right" type="bool" gui-text="Dessiner le côté droit (YxZ)">true</param>
+            <param name="d_front" type="bool" gui-text="Dessiner l'avant (XxZ)">true</param>
+            <param name="d_back" type="bool" gui-text="Dessiner l'arrière (XxZ)">true</param>
+        </page>
+        <page name="page_3" gui-text="Compartiments">
+            <label appearance="header">Compartiments sur l'axe X</label>
+            <param name="X_compartments" type="int" min="1" max="100000" gui-text="Compartiments X">1</param>
+            <param name="X_mode" type="optiongroup" appearance="combo" gui-text="Mode">
+                <option value="even">égal</option>
+                <option value="relative">relatif</option>
+                <option value="absolut">absolu</option>
+            </param>
+            <param name="X_divisions" type="string" gui-text="Distances">20.0;40.0</param>
+            <param name="X_fit" type="bool" gui-text="ajuster la longueur de l'axe aux compartiments">false</param>
+            <label appearance="header">Compartiments sur l'axe Y</label>
+            <param name="Y_compartments" type="int" min="1" max="100000" gui-text="Compartiments Y">1</param>
+            <param name="Y_mode" type="optiongroup" appearance="combo" gui-text="Mode">
+                <option value="even">égal</option>
+                <option value="relative">relatif</option>
+                <option value="absolut">absolu</option>
+            </param>
+            <param name="Y_divisions" type="string" gui-text="Distances">20.0;40.0</param>
+            <param name="Y_fit" type="bool" gui-text="ajuster la longueur de l'axe aux compartiments">false</param>
+        </page>
+    </param>
+    <effect>
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Boîtes (autres modèles)"><submenu name="À encoches" /></submenu></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">box_maker_mehr_boxes.py</command>
+    </script>
+</inkscape-extension>

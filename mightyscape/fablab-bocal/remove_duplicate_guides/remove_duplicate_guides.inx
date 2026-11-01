@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Supprimer les guides en double</name>
+    <id>fablabchemnitz.remove_duplicate_guides</id>
+    <effect>
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Grilles, repères et mesures" /></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">remove_duplicate_guides.py</command>
+    </script>
+</inkscape-extension>

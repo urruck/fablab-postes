@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Boîtes robot (carton)</name>
+    <id>fablabchemnitz.de.robot_boxes</id>
+    <param name="width" type="float" min="0.0" max="10000.0" gui-text="Largeur">62.0</param>
+    <param name="height" type="float" min="0.0" max="10000.0" gui-text="Hauteur">38.0</param>
+    <param name="depth" type="float" min="0.0" max="10000.0" gui-text="Profondeur">23.0</param>
+    <param name="thickness" type="float" min="0.0" max="100.0" gui-text="Épaisseur du papier">1.0</param>
+    <param name="crampheight" type="float" min="0.0" max="100.0" gui-text="Hauteur des oreilles de serrage (0 = aucune)">1.0</param>
+    <param name="dashwidth" type="float" min="0.0" max="100.0" gui-text="Longueur des tirets de la ligne de pli">5.0</param>
+    <param name="dashstep" type="float" min="0.0" max="100.0" gui-text="Pas des tirets de la ligne de pli">5.0</param>
+    <param name="bendsurface" type="optiongroup" appearance="combo" gui-text="Face de la ligne de pli">
+        <option value="middle">milieu</option>
+        <option value="inner">intérieure</option>
+        <option value="outer">extérieure</option>
+    </param>
+    <param name="unit" type="optiongroup" appearance="combo" gui-text="Unité">
+        <option value="cm">cm</option>
+        <option value="in">in</option>
+        <option value="mm">mm</option>
+        <option value="pc">pc</option>
+        <option value="pt">pt</option>
+        <option value="px">px</option>
+    </param>
+    <effect>
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Boîtes (autres modèles)"><submenu name="Carton et papier" /></submenu></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">robot_boxes.py</command>
+    </script>
+</inkscape-extension>

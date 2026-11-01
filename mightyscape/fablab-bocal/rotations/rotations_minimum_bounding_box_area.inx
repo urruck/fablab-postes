@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Rotations - boîte englobante d'aire minimale</name>
+    <id>fablabchemnitz.de.rotations_minimum_bounding_box_area</id>
+    <param name="precision" type="int" min="1" max="72000" gui-text="Précision (pas) :" gui-description="Par défaut : 360">360</param>
+    <effect>
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Transformations" /></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">rotations_minimum_bounding_box_area.py</command>
+    </script>
+</inkscape-extension>

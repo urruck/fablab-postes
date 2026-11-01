@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Charnières souples Buxtronix</name>
+    <id>fablabchemnitz.de.buxtronix_living_hinges</id>
+    <param name="tab" type="notebook">
+        <page name="straight_lattice" gui-text="Treillis droit">
+            <image>images/straight-lattice.png</image>
+            <param name="sl_length" type="int" min="1" max="200" gui-text="Longueur des éléments" appearance="full">20</param>
+            <param name="sl_spacing" type="float" min="0.1" max="10.0" precision="1" gui-text="Espacement vertical des éléments" appearance="full">2.0</param>
+            <param name="sl_gap" type="float" min="0.0" max="10.0" precision="1" gui-text="Hauteur des éléments" appearance="full">0.0</param>
+            <label xml:space="preserve">
+      </label>
+        </page>
+        <page name="diamond_lattice" gui-text="Treillis en losanges">
+            <image>images/diamond-lattice.png</image>
+            <param name="dl_length" type="int" min="1" max="200" gui-text="Longueur des éléments" appearance="full">20</param>
+            <param name="dl_spacing" type="float" min="0.1" max="10.0" precision="1" gui-text="Espacement vertical des éléments" appearance="full">4.0</param>
+            <param name="dl_curve" type="float" min="-1.0" max="1.0" precision="1" gui-text="Courbure de chaque élément" appearance="full">0.5</param>
+            <label xml:space="preserve">
+      </label>
+        </page>
+        <page name="cross_lattice" gui-text="Treillis en croix">
+            <image>images/cross-lattice.png</image>
+            <param name="cl_length" type="int" min="1" max="200" gui-text="Longueur des éléments" appearance="full">20</param>
+            <param name="cl_spacing" type="float" min="0.1" max="10.0" precision="1" gui-text="Espacement vertical des éléments" appearance="full">6.0</param>
+            <label xml:space="preserve">
+      </label>
+        </page>
+        <page name="wavy_lattice" gui-text="Treillis ondulé">
+            <image>images/wavy-lattice.png</image>
+            <param name="wl_length" type="int" min="1" max="200" gui-text="Longueur des éléments" appearance="full">29</param>
+            <param name="wl_spacing" type="float" min="0.1" max="10.0" precision="1" gui-text="Espacement vertical des éléments" appearance="full">4.0</param>
+            <label xml:space="preserve">
+      </label>
+        </page>
+        <page name="about" gui-text="À propos / Aide">
+            <label xml:space="preserve">Cette extension dessine des charnières souples (living hinges), aussi appelées charnières en treillis ou pliage par découpe laser.
+	      
+Ces motifs permettent de plier des matériaux normalement rigides (bois, acrylique…).</label>
+            <image>images/about.png</image>
+            <label appearance="url">https://github.com/buxtronix/living-hinge</label>
+        </page>
+    </param>
+    <param name="width" type="float" min="0" max="10000" gui-text="Largeur">100</param>
+    <param name="height" type="float" min="0" max="10000" gui-text="Hauteur">100</param>
+    <param name="unit" gui-text="Unité de la largeur / hauteur" type="optiongroup" appearance="combo">
+        <option value="mm">mm</option>
+        <option value="cm">cm</option>
+        <option value="in">in</option>
+    </param>
+    <label>Si des objets sont sélectionnés, leurs boîtes englobantes sont remplies avec le motif
+	  au lieu d'utiliser la largeur / hauteur ci-dessus. Les curseurs sont tous en millimètres.</label>
+    <separator />
+    <param name="swatch" type="bool" gui-text="Dessiner une carte d'échantillons">false</param>
+    <effect>
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Découpe laser et traceur"><submenu name="Charnières souples" /></submenu></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">buxtronix_living_hinges.py</command>
+    </script>
+</inkscape-extension>

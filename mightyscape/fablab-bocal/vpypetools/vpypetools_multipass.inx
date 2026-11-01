@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Passes multiples</name>
+    <id>fablabchemnitz.de.vpype_multipass</id>
+	<param name="tab" type="notebook">
+		<page name="tab_settings_multipass" gui-text="vpype passes multiples">
+            <image>vpype_logo.svg</image>		
+			<label>Ajoute plusieurs passes à chaque ligne. Chaque ligne est prolongée par une copie inversée d'elle-même, éventuellement plusieurs fois. Utile pour les stylos qui demandent plusieurs passages pour un bon résultat.</label>
+			<param name="multipass" type="bool" gui-hidden="true">true</param>	
+			<param name="multipass_count" type="int" min="2" max="9999" gui-text="nombre" gui-description="Nombre de passes par ligne (par défaut 2)">2</param>
+		</page>
+		<page name="tab_settings_general" gui-text="Réglages généraux">
+			<label appearance="header">Entrée (Inkscape vers vpype)</label>
+			<param name="input_handling" type="optiongroup" appearance="radio" gui-text="Traitement de l'entrée / des calques">
+			   <option value="layers">Multicalque / document (tous les calques / tout le document)</option>
+			   <option value="paths">Calque unique / chemins (un calque / les chemins sélectionnés ou tous les chemins du document)</option>
+			</param>
+		    <param name="flattenbezier" type="bool" gui-text="Quantification (aplatir les courbes de Bézier en polylignes)" gui-description="Convertir les courbes de Bézier en polylignes. Activé automatiquement en « Multicalque / document » (paramètre de quantification)">true</param>	
+			<param name="flatness" type="float" min="0.001" max="99999.000" precision="3" gui-text="Planéité (tolérance)" gui-description="Planéité minimale = 0,001. Plus la valeur est petite, plus les segments sont fins. Valeur aussi utilisée par l'option « simplifier »">0.100</param>
+			<param name="decimals" type="int" min="0" max="16" gui-text="Décimales" gui-description="Précision des coordonnées des lignes importées dans vpype. Ne fonctionne pas en « Multicalque / document »">3</param>
+			<param name="simplify" type="bool" gui-text="Simplifier la géométrie" gui-description="Réduit fortement le nombre de segments qui approchent la courbe tout en garantissant une conversion précise, mais peut allonger le temps de traitement. Ne fonctionne pas en « Calque unique / chemins »">false</param>
+			<param name="parallel" type="bool" gui-text="Simplification en parallèle" gui-description="Active le multiprocessus pour la conversion SVG. Conseillé SEULEMENT avec « Simplifier la géométrie » sur de gros fichiers SVG avec beaucoup de courbes. Ne fonctionne pas en « Calque unique / chemins »">false</param>			
+			<spacer />
+			<label appearance="header">Validation (chaîne vpype)</label>
+		 	<param name="output_show" type="bool" gui-text="Aperçu seulement (débogage)" gui-description="Ouvre une fenêtre à part avec le SVG final. Si activé, le résultat n'est pas appliqué au canevas Inkscape (aperçu seulement) ! Indisponible sur les postes Boc@l (Qt absent).">false</param>
+		 	<param name="output_show_points" type="bool" gui-text="Afficher les points dans l'aperçu">false</param>
+		 	<param name="output_stats" type="bool" gui-text="Afficher les statistiques de conversion" gui-description="Affiche des statistiques avant / après conversion. Aide à voir les longueurs économisées.">false</param>
+			<spacer />
+			<label appearance="header">Sortie (vpype vers Inkscape)</label>
+		 	<param name="output_trajectories" type="bool" gui-text="Importer les déplacements à vide" gui-description="Ajoute des chemins pour les déplacements à vide">false</param>
+		 	<param name="keep_objects" type="bool" gui-text="Garder les objets d'origine" gui-description="Si décoché, les objets d'origine (sélectionnés) sont supprimés">false</param>
+		 	<param name="strokes_to_paths" type="bool" gui-text="Convertir automatiquement les contours bas niveau en chemins" gui-description="Option conseillée. Fait « Chemin &gt; Contour en chemin » (Ctrl + Alt + C) pour reconvertir les lignes de vpype en chemins normaux. Attention : allonge nettement le temps d'import.">true</param>
+			<param name="use_style_of_first_element" type="bool" gui-text="Reprendre le style du premier élément du calque" gui-description="Si activé, le style du premier élément de la sélection est appliqué à toutes les lignes importées de vpype (sauf les déplacements). Ne fonctionne pas en « Multicalque / document »">true</param>	
+			<param name="lines_stroke_width" type="float" min="0.001" max="99999.000" precision="3" gui-text="Épaisseur des lignes d'outil (px)" gui-description="Remplacée si « Reprendre le style du premier élément » est activé">1.000</param>	
+			<param name="trajectories_stroke_width" type="float" min="0.001" max="99999.000" precision="3" gui-text="Épaisseur des lignes de déplacement (px)">1.000</param>
+		</page>
+        <page name="tab_about" gui-text="À propos">
+            <label appearance="header">vpype passes multiples</label>
+            <label>2021 / écrit par Mario Voigt (Stadtfabrikanten e.V. / FabLab Chemnitz)</label>
+            <spacer />
+            <label appearance="header">Documentation en ligne</label>
+            <label appearance="url">https://y.stadtfabrikanten.org/vpypetools</label>
+            <spacer />
+            <label appearance="header">Contribuer</label>
+            <label appearance="url">https://gitea.fablabchemnitz.de/FabLab_Chemnitz/mightyscape-1.2</label>
+            <label appearance="url">mailto:mario.voigt@stadtfabrikanten.org</label>
+            <spacer />
+            <label appearance="header">Modules tiers</label>
+            <label appearance="url">https://github.com/abey79/vpype</label>
+            <spacer />
+            <label appearance="header">Collection d'extensions MightyScape</label>
+            <label>Ce logiciel fait partie de la collection d'extensions MightyScape pour Inkscape, sous licence GNU GPL v3</label>
+            <label appearance="url">https://y.stadtfabrikanten.org/mightyscape-overview</label>
+        </page>
+        <page name="tab_donate" gui-text="Faire un don">
+            <label appearance="header">Café + pizza</label>
+            <label>Nous sommes les Stadtfabrikanten, qui font vivre le FabLab Chemnitz depuis 2016. Un FabLab est un atelier ouvert qui donne accès à des machines et des outils numériques : imprimantes 3D, découpeuses laser, fraiseuses CNC.</label>
+            <spacer />           
+            <label>Vous aimez notre travail et voulez nous soutenir ? Vous pouvez faire un don à notre association de différentes façons :</label>
+            <label appearance="url">https://y.stadtfabrikanten.org/donate</label>
+            <spacer />
+            <label>Merci d'utiliser notre extension et de nous aider !</label>
+            <image>../000_about_fablabchemnitz.svg</image>
+        </page>
+	</param>
+    <effect needs-live-preview="true">
+        <object-type>all</object-type>
+		<effects-menu>
+         <submenu name="FabLab Boc@l"><submenu name="Découpe laser et traceur"><submenu name="Optimisation vpype" /></submenu></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">vpypetools.py</command>
+    </script>
+</inkscape-extension>

@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Séquence d'animation image par image</name>
+    <id>fablabchemnitz.de.frame_animation_sequence</id>
+    <param name="begin_str" type="string" gui-text="début (begin_str) :">0</param>
+    <param name="repeat_str" type="string" gui-text="répétition (repeat_str) :" gui-description="Saisir « indefinite » (infini) ou un nombre entier">indefinite</param>
+    <param name="dur_str" type="string" gui-text="durée (dur_str) :">9.1</param>
+    <param name="delete" type="bool" gui-text="Supprimer les images">true</param>  
+    <effect>
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Divers"><submenu name="Animation" /></submenu></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">frame_animation_sequence.py</command>
+    </script>
+</inkscape-extension>

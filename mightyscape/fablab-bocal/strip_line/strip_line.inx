@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Bande de lignes</name>
+    <id>fablabchemnitz.de.strip_line</id>
+    <param name="line_width" type="int" min="0" max="99999" gui-text="Épaisseur de ligne">10</param>
+    <param name="unit" type="optiongroup" appearance="combo" gui-text="Unités de largeur">
+        <option value="mm">mm</option>
+        <option value="cm">cm</option>
+        <option value="in">in</option>
+        <option value="px">px</option>
+        <option value="pt">pt</option>
+    </param>
+    <param name="log_directory" type="path" mode="folder" gui-text="Dossier du journal :">~/</param>
+    <param name="log_filename" type="string" gui-text="Nom du fichier journal">stripline.log</param>
+    <effect>
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Formes et motifs"><submenu name="À partir de chemins" /></submenu></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">strip_line.py</command>
+    </script>
+</inkscape-extension>

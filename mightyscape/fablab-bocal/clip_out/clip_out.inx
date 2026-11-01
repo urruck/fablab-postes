@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Détourage multiple (Clip Out)</name>
+    <id>fablabchemnitz.de.clip_out</id>
+    <param name="notebook_main" type="notebook">
+        <page name="settings_page" gui-text="Paramètres">
+            <param name="clip_type_inverse" type="bool" gui-text="Inverser" gui-description="Faire des trous :)">false</param>
+            <separator />
+            <param name="output_set" type="optiongroup" appearance="radio" gui-text="Sortie">
+                <option value="master_only">Image principale seulement</option>
+                <option value="separate">Images séparées</option>
+                <option value="master_and_separate">Principale et séparées</option>
+            </param>
+                <param name="canvas_to_selection" type="optiongroup" appearance="radio" gui-text="Redimensionner à la sélection" gui-description="Recadrer le canevas sur le détourage obtenu">
+                    <option value="true">Oui</option>
+                    <option value="false">Non</option>
+            </param>
+            <param name="png_dpi" type="int" min="10" max="99999999" gui-text="Résolution PNG (ppp)">96</param>
+            <separator />
+            <param type="path" name="save_path" gui-text="Dossier d'enregistrement" mode="folder">None Selected</param>
+        </page>
+        <page name="about_page" gui-text="À propos">
+            <label xml:space="preserve">Clip Out - Exporte plusieurs images PNG détourées à partir de chemins / formes et d'une image de fond</label>
+            <label appearance="url">https://gitlab.com/inklinea/quick-export</label>
+            <label appearance="url">https://inkscape.org/~inklinea/</label>
+            <label xml:space="preserve">Nécessite Inkscape 1.1+ --&gt;
+L'image à détourer doit être sélectionnée en dernier.
+Méthode simple : tout sélectionner, puis Maj + clic gauche deux fois sur l'image pour qu'elle soit la dernière sélectionnée.
+Le fichier SVG doit avoir été enregistré
+au moins une fois avant (ne fonctionne pas sur un SVG jamais enregistré)</label>
+        </page>
+    </param>
+    <effect needs-live-preview="false">
+        <object-type>path</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Import et export" /></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">clip_out.py</command>
+    </script>
+</inkscape-extension>

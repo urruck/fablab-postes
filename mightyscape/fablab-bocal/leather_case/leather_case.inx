@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Étui en cuir</name>
+    <id>fablabchemnitz.de.leather_case</id>
+    <param name="width" type="float" min="0.1" max="10000" gui-text="Largeur (mm)">80.0</param>
+    <param name="height" type="float" min="0.1" max="10000" gui-text="Hauteur (mm)">165.0</param>
+    <param name="depth" type="float" min="0.1" max="10000" gui-text="Profondeur (mm)">10.0</param>
+    <param name="heightMargin" type="float" min="0" max="10000" gui-text="Marge de hauteur (mm)">10.0</param>
+    <param name="cornerRoundness" type="float" min="0" max="10000" gui-text="Arrondi des coins (mm)">10.0</param>
+    <param name="divisions" type="int" min="1" max="5" gui-text="Divisions">2</param>
+    <param name="claspAmount" type="optiongroup" appearance="combo" gui-text="Nombre de fermoirs">
+        <option value="1">1</option>
+        <option value="2">2</option>
+    </param>
+    <param name="extraTongueLength" type="float" min="0" max="10000" gui-text="Longueur de languette en plus (mm)">10.0</param>
+    <param name="tipTongueLength" type="float" min="0.1" max="10000" gui-text="Longueur de la pointe de la languette (mm)">40.0</param>
+    <param name="extraEdgeWidth" type="float" min="0" max="10000" gui-text="Largeur de bord en plus (mm)">10.0</param>
+    <param name="makeHoles" type="bool" gui-text="Percer les trous">true</param>
+    <param name="groupObjects" type="bool" gui-text="Grouper les objets">false</param>
+    <effect>
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Boîtes (autres modèles)"><submenu name="À encoches" /></submenu></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">leather_case.py</command>
+    </script>
+</inkscape-extension>

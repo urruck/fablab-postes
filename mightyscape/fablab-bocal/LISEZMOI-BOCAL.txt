@@ -1,0 +1,6 @@
+Extensions FabLab Boc@l : MightyScape (https://github.com/eridur-de/mightyscape-1.2)
+trié, corrigé pour Inkscape 1.4 Flatpak et traduit en français.
+Ne pas modifier ici : ce dossier est reconstruit par mightyscape/installer.sh
+(dépôt https://github.com/urruck/fablab-postes).
+
+434 extensions. Retirées : about_upgrade_mightyscape, animate_order, boxes.py.Castle, boxes.py.OrganPipe, boxes.py.Planetary2, boxes.py.Platonic, boxes.py.Rotary, boxes.py.SevenSegmentClock, boxes.py.Silverware, circle_tangents, color_harmony, cutting_optimizer, dimensioning, dxf2papercraft, edit_stroke_font, ellipse_by_five_points, fillet_and_chamfer, gen_stroke_font_data, import_3d_mesh, inkcut_cut, inkcut_open, inventory_sticker, nextgenerator, ocr, open_extensions_dir, open_in_roland_cutstudio, open_in_visicut_add, open_in_visicut_replace, origami_patterns_cylindrical_template, origami_patterns_old_bendy, origami_patterns_old_kresling, origami_patterns_template, output_pro, paperfold, plotty, plycutter, psd_export, render_stroke_font_text, round_corners, shape_recognition, slic3r_stl_input, stroke_font_templ, sudoku, svg2fcsketch, svg_embed_and_crop, sync_stroke_font, vpypetools_deduplicate

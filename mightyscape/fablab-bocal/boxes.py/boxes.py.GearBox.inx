@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+<name>Boîte d'engrenages (GearBox)</name>
+<id>info.festi.boxes.py.GearBox</id>
+<param name="generator" type="string" gui-hidden="true">gearbox</param>
+<param name="tab" type="notebook"><page name="tab_0" gui-text="Boîte d'engrenages"><param name="teeth1" type="int" max="9999" gui-text="dents 1" gui-description="nombre de dents de l'engrenage d'entrée">8</param>
+<param name="teeth2" type="int" max="9999" gui-text="dents 2" gui-description="nombre de dents de l'engrenage de sortie">20</param>
+<param name="modulus" type="float" precision="2" max="9999" gui-text="module" gui-description="module des dents en mm">3</param>
+<param name="shaft" type="float" precision="2" max="9999" gui-text="arbre" gui-description="diamètre de l'arbre">6.0</param>
+<param name="stages" type="int" max="9999" gui-text="niveaux" gui-description="nombre de niveaux dans le réducteur à engrenages">4</param>
+</page>
+<page name="tab_1" gui-text="Par défaut"><param name="thickness" type="float" precision="2" max="9999" gui-text="épaisseur" gui-description="épaisseur du matériau (en mm) [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#thickness)">3.0</param>
+<param name="tabs" type="float" precision="2" max="9999" gui-text="brides" gui-description="largeur des attaches qui retiennent les pièces dans la plaque (en mm) (pas partout) [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#tabs)">0.0</param>
+<param name="qr_code" type="bool" gui-text="qr_code" gui-description="Ajouter un QR code avec le lien ou la ligne de commande au résultat">false</param>
+<param name="debug" type="bool" gui-text="débogage" gui-description="dessiner les boîtes englobantes de certaines structures [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#debug)">false</param>
+<param name="labels" type="bool" gui-text="étiquettes" gui-description="étiqueter les pièces (si possible)">true</param>
+<param name="reference" type="float" precision="2" max="9999" gui-text="référence" gui-description="dessiner un rectangle de référence de la longueur donnée (en mm) (0 pour désactiver) [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#reference)">100.0</param>
+<param name="inner_corners" type="optiongroup" appearance="combo" gui-text="inner_corners" gui-description="style des angles intérieurs [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#inner-corners)">
+<option value="loop">boucle</option>
+<option value="corner">angle</option>
+<option value="backarc">arc inversé</option>
+    </param>
+<param name="burn" type="float" precision="2" max="9999" gui-text="brûlage" gui-description="correction de brûlure (en mm) (plus grand = assemblage plus serré) [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#burn)">0.1</param>
+</page>
+<page name="tab_2" gui-text="Assemblages à entures"><param name="FingerJoint_style" type="optiongroup" appearance="combo" gui-text="style" gui-description="style des entures">
+<option value="rectangular">rectangulaire</option>
+<option value="springs">ressorts</option>
+<option value="barbs">crans</option>
+<option value="snap">clipsable</option>
+    </param>
+<param name="FingerJoint_surroundingspaces" type="float" precision="2" max="9999" gui-text="espaces autour" gui-description="espace au début et à la fin, en multiple des espaces normaux">2.0</param>
+<param name="FingerJoint_bottom_lip" type="float" precision="2" max="9999" gui-text="bottom_lip" gui-description="hauteur des lèvres inférieures qui dépassent (multiples de l'épaisseur), FingerHoleEdge seulement !">0.0</param>
+<param name="FingerJoint_edge_width" type="float" precision="2" max="9999" gui-text="largeur de bord" gui-description="espace sous les trous du FingerHoleEdge (multiples de l'épaisseur)">1.0</param>
+<param name="FingerJoint_extra_length" type="float" precision="2" max="9999" gui-text="extra_length" gui-description="matière en plus à poncer pour enlever les traces de brûlure (multiples de l'épaisseur)">0.0</param>
+<param name="FingerJoint_finger" type="float" precision="2" max="9999" gui-text="créneau" gui-description="largeur des entures (multiples de l'épaisseur)">2.0</param>
+<param name="FingerJoint_play" type="float" precision="2" max="9999" gui-text="jeu" gui-description="espace en plus pour que les entures entrent et sortent (multiples de l'épaisseur)">0.0</param>
+<param name="FingerJoint_space" type="float" precision="2" max="9999" gui-text="espace" gui-description="espace entre les entures (multiples de l'épaisseur)">2.0</param>
+<param name="FingerJoint_width" type="float" precision="2" max="9999" gui-text="largeur" gui-description="largeur des trous d'entures (multiples de l'épaisseur)">1.0</param>
+</page>
+<page name="tab_3" gui-text="Exemple">
+<image>./GearBox-thumb.jpg</image>
+</page>
+</param>
+<label appearance="url">https://boxes.hackerspace-bamberg.de/GearBox</label>
+<effect>
+    <object-type>all</object-type>
+    <effects-menu>
+        <submenu name="FabLab Boc@l"><submenu name="Boîtes (Boxes.py)"><submenu name="Pièces et tests" /></submenu></submenu></effects-menu>
+    <icon>GearBox-thumb.svg</icon>
+</effect>
+<script>
+    <command location="inx" interpreter="python">boxes_proxy.py</command>
+</script>
+</inkscape-extension>

@@ -1,0 +1,170 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+   <name>Règle de frettes</name>
+   <id>fablabchemnitz.de.fret_ruler</id>
+   <param name="active-tab" type="notebook">
+      <page name="ruler" gui-text="Règle">
+         <vbox>
+            <label>Dessine une règle pour manches d'instruments à cordes.</label>
+            <param name="draw_style" gui-text="Style de dessin" type="optiongroup" appearance="combo">
+               <option value="ruler">Règle</option>
+               <option value="template">Gabarit de défonceuse</option>
+               <option value="neck">Manche</option>
+            </param>
+            <param name="method" gui-text="Méthode de calcul" type="optiongroup" appearance="combo">
+               <option value="12root2">Racine 12e de 2</option>
+               <option value="18">18</option>
+               <option value="17.817">17.817</option>
+               <option value="17.835">17.835</option>
+               <option value="scala">Scala</option>
+               <option value="Nroot2">Racine N-ième de 2</option>
+            </param>
+            <label>Les deux suivants, seulement si la méthode correspondante est choisie.</label>
+            <hbox>
+               <param name="nth" type="int" min="2" max="50" gui-text="(Méthode = racine N-ième de 2) : notes par gamme :">0</param>
+               <param name="scala_filename" type="string" gui-text="(Méthode = Scala) : nom du fichier Scala :">fj-12tet</param>
+            </hbox>
+         </vbox>
+         <label>Dimensions :</label>
+         <param name="units" gui-text="Unités des dimensions suivantes" type="optiongroup" appearance="combo">
+            <option value="in">in</option>
+            <option value="mm">mm</option>
+         </param>
+         <param name="length" type="float" min="1" max="1000.0" precision="2" gui-text="Diapason en unités (longueur de la règle)">25.5</param>
+         <param name="width" type="float" min="0.5" max="1000.0" precision="2" gui-text="Largeur au sillet en unités">1.35</param>
+         <param name="frets" type="int" min="2" max="500" gui-text="Nombre de frettes à dessiner">18</param>
+         <label>En éventail :</label>
+         <param name="fanned" type="bool" gui-text="Frettes en éventail (diapasons aigu et grave)">false</param>
+         <hbox>
+            <param name="basslength" type="float" min="1" max="1000.0" precision="2" gui-text="Diapason des graves">25.5</param>
+            <param name="perpendicular" type="int" min="0" max="500" gui-text="Frette perpendiculaire">7</param>
+         </hbox>
+         <label>Styles :</label>
+         <param name="linewidth" type="float" min="0.01" max="2.0" precision="2" gui-text="Épaisseur des lignes (mm)">0.1</param>
+         <param name="notch_width" type="float" min="0.0001" max="4.0" precision="4" gui-text="(Gabarit de défonceuse) largeur des encoches de frettes">0.125</param>
+         <hbox>
+            <param name="annotate" type="bool" gui-text="Numérotation des frettes">true</param>
+            <param name="centerline" type="bool" gui-text="Ligne médiane">true</param>
+         </hbox>
+      </page>
+      <page name="neck" gui-text="Manche">
+         <label>Paramètres supplémentaires pour dessiner le manche.</label>
+         <param name="constant_width" type="bool" gui-text="Largeur constante (= sillet)">false</param>
+         <param name="width_bridge" type="float" min="0.5" max="1000.0" precision="2" gui-text="OU : largeur au chevalet en unités">2.0</param>
+         <param name="show_markers" type="bool" gui-text="Afficher les repères">false</param>
+         <param name="markers" type="string" gui-text="Frettes repérées :">3,5,7,10,12,12,15</param>
+         <param name="nutcomp" type="bool" gui-text="Compensation au sillet">false</param>
+         <param name="nutcomp_value" gui-text="Valeurs prédéfinies" type="optiongroup" appearance="combo">
+            <option value="0.012">0.012in (0.30mm)</option>
+            <option value="0.014">0.014in (0.36mm)</option>
+            <option value="manual">Manuelle</option>
+         </param>
+         <param name="nutcomp_manual" type="string" gui-text="Distance de compensation manuelle au sillet">0.014</param>
+      </page>
+      <page name="curvature" gui-text="Courbure">
+         <label>Règle de courbure de manche supplémentaire</label>
+         <param name="show_curves" type="bool" gui-text="Afficher la règle de courbure du manche">true</param>
+         <param name="neck_radius" type="float" min="4" max="100.0" precision="2" gui-text="Rayon de courbure du manche en unités">9.75</param>
+         <param name="arc_length" type="float" min="1" max="100.0" precision="2" gui-text="Longueur d'arc (unités)">5</param>
+         <param name="block_mode" type="bool" gui-text="Dessiner en bloc (plutôt qu'en doigt)">true</param>
+         <param name="arc_height" type="float" min="0.1" max="50.0" precision="2" gui-text="Hauteur de l'arc (unités)">0.5</param>
+         <param name="string_spacing" type="float" min="0.1" max="20.0" precision="2" gui-text="Écart entre cordes (style doigt) (unités)">0.3</param>
+         <label xml:space="preserve">À imprimer ou découper au laser dans du métal comme gabarit de rayon fin,
+ou à exporter vers OpenSCAD pour imprimer en 3D un support de manche ou une cale à poncer plus longs.
+Tailles :
+voir l'onglet Aide courbure</label>
+      </page>
+      <page name="filters" gui-text="Scala ">
+         <label>Onglet d'aide : il ne sert pas au dessin de la règle / du manche.</label>
+         <label>Il montre tous les fichiers Scala qui correspondent aux filtres ci-dessous. Saisir le nom du fichier dans le premier onglet.</label>
+         <label>Cette recherche ne fonctionne que si cet onglet est visible.</label>
+         <label>Il peut y avoir plus de 4000 fichiers Scala : choisissez bien.</label>
+         <param name="filter_tones" type="bool" gui-text="Filtrer par nombre de notes par gamme.">true</param>
+         <param name="scale" type="int" min="2" max="1000" gui-text="Notes par gamme :">12</param>
+         <param name="filter_label" type="bool" gui-text="Filtrer par mot du titre / de la description.">true</param>
+         <param name="keywords" type="string" gui-text="Mot clé :">diatonic</param>
+      </page>
+      <page name="help" gui-text="Aide">
+         <label xml:space="preserve">UTILISATION :
+Exporter en PDF, imprimer en mode poster pour un dessin à l'échelle 1.
+Coller sur la touche et découper, ou découper au laser un gabarit de défonceuse.</label>
+         <label xml:space="preserve">Méthodes :
+Racine 12e de 2 : méthode « préférée » pour les gammes tempérées égales.
+Remarque : la racine 12e de 2 et 17,817 donnent les mêmes résultats.
+17,835 est proche de 17,817 (calcul non arrondi), avec au plus 0,2 mm d'écart sur un diapason de 24 pouces.
+
+Repères :
+Les repères de frettes sont placés différemment selon l'accordage de l'instrument (une valeur en double dessine deux repères).
+Exemples courants pour le ukulélé :
+[3,5,7,10,12,12] (17 frettes),
+[3,5,7,7,10], [5,7,10], [5,7,12]
+[5,7,10,12,15] (19 frettes)
+
+Compensation au sillet :
+Avance un peu le sillet, pour une meilleure justesse de la frette 1 si le sillet est ajusté corde par corde.
+
+Fichiers Scala :
+Dans le sous-dossier scala des extensions Inkscape. Plus de 4000 autres sur www.huygens-fokker.org/scala
+
+Règle de courbure de manche :
+Un manche peut avoir un rayon (ex. 7,25) au sillet et un rayon plus grand (ex. 12) au corps.
+On parle de rayon conique (à tort de rayon composé). Il facilite le jeu corde par corde près du sillet et les accords près du corps.</label>
+      </page>
+      <page name="help2" gui-text="Aide longueurs">
+         <label xml:space="preserve">Longueurs de touche :
+Les diapasons de guitare sont en général entre 24" et 26".
+Ceux de basse entre 30" et 36".
+Diapasons courants :
+Banjo - 26_3/16 (665,2 mm)
+Mandoline - 13_7/8 (335 mm)
+Ukulélé concert - 15 (381 mm)
+Ukulélé soprano - 13_3/4 (349,25 mm)
+Ukulélé ténor - 17_3/32 (434,2 mm)
+Ukulélé baryton - 20_1/8 (511,2 mm)
+Fender Jaguar - 24 (609,60 mm)
+Fender Stratocaster/Telecaster - 25.5 (647,70 mm)
+Fender Jazz Bass - 34 (863,60 mm)
+Rickenbacker - 24.75 (628,65 mm)
+Rickenbacker basse - 33.25 (844,55 mm)
+Gibson Les Paul - 24.75 (628,65 mm)
+Gibson - 24.625, 24.563, 25.3 (625,48, 623,9, 642,62 mm)
+Paul Reed Smith - 25 (635 mm)
+Hofner Beatle Bass - 30 (762 mm)
+Martin - 24.9, 25.34 (632,5, 643,64 mm)
+PRS - 25 (635 mm)
+Baryton - 27.67 (702,82 mm)
+Basse à diapason court - 30 (762 mm)
+Guitare classique 25.6, 26 (650, 660 mm)
+Guitare baryton 28.5, 30.2 (724, 767 mm)</label>
+      </page>
+      <page name="help3" gui-text="Aide courbure">
+         <label xml:space="preserve">Tailles :
+Ukulélé - en général plat
+Guitares - de 7,25 à 20 pouces (la classique est plate)
+Violons, violoncelles - en général à rayon composé pour suivre l'écartement naturel des doigts.
+
+Jeu de règles courant : 7.25, 9.5, 10, 12, 14, 15, 16, 20
+
+- Fender Strat vintage - 7.25 (184,1 mm)
+- Fender Strat moderne - 9.5 (241 mm)
+- Gibson - 12 (305 mm)
+- Danelectro - 14 (355 mm)
+- Ibanez RG,S - 15.75-17 (400-430 mm)
+- Ibanez Artcore, SZ - 12 (305 mm)
+- PRS - 10 (254 mm), 11.5 (292 mm)
+- Jackson - 16 (406 mm)
+- Électrique courante - 9.5-10 (241-254 mm)
+- Électrique courante + chevalet Floyd Rose - 10 (254 mm)
+- Martin acoustique - 16 (406,4 mm)
+- Violon - 42 mm</label>
+      </page>
+   </param>
+   <effect needs-live-preview="true">
+        <object-type>path</object-type>
+        <effects-menu>
+           <submenu name="FabLab Boc@l"><submenu name="Mécanique et graduations" /></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">fret_ruler.py</command>
+    </script>
+</inkscape-extension>

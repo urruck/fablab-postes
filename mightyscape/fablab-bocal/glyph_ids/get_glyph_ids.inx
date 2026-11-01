@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Identifiants de glyphes - Lire</name>
+    <id>fablabchemnitz.de.glyph_ids.get_glyph_ids</id>
+    <param type="notebook" name="tab">
+        <page name="getGlyphIDs" gui-text="Identifiants de glyphes - Lire">
+            <label>Lit tous les identifiants de glyphes (identifiants des chemins du calque d'id = glyph) et les assemble en une chaîne.</label>
+            <label>Cette chaîne est enregistrée dans un élément texte, dans un nouveau calque « glyphIds ».</label>
+            <label>Réutilisez cette chaîne pour définir les identifiants (Identifiants de glyphes - Définir) avant de générer la nouvelle police, car les identifiants peuvent se perdre lors des opérations sur les chemins</label>
+        </page>
+        <page name="help" gui-text="Informations">
+        <label appearance="header">Pour plus d'informations</label>
+        <label appearance="url">https://gitlab.com/EllenWasbo/inkscape-extension-getsetGlyphIDs</label>
+        <label>et</label>
+        <label appearance="url">http://cutlings.wasbo.net/inkscape-extension-automate-glyph-ids/</label>
+        </page>
+    </param>
+    <effect>
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Texte" /></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">get_glyph_ids.py</command>
+    </script>
+</inkscape-extension>

@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+   <name>Export LaserDraw (lyz)</name>
+   <id>fablabchemnitz.de.laserdraw_export.lyz</id>
+   
+   <label>La mise en forme permet de séparer un dessin en fichiers de découpe et de gravure. Lignes rouges : découpe ; lignes bleues : gravure ; noir : gravure raster.</label>
+   <param name="cut_select" type="optiongroup" appearance="combo" gui-text="Type :">
+      <option value="vector_red">Découpe vectorielle (exporte les lignes rouges)</option>
+      <option value="vector_blue">Gravure vectorielle (exporte les lignes bleues)</option>
+      <option value="raster">Gravure raster (exporte tout le reste)</option>
+      <option value="all">Tout (vecteurs et gravure raster dans un seul fichier)</option>
+      <option value="image">Image (exporte tout en raster)</option>
+   </param>
+   <param name="resolution" type="int" min="100" max="1000" gui-text="Résolution de l'image raster">1000</param>
+   <param name="margin" type="float" precision="1" min="0" max="9999" gui-text="Taille de marge LaserDraw">2.0</param>
+   <param name="txt2paths" type="bool" gui-text="Convertir le texte en chemins">false</param>
+   <param name="inkscape_version" type="optiongroup" appearance="combo" gui-text="Version d'Inkscape :">
+      <option value="100">1.00 ou plus récente</option>
+      <option value="92">0.92 à 0.99</option>
+      <option value="91">0.91 ou plus ancienne</option>
+   </param>
+   <output>
+      <extension>.lyz</extension>
+      <mimetype>image/lyz</mimetype>
+      <filetypename>Laser Draw LYZ (*.lyz)</filetypename>
+      <filetypetooltip>LaserDraw LYZ Output</filetypetooltip>
+      <dataloss>true</dataloss>
+   </output>
+   <script>
+      <command location="inx" interpreter="python">lyz_export.py</command>
+      <helper_extension>org.inkscape.output.svg.inkscape</helper_extension>
+   </script>
+</inkscape-extension>

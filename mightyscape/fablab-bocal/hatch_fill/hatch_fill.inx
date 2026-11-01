@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Remplissage par hachures</name>
+    <id>fablabchemnitz.de.hatch_fill</id>
+    <param name="tab" type="notebook">
+        <page name="splash" gui-text="Remplissage par hachures">
+            <label xml:space="preserve">Cette extension remplit chaque forme fermée du dessin avec un chemin de hachures tracées en aller-retour. Si des objets sont sélectionnés, seuls ceux-ci sont remplis.
+
+Les formes hachurées sont groupées avec leur remplissage.</label>
+            <param name="hatchSpacing" type="float" min="0.001" max="1000" precision="3" gui-text="Espacement des hachures">3.0</param>
+            <param name="hatchAngle" type="float" min="-360" max="360" gui-text="Angle des hachures (degrés)">45</param>
+            <param name="crossHatch" type="bool" gui-text="Hachures croisées ?">false</param>
+            <param name="reducePenLifts" type="bool" gui-text="Relier les extrémités proches ?">true</param>
+            <param name="hatchScope" type="float" min="0.001" max="10.0" precision="3" gui-text="Portée du raccordement des extrémités (par défaut : 3)">3.0</param>
+            <param name="holdBackHatchFromEdges" type="bool" gui-text="Retrait du remplissage par rapport aux bords ?">true</param>
+            <param name="holdBackSteps" type="float" min="0.001" max="10.0" precision="3" gui-text="Distance de retrait (par défaut : 1)">1.0</param>
+            <param name="tolerance" type="float" min="0.1" max="100" gui-text="Tolérance (par défaut : 3.0)">3.0</param>
+            <label xml:space="preserve">(v0.9.0b, juillet 2020)</label>
+        </page>
+        <page name="info" gui-text="Plus d'infos...">
+            <label xml:space="preserve">L'espacement est la distance entre les hachures, en pixels écran (px). Les angles sont en degrés depuis l'horizontale : 90 = vertical.
+
+L'option Hachures croisées ajoute une seconde série de hachures, perpendiculaire à la première.
+
+L'option « Relier les extrémités proches » tente de relier les bouts de lignes voisins par une courbe douce, pour un tracé plus fluide.
+
+La portée fixe la distance (en largeurs de hachure) dans laquelle chercher les segments à relier. De grandes valeurs peuvent créer des hachures là où vous n'en voulez pas. Préférez une valeur entre 2 et 4.
+
+L'option Retrait éloigne un peu le remplissage du bord de l'objet d'origine. Cela aide à « colorier sans déborder » avec un stylo.
+
+Les hachures ont la même couleur et la même épaisseur que l'objet d'origine.
+
+La tolérance règle la précision avec laquelle les hachures remplissent les chemins.</label>
+        </page>
+    </param>
+    <effect needs-live-preview="true">
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Formes et motifs"><submenu name="À partir de chemins" /></submenu></submenu></effects-menu>
+    </effect>
+    <script>
+        <command interpreter="python" location="inx">hatch_fill.py</command>
+    </script>
+</inkscape-extension>

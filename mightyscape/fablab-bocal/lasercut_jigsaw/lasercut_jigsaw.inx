@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Puzzle pour découpe laser</name>
+    <id>fablabchemnitz.de.lasercut_jigsaw</id>
+    <param name="tab" type="notebook">
+        <page name="Style" gui-text="Style">
+            <label>La couleur des lignes du puzzle ne s'applique pas si « Créer des pièces séparées » est activé.</label>
+            <param name="color_border" type="color" appearance="colorbutton" gui-text="Couleur de la bordure">4278190335</param>
+            <param name="color_jigsaw" type="color" appearance="colorbutton" gui-text="Couleur des lignes du puzzle">65535</param>
+        </page>
+        <page name="Dimensions" gui-text="Dimensions">
+            <label>Définir la taille du puzzle et de la grille.</label>
+            <param name="sizetype" gui-text="Largeur / hauteur pour..." type="optiongroup" appearance="radio">
+                <option value="boxsize">la taille totale</option>
+                <option value="partsize">la taille d'une pièce</option>
+            </param>
+            <param name="width" type="float" min="0.1" max="1000.0" precision="2" gui-text="Largeur">100.0</param>
+            <param name="height" type="float" min="0.1" max="1000.0" precision="2" gui-text="Hauteur">80.0</param>
+            <param name="innerradius" type="float" min="0.0" max="500.0" precision="2" gui-text="Rayon des coins" gui-description="0 = coins à angle droit">5.0</param>
+            <param name="units" gui-text="Unités" type="optiongroup" appearance="combo" gui-description="Unité des dimensions">
+                <option value="px">px</option>
+                <option value="pt">pt</option>
+                <option value="in">in</option>
+                <option value="cm">cm</option>
+                <option value="mm">mm</option>
+            </param>
+            <param name="border" type="bool" gui-text="Bordure extérieure" gui-description="Ajouter un cadre extérieur">false</param>
+            <param name="borderwidth" type="float" min="0.0" max="500.0" precision="2" gui-text="Largeur de la bordure" gui-description="Taille du cadre extérieur.">20.0</param>
+            <param name="outerradius" type="float" min="0.0" max="500.0" precision="2" gui-text="Rayon de la bordure" gui-description="0 = coins à angle droit">5.0</param>
+            <param name="pack" type="optiongroup" appearance="combo" gui-text="Position du fond" gui-description="Où placer la pièce de fond sur la page">
+                <option value="Right">Droite</option>
+                <option value="Below">En dessous</option>
+                <option value="Separate">Images séparées</option>
+            </param>
+            <param name="pieces_W" type="int" min="2" max="199" gui-text="Nombre de pièces en largeur (colonnes)">5</param>
+            <param name="pieces_H" type="int" min="2" max="199" gui-text="Nombre de pièces en hauteur (rangées)">4</param>
+        </page>
+        <page name="Notches" gui-text="Tenons">
+            <label>Réglage de la forme des tenons et du caractère aléatoire de la disposition.</label>
+            <param name="notch_percent" type="float" min="0.0" max="1.0" precision="2" appearance="full" gui-text="Taille relative des tenons" gui-description="Taille relative des tenons. Entre 0,15 et 0,50, c'est bien">0.5</param>
+            <param name="rand" type="float" min="0.0" max="1.0" precision="2" appearance="full" gui-text="Déformation aléatoire de la grille" gui-description="Intensité de la déformation de la grille de base.">0.4</param>
+            <param name="smooth_edges" type="bool" gui-text="Certains bords peuvent être lisses" gui-description="Autoriser des pièces à bords lisses.">false</param>
+            <param name="noknob_frequency" type="float" min="0.0" max="100.0" appearance="full" precision="2" gui-text="pourcentage de bords lisses">10</param>
+            <param name="use_seed" type="bool" gui-text="Puzzle aléatoire" gui-description="Utiliser le trait de coupe comme épaisseur de ligne">true</param>
+            <param name="seed" type="int" min="0" max="99999999" gui-text="ou motif du puzzle (graine)" gui-description="Graine aléatoire, pour pouvoir refaire le même puzzle">12345</param>
+            <param name="pieces" type="bool" gui-text="Créer des pièces séparées">false</param>
+            <param name="shift" type="float" min="0.0" max="100.0" precision="2" gui-text="Décalage de chaque pièce (%)">0</param>
+        </page>
+        <page name="Usage" gui-text="Utilisation">
+            <label xml:space="preserve">Les lignes du puzzle sont simples pour minimiser la découpe laser.
+   (Les pièces ne sont pas des formes séparées.)
+Le bord extérieur peut être un rectangle ou avoir des coins arrondis.
+
+Un cadre peut être ajouté autour du puzzle.
+
+La taille des tenons dépend de la taille moyenne des pièces.
+
+La déformation aléatoire rend chaque pièce unique.
+
+Ajustez la taille des tenons et la déformation pour éviter les lignes qui se chevauchent :
+  - une forte déformation provoque des chevauchements
+    avec de petits tenons.
+  - des grilles très déséquilibrées (ex. 9x2 avec des tenons à 0,5)
+    provoquent des chevauchements.</label>
+        </page>
+    </param>
+    <effect>
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Jeux et puzzles" /></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">lasercut_jigsaw.py</command>
+    </script>
+</inkscape-extension>

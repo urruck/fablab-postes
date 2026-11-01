@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Roue à rochet</name>
+    <id>fablabchemnitz.de.ratchet</id>
+    <param name="teeth" type="int" min="2" max="300" gui-text="Nombre de dents">12</param>
+    <param name="centre_hole" type="bool" gui-text="Trou central">true</param>
+    <param name="centre_hole_diam" type="float" precision="3" min="0" max="50" gui-text="Taille du trou central">1.000</param>
+    <param name="diam_in" type="float" precision="3" min="0" max="200" gui-text="Diamètre extérieur">30.000</param>
+    <param name="diam_out" type="float" precision="3" min="0" max="200" gui-text="Diamètre intérieur">28.000</param>
+    <param name="vtooth_shape" type="optiongroup" appearance="combo" gui-text="Profil vertical des dents :">
+        <option value="straight">droit</option>
+        <option value="curve">courbe</option>
+    </param>
+    <param name="htooth_shape" type="optiongroup" appearance="combo" gui-text="Profil horizontal des dents :">
+        <option value="straight">droit</option>
+        <option value="curve">courbe</option>
+    </param>
+    <label appearance="header">Auteur / licence</label>
+    <label xml:space="preserve">écrit par Kie (inkscape@kitamura-studios.com)
+  Draw Ratchet Copyright (C) 2016 Kie Brooks
+  Distribué sous GPLv3 ou ultérieure
+
+  Une extension simple pour gagner du temps à dessiner des roues à rochet.</label>
+    <effect>
+        <object-type>path</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Mécanique et graduations" /></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">ratchet.py</command>
+    </script>
+</inkscape-extension>

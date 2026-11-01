@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Éclats et rayures</name>
+    <id>fablabchemnitz.de.chip_scratches</id>
+    <param type="notebook" name="Nmain">
+        <page name="Overall" gui-text="Général">
+            <param name="rtype" type="optiongroup" appearance="combo" gui-text="Taille">
+                <option value="rect_from_pgsize">Rectangle de la taille de la page</option>
+                <option value="rect_from_xy">Rectangle selon largeur et hauteur</option>
+                <option value="rect_from_selection">Rectangle de la sélection</option>
+            </param>
+            <param name="rx" type="int" min="0" max="10000" gui-text="Largeur">1000</param>
+            <param name="ry" type="int" min="0" max="10000" gui-text="Hauteur">1000</param>
+            <separator />
+            <param name="mainSize" type="float" max="100.0" precision="3" gui-text="Taille des objets (facteur d'échelle)">1.000</param>
+            <param name="mainNum" type="int" min="0" max="5000" gui-text="Nombre d'objets (multiplicateur)">1</param>
+            <param name="randomize" type="bool" gui-text="Nombre d'objets aléatoire">true</param>
+            <param name="allInOneGroup" type="bool" gui-text="Mettre tous les éléments dans un groupe">true</param>
+        </page>
+        <page name="Scratches" gui-text="Rayures">
+            <param name="honp" type="bool" gui-text="Activer les rayures">true</param>
+            <param name="hsize" type="float" min="-100.0" max="100.0" precision="3" gui-text="Taille des rayures">2.000</param>
+            <param name="hgrow" type="float" min="-100.0" max="100.0" precision="3" gui-text="Agrandir les rayures avec la distance">0.000</param>
+            <param name="hnum" type="int" min="0" max="100" gui-text="Nombre de rayures">10</param>
+            <param name="hrad" type="bool" gui-text="Orienter les rayures vers le centre">false</param>
+            <param name="hang" type="float" min="-180.0" max="180.0" precision="3" gui-text="Angle par rapport au rayon">90.00</param>
+            <param name="hcurve" type="float" min="-100.0" max="100.0" precision="3" gui-text="Faire varier l'angle avec la distance">0.000</param>
+            <param name="hgrad" type="bool" gui-text="Utiliser un dégradé de densité">false</param>
+        </page>
+        <page name="Chips" gui-text="Éclats">
+            <param name="conp" type="bool" gui-text="Activer les éclats">true</param>
+            <param name="csize" type="float" min="-100.0" max="100.0" precision="3" gui-text="Taille des éclats">1.000</param>
+            <param name="cgrow" type="float" min="-100.0" max="100.0" precision="3" gui-text="Agrandir les éclats avec la distance">0.000</param>
+            <param name="cnum" type="int" min="0" max="100" gui-text="Nombre d'éclats">10</param>
+            <param name="cgrad" type="bool" gui-text="Utiliser un dégradé de densité">false</param>
+        </page>
+        <page name="Specks" gui-text="Points">
+            <param name="sonp" type="bool" gui-text="Activer les points">true</param>
+            <param name="ssize" type="float" max="100.0" min="-100.0" precision="3" gui-text="Taille des points">1.000</param>
+            <param name="sgrow" type="float" max="100.0" min="-100.0" precision="3" gui-text="Agrandir les points avec la distance">0.000</param>
+            <param name="snum" type="int" min="0" max="100" gui-text="Nombre de points">10</param>
+            <param name="sgrad" type="bool" gui-text="Utiliser un dégradé de densité">false</param>
+        </page>
+    </param>
+    <effect>
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Formes et motifs"><submenu name="Textures et effets" /></submenu></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">chip_scratches.py</command>
+    </script>
+</inkscape-extension>

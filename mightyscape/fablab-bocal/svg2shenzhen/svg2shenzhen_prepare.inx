@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Svg2Shenzhen - Préparer le document</name>
+    <id>fablabchemnitz.de.svg2shenzhen_prepare</id>
+	<label>Préparer le document pour l'export KiCad</label>
+    <param name="docwidth" type="float" min="0.0" max="100000.0" gui-text="Largeur du document (mm)">100</param>
+    <param name="docheight" type="float" min="0.0" max="100000.0" gui-text="Hauteur du document (mm)">100</param>
+    <effect needs-live-preview="false">
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Import et export" /></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">svg2shenzhen/prepare.py</command>
+    </script>
+</inkscape-extension>

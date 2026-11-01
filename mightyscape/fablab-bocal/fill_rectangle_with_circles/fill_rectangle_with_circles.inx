@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Remplir un rectangle de cercles</name>
+    <id>fablabchemnitz.fill_rectangle_with_circles</id>
+    <param name="radius" type="float" min="0.01" max="10000" gui-text="Rayon à utiliser">3.0</param>
+    <param name="margin" type="float" min="0.01" max="10000" gui-text="Marge entre le bord des rectangles et les cercles">10.0</param>
+    <param name="space" type="float" min="0.01" max="10000" gui-text="Espacement entre les cercles">30.0</param>
+    <effect>
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Formes et motifs"><submenu name="À partir d'objets" /></submenu></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">fill_rectangle_with_circles.py</command>
+    </script>
+</inkscape-extension>

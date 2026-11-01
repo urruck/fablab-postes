@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+   <name>Mettre à l'échelle réelle</name>
+   <id>fablabchemnitz.de.scale_to_real</id>
+   <param name="tab" type="notebook">
+      <page name="realscale" gui-text="Échelle réelle">
+         <label appearance="header">Mesure</label>
+         <param name="length" type="float" min="0.1" max="100000.0" precision="3" gui-text="Longueur du chemin de référence :" gui-description="Longueur réelle du chemin de référence">100.0</param>
+         <param name="unit" type="optiongroup" appearance="combo" gui-text="Unité :" gui-description="Unité réelle du dessin">
+            <option value="px">px</option>
+            <option value="pc">pc</option>
+            <option value="pt">pt</option>
+            <option value="in">in</option>
+            <option value="mm">mm</option>
+            <option value="cm">cm</option>
+         </param>
+         <label appearance="header">Échelle du dessin</label>
+         <param name="choosescale" gui-text="Catégorie d'échelle" gui-description="Choisissez le type d'échelle, puis l'échelle voulue dans la liste correspondante." type="optiongroup" appearance="combo">
+            <option value="metric">Métrique</option>
+            <option value="imperial">Impériale</option>
+            <option value="custom">Personnalisé</option>
+         </param>
+         <param name="metric" type="optiongroup" appearance="combo" gui-text="Échelle métrique :" gui-description="Échelles métriques pour les plans">
+            <option value="1">1:1</option>
+            <option value="2">1:2</option>
+            <option value="5">1:5</option>
+            <option value="10">1:10</option>
+            <option value="20">1:20</option>
+            <option value="25">1:25</option>
+            <option value="50">1:50</option>
+            <option value="100">1:100</option>
+            <option value="200">1:200</option>
+            <option value="250">1:250</option>
+            <option value="500">1:500</option>
+            <option value="1000">1:1000</option>
+            <option value="1250">1:1250</option>
+            <option value="2500">1:2500</option>
+         </param>
+         <param name="imperial" type="optiongroup" appearance="combo" gui-text="Échelle impériale :" gui-description="Échelles impériales pour les plans">
+            <option value="1">1:1</option>
+            <option value="2">1:2</option>
+            <option value="4">1:4</option>
+            <option value="8">1:8</option>
+            <option value="16">1:16</option>
+            <option value="24">1:24</option>
+            <option value="32">1:32</option>
+            <option value="48">1:48</option>
+            <option value="64">1:64</option>
+            <option value="96">1:96</option>
+            <option value="128">1:128</option>
+         </param>
+         <param name="custom_scale" type="float" min="0.00001" max="2000000" gui-text="Échelle personnalisée (1 : valeur)" precision="5" gui-description="Saisir un facteur d'échelle personnalisé. Une valeur inférieure à 1 agrandit le dessin.">45</param>
+         <label appearance="header">Règle d'échelle</label>
+         <param name="showscale" type="bool" gui-text="Créer une règle d'échelle" gui-description="Dessiner la règle d'échelle sur la page">true</param>
+         <param name="unitlength" type="optiongroup" appearance="combo" gui-text="Demi-longueur de l'échelle" gui-description="Nombre d'unités sur une moitié de la règle">
+            <option value="1">1</option>
+            <option value="10">10</option>
+            <option value="100">100</option>
+         </param>
+      </page>
+      <page name="help" gui-text="Aide">
+         <label appearance="header">Utilisation</label>
+         <label xml:space="preserve">Met à l'échelle un objet (ou un groupe) d'après la longueur réelle d'un chemin de référence (utile par exemple pour mettre des plans d'architecture à l'échelle) :
+            
+• Dessinez sur l'objet une ligne droite à deux points de longueur connue (par exemple, si vous connaissez la longueur d'un mur, tracez la ligne d'un bout à l'autre du mur).
+
+• Sélectionnez d'abord la ligne, puis le dessin (qui doit être un groupe ou un objet unique).
+
+• Longueur : indiquez la longueur réelle de la ligne tracée (par ex. la longueur du mur).
+
+• Unité : indiquez l'unité de cette mesure ; attention, le dessin peut devenir énorme en km, voire en m. Corrigez cela avec « Échelle du dessin ».
+
+• Échelle du dessin : choisissez une catégorie, puis une échelle autre que 1:1 dans la liste. Pour agrandir, choisissez « Personnalisée » et saisissez une valeur inférieure à 1.
+
+• Règle d'échelle : l'échelle peut être affichée avec une règle. Le nombre d'unités de la règle est réglable (par ex. des graduations tous les un, dix ou cent centimètres).</label>
+      </page>
+   </param>
+   <effect needs-live-preview="true">
+      <object-type>all</object-type>
+      <effects-menu>
+         <submenu name="FabLab Boc@l"><submenu name="Transformations" /></submenu></effects-menu>
+   </effect>
+   <script>
+      <command location="inx" interpreter="python">scale_to_real.py</command>
+   </script>
+</inkscape-extension>

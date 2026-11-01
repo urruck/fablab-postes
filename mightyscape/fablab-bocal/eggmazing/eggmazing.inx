@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Labyrinthe pour œuf (Eggbot)</name>
+    <id>fablabchemnitz.de.eggmazing</id>
+    <param name="mazeSize" type="optiongroup" appearance="combo" gui-text="Taille du labyrinthe (l x h) :">
+        <option value="SMALL">Petit (32 x 6)</option>
+        <option value="MEDIUM">Moyen (64 x 12)</option>
+        <option value="LARGE">Grand (96 x 18)</option>
+        <option value="XLARGE">Très grand (128 x 24)</option>
+    </param>
+    <effect needs-live-preview="true">
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Jeux et puzzles" /></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">eggmazing.py</command>
+    </script>
+</inkscape-extension>

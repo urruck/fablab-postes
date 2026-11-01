@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+   <name>Baderne d'Apollonius</name>
+   <id>fablabchemnitz.de.apollonian_gasket</id>
+   <param name="active_tab" type="notebook">
+      <page name="settings" gui-text="Paramètres">
+         <param name="depth" type="int" min="2" max="10" gui-text="Profondeur" gui-description="Attention : des valeurs élevées peuvent rendre le calcul très long !">3</param>
+         <param name="c1" type="float" min="0.1" max="10.0" precision="2" gui-text="c1">2.0</param>
+         <param name="c2" type="float" min="0.1" max="10.0" precision="2" gui-text="c2">3.0</param>
+         <param name="c3" type="float" min="0.1" max="10.0" precision="2" gui-text="c3">3.0</param>
+         <param name="shrink" type="bool" gui-text="réduire les cercles pour la découpe">true</param>
+         <param name="as_paths" type="bool" gui-text="dessiner des éléments svg:path au lieu de svg:circle">true</param>
+
+      </page>
+      <page name="Usage" gui-text="Utilisation">
+         <label xml:space="preserve">Créer une baderne d'Apollonius :
+Profondeur = profondeur dans l'arbre de recherche
+		
+c1,c2,c3 = courbures des 3 premiers cercles tangents</label>
+         <label appearance="url">https://en.wikipedia.org/wiki/Apollonian_gasket</label>
+      </page>
+   </param>
+   <effect>
+      <object-type>all</object-type>
+      <effects-menu>
+         <submenu name="FabLab Boc@l"><submenu name="Jeux et puzzles" /></submenu></effects-menu>
+   </effect>
+   <script>
+      <command location="inx" interpreter="python">apollonian_gasket.py</command>
+   </script>
+</inkscape-extension>

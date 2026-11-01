@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Générateur de boîte - Rainures en T</name>
+    <id>fablabchemnitz.de.box_maker_t_slot</id>
+    <param name="unit" gui-text="Unité" type="optiongroup" appearance="combo">
+        <option value="mm">mm</option>
+        <option value="cm">cm</option>
+        <option value="in">in</option>
+    </param>
+    <param name="inside" type="optiongroup" appearance="combo" gui-text="Dimensions de la boîte">
+        <option value="1">Intérieur</option>
+        <option value="0">Extérieur</option>
+    </param>
+    <param name="length" type="float" precision="3" min="0.0" max="10000.0" gui-text="Longueur">80.0</param>
+    <param name="width" type="float" precision="3" min="0.0" max="10000.0" gui-text="Largeur">80.0</param>
+    <param name="depth" type="float" precision="3" min="0.0" max="10000.0" gui-text="Hauteur">80.0</param>
+    <param name="tab" type="float" precision="2" min="0.0" max="10000.0" gui-text="Largeur de languette minimale / souhaitée">10.0</param>
+    <param name="equal" type="optiongroup" appearance="combo" gui-text="Largeur des languettes">
+        <option value="0">Fixe</option>
+        <option value="1">Proportionnelle</option>
+    </param>
+    <param name="thickness" type="float" precision="2" min="0.0" max="10000.0" gui-text="Épaisseur du matériau">6.0</param>
+    <param name="kerf" type="float" precision="3" min="0.0" max="10000.0" gui-text="Trait de coupe (largeur de coupe)">0.0</param>
+    <param name="clearance" type="float" precision="3" min="0.0" max="10000.0" gui-text="Jeu">0.05</param>
+    <param name="style" gui-text="Disposition / style" type="optiongroup" appearance="combo">
+        <option value="1">Schématique</option>
+        <option value="2">3 pièces</option>
+        <option value="3">En ligne (compacte)</option>
+        <option value="4">Schématique, languettes alternées</option>
+    </param>
+    <param name="spacing" type="float" precision="2" min="0.0" max="10000.0" gui-text="Espace entre les pièces">5.0</param>
+    <param name="screw_length" type="float" precision="2" min="0.0" max="10000.0" gui-text="Longueur de vis">12</param>
+    <param name="screw_diameter" type="float" precision="2" min="0.0" max="10000.0" gui-text="Diamètre de vis">3</param>
+    <effect>
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Boîtes (autres modèles)"><submenu name="À encoches" /></submenu></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">box_maker_t_slot.py</command>
+    </script>
+</inkscape-extension>

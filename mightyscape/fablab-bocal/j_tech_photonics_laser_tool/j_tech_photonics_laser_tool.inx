@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Outil laser J Tech Photonics (G-code)</name>
+    <id>fablabchemnitz.de.j_tech_photonics_laser_tool</id> 
+    <param name="tabs" type="notebook">
+        <page name="important_settings" gui-text="Réglages importants">
+            <param name="unit" type="optiongroup" appearance="combo" gui-text="Unité de mesure">
+                <option value="mm">millimètres</option>
+                <option value="in">pouces</option>
+            </param>
+            <param name="travel_speed" type="float" min="0" max="999999" gui-text="Vitesse de déplacement (unité/min)">3000</param>
+            <param name="cutting_speed" type="float" min="0" max="999999" gui-text="Vitesse de coupe (unité/min)">750</param>
+            <spacer />
+            <param name="passes" type="int" min="1" max="999999" gui-text="Passes">1</param>
+            <param name="pass_depth" type="float" min="0" max="999999" gui-text="Profondeur par passe (unité)">1</param>
+            <spacer />
+            <param name="directory" type="path" gui-text="Dossier de sortie" mode="folder">-- Choose Output Directory --</param>
+            <param name="filename" type="string" gui-text="Nom du fichier">output.gcode</param>
+            <param name="filename_suffix" type="bool" gui-text="Ajouter un numéro au nom du fichier">true</param>
+        </page>
+        <page name="advanced_settings" gui-text="Réglages avancés">
+            <param name="tool_power_command" type="string" gui-text="Commande d'allumage de l'outil">M3 S255;</param>
+            <param name="tool_off_command" type="string" gui-text="Commande d'arrêt de l'outil">M5;</param>
+            <param name="dwell_time" type="float" gui-text="Temporisation avant déplacement (ms)">0</param>
+            <spacer />
+            <param name="draw_debug" type="bool" gui-text="Dessiner le débogage">true</param>
+            <param name="debug_line_width" type="float" gui-text="Épaisseur des lignes de débogage (px)">0.5</param>
+            <param name="debug_arrow_scale" type="float" min="0" gui-text="Échelle des flèches de débogage">1.0</param>
+            <spacer />
+            <param name="approximation_tolerance" type="string" gui-text="Tolérance d'approximation (±unité) [conseil : entre 10^-4 et 1]">0.01</param>
+        </page>
+        <page name="header_footer_settings" gui-text="En-tête et pied personnalisés">
+            <spacer />
+            <param name="header_path" type="path" mode="file" gui-text="Fichier d'en-tête G-code personnalisé" />
+            <param name="footer_path" type="path" mode="file" gui-text="Fichier de pied G-code personnalisé" />
+            <spacer />
+            <param name="do_z_axis_start" type="bool" gui-text="Définir la position de départ de l'axe Z">false</param>
+            <param name="z_axis_start" type="float" min="0" max="999999" gui-text="Position de départ absolue de l'axe Z (unité)">0</param>
+            <spacer />
+            <param name="move_to_origin_end" type="bool" gui-text="Revenir à l'origine à la fin">false</param>
+            <spacer />
+            <param name="do_laser_off_start" type="bool" gui-text="Éteindre le laser avant le travail">true</param>
+            <param name="do_laser_off_end" type="bool" gui-text="Éteindre le laser après le travail">true</param>
+        </page>
+        <page name="scaling" gui-text="Système de coordonnées et transformations">
+            <param name="machine_origin" type="optiongroup" appearance="combo" gui-text="Origine de la machine">
+                <option value="bottom-left">en bas à gauche</option>
+                <option value="center">centré</option>
+                <option value="top-left">en haut à gauche</option>
+            </param>
+            <param name="invert_y_axis" type="bool" gui-text="Inverser l'axe Y">false</param>
+            <param name="bed_width" type="float" min="0" max="999999" gui-text="Largeur X du plateau (unité)">200</param>
+            <param name="bed_height" type="float" min="0" max="999999" gui-text="Longueur Y du plateau (unité)">200</param>
+            <spacer />
+            <param name="horizontal_offset" type="float" min="-999999" max="999999" gui-text="Décalage X du G-code (unité)">0</param>
+            <param name="vertical_offset" type="float" min="-999999" max="999999" gui-text="Décalage Y du G-code (unité)">0</param>
+            <param name="scaling_factor" type="float" min="-999999" max="999999" gui-text="Facteur d'échelle du G-code">1</param>
+        </page>
+    </param>
+    <effect>
+        <object-type>path</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Découpe laser et traceur" /></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">j_tech_photonics_laser_tool.py</command>
+    </script>
+</inkscape-extension>

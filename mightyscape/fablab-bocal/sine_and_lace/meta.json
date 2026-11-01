@@ -1,0 +1,21 @@
+[
+  {
+    "name": "Sine And Lace",
+    "id": "fablabchemnitz.de.sine_and_lace",
+    "path": "sine_and_lace",
+    "dependent_extensions": null,
+    "original_name": "Sine and Lace",
+    "original_id": "command.experiment.sineandlace",
+    "license": "GNU GPL v3",
+    "license_url": "https://github.com/evil-mad/EggBot/blob/master/LICENSE",
+    "comment": "",
+    "source_url": "https://gitea.fablabchemnitz.de/FabLab_Chemnitz/mightyscape-1.2/src/branch/master/extensions/fablabchemnitz/sine_and_lace",
+    "fork_url": "https://github.com/evil-mad/EggBot",
+    "documentation_url": "https://y.stadtfabrikanten.org/sine-and-lace",
+    "inkscape_gallery_url": null,
+    "contributors": [
+      "github.com/evil-mad",
+      "github.com/eridur-de"
+    ]
+  }
+]

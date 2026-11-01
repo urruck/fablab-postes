@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Nœuds en zigzag</name>
+    <id>fablabchemnitz.de.zigzag_nodes</id>
+    <label>Cet effet décale alternativement les nœuds du chemin sélectionné.</label>
+    <param name="radius" type="float" min="0.0" max="1000.0" gui-text="Déplacement maximal, px">3.0</param>
+    <effect>
+        <object-type>path</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Formes et motifs"><submenu name="À partir de chemins" /></submenu></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">zigzag_nodes.py</command>
+    </script>
+</inkscape-extension>

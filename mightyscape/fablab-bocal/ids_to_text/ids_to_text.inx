@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Identifiants vers texte</name>
+    <id>fablabchemnitz.de.ids_to_text</id>
+    <param name="path_attribute" appearance="combo" gui-text="Attribut du chemin à afficher :" type="optiongroup">
+        <option value="id">Identifiant</option>
+        <option value="label">Étiquette</option>
+        <option value="fill">Couleur de remplissage</option>
+        <option value="stroke">Couleur du contour</option>
+        <option value="width">Largeur</option>
+        <option value="height">Hauteur</option>
+    </param>
+    <param name="fontsize" type="int" min="1" max="1000" gui-text="Taille de police (px) :">10</param>
+    <param name="color" type="color" appearance="colorbutton" gui-text="Couleur du texte :">255</param>
+    <param name="font" type="string" gui-text="Police :">Roboto</param>
+    <param name="fontweight" appearance="combo" gui-text="Graisse :" type="optiongroup">
+        <option value="normal">Normale</option>
+        <option value="bold">Gras</option>
+        <option value="100">100</option>
+        <option value="200">200</option>
+        <option value="300">300</option>
+        <option value="400">400</option>
+        <option value="500">500</option>
+        <option value="600">600</option>
+        <option value="700">700</option>
+        <option value="800">800</option>
+        <option value="900">900</option>
+    </param>
+    <param name="replaced" type="string" gui-text="Texte à remplacer :" />
+    <param name="replacewith" type="string" gui-text="Remplacer par :" />
+    <param name="matchre" type="string" gui-text="Expression régulière :" />
+    <param name="angle" type="float" min="-360" max="360" gui-text="Angle (°) :">0</param>
+    <param name="capitals" type="bool" gui-text="Tout mettre en majuscules">false</param>
+    <param name="group" type="bool" gui-text="Grouper les chemins avec les textes générés">false</param>
+    <label appearance="header">Aide</label>
+    <label>Extrait les identifiants (ou d'autres attributs) des chemins sélectionnés et les affiche en texte à l'intérieur des chemins.
+       Exemples et plus d'infos :</label>
+    <label appearance="url">https://github.com/whiplashoo/ids_to_text_inkscape</label>
+    <effect>
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Texte" /></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">ids_to_text.py</command>
+    </script>
+</inkscape-extension>

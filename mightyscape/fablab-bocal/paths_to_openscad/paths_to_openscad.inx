@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+   <name>Chemins vers OpenSCAD</name>
+   <id>fablabchemnitz.de.paths_to_openscad</id>
+   <param name="tab" type="notebook">
+      <page name="splash" gui-text="Chemins vers OpenSCAD">
+         <param type="path" name="fname" gui-text="Fichier de sortie" mode="file_new" filetypes="scad" gui-description="Utiliser « {NAME}.scad » pour reprendre le nom du SVG.">{NAME}.scad</param>
+         <param name="zsize" type="float" min="0" max="1000" precision="2" gui-text="Épaisseur (Z) [mm]" gui-description="Épaisseur d'extrusion 3D par défaut (si aucune zsize n'est lue dans l'objet SVG).">5.0</param>
+         <param name="parsedesc" type="bool" gui-text="Lecture des descriptions" gui-description="Lit la zsize, le zoffset et l'échelle d'extrusion de chaque objet SVG dans sa description ou son identifiant. Voir l'onglet Syntaxe d'extrusion.">true</param>
+         <param name="scadview" type="bool" gui-text="Voir dans OpenSCAD" gui-description="Lance OpenSCAD pour voir le modèle 3D.">false</param>
+         <param name="scad2stl" type="bool" gui-text="Convertir en STL" gui-description="Enregistre aussi un fichier .stl à côté du fichier de sortie.">false</param>
+         <param name="stlpost" type="bool" gui-text="Post-traitement STL" gui-description="Lance par exemple un trancheur après la conversion en STL. Voir l'onglet Commandes.">false</param>
+         <param name="stlmodule" type="bool" gui-text="Créer seulement un module">false</param>
+      </page>
+      <page name="tuning" gui-text="Réglages fins">
+         <param name="smoothness" type="float" min="0.0001" max="5" precision="4" gui-text="Lissage" gui-description="Utilisé pour le rendu des courbes. Plus petit = plus lisse. Plage : 0,0001 à 5">0.2</param>
+         <param type="float" name="chamfer" min="0.0" gui-text="Ajouter un rayon de chanfrein [mm]">0</param>
+         <param name="chamfer_fn" type="optiongroup" appearance="combo" gui-text="Précision du chanfrein ($fn)">
+            <option value="4">4 : grossière (rapide)</option>
+            <option value="12">12 : moyenne (lente)</option>
+            <option value="16">16 : fine (plus lente)</option>
+            <option value="32">32 : parfaite (la plus lente)</option>
+         </param>
+         <label appearance="header">Mode contour</label>
+         <label>Les objets sont extrudés en 3D soit en mode normal, soit en mode contour. Normalement, les surfaces remplies sont extrudées sans tenir compte de l'épaisseur du trait. Les objets sans remplissage sont rendus en mode contour. Remarque : l'instruction « Scale: XX % » est sans effet en mode contour.</label>
+         <param name="min_line_width" type="float" min="0.1" max="10" gui-text="Épaisseur de trait minimale [mm]">1.0</param>
+         <param type="float" name="line_width_scale_perc" min="1" max="10000" gui-text="Échelle de l'épaisseur de trait [%]">100.0</param>
+         <param name="line_fn" type="optiongroup" appearance="combo" gui-text="Précision de l'épaisseur de trait ($fn)">
+            <option value="4">4 : grossière (rapide)</option>
+            <option value="8">8 : moyenne (lente)</option>
+            <option value="16">16 : fine (plus lente)</option>
+            <option value="32">32 : parfaite (la plus lente)</option>
+         </param>
+         <param name="force_line" type="bool" gui-text="Forcer le mode contour, ignorer le remplissage">false</param>
+         <spacer />
+      </page>
+      <page name="commands" gui-text="Commandes">
+         <label>Variables : « {NAME}.scad » désigne le fichier OpenSCAD indiqué comme « Fichier de sortie » dans l'onglet principal. « {NAME}.stl » désigne le fichier STL à écrire.</label>
+         <param name="scadviewcmd" type="string" gui-text="Voir dans OpenSCAD :" gui-description="Lancé seulement si aucune commande du même nom ne tourne déjà. Toujours lancé sans bloquer. Un OpenSCAD ouvert recharge automatiquement le fichier modifié">openscad "{NAME}.scad"</param>
+         <param name="scad2stlcmd" type="string" gui-text="Convertir en STL :" gui-description="Lancé automatiquement quand un post-traitement STL est demandé.">openscad "{NAME}.scad" --export-format binstl -o "{NAME}.stl"</param>
+         <param name="stlpostcmd" type="string" gui-text="Post-traitement STL :" gui-description="Ajouter « &amp; » à la fin pour ne pas bloquer.">cura "{NAME}.stl" &amp;</param>
+      </page>
+      <page name="extrusion" gui-text="Syntaxe d'extrusion">
+         <label xml:space="preserve">L'épaisseur (axe Z) et d'autres paramètres peuvent être définis dans la description d'un objet SVG. Le menu « Objet &gt; Propriétés de l'objet... » (Maj + Ctrl + O) montre les détails d'un objet sélectionné.
+
+Si l'identifiant d'un objet est de la forme nom_XXX_mm ou nom_XXXmm,
+XXX devient la zsize en millimètres.
+Utiliser . ou _ comme séparateur décimal.
+Attention : les espaces et virgules deviennent « _ » dans l'identifiant.</label>
+         <label appearance="header">Syntaxe de la description de l'objet</label>
+         <label xml:space="preserve">Depth: 10 mm
+  Longueur d'extrusion linéaire (ou taille Z) de l'objet.
+
+Antimatter: true
+  L'objet fait partie de l'ensemble soustrait,
+  il est retiré de tous les autres objets.
+
+Offset: 4.5 mm
+  Remonte un objet pour créer un balcon (ou une fenêtre).
+
+Taper: 90 %           ou           Taper: 120,60 %
+  Met l'objet à l'échelle le long de l'axe Z. La face du bas
+  reste comme dessinée, la face du haut est mise à cette échelle.
+  Avec deux valeurs (séparées par une virgule), l'échelle
+  diffère selon X et Y.
+
+Les paramètres des objets priment sur ceux des groupes.</label>
+      </page>
+      <page name="info" gui-text="À propos...">
+         <label xml:space="preserve">Cette extension convertit les chemins Inkscape en polygones extrudés dans OpenSCAD. Avant usage, certains objets doivent être convertis en chemins avec « Chemin &gt; Objet en chemin ».
+
+Les pixels d'Inkscape sont convertis en millimètres selon la norme SVG : 96 px = 1 pouce = 25,4 mm. (Avant Inkscape 0.92 la norme était 90 px par pouce ; les produits Adobe utilisent souvent 75 px par pouce.)
+
+Dan Newman (dan newman @ mtbaldy us)
+Josef Skladanka (jskladan @ redhat com)
+Juergen Weigert (juergen @ fabmail org)
+
+Mises à jour sur</label>
+<label appearance="url">https://github.com/fablabnbg/inkscape-paths2openscad/releases</label>
+      </page>
+   </param>
+   <effect needs-live-preview="false">
+      <object-type>all</object-type>
+      <effects-menu>
+         <submenu name="FabLab Boc@l"><submenu name="Import et export" /></submenu></effects-menu>
+   </effect>
+   <script>
+      <command location="inx" interpreter="python">paths_to_openscad.py</command>
+   </script>
+</inkscape-extension>

@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Largeur des colonnes sélectionnées</name>
+    <id>fablabchemnitz.de.table_edit_columns</id>
+    <param name="width" type="string" gui-text="Nouvelle largeur :">10mm</param>
+    
+    <effect>
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Tableaux"><submenu name="Modifier" /></submenu></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">table_edit_columns.py</command>
+    </script>
+</inkscape-extension>

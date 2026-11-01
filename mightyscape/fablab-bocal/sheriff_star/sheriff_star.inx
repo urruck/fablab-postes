@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+   <name>Étoile de shérif</name>
+   <id>fablabchemnitz.de.sheriff_star</id>
+   <param name="tab" type="notebook">
+      <page name="settings" gui-text="Paramètres">
+         <param name="points" type="int" min="5" max="10" gui-text="Nombre de branches">6</param>
+         <param name="star_tip_ratio" type="int" min="1" max="100" gui-text="Cercles des pointes (%)">10</param>
+         <param name="inner_ratio" type="int" min="1" max="100" gui-text="Cercle intérieur (%)">58</param>
+         <param name="show_inner_circle" type="bool" gui-text="Afficher le cercle intérieur">false</param>
+      </page>
+      <page name="help" gui-text="Aide">
+         <label xml:space="preserve">Cette extension crée une étoile de shérif dans le cercle ou l'ellipse sélectionné.
+
+Les sommets extérieurs (pointes de l'étoile) sont reliés par un point du cercle intérieur (en général masqué). Ce point est à mi-angle entre les deux sommets extérieurs. Le rayon du cercle intérieur est un pourcentage du rayon du cercle ou de l'ellipse sélectionné.
+
+De petits cercles sont placés au bout de chaque pointe. Leur rayon est un pourcentage du rayon du cercle sélectionné (pour une ellipse, le rayon x).
+
+Les éléments de l'étoile restent des objets séparés, pour pouvoir les retravailler.</label>
+      </page>
+   </param>
+   <effect>
+      <object-type>path</object-type>
+      <effects-menu>
+         <submenu name="FabLab Boc@l"><submenu name="Formes et motifs"><submenu name="À partir d'objets" /></submenu></submenu></effects-menu>
+   </effect>
+   <script>
+      <command location="inx" interpreter="python">sheriff_star.py</command>
+   </script>
+</inkscape-extension>

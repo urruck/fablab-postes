@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+	<name>Générateur de boîte - Boîte elliptique</name>
+	<id>fablabchemnitz.de.box_maker_elliptical_box</id>
+	<param name="unit" type="optiongroup" appearance="combo" gui-text="Unité">
+		<option value="mm">mm</option>
+		<option value="cm">cm</option>
+		<option value="in">in</option>
+		<option value="pt">pt</option>
+		<option value="px">px</option>
+		<option value="pc">pc</option>
+	</param>
+	<param name="thickness" type="float" min="1.0" max="100.0" gui-text="Épaisseur du matériau">3.0</param>
+	<param name="height" type="float" min="0.0" max="10000.0" gui-text="Hauteur">30.0</param>
+	<param name="width" type="float" min="0.0" max="10000.0" gui-text="Largeur">50.0</param>
+	<param name="depth" type="float" min="0.0" max="10000.0" gui-text="Profondeur">40.0</param>
+	<param name="cut_dist" type="float" min="0.1" max="100.0" gui-text="Distance entre découpes">1.5</param>
+	<param name="auto_cut_dist" type="bool" gui-text="Adapter automatiquement la distance entre découpes à la courbure">false</param>
+	<param name="cut_nr" type="int" min="1" max="100" gui-text="Nombre de découpes">4</param>
+	<param name="lid_angle" type="float" min="0.0" max="360.0" gui-text="Angle du couvercle">90</param>
+	<param name="invert_lid_notches" type="bool" gui-text="Inverser les encoches du couvercle (crée un couvercle sans maintien latéral)">false</param>
+	<param name="central_rib_lid" type="bool" gui-text="Ajouter une nervure centrale au couvercle (nombre pair de découpes nécessaire)">false</param>
+	<param name="central_rib_body" type="bool" gui-text="Ajouter une nervure centrale au corps (nombre pair de découpes nécessaire)">false</param>
+	<effect>
+		<object-type>all</object-type>
+		<effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Boîtes (autres modèles)"><submenu name="À encoches" /></submenu></submenu></effects-menu>
+	</effect>
+	<script>
+		<command location="inx" interpreter="python">box_maker_elliptical_box.py</command>
+	</script>
+</inkscape-extension>

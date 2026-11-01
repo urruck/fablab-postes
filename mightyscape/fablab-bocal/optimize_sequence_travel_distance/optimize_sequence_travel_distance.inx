@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Optimiser l'ordre : déplacements à vide</name>
+    <id>fablabchemnitz.de.optimize_sequence_travel_distance</id>
+    <label appearance="header">Outil d'optimisation de tracé AxiDraw</label>
+    <label>Cet outil réordonne les objets de chaque calque du document pour réduire la distance et le temps des déplacements à vide (outil levé).</label>
+    <param name="reordering" gui-text="Traitement des groupes" type="optiongroup" appearance="radio">
+        <option value="2">Réordonner à l'intérieur des groupes</option>
+        <option value="1">Conserver les groupes</option>
+        <option value="3">Dissocier les groupes</option>
+    </param>
+    <param name="preview_rendering" type="bool" gui-text="Aperçu du rendu">false</param>
+    <label>v 2.6. Copyright 2020, Evil Mad Scientist</label>
+    <effect needs-live-preview="true">
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Découpe laser et traceur" /></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">optimize_sequence_travel_distance.py</command>
+    </script>
+</inkscape-extension>

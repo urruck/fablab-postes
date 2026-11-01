@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Arrondir les coordonnées</name>
+    <id>fablabchemnitz.de.rounder</id>
+    <param name="precision" type="int" min="0" max="20" gui-text="Précision d'arrondi">2</param>
+    <param name="paths" type="bool" gui-text="Arrondir les nœuds">true</param>
+    <param name="ctrl" type="bool" gui-text="Arrondir les poignées">false</param>
+    <param name="along" type="bool" gui-text="Déplacer les poignées avec les nœuds">true</param>
+    <param name="half" type="bool" gui-text="Autoriser l'arrondi au demi si plus proche">false</param>
+    <param name="strokewidth" type="bool" gui-text="Arrondir l'épaisseur du contour">false</param>
+    <param name="widthheight" type="bool" gui-text="Arrondir largeur et hauteur">false</param>
+    <param name="position" type="bool" gui-text="Arrondir la position X et Y">false</param>
+    <param name="opacity" type="bool" gui-text="Arrondir l'opacité globale">false</param>
+    <param name="strokeopacity" type="bool" gui-text="Arrondir l'opacité du contour">false</param>
+    <param name="fillopacity" type="bool" gui-text="Arrondir l'opacité du remplissage">false</param>
+    <spacer />
+    <label>Remarque : ne s'applique qu'aux éléments svg:path. Ne fonctionne pas sur les rectangles, cercles, ellipses, arcs, polygones, lignes, polylignes, etc.</label>
+    <label appearance="url">https://y.stadtfabrikanten.org/rounder</label>
+    <effect>
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Chemins"><submenu name="Modifier" /></submenu></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">rounder.py</command>
+    </script>
+</inkscape-extension>

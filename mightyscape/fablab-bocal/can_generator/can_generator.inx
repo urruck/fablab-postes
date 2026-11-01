@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Générateur de boîte ronde (bois cintré)</name>
+    <id>fablabchemnitz.de.can_generator</id>
+    <param name="active-tab" type="notebook">
+        <page name="config" gui-text="Configuration">
+            <param name="diameter" type="int" min="3" max="1200" gui-text="Diamètre de la boîte en mm">30</param>
+            <param name="overhang" type="int" min="0" max="1200" gui-text="Débord en mm">5</param>
+            <param name="height" type="int" min="3" max="1000" gui-text="Hauteur de la boîte en mm">50</param>
+            <param name="angle" type="float" min="8" max="22.5" gui-text="Angle des segments (nombre de segments divisible par 2 !)">22.5</param>
+            <param name="material" type="float" min="0.2" max="5" gui-text="Épaisseur du matériau en mm">3.6</param>
+            <param name="bottom" type="bool" gui-text="Dessus et fond ?">false</param>
+        </page>
+        <page name="hilfe" gui-text="Aide">
+            <label xml:space="preserve">Le principe est d'entailler le contreplaqué assez profondément pour qu'il se cintre sans casser. Le bois cintré forme le tour de la boîte. Le couvercle n'est pas tout à fait rond mais découpé en segments, dont le nombre correspond aux entailles du tour. Pour cela, le bois doit être entaillé en travers du fil. L'angle détermine le nombre de segments : par exemple, 22,5 degrés donne 16 segments. Ne pas descendre en dessous.</label>
+        </page>
+    </param>
+    <effect>
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Boîtes (autres modèles)"><submenu name="À encoches" /></submenu></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">can_generator.py</command>
+    </script>
+</inkscape-extension>

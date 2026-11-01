@@ -1,0 +1,99 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Créer des attaches (ponts de maintien)</name>
+    <id>fablabchemnitz.de.create_links</id>
+    <param name="tab" type="notebook">
+        <page name="tab_settings" gui-text="Paramètres">
+			<hbox>
+				<vbox>
+					<param name="path_types" type="optiongroup" appearance="combo" gui-text="Appliquer aux">
+						<option value="open_paths">chemins ouverts</option>
+						<option value="closed_paths">chemins fermés</option>
+						<option value="both">les deux</option>
+					</param>
+					<param name="creationtype" type="optiongroup" appearance="combo" gui-text="Création">
+						<option value="use_existing">Pointillés existants de l'élément</option>
+						<option value="custom_dashpattern">Motif de pointillés personnalisé</option>
+						<option value="entered_values">Selon les réglages d'unité et d'attaches</option>
+					</param>
+					<label appearance="header">Création : réglages des attaches</label>
+                    <param name="creationunit" type="optiongroup" appearance="combo" gui-text="Unités de création">
+                        <option value="mm">mm</option>
+                        <option value="cm">cm</option>
+                        <option value="in">in</option>
+                        <option value="pt">pt</option>
+                        <option value="px">px</option>
+                        <option value="pc">pc</option>
+                        <option value="percent">%</option>
+                    </param>
+					<param name="link_count" type="int" min="1" max="9999" gui-text="Nombre d'attaches">1</param>
+					<param name="link_multiplicator" type="int" min="0" max="9999" gui-text="Multiplicateur d'attaches" gui-description="Si activé, crée plusieurs interruptions de même taille à côté de l'interruption principale">0</param>
+					<param name="length_link" type="float" min="0.000" max="9999.000" precision="3" gui-text="Longueur d'attache (longueur de l'interruption)">1.000</param>
+					<param name="link_offset" type="float" min="-9999.000" max="9999.000" precision="3" appearance="full" gui-text="Décalage des attaches (+/-)" gui-description="Avec l'unité « % », entrer une valeur de 0 à 100. L'attache est placée au milieu">0.000</param>
+                    <param name="switch_pattern" type="bool" gui-text="Inverser attaches et tirets" gui-description="Si activé, la longueur d'interruption devient la longueur des tirets (inverse le motif de pointillés).">false</param>
+                    <param name="weakening_mode" type="bool" gui-text="Mode affaiblissement" gui-description="Si activé, les attaches inversées sont colorées en #0000ff (bleu) et l'option « Conserver les éléments sélectionnés » est désactivée">false</param>
+					<label appearance="header">Création : réglages du motif de pointillés</label>
+					<param name="custom_dasharray_value" type="string" gui-text="Motif de pointillés" gui-description="Liste de longueurs alternant tirets et espaces. Seuls les nombres sont acceptés, les pourcentages et autres caractères sont ignorés.">10 5.5 2.0 2.0</param>
+					<param name="custom_dashoffset_value" type="float" min="-9999.000" max="9999.000" precision="3" gui-text="Décalage des attaches (+/-)">0.000</param>
+				</vbox>
+                <separator />	
+				<vbox>
+					<label appearance="header">Réglages généraux</label>
+					<param name="length_filter" type="bool" gui-text="Filtrer selon la longueur des chemins">false</param>
+					<param name="length_filter_value" type="float" min="0.000" max="9999.000" precision="3" gui-text="Chemins plus longs que">0.000</param>
+					<param name="length_filter_unit" type="optiongroup" appearance="combo" gui-text="Unité du filtre de longueur">
+						<option value="mm">mm</option>
+						<option value="cm">cm</option>
+						<option value="in">in</option>
+						<option value="pt">pt</option>
+						<option value="px">px</option>
+						<option value="pc">pc</option>
+					</param>
+					<param name="keep_selected" type="bool" gui-text="Conserver les éléments sélectionnés">false</param>
+					<param name="no_convert" type="bool" gui-text="Ne pas créer de chemin(s) de sortie (style seulement)">false</param>
+					<param name="breakapart" type="bool" gui-text="Séparer le(s) chemin(s) de sortie en segments" gui-description="Fait Ctrl + Maj + K pour séparer le nouveau chemin en morceaux. Conseillé, car la séparation par défaut d'Inkscape peut produire des chemins pointus.">true</param>
+					<param name="show_info" type="bool" gui-text="Afficher longueur, motif et infos / erreurs de filtrage" gui-description="Attention : peut bloquer Inkscape si le dessin a beaucoup de nœuds, à cause du volume de messages. Pour le débogage seulement !">false</param>
+					<param name="skip_errors" type="bool" gui-text="Ignorer les erreurs">false</param>
+				</vbox>
+			</hbox>
+			<separator />
+            <label>Astuce : utilisez « Conserver les éléments sélectionnés » pour créer les attaches normalement (sur une copie). Puis, sur la sélection d'origine, utilisez « Inverser attaches et tirets » et « Mode affaiblissement » pour créer des lignes d'affaiblissement laser qui aideront à détacher les pièces après la découpe.</label>
+        </page>
+        <page name="tab_about" gui-text="À propos">
+            <label appearance="header">Créer des attaches</label>
+            <label>Un outil pour créer des attaches, aussi appelées ponts ou pattes de maintien. Prévu pour les découpeuses laser.</label>
+            <label>2021 - 2025 / écrit par Mario Voigt (Stadtfabrikanten e.V. / FabLab Chemnitz)</label>
+            <spacer />
+            <label appearance="header">Documentation en ligne</label>
+            <label appearance="url">https://y.stadtfabrikanten.org/createlinks</label>
+            <spacer />
+            <label appearance="header">Contribuer</label>
+            <label appearance="url">https://gitea.fablabchemnitz.de/FabLab_Chemnitz/mightyscape-1.2</label>
+            <label appearance="url">mailto:mario.voigt@stadtfabrikanten.org</label>
+            <spacer />
+            <label appearance="header">Collection d'extensions MightyScape</label>
+            <label>Ce logiciel fait partie de la collection d'extensions MightyScape pour Inkscape, sous licence GNU GPL v3</label>
+            <label appearance="url">https://y.stadtfabrikanten.org/mightyscape-overview</label>
+        </page>
+        <page name="tab_donate" gui-text="Faire un don">
+            <label appearance="header">Café + pizza</label>
+            <label>Nous sommes les Stadtfabrikanten, qui font vivre le FabLab Chemnitz depuis 2016. Un FabLab est un atelier ouvert qui donne accès à des machines et des outils numériques : imprimantes 3D, découpeuses laser, fraiseuses CNC.</label>
+            <spacer />           
+            <label>Vous aimez notre travail et voulez nous soutenir ? Vous pouvez faire un don à notre association de différentes façons :</label>
+            <label appearance="url">https://y.stadtfabrikanten.org/donate</label>
+            <spacer />
+            <label>Merci d'utiliser notre extension et de nous aider !</label>
+            <image>../000_about_fablabchemnitz.svg</image>
+        </page>
+	</param>
+    <effect>
+        <object-type>path</object-type>
+        <effects-menu>
+        <submenu name="FabLab Boc@l"><submenu name="Découpe laser et traceur" /></submenu></effects-menu>
+       <menu-tip>Creating links (also known as microtabs, tabs, bridges, breakaway connectors, links, perforations) is sometimes required for laser cutting or vinyl cutting. It allows to pinch paths to create real segments</menu-tip>
+       <icon>icon.svg</icon>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">create_links.py</command>
+    </script>
+</inkscape-extension>

@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Guillotine Plus (découpe en images)</name>
+    <id>fablabchemnitz.de.guillotine_plus</id>
+    <param name="directory" type="path" mode="folder" gui-text="Dossier d'enregistrement des images :">~/</param>
+    <param name="image" type="string" gui-text="Nom des images (sans extension) :">guillotined</param>
+	<param name="dpi" type="int" gui-text="PPP" min="1" max="10000">300</param> 
+    <param name="ignore" type="bool" gui-text="Ignorer ces réglages et utiliser les indications d'export">false</param>
+    <effect needs-live-preview="false">
+        <object-type>all</object-type>
+            <effects-menu>
+				<submenu name="FabLab Boc@l"><submenu name="Import et export" /></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">guillotine_plus.py</command>
+    </script>
+</inkscape-extension>

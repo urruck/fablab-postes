@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Triangle</name>
+    <id>fablabchemnitz.de.triangle</id>
+    <param name="unit" type="optiongroup" appearance="combo" gui-text="Unités :">
+        <option value="mm">mm</option>
+        <option value="cm">cm</option>
+        <option value="px">px</option>
+        <option value="pt">pt</option>
+        <option value="pc">pc</option>
+        <option value="in">in</option>
+    </param>
+    <param name="s_a" type="float" precision="3" min="0.010" max="10000.000" gui-text="Longueur du côté a :">100.0</param>
+    <param name="s_b" type="float" precision="3" min="0.010" max="10000.000" gui-text="Longueur du côté b :">100.0</param>
+    <param name="s_c" type="float" precision="3" min="0.010" max="10000.000" gui-text="Longueur du côté c :">100.0</param>
+    <param name="a_a" type="float" precision="3" min="0.000" max="180.000" gui-text="Angle a (degrés) :">60</param>
+    <param name="a_b" type="float" precision="3" min="0.000" max="180.000" gui-text="Angle b (degrés) :">30</param>
+    <param name="a_c" type="float" precision="3" min="0.000" max="180.000" gui-text="Angle c (degrés) :">90</param>
+    <param name="mode" type="optiongroup" appearance="combo" gui-text="Mode :">
+        <option value="3_sides">Depuis trois côtés</option>
+        <option value="s_ab_a_c">Depuis les côtés a, b et l'angle c</option>
+        <option value="s_ab_a_a">Depuis les côtés a, b et l'angle a</option>
+        <option value="s_a_a_ab">Depuis le côté a et les angles a, b</option>
+        <option value="s_c_a_ab">Depuis le côté c et les angles a, b</option>
+    </param>
+    <effect>
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Formes et motifs"><submenu name="Générateurs" /></submenu></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">triangle.py</command>
+    </script>
+</inkscape-extension>

@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+   <name>Générateur de boîte - Boîte pour découpe laser</name>
+   <id>fablabchemnitz.de.box_maker_lasercut_box</id>
+   <param name="tab" type="notebook">
+      <page name="Dimensions" gui-text="Dimensions">
+         <label xml:space="preserve">Les dimensions peuvent être extérieures ou intérieures.
+Les cubes d'angle peuvent être omis.
+Les unités du document doivent être en mm et non en pixels (si vous comptez vraiment découper au laser).</label>
+         <param name="int_ext" gui-text="Les dimensions sont" type="optiongroup" appearance="combo">
+            <option value="true">Extérieures</option>
+            <option value="false">Intérieures</option>
+         </param>
+         <param name="units" gui-text="Unités" type="optiongroup" appearance="combo">
+            <option value="in">in</option>
+            <option value="cm">cm</option>
+            <option value="mm">mm</option>
+            <option value="px">px</option>
+            <option value="pt">pt</option>
+         </param>
+         <param name="width" type="float" min="0.1" max="1000.0" gui-text="Largeur">50.0</param>
+         <param name="height" type="float" min="0.1" max="1000.0" gui-text="Hauteur">30.0</param>
+         <param name="depth" type="float" min="0.1" max="1000.0" gui-text="Profondeur">15</param>
+         <param name="thickness" type="float" min="0.0" max="20.0" precision="2" gui-text="Épaisseur du matériau">3.0</param>
+         <param name="ntab_W" type="int" min="1" max="299" gui-text="Nombre de languettes en largeur">11</param>
+         <param name="ntab_H" type="int" min="1" max="299" gui-text="Nombre de languettes en hauteur">11</param>
+         <param name="ntab_D" type="int" min="1" max="299" gui-text="Nombre de languettes en profondeur">6</param>
+         <param name="corners" type="bool" gui-text="Inclure les coins">true</param>
+         <param name="halftabs" type="bool" gui-text="Languettes de demi-taille près des coins">true</param>
+      </page>
+      <page name="Usage2" gui-text="Trait de coupe laser">
+         <label xml:space="preserve">Le trait de coupe est la matière perdue sous la largeur du faisceau laser.
+Généralement entre 0,1 et 0,4 mm. Il dépend du matériau découpé et de la vitesse du laser.
+
+Avec un trait de coupe à 0, la boîte utilise le moins de matière possible. Mais la matière brûlée par le laser donnera un assemblage lâche, qui demandera sûrement de la colle.
+
+Si le trait de coupe est supérieur à zéro, vous pouvez choisir un « ajustement précis » calculé, ou ajouter des bossages pour un « ajustement serré ».
+L'« ajustement précis » élargit les languettes pour compenser la matière brûlée et obtenir un assemblage serré.
+Les bossages ajoutent de petites saillies dans les encoches pour un « ajustement serré » (voir l'onglet suivant).
+   
+Les pièces seront écartées, ce qui utilise plus de matière, car un trait de coupe commun ne peut pas être utilisé.</label>
+         <param name="kerf_size" type="float" min="0.0" max="3.0" precision="2" gui-text="Trait de coupe (matière brûlée par le laser)">0.0</param>
+         <param name="linewidth" type="bool" gui-text="Largeur du trait affiché = trait de coupe">false</param>
+      </page>
+      <page name="Usage3" gui-text="Bossages">
+         <label xml:space="preserve">Les bossages permettent un assemblage serré dans les matériaux déformables comme le bois.
+
+Si « Bossages » est coché, les languettes ne sont pas compensées du trait de coupe. À la place, un petit bossage est ajouté à chaque encoche pour un assemblage serré.
+   - la taille du bossage est égale au trait de coupe.
+   
+Les bossages conviennent aux matériaux souples comme le bois, mais pas aux matériaux rigides comme le plexiglas.
+
+Style des bossages : demi-ronds ou triangles. Les triangles sont plus rapides à découper, les demi-ronds tiennent mieux.</label>
+         <param name="dimples" type="bool" gui-text="Bossages au lieu d'un ajustement précis">false</param>
+         <param name="dstyle" gui-text="Style des bossages" type="optiongroup" appearance="combo">
+            <option value="false">Bossages</option>
+            <option value="true">Triangles</option>
+         </param>
+      </page>
+      <page name="Usage4" gui-text="Divers">
+         <label xml:space="preserve">Couleurs :
+Le code couleur de Ponoko est utilisé :
+   - Bleu (0,0,255) : ligne de découpe laser
+   - Orange : annotation non imprimée
+Toutes les lignes font 0,1 mm de large, comme l'exige Ponoko.
+
+Des annotations peuvent être affichées. Elles indiquent seulement le trait de coupe, sur chaque pièce.
+Pratique pour imprimer des essais d'assemblage dans différents matériaux.</label>
+         <param name="annotation" type="bool" gui-text="Ajouter les annotations">true</param>
+      </page>
+   </param>
+   <effect>
+      <object-type>all</object-type>
+      <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Boîtes (autres modèles)"><submenu name="À encoches" /></submenu></submenu></effects-menu>
+   </effect>
+   <script>
+      <command location="inx" interpreter="python">box_maker_lasercut_box.py</command>
+   </script>
+</inkscape-extension>

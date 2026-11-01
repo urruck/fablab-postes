@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Colorer selon longueur / inclinaison des chemins</name>
+    <id>fablabchemnitz.de.colorize_path_lengths</id>
+    <param name="selection" type="optiongroup" appearance="combo" gui-text="Sélection :">
+        <option value="path_lengthselection">Sélection par longueur</option>
+        <option value="path_slantselection">Sélection par inclinaison</option>
+    </param>
+    <label>Les longueurs sont en px</label>
+    <param name="len1" type="float" gui-text="Long1 : rouge                       &lt;" min="1" max="99999">12</param>
+    <param name="len2" type="float" gui-text="Long2 : vert                   &lt; =" min="1" max="99999">25</param>
+    <param name="len3" type="float" gui-text="Long3 : vert-jaune         &lt; =" min="1" max="99999">40</param>
+    <param name="len4" type="float" gui-text="Long4 : bleu ciel                &lt; =" min="1" max="99999">60</param>
+    <param name="len5" type="float" gui-text="Long5 : bleu                      &gt;" min="1" max="99999">60</param>
+    <param name="hor" type="float" gui-text="hor : rouge                         &lt; (H/L)" min="0.01" max="99999">0.1</param>
+    <param name="ver" type="float" gui-text="ver : bleu                        &gt;" min="1" max="99999">10</param>
+    <effect>
+        <object-type>path</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Grilles, repères et mesures" /></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">colorize_path_lengths.py</command>
+    </script>
+</inkscape-extension>

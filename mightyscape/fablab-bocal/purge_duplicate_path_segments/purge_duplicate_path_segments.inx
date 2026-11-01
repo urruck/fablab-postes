@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Purger les segments en double</name>
+    <id>fablabchemnitz.de.purge_duplicate_path_segments</id>
+    <effect>
+        <object-type>path</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Chemins"><submenu name="Couper et nettoyer" /></submenu></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">purge_duplicate_path_segments.py</command>
+    </script>
+</inkscape-extension>

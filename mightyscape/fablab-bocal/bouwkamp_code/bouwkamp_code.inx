@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Code de Bouwkamp</name>
+    <id>fablabchemnitz.de.bouwkamp</id>
+	<param name="tab" type="notebook">
+		<page name="settings" gui-text="Paramètres">
+			<param name="bouwkamp_code" type="string" gui-text="Code de Bouwkamp :">21, 112, 112, [50, 35, 27], [8, 19], [15, 17, 11], [6, 24], [29, 25, 9, 2], [7, 18], [16], [42], [4, 37], [33]</param>
+			<param name="wrap_in_group" type="bool" gui-text="Grouper le résultat">true</param>
+		</page>
+		<page name="help" gui-text="Aide">
+			<label xml:space="preserve">Cette extension génère des carrés et rectangles carrelés (découpés en carrés) à partir de codes de Bouwkamp et de codes en tableau.
+
+Vous pouvez coller les codes de Bouwkamp avec ou sans caractères de mise en forme (comme les crochets) et les convertir en carrés.</label>
+		</page>
+	</param>
+    <effect>
+        <object-type>all</object-type>
+        <effects-menu>
+         <submenu name="FabLab Boc@l"><submenu name="Jeux et puzzles" /></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">bouwkamp_code.py</command>
+    </script>
+</inkscape-extension>

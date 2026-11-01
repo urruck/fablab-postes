@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Objets sur les points d'un chemin</name>
+    <id>fablabchemnitz.de.dots_to_path_points</id>
+    <param name="tab" type="notebook">
+        <page name="points" gui-text="Points à utiliser">
+            <param type="bool" name="endpoints" gui-text="Extrémités">true</param>
+            <param type="bool" name="controlpoints" gui-text="Points de contrôle">false</param>
+        </page>
+        <page name="usage" gui-text="Utilisation">
+            <label xml:space="preserve">Cette extension place un objet quelconque sur les points
+d'un chemin.
+
+Sélectionner deux objets :
+
+1. un objet qui représente le chemin
+2. un objet qui représente le point
+
+L'extension utilise des éléments SVG &lt;use&gt; liés
+au second objet. Modifier la forme de
+l'objet source modifie les objets liés.</label>
+        </page>
+    </param>
+    <effect>
+        <object-type>all</object-type>
+        <effects-menu>
+         <submenu name="FabLab Boc@l"><submenu name="Formes et motifs"><submenu name="À partir de chemins" /></submenu></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">dots_to_path_points.py</command>
+    </script>
+</inkscape-extension>

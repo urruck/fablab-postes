@@ -1,0 +1,119 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+<name>Kamishibaï (Kamishibai)</name>
+<id>info.festi.boxes.py.Kamishibai</id>
+<param name="generator" type="string" gui-hidden="true">kamishibai</param>
+<param name="tab" type="notebook"><page name="tab_0" gui-text="Kamishibaï"><param name="SheetWidth" type="float" precision="2" max="9999" gui-text="Largeur des feuilles" gui-description="largeur des feuilles en mm">297.0</param>
+<param name="SheetHeight" type="float" precision="2" max="9999" gui-text="Hauteur des feuilles" gui-description="hauteur des feuilles en mm">210.0</param>
+<param name="SheetsStackDepth" type="float" precision="2" max="9999" gui-text="Épaisseur de la pile de feuilles" gui-description="Épaisseur de la pile de feuilles en mm">30.0</param>
+<param name="FrameThickness" type="float" precision="2" max="9999" gui-text="Épaisseur du cadre" gui-description="Épaisseur du cadre en mm">20.0</param>
+<param name="FrameCornerRadius" type="float" precision="2" max="9999" gui-text="Rayon des coins du cadre" gui-description="Rayon des coins du cadre en mm">5.0</param>
+<param name="Margin" type="float" precision="2" max="9999" gui-text="Marge" gui-description="Marge pour les feuilles et les pièces mobiles en mm">2.0</param>
+<param name="HandleThickness" type="int" max="9999" gui-text="Épaisseur de la poignée" gui-description="Épaisseur de la poignée du haut en multiples de l'épaisseur (0 = pas de poignée)">2</param>
+<param name="HandleWidth" type="float" precision="2" max="9999" gui-text="Largeur de la poignée" gui-description="Largeur de la poignée du haut en mm (0 = pas de poignée) ; l'épaisseur de la pile de feuilles doit dépasser d'au moins 4 × l'épaisseur">120.0</param>
+<param name="HandleMargin" type="float" precision="2" max="9999" gui-text="Marge de la poignée" gui-description="Marge de la poignée du haut en mm (0 = pas de marge)">0.0</param>
+<param name="BackExtraDepth" type="int" max="9999" gui-text="Profondeur arrière en plus" gui-description="Profondeur arrière en plus (pour ajouter des boutons par exemple), en multiples de l'épaisseur ; 0 pour laisser calculer la plus petite">4</param>
+<param name="PegsWidthMargin" type="float" precision="2" max="9999" gui-text="Marge de largeur des tenons" gui-description="Marge de largeur des tenons en mm ; valeur plus faible si les pièces forcent, plus élevée si elles glissent facilement (assemblage par vis ou colle)">0.5</param>
+</page>
+<page name="tab_1" gui-text="Par défaut"><param name="thickness" type="float" precision="2" max="9999" gui-text="épaisseur" gui-description="épaisseur du matériau (en mm) [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#thickness)">3.0</param>
+<param name="tabs" type="float" precision="2" max="9999" gui-text="brides" gui-description="largeur des attaches qui retiennent les pièces dans la plaque (en mm) (pas partout) [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#tabs)">0.0</param>
+<param name="qr_code" type="bool" gui-text="qr_code" gui-description="Ajouter un QR code avec le lien ou la ligne de commande au résultat">false</param>
+<param name="debug" type="bool" gui-text="débogage" gui-description="dessiner les boîtes englobantes de certaines structures [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#debug)">false</param>
+<param name="labels" type="bool" gui-text="étiquettes" gui-description="étiqueter les pièces (si possible)">true</param>
+<param name="reference" type="float" precision="2" max="9999" gui-text="référence" gui-description="dessiner un rectangle de référence de la longueur donnée (en mm) (0 pour désactiver) [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#reference)">100.0</param>
+<param name="inner_corners" type="optiongroup" appearance="combo" gui-text="inner_corners" gui-description="style des angles intérieurs [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#inner-corners)">
+<option value="loop">boucle</option>
+<option value="corner">angle</option>
+<option value="backarc">arc inversé</option>
+    </param>
+<param name="burn" type="float" precision="2" max="9999" gui-text="brûlage" gui-description="correction de brûlure (en mm) (plus grand = assemblage plus serré) [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#burn)">0.1</param>
+</page>
+<page name="tab_2" gui-text="Assemblages à entures"><param name="FingerJoint_style" type="optiongroup" appearance="combo" gui-text="style" gui-description="style des entures">
+<option value="rectangular">rectangulaire</option>
+<option value="springs">ressorts</option>
+<option value="barbs">crans</option>
+<option value="snap">clipsable</option>
+    </param>
+<param name="FingerJoint_surroundingspaces" type="float" precision="2" max="9999" gui-text="espaces autour" gui-description="espace au début et à la fin, en multiple des espaces normaux">1.5</param>
+<param name="FingerJoint_bottom_lip" type="float" precision="2" max="9999" gui-text="bottom_lip" gui-description="hauteur des lèvres inférieures qui dépassent (multiples de l'épaisseur), FingerHoleEdge seulement !">0.0</param>
+<param name="FingerJoint_edge_width" type="float" precision="2" max="9999" gui-text="largeur de bord" gui-description="espace sous les trous du FingerHoleEdge (multiples de l'épaisseur)">1.0</param>
+<param name="FingerJoint_extra_length" type="float" precision="2" max="9999" gui-text="extra_length" gui-description="matière en plus à poncer pour enlever les traces de brûlure (multiples de l'épaisseur)">0.0</param>
+<param name="FingerJoint_finger" type="float" precision="2" max="9999" gui-text="créneau" gui-description="largeur des entures (multiples de l'épaisseur)">2.0</param>
+<param name="FingerJoint_play" type="float" precision="2" max="9999" gui-text="jeu" gui-description="espace en plus pour que les entures entrent et sortent (multiples de l'épaisseur)">0.0</param>
+<param name="FingerJoint_space" type="float" precision="2" max="9999" gui-text="espace" gui-description="espace entre les entures (multiples de l'épaisseur)">2.0</param>
+<param name="FingerJoint_width" type="float" precision="2" max="9999" gui-text="largeur" gui-description="largeur des trous d'entures (multiples de l'épaisseur)">1.0</param>
+</page>
+<page name="tab_3" gui-text="Couvercles coulissants"><param name="SlideOnLid_hole_width" type="int" max="9999" gui-text="hole_width" gui-description="largeur du « trou pour le doigt » en mm">15</param>
+<param name="SlideOnLid_second_pin" type="bool" gui-text="second_pin" gui-description="axe supplémentaire pour un meilleur positionnement">true</param>
+<param name="SlideOnLid_spring" type="optiongroup" appearance="combo" gui-text="ressort" gui-description="position(s) des ressorts de verrouillage supplémentaires dans le couvercle">
+<option value="both">les deux</option>
+<option value="none">aucun</option>
+<option value="left">gauche</option>
+<option value="right">droite</option>
+    </param>
+<param name="SlideOnLid_style" type="optiongroup" appearance="combo" gui-text="style" gui-description="style des entures">
+<option value="rectangular">rectangulaire</option>
+<option value="springs">ressorts</option>
+<option value="barbs">crans</option>
+<option value="snap">clipsable</option>
+    </param>
+<param name="SlideOnLid_surroundingspaces" type="float" precision="2" max="9999" gui-text="espaces autour" gui-description="espace au début et à la fin, en multiple des espaces normaux">2.0</param>
+<param name="SlideOnLid_bottom_lip" type="float" precision="2" max="9999" gui-text="bottom_lip" gui-description="hauteur des lèvres inférieures qui dépassent (multiples de l'épaisseur), FingerHoleEdge seulement !">0.0</param>
+<param name="SlideOnLid_edge_width" type="float" precision="2" max="9999" gui-text="largeur de bord" gui-description="espace sous les trous du FingerHoleEdge (multiples de l'épaisseur)">1.0</param>
+<param name="SlideOnLid_extra_length" type="float" precision="2" max="9999" gui-text="extra_length" gui-description="matière en plus à poncer pour enlever les traces de brûlure (multiples de l'épaisseur)">0.0</param>
+<param name="SlideOnLid_finger" type="float" precision="2" max="9999" gui-text="créneau" gui-description="largeur des entures (multiples de l'épaisseur)">3.0</param>
+<param name="SlideOnLid_play" type="float" precision="2" max="9999" gui-text="jeu" gui-description="espace en plus pour que les entures entrent et sortent (multiples de l'épaisseur)">0.1</param>
+<param name="SlideOnLid_space" type="float" precision="2" max="9999" gui-text="espace" gui-description="espace entre les entures (multiples de l'épaisseur)">2.0</param>
+<param name="SlideOnLid_width" type="float" precision="2" max="9999" gui-text="largeur" gui-description="largeur des trous d'entures (multiples de l'épaisseur)">1.0</param>
+</page>
+<page name="tab_4" gui-text="Charnières et axes de charnière"><param name="Hinge_grip_percentage" type="int" max="9999" gui-text="grip_percentage" gui-description="grip_percentage">0</param>
+<param name="Hinge_outset" type="bool" gui-text="débord" gui-description="faire un débord du couvercle sur les côtés (similaire à OutSetEdge)">true</param>
+<param name="Hinge_pinwidth" type="float" precision="2" max="9999" gui-text="largeur de l'axe" gui-description="Régler à la valeur inférieure pour avoir des disques entourant les axes">0.4</param>
+<param name="Hinge_axle" type="float" precision="2" max="9999" gui-text="axe" gui-description="diamètre du trou de l'axe (multiples de l'épaisseur)">2.5</param>
+<param name="Hinge_grip_length" type="int" max="9999" gui-text="grip_length" gui-description="longueur fixe des prises sur les couvercles (multiples de l'épaisseur)">0</param>
+<param name="Hinge_hingestrength" type="int" max="9999" gui-text="solidité de la charnière" gui-description="épaisseur de l'arc qui maintient l'axe (multiples de l'épaisseur)">1</param>
+</page>
+<page name="tab_5" gui-text="Capot avant du kamishibaï"><param name="FrontCoverStyle" type="optiongroup" appearance="combo" gui-text="Style du capot avant" gui-description="style du capot avant">
+<option value="slide-on lid">couvercle coulissant</option>
+<option value="two-part lid with hinge eyes (both ends)">couvercle en deux parties avec œillets de charnière (aux deux bouts)</option>
+<option value="three-part lid, higes not provided">couvercle en trois parties, charnières non fournies</option>
+    </param>
+<param name="FrontExtraDepth" type="int" max="9999" gui-text="Profondeur avant en plus" gui-description="Profondeur avant en plus (pour fixer des charnières par exemple), en multiples de l'épaisseur ; 0 pour ignorer ou laisser calculer la plus petite">4</param>
+<param name="FrontLockStyle" type="optiongroup" appearance="combo" gui-text="Style de fermeture avant" gui-description="style de la fermeture avant">
+<option value="none">aucun</option>
+<option value="simple">simple</option>
+<option value="with key">à clé</option>
+    </param>
+<param name="FrontExtraTopAndBottomLocks" type="bool" gui-text="Fermetures avant en plus en haut et en bas" gui-description="Ajouter des fermetures avant en haut et en bas">true</param>
+</page>
+<page name="tab_6" gui-text="Trous de charnière du capot 3 volets du kamishibaï"><param name="HingeHolesDiameter" type="float" precision="2" max="9999" gui-text="Diamètre des trous de charnière" gui-description="Diamètre des trous de charnière en mm (0 = pas de trou)">2.5</param>
+<param name="HingeHolesCoverEdgeDistance" type="float" precision="2" max="9999" gui-text="Distance trous du capot - bord" gui-description="distance du bord au centre des trous du capot, en mm">5.5</param>
+<param name="HingeHolesBoxEdgeDistance" type="float" precision="2" max="9999" gui-text="Distance trous de la boîte - bord" gui-description="distance du bord au centre des trous de la boîte, en mm">7.0</param>
+<param name="HingeHolesCoverSeparation" type="string" gui-text="Écart entre trous du capot" gui-description="écart entre les centres des trous du capot en mm (type paramètre de section) ; le premier élément est la distance au bord">24.0:12.0</param>
+<param name="HingeHolesBoxSeparation" type="string" gui-text="Écart entre trous de la boîte" gui-description="écart entre les centres des trous de la boîte en mm (type paramètre de section) ; le premier élément est la distance au bord">15.0:30.0</param>
+</page>
+<page name="tab_7" gui-text="Vis d'assemblage des pièces"><param name="LockScrewDiameter" type="float" precision="2" max="9999" gui-text="Diamètre des vis de fermeture" gui-description="Diamètre des trous de vis en mm (0 = pas de vis)">0.0</param>
+<param name="TopLockScrewLength" type="float" precision="2" max="9999" gui-text="Longueur des vis de fermeture du haut" gui-description="Longueur des vis de fermeture du haut en mm">16.0</param>
+<param name="BottomLockScrewLength" type="float" precision="2" max="9999" gui-text="Longueur des vis de fermeture du bas" gui-description="Longueur des vis de fermeture du bas en mm">13.0</param>
+<param name="DoorFeetScrewLength" type="float" precision="2" max="9999" gui-text="Longueur des vis des pieds de porte" gui-description="Longueur des vis des pieds de porte en mm (0 = pas de vis)">16.0</param>
+<param name="LockNutThickness" type="float" precision="2" max="9999" gui-text="Épaisseur des écrous" gui-description="Épaisseur des écrous de fermeture en mm">2.4</param>
+<param name="LockNutWidth" type="float" precision="2" max="9999" gui-text="Largeur des écrous" gui-description="Largeur des écrous de fermeture en mm">5.5</param>
+<param name="LockScrewDistanceFromBorder" type="float" precision="2" max="9999" gui-text="Distance vis - bord" gui-description="Distance entre l'axe de la vis et le bord latéral (en multiples de l'épaisseur)">11</param>
+<param name="LockScrewExtraFeetScewDiameter" type="float" precision="2" max="9999" gui-text="Diamètre des vis des pieds d'angle" gui-description="Diamètre des trous de vis des pieds supplémentaires aux coins, en mm (0 = pas de vis)">3.0</param>
+<param name="LockScrewExtraFeetDistanceFromBorder" type="float" precision="2" max="9999" gui-text="Distance pieds d'angle - bord" gui-description="Distance au bord de l'axe des pieds supplémentaires aux coins, en mm (0 = pas de vis)">7.0</param>
+</page>
+<page name="tab_8" gui-text="Exemple">
+<image>./Kamishibai-thumb.jpg</image>
+</page>
+</param>
+<label appearance="url">https://boxes.hackerspace-bamberg.de/Kamishibai</label>
+<effect>
+    <object-type>all</object-type>
+    <effects-menu>
+        <submenu name="FabLab Boc@l"><submenu name="Boîtes (Boxes.py)"><submenu name="Objets divers" /></submenu></submenu></effects-menu>
+    <icon>Kamishibai-thumb.svg</icon>
+</effect>
+<script>
+    <command location="inx" interpreter="python">boxes_proxy.py</command>
+</script>
+</inkscape-extension>

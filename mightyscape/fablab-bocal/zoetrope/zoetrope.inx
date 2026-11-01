@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Zootrope</name>
+    <id>fablabchemnitz.de.zoetrope</id>
+    <param name="active-tab" type="notebook">
+        <page name="title" gui-text="Dimensions">
+            <param name="units" type="optiongroup" appearance="combo" gui-text="Unités">
+                <option value="mm">mm</option>
+                <option value="cm">cm</option>
+                <option value="in">in</option>
+                <option value="pt">pt</option>
+                <option value="px">px</option>
+            </param>
+            <param name="diameter" type="float" min="3" max="1200" gui-text="Diamètre du disque final">12</param>
+            <param name="divisions" type="int" min="2" max="180" gui-text="Nombre d'images sur le pourtour" gui-description="(L'image est toujours sur le bord extérieur)">24</param>
+            <param name="height" type="float" min="0.5" max="600" gui-text="Hauteur de l'image">3</param>
+            <param name="stroke_width" type="float" min="0.001" precision="2" max="12" gui-text="Épaisseur des lignes">0.1</param>
+        </page>
+        <page name="pulse" gui-text="Anneau de déclenchement">
+            <param name="trigger" type="bool" gui-text="Ajouter l'anneau de déclenchement" gui-description="Dessine un anneau de repères noirs d'impulsion.">true</param>
+            <param name="triggerradius" type="float" min="1" max="600" gui-text="Rayon de l'anneau de déclenchement">3</param>
+            <param name="thick" type="float" min="0.1" max="100" gui-text="Épaisseur de l'anneau de déclenchement">3</param>
+            <param name="ratio" type="float" min="0.01" max="1" precision="2" gui-text="Rapport de déclenchement" gui-description="Le rapport fixe la durée de l'impulsion.">0.1</param>
+            <param name="phase" type="float" min="0.0" max="1" precision="2" gui-text="Phase de déclenchement" gui-description="Décalage de phase par rapport au bord de la division.">0.1</param>
+        </page>
+        <page name="image" gui-text="Déformation de l'image">
+            <label>Afficher le gabarit d'image.</label>
+            <param name="template" type="bool" gui-text="Ajouter le gabarit d'image et de déformation">true</param>
+            <param name="dpi" type="int" min="10" max="600" gui-text="Résolution d'exemple (ppp) pour estimer la taille de l'image">150</param>
+        </page>
+        <page name="Usage" gui-text="Aide">
+            <label xml:space="preserve">Construit un zootrope à imprimer sur un disque tournant.
+Indiquez le diamètre final du disque et le nombre d'images
+sur la circonférence.
+
+Un cercle de repères noirs peut aussi être imprimé
+pour déclencher un stroboscope. La largeur et la phase des repères
+sont réglables, et l'anneau peut être placé à n'importe quel rayon.
+
+Enfin, indiquez la résolution et dessinez un gabarit d'image rectangulaire.
+Avec la référence déformée, il sert dans un logiciel de dessin
+à préparer les images pour ce zootrope.</label>
+        </page>
+    </param>
+    
+    <effect>
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Boîtes (autres modèles)"><submenu name="Carton et papier" /></submenu></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">zoetrope.py</command>
+    </script>
+</inkscape-extension>

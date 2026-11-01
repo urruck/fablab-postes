@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Filtre vers calque</name>
+    <id>fablabchemnitz.de.filter_to_layer</id>
+    <param name="type" type="optiongroup" appearance="radio" gui-text="Filtre sur le calque actif :">
+        <option value="Add">Ajouter</option>
+        <option value="Remove">Supprimer</option>
+    </param>
+    <label>Filtre depuis l'élément sélectionné : s'applique seulement aux prochains dessins et à l'élément sélectionné. Inconvénient : impossible d'ajouter d'autres effets aux éléments.</label>
+    <effect needs-document="true">
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Calques et groupes" /></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">filter_to_layer.py</command>
+    </script>
+</inkscape-extension>

@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Boîte à rabat (jeu de cartes)</name>
+    <id>fablabchemnitz.de.tuckbox</id>
+    <param name="type" type="optiongroup" appearance="combo" gui-text="Type de boîte">
+        <option value="TUCKBOX">Boîte à rabat (jeu de cartes)</option>
+        <option value="SLIPCASE">Fourreau / bande de jeu de cartes</option>
+        <option value="MATCHBOX">Boîte d'allumettes</option>
+    </param>
+    <param name="num_flaps" type="int" min="1" max="2" gui-text="Nombre de rabats">1</param>
+    <param name="deck_width" type="float" precision="1" min="5" max="1000" gui-text="Largeur de la boîte (mm)">63.5</param>
+    <param name="deck_height" type="float" precision="1" min="5" max="1000" gui-text="Hauteur de la boîte (mm)">88</param>
+    <param name="deck_depth" type="float" precision="1" min="5" max="200" gui-text="Profondeur de la boîte (mm)">20</param>
+    <param name="box_allowance" type="float" precision="1" min="0" max="5" gui-text="Jeu de la boîte (mm)">1.5</param>
+    <effect>
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Boîtes (autres modèles)"><submenu name="Carton et papier" /></submenu></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">tuckbox.py</command>
+    </script>
+</inkscape-extension>

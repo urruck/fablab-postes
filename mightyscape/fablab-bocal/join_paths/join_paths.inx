@@ -1,0 +1,106 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Joindre les chemins / créer languettes et bossages</name>
+    <id>fablabchemnitz.de.join_paths</id>
+    <param name="tab" type="notebook">
+        <page name="subdividePath" gui-text="Joindre les chemins / créer languettes et bossages">
+            <hbox>
+                <vbox>
+                <label appearance="header">Joindre les chemins</label>
+                <param name="optimized" type="bool" gui-text="Jonction optimisée">true</param>
+                <param name="reverse" type="bool" gui-text="Inverser">true</param>
+                <param name="margin" type="float" min="0.0001" max="99999.0000" precision="4" gui-text="Marge de fusion">0.0100</param>
+                <label appearance="header">Languettes et bossages</label>
+                <label>Activer pour insérer des bossages (ergots d'assemblage serré) dans</label> 
+                <label>les interruptions (au lieu de lignes droites)</label>
+                <param name="add_dimples" type="bool" gui-text="Créer des bossages">false</param>
+                <param name="dimples_to_group" type="bool" gui-text="Réunir en un seul groupe">false</param>
+                <param name="dimple_type" type="optiongroup" appearance="combo" gui-text="Type de bossage">
+                    <option value="lines">lignes</option>
+                    <option value="peaks">pointes</option>
+                    <option value="arcs">arcs</option>
+                    <option value="tabs">brides</option>
+                    <option value="sheetmetal">tôlerie</option>
+                </param>
+                <param name="draw_dimple_centers" type="bool" gui-text="Dessiner le centre des bossages">false</param>
+                <param name="dimple_invert" type="bool" gui-text="Inverser le côté des bossages">false</param>
+                <param name="draw_both_sides" type="bool" gui-text="Dessiner les deux côtés">false</param>
+                <param name="draw_arcs_as_paths" type="bool" gui-text="Dessiner les arcs en svg:path" gui-description="Si désactivé, on obtient des éléments svg:ellipse. Seulement pour le type « arcs »">true</param>
+                </vbox>
+                <separator />
+                <vbox>
+                <label appearance="header">Dimensions des bossages / languettes</label>
+                <param name="dimple_height_mode" type="optiongroup" appearance="combo" gui-text="Hauteur de base selon...">
+                    <option value="by_height">la hauteur</option>
+                    <option value="by_angle">l'angle</option>
+                </param>
+                <param name="dimple_angle" type="float" min="0.000" max="360.000" precision="3" gui-text="... angle">45.000</param>
+                <param name="dimple_height" type="float" min="0.001" max="99999.000" precision="3" gui-text="... hauteur">4.000</param>
+                <param name="dimple_tab_angle" type="float" min="0.000" max="360.000" precision="3" gui-text="Languette : angle" gui-description="Seulement pour le type « languettes »">45.000</param>
+                <param name="dimple_sheetmetal_depth" type="float" min="0.000" max="99999.000" precision="3" gui-text="Tôlerie : profondeur" gui-description="Seulement pour le type « tôlerie »">4.000</param>
+                <param name="dimple_height_units" gui-text="Unités de hauteur" type="optiongroup" appearance="combo">
+                    <option value="mm">mm</option>
+                    <option value="cm">cm</option>
+                    <option value="in">in</option>
+                    <option value="pt">pt</option>
+                    <option value="px">px</option>
+                 </param>
+                <label appearance="header">Filtre des interruptions</label>
+                <label>Évite de remplir toutes les interruptions avec des languettes / bossages.</label>
+                <param name="dimple_gap_filter" type="bool" gui-text="Appliquer le filtre min / max">false</param>
+                <param name="dimple_min_gap" type="float" min="0.000" max="99999.000" precision="3" gui-text="Min">1</param>
+                <param name="dimple_max_gap" type="float" min="0.000" max="99999.000" precision="3" gui-text="Max">40</param>
+                <param name="dimple_gap_filter_units" gui-text="Unités du filtre" type="optiongroup" appearance="combo">
+                    <option value="mm">mm</option>
+                    <option value="cm">cm</option>
+                    <option value="in">in</option>
+                    <option value="pt">pt</option>
+                    <option value="px">px</option>
+                 </param>
+                </vbox>
+            </hbox>   
+        </page>
+        <page name="tab_about" gui-text="À propos">
+            <label appearance="header">Joindre les chemins / créer languettes et bossages</label>
+            <label>Cet effet joint les courbes de Bézier par des segments droits.
+Si les extrémités sont assez proches, elles sont fusionnées en un seul nœud.
+Avec l'option optimisée, la nouvelle courbe part de la courbe
+la plus haute de la sélection. Les courbes sont ensuite jointes selon la
+distance de leur extrémité la plus proche à la courbe précédente.
+
+Permet aussi de créer différentes languettes / bossages pour la découpe laser.
+
+Cette extension est à l'origine basée sur « Join Paths Optimized » de Shriinivas.</label>
+            <label>2021 - 2023 / écrit par Mario Voigt (Stadtfabrikanten e.V. / FabLab Chemnitz)</label>
+            <spacer />
+            <label appearance="header">Documentation en ligne</label>
+            <label appearance="url">https://y.stadtfabrikanten.org/joinpaths</label>
+            <spacer />
+            <label appearance="header">Contribuer</label>
+            <label appearance="url">https://gitea.fablabchemnitz.de/FabLab_Chemnitz/mightyscape-1.2</label>
+            <label appearance="url">mailto:mario.voigt@stadtfabrikanten.org</label>
+            <spacer />
+            <label appearance="header">Collection d'extensions MightyScape</label>
+            <label>Ce logiciel fait partie de la collection d'extensions MightyScape pour Inkscape, sous licence GNU GPL v3</label>
+            <label appearance="url">https://y.stadtfabrikanten.org/mightyscape-overview</label>
+        </page>
+        <page name="tab_donate" gui-text="Faire un don">
+            <label appearance="header">Café + pizza</label>
+            <label>Nous sommes les Stadtfabrikanten, qui font vivre le FabLab Chemnitz depuis 2016. Un FabLab est un atelier ouvert qui donne accès à des machines et des outils numériques : imprimantes 3D, découpeuses laser, fraiseuses CNC.</label>
+            <spacer />           
+            <label>Vous aimez notre travail et voulez nous soutenir ? Vous pouvez faire un don à notre association de différentes façons :</label>
+            <label appearance="url">https://y.stadtfabrikanten.org/donate</label>
+            <spacer />
+            <label>Merci d'utiliser notre extension et de nous aider !</label>
+            <image>../000_about_fablabchemnitz.svg</image>
+        </page>
+    </param>
+    <effect>
+        <object-type>path</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Chemins"><submenu name="Joindre et ordonner" /></submenu></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">join_paths.py</command>
+    </script>
+</inkscape-extension>

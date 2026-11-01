@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Anneau de maintien</name>
+    <id>org.inkscape.Origami_patterns.support_ring</id>
+    <param name="active-tab" type="notebook">
+        <page name="options" gui-text="Options">
+            <param name="sides" type="int" min="3" max="100" gui-text="Nombre de côtés du polygone">6</param>
+            <param name="radius_external" type="float" max="10000" precision="3" gui-text="Rayon du motif :">10.0</param>
+            <param name="inverted" type="bool" gui-text="Inverser le sens des crochets ?">false</param>
+            <param name="single_stroke" type="bool" gui-text="Trait unique ?">true</param>
+            <separator />
+            <param name="connector_length" type="float" max="10000" precision="3" gui-text="Longueur du connecteur :">3.0</param>
+            <param name="connector_thickness" type="float" max="10000" precision="3" gui-text="Épaisseur du connecteur :">3.0</param>
+            <param name="head_length" type="float" max="10000" precision="3" gui-text="Longueur de tête en plus :">1.0</param>
+            <param name="head_thickness" type="float" max="10000" precision="3" gui-text="Épaisseur de tête en plus :">1.0</param>
+            <separator />
+            <param name="radius_draw" type="bool" gui-text="Dessiner le rayon intérieur ? (ou extérieur si inversé)">true</param>
+            <param name="radius_ratio" type="float" min="0" max="0.9" precision="3" gui-text="Rapport radial :">0.5</param>
+            <param name="radius_type" type="optiongroup" appearance="combo" gui-text="Type de rayon intérieur :">
+                <option value="polygonal">Polygonal</option>
+                <option value="circular">Circulaire</option>
+            </param>
+            <separator />
+            <label>La longueur doit valoir au moins l'épaisseur du matériau d'origami + l'épaisseur de la ceinture.</label>
+            <label>Pour une version OpenSCAD simple de la ceinture, voir Origami_Patterns/Support_Ring_Belt.</label>
+            <param name="units" type="optiongroup" appearance="combo" gui-text="Unités">
+                <option value="mm">mm</option>
+                <option value="cm">cm</option>
+                <option value="in">in</option>
+                <option value="pt">pt</option>
+                <option value="px">px</option>
+            </param>
+        </page>
+        <page name="mountains" gui-text="Traits">
+            <param name="mountain_dashes_bool" type="bool" gui-text="Contours en pointillés ?">false</param>
+            <param name="mountain_dashes_len" type="float" min="0.1" max="10" appearance="full" precision="2" gui-text="Longueur tiret + espace">1</param>
+            <param name="mountain_dashes_duty" type="float" min="0.1" max="1" appearance="full" precision="2" gui-text="Part du tiret">0.5</param>
+            <param name="mountain_stroke_width" type="float" min="0.01" max="3" appearance="full" gui-text="Épaisseur des traits">0.1</param>
+            <param name="mountain_stroke_color" type="color" gui-text="Couleur des traits :">4278190335</param>
+        </page>
+    </param>
+    <effect>
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Papier et origami"><submenu name="Origami" /></submenu></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">OrigamiPatterns/SupportRing.py</command>
+    </script>
+</inkscape-extension>

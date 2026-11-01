@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+   <name>Cadran solaire déclinant</name>
+   <id>fablabchemnitz.de.sundial_declining</id>
+   <param name="tab" type="notebook">
+      <page name="input" gui-text="Options">
+         <label appearance="header">Coordonnées du lieu</label>
+         <param name="latitude" type="float" min="10" max="70" precision="3" gui-text="Latitude :">50</param>
+         <param name="longitude" type="float" min="-180" max="180" precision="3" gui-text="Longitude :">16</param>
+         <param name="timezone" type="int" min="-12" max="12" gui-text="Fuseau horaire :">0</param>
+         <param name="summer_time" type="bool" gui-text="Heure d'été :">false</param>
+      </page>
+      <page name="input_2" gui-text="Ajouter">
+         <label appearance="header">Ajouter 1</label>
+         <param name="gnom" type="float" min="10" max="50" precision="1" gui-text="Longueur du gnomon :">40</param>
+         <param name="decl" type="float" min="-90" max="90" precision="1" gui-text="Azimut du mur :">40</param>
+         <label xml:space="preserve">( + ouest ; - est)</label>
+         <param name="incl" type="float" min="-45" max="45" precision="1" gui-text="Inclinaison du mur :">0</param>
+         <label xml:space="preserve">( + x; - x)</label>
+      </page>
+      <page name="input_3" gui-text="Dessiner">
+         <label appearance="header">Ajouter 2</label>
+         <param name="DL" type="optiongroup" appearance="combo" gui-text="Nombre de lignes de données :">
+            <option value="0">0</option>
+            <option value="3">3</option>
+            <option value="7">7</option>
+         </param>
+      </page>
+   </param>
+   <label xml:space="preserve">* Latitude de +10 à +70
+* Longitude (+ vers l'est) de -180 à 180
+* Fuseau horaire (+ vers l'est) de -12 à 12</label>
+   <effect>
+      <object-type>all</object-type>
+      <effects-menu>
+        <submenu name="FabLab Boc@l"><submenu name="Formes et motifs"><submenu name="Générateurs" /></submenu></submenu></effects-menu>
+   </effect>
+   <script>
+      <command location="inx" interpreter="python">sundial_declining.py</command>
+   </script>
+</inkscape-extension>

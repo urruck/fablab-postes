@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+<name>Motif de trous (HolePattern)</name>
+<id>info.festi.boxes.py.HolePattern</id>
+<param name="generator" type="string" gui-hidden="true">holepattern</param>
+<param name="tab" type="notebook"><page name="tab_0" gui-text="Motif de trous"><param name="x" type="float" precision="2" max="9999" gui-text="x" gui-description="largeur intérieure en mm">100.0</param>
+<param name="y" type="float" precision="2" max="9999" gui-text="y" gui-description="profondeur intérieure en mm">100.0</param>
+<param name="shape" type="optiongroup" appearance="combo" gui-text="forme" gui-description="Forme du motif de trous">
+<option value="rectangle">rectangle</option>
+<option value="ellipse">ellipse</option>
+<option value="oval">ovale</option>
+<option value="hexagon">hexagone</option>
+<option value="octagon">octogone</option>
+    </param>
+</page>
+<page name="tab_1" gui-text="Par défaut"><param name="thickness" type="float" precision="2" max="9999" gui-text="épaisseur" gui-description="épaisseur du matériau (en mm) [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#thickness)">3.0</param>
+<param name="tabs" type="float" precision="2" max="9999" gui-text="brides" gui-description="largeur des attaches qui retiennent les pièces dans la plaque (en mm) (pas partout) [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#tabs)">0.0</param>
+<param name="qr_code" type="bool" gui-text="qr_code" gui-description="Ajouter un QR code avec le lien ou la ligne de commande au résultat">false</param>
+<param name="debug" type="bool" gui-text="débogage" gui-description="dessiner les boîtes englobantes de certaines structures [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#debug)">false</param>
+<param name="labels" type="bool" gui-text="étiquettes" gui-description="étiqueter les pièces (si possible)">true</param>
+<param name="reference" type="float" precision="2" max="9999" gui-text="référence" gui-description="dessiner un rectangle de référence de la longueur donnée (en mm) (0 pour désactiver) [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#reference)">100.0</param>
+<param name="inner_corners" type="optiongroup" appearance="combo" gui-text="inner_corners" gui-description="style des angles intérieurs [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#inner-corners)">
+<option value="loop">boucle</option>
+<option value="corner">angle</option>
+<option value="backarc">arc inversé</option>
+    </param>
+<param name="burn" type="float" precision="2" max="9999" gui-text="brûlage" gui-description="correction de brûlure (en mm) (plus grand = assemblage plus serré) [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#burn)">0.1</param>
+</page>
+<page name="tab_2" gui-text="Remplissage de trous"><param name="fillHoles_bar_length" type="int" max="9999" gui-text="bar_length" gui-description="longueur maximale des barres">50</param>
+<param name="fillHoles_fill_pattern" type="optiongroup" appearance="combo" gui-text="fill_pattern" gui-description="style du motif de trous">
+<option value="no fill">aucun remplissage</option>
+<option value="hex">hexagonal</option>
+<option value="square">carré</option>
+<option value="random">aléatoire</option>
+<option value="hbar">barres horizontales</option>
+<option value="vbar">barres verticales</option>
+    </param>
+<param name="fillHoles_hole_max_radius" type="float" precision="2" max="9999" gui-text="hole_max_radius" gui-description="rayon maximal des trous générés (en mm)">3.0</param>
+<param name="fillHoles_hole_min_radius" type="float" precision="2" max="9999" gui-text="hole_min_radius" gui-description="rayon minimal des trous générés (en mm)">0.5</param>
+<param name="fillHoles_hole_style" type="optiongroup" appearance="combo" gui-text="hole_style" gui-description="style des trous (ne s'applique pas aux motifs « vbar » et « hbar »)">
+<option value="round">rond</option>
+<option value="triangle">triangle</option>
+<option value="square">carré</option>
+<option value="hexagon">hexagone</option>
+<option value="octagon">octogone</option>
+    </param>
+<param name="fillHoles_max_random" type="int" max="9999" gui-text="max_random" gui-description="nombre maximal de trous aléatoires">1000</param>
+<param name="fillHoles_space_between_holes" type="float" precision="2" max="9999" gui-text="space_between_holes" gui-description="espacement entre trous (en mm)">4.0</param>
+<param name="fillHoles_space_to_border" type="float" precision="2" max="9999" gui-text="space_to_border" gui-description="espacement entre trou et bord (en mm)">4.0</param>
+</page>
+<page name="tab_3" gui-text="Exemple">
+<image>./HolePattern-thumb.jpg</image>
+</page>
+</param>
+<label appearance="url">https://boxes.hackerspace-bamberg.de/HolePattern</label>
+<effect>
+    <object-type>all</object-type>
+    <effects-menu>
+        <submenu name="FabLab Boc@l"><submenu name="Boîtes (Boxes.py)"><submenu name="Perçages et façades" /></submenu></submenu></effects-menu>
+    <icon>HolePattern-thumb.svg</icon>
+</effect>
+<script>
+    <command location="inx" interpreter="python">boxes_proxy.py</command>
+</script>
+</inkscape-extension>

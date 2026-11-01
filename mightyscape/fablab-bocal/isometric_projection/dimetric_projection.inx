@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Projection dimétrique</name>
+    <id>fablabchemnitz.de.dimetric_projection</id>
+    <param name="conversion" type="optiongroup" appearance="combo" gui-text="Convertir la vue à plat en">
+        <option value="top">Dessus dimétrique</option>
+        <option value="left">Côté gauche dimétrique</option>
+        <option value="right">Côté droit dimétrique</option>
+    </param>
+    <param name="reverse" type="bool" gui-text="Transformation inverse">false</param>
+    <param name="orthoangle" type="float" precision="3" min="0.001" max="90.000" gui-text="Angle orthographique">15.000</param>
+    <effect>
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Transformations" /></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">isometric_projection.py</command>
+    </script>
+</inkscape-extension>

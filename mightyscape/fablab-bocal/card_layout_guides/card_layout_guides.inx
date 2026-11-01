@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Repères de mise en page de cartes</name>
+    <id>fablabchemnitz.de.card_layout_guides</id>
+    <param name="layout" type="optiongroup" appearance="combo" gui-text="Type de mise en page">
+        <option value="SIMPLE">Grille simple</option>
+        <option value="FOLDING">Grille pliable</option>
+    </param>
+    <param name="card_width" type="float" precision="1" min="5" max="1000" gui-text="Largeur de carte (mm)">60</param>
+    <param name="card_height" type="float" precision="1" min="5" max="1000" gui-text="Hauteur de carte (mm)">30</param>
+    <param name="orientation" type="optiongroup" appearance="combo" gui-text="Orientation des cartes">
+        <option value="HORIZONTAL">Horizontale</option>
+        <option value="VERTICAL">Verticale</option>
+    </param>
+    <param name="card_margin" type="float" precision="1" min="0" max="200" gui-text="Marge des cartes (mm)">2</param>
+    <param name="bleed_margin" type="float" precision="1" min="0" max="200" gui-text="Fond perdu (mm)">2</param>
+    <param name="page_margin" type="float" precision="1" min="0" max="200" gui-text="Marge de page (mm)">15</param>
+    <effect>
+        <object-type>all</object-type>
+        <effects-menu>
+			<submenu name="FabLab Boc@l"><submenu name="Grilles, repères et mesures" /></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">card_layout_guides.py</command>
+    </script>
+</inkscape-extension>

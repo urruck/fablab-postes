@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Générateur de boîte - À languettes</name>
+    <id>fablabchemnitz.de.boxmaker_tabbed.box_maker_tabbed</id>
+    <hbox>
+        <vbox>
+            <label>Dimensions</label>
+            <separator />
+            <param name="unit" gui-text="Unités" type="optiongroup" appearance="combo">
+                <option value="mm">mm</option>
+                <option value="cm">cm</option>
+                <option value="in">in</option>
+            </param>
+            <param name="inside" type="optiongroup" gui-text="Dimensions de la boîte" appearance="combo">
+                <option value="1">Intérieur</option>
+                <option value="0">Extérieur</option>
+            </param>
+            <param name="length" type="float" precision="3" min="0.0" max="10000.0" gui-text="Longueur">180</param>
+            <param name="width" type="float" precision="3" min="0.0" max="10000.0" gui-text="Largeur">240</param>
+            <param name="depth" type="float" precision="3" min="0.0" max="10000.0" gui-text="Hauteur">50</param>
+            <spacer />
+            <label>Languettes</label>
+            <separator />
+            <param name="equal" type="optiongroup" appearance="combo" gui-text="Largeur">
+                <option value="0">Fixe</option>
+                <option value="1">Proportionnelle</option>
+            </param>
+            <param name="tab" type="float" precision="2" min="0.0" max="10000.0" gui-text="Largeur min. / souhaitée">3.0</param>
+            <param name="tabtype" type="optiongroup" gui-text="    Type" appearance="combo">
+                <option value="0">Classique (laser)</option>
+                <option value="1">Dogbone (fraiseuse)</option>
+            </param>
+            <param name="tabsymmetry" type="optiongroup" gui-text="Symétrie" appearance="combo">
+                <option value="0">Symétrique en XY</option>
+                <option value="1">Symétrique par rotation</option>
+                
+            </param>
+            <param name="dimpleheight" type="float" precision="2" min="0.0" max="10000.0" gui-text="Hauteur des bossages">0.0</param>
+            <param name="dimplelength" type="float" precision="2" min="0.0" max="10000.0" gui-text="Longueur des bossages">0.0</param>
+        </vbox>
+        <spacer />
+        <separator />
+        <spacer />
+        <vbox>
+            <label>Trait et trait de coupe</label>
+            <separator />
+            <param name="hairline" type="optiongroup" gui-text="Épaisseur du trait" appearance="combo">
+                <option value="0">Par défaut</option>
+                <option value="1">Très fin (0,002" pour Epilog)</option>
+            </param>
+            <param name="thickness" type="float" precision="2" min="0.0" max="10000.0" gui-text="Épaisseur du matériau">3.0</param>
+            <param name="kerf" type="float" precision="3" min="0.0" max="10000.0" gui-text="Trait de coupe (largeur de coupe)">0.1</param>
+            <spacer />
+            <label>Disposition</label>
+            <separator />
+            <param name="style" gui-text="Disposition" type="optiongroup" appearance="combo">
+                <option value="1">Schématique</option>
+                <option value="2">3 pièces</option>
+                <option value="3">En ligne (compacte)</option>
+            </param>
+            <param name="boxtype" gui-text="Type de boîte" type="optiongroup" appearance="combo">
+                <option value="1">Entièrement fermée</option>
+                <option value="2">Un côté ouvert (Lxl)</option>
+                <option value="3">Deux côtés ouverts (Lxl et LxH)</option>
+                <option value="4">Trois côtés ouverts (Lxl, LxH, Hxl)</option>
+                <option value="5">Extrémités opposées ouvertes (Lxl)</option>
+                <option value="6">Deux panneaux seulement (Lxl et LxH)</option>
+            </param>
+            <param name="div_l" type="int" min="0" max="10" gui-text="Séparations (axe de la longueur)">2</param>
+            <param name="div_w" type="int" min="0" max="10" gui-text="Séparations (axe de la largeur)">3</param>
+            <param name="keydiv" gui-text="Encastrer les séparations dans" type="optiongroup" appearance="combo">
+                <option value="3">Aucun</option>
+                <option value="2">Les parois</option>
+                <option value="1">Le fond / le dessus</option>
+                <option value="0">Tous les côtés</option>
+            </param>
+            <param name="spacing" type="float" precision="2" min="0.0" max="10000.0" gui-text="Espace entre les pièces">1.0</param>
+        </vbox>
+    </hbox>
+    <effect needs-live-preview="true">
+        <object-type>path</object-type>
+        <effects-menu>
+        <submenu name="FabLab Boc@l"><submenu name="Boîtes (autres modèles)"><submenu name="À encoches" /></submenu></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">box_maker_tabbed.py</command>
+    </script>
+</inkscape-extension>

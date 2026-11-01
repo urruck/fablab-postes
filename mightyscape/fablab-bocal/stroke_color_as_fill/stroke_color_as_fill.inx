@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Couleur de contour en remplissage</name>
+    <id>fablabchemnitz.de.stroke_color_as_fill</id>
+    <param name="tab" type="notebook">
+        <page name="swap_tab" gui-text="Remplissage, contour">
+            <param name="fill_stroke_mode" type="optiongroup" appearance="combo" gui-text="Mode :">
+                <option value="fill_stroke">Échanger remplissage et contour</option>
+                <option value="fill">Copier le remplissage vers le contour</option>
+                <option value="stroke">Copier le contour vers le remplissage</option>
+            </param>
+            <param name="fill_stroke_copy_alpha" type="bool" gui-text="Copier l'opacité">true</param>
+            <param name="fill_stroke_copy_none" type="bool" gui-text="Copier la valeur « aucun »">true</param>
+            <param name="fill_stroke_copy_unset" type="bool" gui-text="Copier la valeur « non défini »">true</param>
+            <param name="fill_stroke_convert_unset" type="bool" gui-text="Convertir la valeur « non défini »" gui-description="Convertit un remplissage non défini en contour noir, et un contour non défini en remplissage « aucun ».">true</param>
+        
+        </page>
+        <page name="about_tab" gui-text="À propos">
+            <label appearance="header">Échanger</label>
+            <label>Échange ou copie la peinture de remplissage et de contour.</label>
+        </page>
+    </param>
+    <effect needs-document="true">
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Couleurs" /></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">stroke_color_as_fill.py</command>
+    </script>
+</inkscape-extension>

@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Gamme sur clavier de piano</name>
+    <id>fablabchemnitz.de.piano_scale</id>
+    <param name="firstNote" type="string" gui-text="Première note">C1</param>
+    <param name="lastNote" type="string" gui-text="Dernière note">B2</param>
+    <param name="keynote" type="string" gui-text="Tonique">C1</param>
+    <param name="tab" type="notebook">
+        <page name="direct" gui-text="Intervalles directs">
+            <param name="intervals" type="string" gui-text="Intervalles">2212221</param>
+        </page>
+        <page name="scale" gui-text="Échelle">
+            <param name="scale" type="optiongroup" appearance="combo" gui-text="Gamme musicale">
+                <option value="0">Ionien</option>
+                <option value="1">Dorien</option>
+                <option value="2">Phrygien</option>
+                <option value="3">Lydien</option>
+                <option value="4">Mixolydien</option>
+                <option value="5">Éolien</option>
+                <option value="6">Locrien</option>
+            </param>
+        </page>
+        <page name="helpSheet" gui-text="Fiche d'aide">
+            <param name="helpSheet" type="optiongroup" appearance="combo" gui-text="Fiche d'aide">
+                <option value="0">Mode ionien</option>
+                <option value="1">Mode dorien</option>
+                <option value="2">Mode phrygien</option>
+                <option value="3">Mode lydien</option>
+                <option value="4">Mode mixolydien</option>
+                <option value="5">Mode éolien</option>
+                <option value="6">Mode locrien</option>
+            </param>
+        </page>
+    </param>
+    <effect>
+        <object-type>all</object-type>
+        <effects-menu>
+         <submenu name="FabLab Boc@l"><submenu name="Mécanique et graduations" /></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">piano_scale.py</command>
+    </script>
+</inkscape-extension>

@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Trajectoire paramétrique</name>
+    <id>fablabchemnitz.de.travel</id>
+    <param name="active-tab" type="notebook">
+        <page name="options" gui-text="Options">
+            <param name="x_scale" type="float" max="10000" precision="3" gui-text="Échelle X :">1</param>
+            <param name="y_scale" type="float" max="10000" precision="3" gui-text="Échelle Y :">1</param>
+            <param name="t_start" type="float" max="10000" min="-10000" precision="4" gui-text="temps de début">0</param>
+            <param name="t_end" type="float" max="10000" min="-10000" precision="4" gui-text="temps de fin">1</param>
+            <label appearance="header">Indiquer l'un des éléments suivants :</label>
+            <param name="n_steps" type="int" max="1000" gui-text="nombre d'étapes">11</param>
+            <param name="fps" type="float" max="1000" precision="3" gui-text="images par seconde">0</param>
+            <param name="dt" type="float" max="1000" precision="5" gui-text="intervalle de temps">0</param>
+            <label appearance="header">Saisir des équations Python en fonction de t.</label>
+            <param name="x_eqn" type="string" gui-text="x(t) = ">t</param>
+            <param name="y_eqn" type="string" gui-text="y(t) = ">0</param>
+            <param name="x_size_eqn" type="string" gui-text="x_size(t) = ">1</param>
+            <param name="y_size_eqn" type="string" gui-text="y_size(t) = ">1</param>
+            <param name="theta_eqn" type="string" gui-text="theta(t) (en degrés) =">0</param>
+        </page>
+        <page name="help" gui-text="Aide">
+            <label>Copie un objet le long d'une trajectoire paramétrique précise. Voir</label>
+            <label appearance="url">https://github.com/rkp8000/inkscape-travel</label>
+            <label>pour les instructions et des exemples.</label>
+        </page>
+    </param>
+    <effect>
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Formes et motifs"><submenu name="À partir de chemins" /></submenu></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">travel.py</command>
+    </script>
+</inkscape-extension>

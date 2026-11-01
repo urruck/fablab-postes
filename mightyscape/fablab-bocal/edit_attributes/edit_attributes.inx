@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+	<name>Modifier des attributs</name>
+	<id>fablabchemnitz.de.edit_attributes</id>
+	<label>Modifie la valeur d'un attribut sur les éléments sélectionnés.</label>
+	<label>Pour les espaces de noms, utiliser {urlEspaceDeNoms}nomAttribut</label>
+	<param name="attributeName" type="string" gui-text="Nom :" />
+	<param name="attributeValue" type="string" gui-text="Valeur :" />
+	<param name="mode" type="optiongroup" appearance="combo" gui-text="Opération sur l'attribut"> 
+		<option value="set">Définir</option>
+		<option value="append">Ajouter à la fin</option>
+		<option value="prefix">Ajouter au début</option>
+        <option value="clear">Vider le contenu</option>
+		<option value="remove">Supprimer l'attribut</option>
+	</param>
+	<effect>
+		<object-type>all</object-type>
+		<effects-menu>
+			<submenu name="FabLab Boc@l"><submenu name="Divers" /></submenu></effects-menu>
+	</effect>
+	<script>
+		<command location="inx" interpreter="python">edit_attributes.py</command>
+	</script>
+</inkscape-extension>

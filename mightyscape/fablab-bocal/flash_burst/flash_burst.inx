@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Éclat lumineux</name>
+    <id>fablabchemnitz.de.flash_burst</id>
+    <param name="r1" type="int" min="1" max="20" gui-text="Rayon intérieur (min)">10</param>
+    <param name="r2" type="int" min="1" max="20" gui-text="Rayon intérieur (max)">10</param>
+    <separator />
+    <param name="R1" type="int" min="200" max="500" gui-text="Rayon extérieur (min)">350</param>
+    <param name="R2" type="int" min="200" max="500" gui-text="Rayon extérieur (max)">350</param>
+    <separator />
+    <param name="a1" type="int" min="1" max="45" gui-text="Angle (min)">5</param>
+    <param name="a2" type="int" min="1" max="45" gui-text="Angle (max)">10</param>
+    <separator />
+    <param name="ad1" type="int" min="1" max="10" gui-text="Écart d'angle (min)">3</param>
+    <param name="ad2" type="int" min="1" max="10" gui-text="Écart d'angle (max)">5</param>
+    <effect>
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Formes et motifs"><submenu name="Textures et effets" /></submenu></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">flash_burst.py</command>
+    </script>
+</inkscape-extension>

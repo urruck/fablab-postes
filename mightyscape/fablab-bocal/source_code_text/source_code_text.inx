@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+	<name>Texte de code source</name>
+	<id>fablabchemnitz.de.source_code_text</id>
+    <param name="directory" type="path" mode="folder" gui-text="Dossier où chercher le code">C:\Users\</param>
+    <param name="pattern" type="string" gui-text="Motif de nom de fichier">py</param>
+    <param name="wordsperpara" type="int" min="0" max="10000" gui-text="Nombre maximal de mots par paragraphe">0</param>
+    <param name="numparas" type="int" min="0" max="1000" gui-text="Limiter le nombre de paragraphes">1</param>
+    <label appearance="header">Aide</label>
+    <label>Inspiré du greffon « Lorem Ipsum », ce greffon cherche du code dans le dossier de base et l'enchaîne en joignant sur les espaces. Si un texte encadré est sélectionné, le code y est ajouté ; sinon un nouveau texte encadré de la taille de la page est créé dans un nouveau calque.</label>
+    <effect>
+        <object-type>all</object-type>
+        <effects-menu>
+         <submenu name="FabLab Boc@l"><submenu name="Texte" /></submenu></effects-menu>
+    </effect>
+    <script>
+    	<command location="inx" interpreter="python">source_code_text.py</command>
+    </script>
+</inkscape-extension>

@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Animation de tracé</name>
+    <id>fablabchemnitz.de.line_animator</id>
+    <param name="action" type="notebook">
+        <page name="add_anim" gui-text="Ajouter l'animation">
+            <label>Anime les objets sélectionnés comme s'ils étaient dessinés au crayon.</label>
+            <param name="identifier" type="string" gui-description="Seulement des lettres A-Z et a-z, des chiffres et des tirets bas." gui-text="Nom unique :">animation_1</param>
+            <param name="duration" type="float" precision="3" min="0.001" max="1000.000" gui-description="Durée de l'animation en secondes." gui-text="Durée (secondes) :">10.000</param>
+            <param name="repeat" type="int" min="0" max="1000" gui-description="Nombre de fois où l'animation est jouée. 0 = répétition infinie." gui-text="Nombre de répétitions (0 = infini) :">1</param>
+            <param name="delay" type="float" precision="3" min="0.000" max="1000.000" gui-description="Temps d'attente avant le début de l'animation. Permet d'enchaîner des animations de vitesses différentes ou d'en créer en parallèle." gui-text="Délai (secondes) :">0.000</param>
+        </page>
+        <page name="advanced" gui-text="Options avancées">
+            <param name="timing" appearance="combo" type="optiongroup" gui-description="Choisir le profil de vitesse de l'animation" gui-text="Courbe de vitesse">
+                <option value="ease">ease</option>
+                <option value="ease-in">ease-in</option>
+                <option value="ease-out">ease-out</option>
+                <option value="ease-in-out">ease-in-out</option>
+                <option value="linear">linear</option>
+            </param>
+        </page>
+        <page name="remove_anim" gui-text="Retirer l'animation">
+            <param name="remove_from" appearance="combo" type="optiongroup" gui-description="Retire toute trace d'animation du fichier, ou seulement des objets sélectionnés." gui-text="Retirer les animations :">
+                <option value="selected">des objets sélectionnés</option>
+                <option value="all">de tout le document</option>
+            </param>
+        </page>
+        <page name="help" gui-text="Aide">
+            <label>Cette extension convertit vos dessins au trait en animations CSS lisibles par tout navigateur web récent. Les chemins semblent dessinés à la main.</label>
+            <label>Réglez la couleur et l'épaisseur du trait à votre goût. Les sous-chemins sont dessinés en même temps. Les chemins séparés sont dessinés dans l'ordre d'empilement.</label>
+            <label>Vous pouvez utiliser l'extension plusieurs fois par document, sur des ensembles d'objets (entièrement) différents. Vous pouvez ainsi régler des durées différentes, et ajouter un délai pour que les animations démarrent à des moments différents.</label>
+            <label>L'extension est développée sur GitLab :</label>
+            <label appearance="url">https://gitlab.com/Moini/ink_line_animator</label>
+        </page>
+    </param>
+    <effect needs-live-preview="false">
+        <object-type>path</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Divers"><submenu name="Animation" /></submenu></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">line_animator.py</command>
+    </script>
+</inkscape-extension>

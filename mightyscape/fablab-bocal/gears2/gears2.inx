@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Engrenages 2</name>
+    <id>fablabchemnitz.de.gears2</id>
+    <param name="tab" type="notebook">
+        <page name="Options" gui-text="Options">
+            <param name="teeth" type="int" min="6" max="500" gui-text="Nombre de dents">24</param>
+            <param name="pressure_angle" type="float" min="1" max="40" gui-text="Angle de pression">20</param>
+            <param name="size_type" type="optiongroup" appearance="combo" gui-text="Type de taille">
+                <option value="1">Module (mm)</option>
+                <option value="2">Diamètre primitif (pouces)</option>
+                <option value="3">Pas diamétral (pouces)</option>
+            </param>
+            <param name="size" type="float" min="0.01" max="500" gui-text="Taille">5</param>
+            <param name="orientation" type="optiongroup" appearance="combo" gui-text="Type de denture">
+                <option value="1">Extérieures</option>
+                <option value="2">Intérieures</option>
+            </param>
+        </page>
+        <page name="Help" gui-text="Aide">
+            <label xml:space="preserve">Nombre de dents : sans surprise.
+
+Angle de pression : angle en degrés de la pression entre deux dents en contact. Plus il est grand, plus les dents sont larges et triangulaires : plus solides, mais moins tolérantes aux défauts de fabrication et d'alignement. Valeurs courantes : 14,5, 20 et 25.
+
+Type de taille : trois méthodes courantes pour définir la taille d'un engrenage. Le module est le rapport entre le diamètre primitif en mm et le nombre de dents. Le diamètre primitif est le diamètre en pouces du cercle de référence théorique. Le pas diamétral est le rapport entre le nombre de dents et le diamètre primitif en pouces.
+
+Taille : la valeur, dans l'unité du type de taille choisi.
+
+Denture : extérieure ou intérieure (sans doute extérieure).
+
+Cette extension s'appuie sur gearUtils-03.js du Dr A.R. Collins.
+Dernière version : www.arc.id.au/gearDrawing.html</label>
+        </page>
+    </param>
+    <effect needs-live-preview="true">
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Mécanique et graduations" /></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">gears2.py</command>
+    </script>
+</inkscape-extension>

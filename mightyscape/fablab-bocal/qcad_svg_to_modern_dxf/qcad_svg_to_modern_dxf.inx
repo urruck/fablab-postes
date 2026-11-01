@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>SVG QCAD vers DXF moderne</name>
+    <id>fablabchemnitz.de.qcad_svg_to_modern_dxf</id>
+    <param name="tab" type="notebook">
+        <page name="tab_settings" gui-text="Paramètres">
+            <param name="qcad_dxf_format" type="optiongroup" appearance="combo" gui-text="Type d'export DXF">
+                <option value="R32 DXF">R32/2018 (OpenDesign)</option>
+                <option value="R27 DXF">R27/2013 (OpenDesign)</option>
+                <option value="R24 DXF">R24/2010 (OpenDesign)</option>
+                <option value="R21 DXF">R21/2007 (OpenDesign)</option>
+                <option value="R18 DXF">R18/2004 (OpenDesign)</option>
+                <option value="R15 DXF">R15/2000 (OpenDesign)</option>
+                <option value="dxflib">R15/2000 (dxflib)</option>
+                <option value="R14 DXF">R14 (OpenDesign)</option>
+                <option value="R13 DXF">R13 (OpenDesign)</option>
+                <option value="R12 DXF">R12 (OpenDesign)</option>
+                <option value="R11 DXF">R11 (OpenDesign)</option>
+                <option value="R10 DXF">R10 (OpenDesign)</option>
+                <option value="R9 DXF">R9 (OpenDesign)</option>
+            </param>
+            <param name="qcad_join_polylines" type="bool" gui-text="Joindre les polylignes">true</param>
+            <param name="qcad_tolerance" type="float" min="0.0000001" max="999999" precision="3" gui-text="Tolérance des polylignes">0.001</param>
+            <param name="qcad_purge_duplicates" type="bool" gui-text="Purger les lignes en double">false</param>
+            <param name="qcad_pro_path" type="path" mode="file" gui-text="Chemin du programme QCAD Pro" gui-description="N'utilisez pas l'édition Community : elle ne fonctionnera pas.">~/opt/qcad-3.28.2-pro-linux-x86_64/qcad</param>
+            <param name="debug" type="bool" gui-text="Afficher les infos de débogage">false</param>
+            <param name="open_in_qcad" type="bool" gui-text="Ouvrir le fichier exporté dans QCAD">false</param>
+        </page>
+        <page name="tab_about" gui-text="À propos">
+            <label appearance="header">SVG QCAD vers DXF moderne</label>
+            <label>Cette extension utilise QCAD Pro 3.28 pour convertir un SVG Inkscape en un beau fichier DXF, avec des polylignes continues.</label>
+            <label>2024 / écrit par Mario Voigt (Stadtfabrikanten e.V. / FabLab Chemnitz)</label>
+            <spacer />
+            <label appearance="header">Documentation en ligne</label>
+            <label appearance="url">https://y.stadtfabrikanten.org/qcad-svg-to-modern-dxf</label>
+            <spacer />
+            <label appearance="header">Contribuer</label>
+            <label appearance="url">https://gitea.fablabchemnitz.de/FabLab_Chemnitz/mightyscape-1.2</label>
+            <label appearance="url">mailto:mario.voigt@stadtfabrikanten.org</label>
+            <spacer />
+            <label appearance="header">Collection d'extensions MightyScape</label>
+            <label>Ce logiciel fait partie de la collection d'extensions MightyScape pour Inkscape, sous licence GNU GPL v3</label>
+            <label appearance="url">https://y.stadtfabrikanten.org/mightyscape-overview</label>
+        </page>
+        <page name="tab_donate" gui-text="Faire un don">
+            <label appearance="header">Café + pizza</label>
+            <label>Nous sommes les Stadtfabrikanten, qui font vivre le FabLab Chemnitz depuis 2016. Un FabLab est un atelier ouvert qui donne accès à des machines et des outils numériques : imprimantes 3D, découpeuses laser, fraiseuses CNC.</label>
+            <spacer />           
+            <label>Vous aimez notre travail et voulez nous soutenir ? Vous pouvez faire un don à notre association de différentes façons :</label>
+            <label appearance="url">https://y.stadtfabrikanten.org/donate</label>
+            <spacer />
+            <label>Merci d'utiliser notre extension et de nous aider !</label>
+            <image>../000_about_fablabchemnitz.svg</image>
+        </page>
+    </param>
+    <output>
+        <extension>.dxf</extension>
+        <mimetype>image/dxf</mimetype>
+        <filetypename>QCAD DXF (*.dxf)</filetypename>
+        <filetypetooltip>AutoDesk DXF - OpenDesign/dxflibs</filetypetooltip>
+        <dataloss>true</dataloss>
+    </output>
+    <script>
+        <command location="inx" interpreter="python">qcad_svg_to_modern_dxf.py</command>
+    </script>
+</inkscape-extension>

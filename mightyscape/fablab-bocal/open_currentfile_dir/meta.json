@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Open Current File Directory",
+    "id": "fablabchemnitz.de.open_currentfile_dir",
+    "path": "open_currentfile_dir",
+    "dependent_extensions": null,
+    "original_name": "Open Current File Directory",
+    "original_id": "fablabchemnitz.de.open_currentfile_dir",
+    "license": "GNU GPL v3",
+    "license_url": "https://gitea.fablabchemnitz.de/FabLab_Chemnitz/mightyscape-1.2/src/branch/master/LICENSE",
+    "comment": "Written by Mario Voigt",
+    "source_url": "https://gitea.fablabchemnitz.de/FabLab_Chemnitz/mightyscape-1.2/src/branch/master/extensions/fablabchemnitz/open_currentfile_dir",
+    "fork_url": null,
+    "documentation_url": "https://y.stadtfabrikanten.org/open-current-file-directory",
+    "inkscape_gallery_url": null,
+    "contributors": [
+      "github.com/eridur-de"
+    ]
+  }
+]

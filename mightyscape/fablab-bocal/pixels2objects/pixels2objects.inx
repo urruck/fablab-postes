@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Pixels vers objets</name>
+    <id>fablabchemnitz.de.pixels2objects</id>
+    <param name="tab" type="notebook">
+        <page name="Options" gui-text="Options">
+            <param name="color-stroke" type="bool" gui-text="Appliquer la couleur au contour">false</param>
+            <param name="color-fill" type="bool" gui-text="Appliquer la couleur au remplissage">false</param>
+            <param name="ignore-bg" type="bool" gui-text="Ignorer les pixels de fond">true</param>
+            <param name="obj-select" type="optiongroup" appearance="combo" gui-text="Répartition de plusieurs objets">
+                <option value="coords">Selon les coordonnées de l'image</option>
+                <option value="rr">À tour de rôle</option>
+                <option value="random">Aléatoire</option>
+            </param>
+            <param name="scale" type="float" min="0.001" max="1000" precision="3" gui-text="Échelle des coordonnées de l'image">1</param>
+        </page>
+        <page name="Help" gui-text="Aide">
+            <label>Sélectionnez une image bitmap et un ou plusieurs autres objets.
+L'effet place une copie d'un objet sur chaque
+coordonnée de l'image, de (0, 0) à
+(largeur−1, hauteur−1). Les options permettent : d'adapter
+la couleur de contour et/ou de remplissage des objets au pixel
+correspondant ; de prendre en compte ou d'ignorer les pixels
+de la couleur du fond ; d'agrandir ou réduire les coordonnées ;
+et de répartir plusieurs objets sur les coordonnées
+de façon aléatoire ou déterministe.</label>
+        </page>
+    </param>
+    <effect>
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Images et vectorisation" /></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">pixels2objects.py</command>
+    </script>
+</inkscape-extension>

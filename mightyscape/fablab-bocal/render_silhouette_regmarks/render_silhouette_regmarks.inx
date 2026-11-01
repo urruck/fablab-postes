@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Repères d'enregistrement Silhouette Cameo</name>
+    <id>fablabchemnitz.de.silhouette_cameo_registration_marks</id>
+    <param name="regwidth" type="float" min="0.0" max="10000" gui-text="Distance des repères en X [mm]">180</param>
+    <param name="reglength" type="float" min="0.0" max="10000" gui-text="Distance des repères en Y [mm]">230</param>
+    <param name="regoriginx" type="float" min="10.0" max="10000" gui-text="Position du repère depuis la gauche du document [mm]">15</param>
+    <param name="regoriginy" type="float" min="10.0" max="10000" gui-text="Position du repère depuis le haut du document [mm]">20</param>
+    <label>Distance des bords des repères d'enregistrement</label>
+    <effect>
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Découpe laser et traceur" /></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">render_silhouette_regmarks.py</command>
+    </script>
+</inkscape-extension>

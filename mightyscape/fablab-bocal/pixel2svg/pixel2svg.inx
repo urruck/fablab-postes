@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Pixel2SVG</name>
+    <id>fablabchemnitz.de.pixel2svg</id>
+    <param name="tab" type="notebook">
+        <page name="pixel2svg_tab" gui-text="Options">
+            <param name="squaresize" type="int" min="1" max="100" gui-text="Largeur et hauteur des carrés vectoriels (px)">5</param>
+            <param name="same_like_original" type="bool" gui-text="Même taille que l'original">true</param>
+            <param name="offset_image" type="bool" gui-text="Décaler l'image vectorisée">true</param>
+            <param name="delete_image" type="bool" gui-text="Supprimer l'image bitmap">false</param>
+        </page>
+        <page name="advanced_tab" gui-text="Avancé">
+            <param name="transparency" type="bool" gui-text="Convertir la transparence en « fill-opacity »">true</param>
+            <param name="overlap" type="bool" gui-text="Chevaucher les carrés vectoriels de 1 px">false</param>
+            <param name="verbose" type="bool" gui-text="Afficher les infos de l'image (taille, format, mode)">false</param>
+            <param name="maxsize" type="int" min="1" max="10000" gui-text="Taille d'image max. (largeur ou hauteur)">256</param>
+        </page>
+        <page name="advanced_color_tab" gui-text="Couleurs">
+            <param name="color_mode" type="optiongroup" appearance="combo" gui-text=" ">
+                <option value="all">Vectoriser toutes les couleurs.</option>
+                <option value="other">Ne pas vectoriser cette couleur :</option>
+                <option value="this">Vectoriser seulement cette couleur :</option>
+            </param>
+            <param name="color" type="string" max_length="6" gui-text="Couleur (hexa) :">FFFFFF</param>
+        </page>
+        <page name="about_tab" gui-text="À propos">
+            <label xml:space="preserve">Cette extension est basée sur :
+pixel2svg - convertit du pixel art en SVG, pixel par pixel.
+Copyright 2011 Florian Berger
+http://florian-berger.de/en/software/pixel2svg</label>
+        </page>
+    </param>
+    <effect needs-document="true" needs-live-preview="true">
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Images et vectorisation" /></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">pixel2svg.py</command>
+    </script>
+</inkscape-extension>

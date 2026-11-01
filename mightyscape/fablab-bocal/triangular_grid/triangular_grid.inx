@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Grille triangulaire</name>
+    <id>fablabchemnitz.de.triangular_grid</id>
+    <param name="tabs" type="notebook">
+        <page name="geometry" gui-text="Géométrie">
+            <param name="size_unit" type="optiongroup" appearance="combo" gui-text="Unités d'espacement">
+                <option value="mm">mm</option>
+                <option value="cm">cm</option>
+                <option value="in">in</option>
+                <option value="px">px</option>
+                <option value="pt">pt</option>
+            </param>
+            <param name="dm" type="float" min="1" max="1000" precision="2" gui-text="Espacement des divisions principales">100.00</param>
+            <param name="y_divs" type="int" min="1" max="1000" gui-text="Divisions principales verticales">3</param>
+            <param name="x_divs" type="int" min="1" max="1000" gui-text="Divisions principales horizontales">3</param>
+            <param name="grid_angle" type="float" min="0.1" max="89.9" gui-text="Angle de la grille [degrés]">30.0</param>
+            <param name="subdivs" type="int" min="1" max="1000" gui-text="Subdivisions par division principale">2</param>
+            <param name="subsubdivs" type="int" min="1" max="1000" gui-text="Sous-subdivisions par subdivision">5</param>
+        </page>
+        <page name="border" gui-text="Bordure">
+            <param name="border_color" type="color" gui-text="Couleur">#000000ff</param>
+            <param name="border_th" type="float" min="0" max="1000" gui-text="Épaisseur [px]">3</param>
+        </page>
+        <page name="major" gui-text="Divisions principales">
+            <param name="major_color" type="color" gui-text="Couleur">#ff0000ff</param>
+            <param name="major_th" type="float" min="0" max="1000" gui-text="Épaisseur [px]">2</param>
+        </page>
+        <page name="minor" gui-text="Divisions secondaires">
+            <param name="subdiv_color" type="color" gui-text="Couleur">#ff00ffff</param>
+            <param name="subdiv_th" type="float" min="0" max="1000" gui-text="Épaisseur [px]">2</param>
+        </page>
+        <page name="subminor" gui-text="Divisions tertiaires">
+            <param name="subsubdiv_color" type="color" gui-text="Couleur">##0000ffff</param>
+            <param name="subsubdiv_th" type="float" min="0" max="1000" gui-text="Épaisseur [px]">2</param>
+        </page>
+    </param>
+    <effect>
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Grilles, repères et mesures" /></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">triangular_grid.py</command>
+    </script>
+</inkscape-extension>

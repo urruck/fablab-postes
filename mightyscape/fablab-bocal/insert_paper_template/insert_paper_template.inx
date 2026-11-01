@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Insérer un gabarit papier</name>
+    <id>fablabchemnitz.de.insert_paper_template</id>
+    <param name="papertype" type="optiongroup" appearance="combo" gui-text="Type de boîte">
+        <option value="A7">A7</option>
+        <option value="A6">A6</option>
+        <option value="A5">A5</option>
+        <option value="A4">A4</option>
+        <option value="A3">A3</option>
+        <option value="A2">A2</option>
+        <option value="A1">A1</option>
+        <option value="A0">A0</option>
+        <option value="B6">B6</option>
+        <option value="B5">B5</option>
+        <option value="C6">C6</option>
+        <option value="C5">C5</option>
+        <option value="DIN_LANG">DIN long</option>
+        <option value="POKER">Carte de poker</option>
+        <option value="BRIDGE">Carte de bridge</option>
+        <option value="MINI_US">Mini carte américaine</option>
+        <option value="MINI_EU">Mini carte européenne</option>
+        <option value="TAROT">Carte de tarot</option>
+    </param>
+    <param name="show_type" type="bool" gui-text="Ajouter une étiquette">true</param>
+    <effect>
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Grilles, repères et mesures" /></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">insert_paper_template.py</command>
+    </script>
+</inkscape-extension>

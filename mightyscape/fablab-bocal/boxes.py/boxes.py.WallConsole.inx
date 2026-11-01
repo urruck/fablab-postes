@@ -1,0 +1,103 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+<name>Console murale (WallConsole)</name>
+<id>info.festi.boxes.py.WallConsole</id>
+<param name="generator" type="string" gui-hidden="true">wallconsole</param>
+<param name="tab" type="notebook"><page name="tab_0" gui-text="Console murale"><param name="walltype" type="optiongroup" appearance="combo" gui-text="type de mur" gui-description="Type de système mural de fixation">
+<option value="plain">simple</option>
+<option value="plain reinforced">simple renforcé</option>
+<option value="slatwall">panneau à rainures (slatwall)</option>
+<option value="dinrail">rail DIN</option>
+<option value="french cleat">tasseau biseauté (french cleat)</option>
+<option value="skadis">Skådis</option>
+    </param>
+<param name="sx" type="string" gui-text="sx" gui-description="sections de gauche à droite en mm [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#section-parameters)">100</param>
+<param name="h" type="float" precision="2" max="9999" gui-text="h" gui-description="hauteur interieure en mm (si on ne choisit pas « extérieur »)">100</param>
+<param name="outside" type="bool" gui-text="extérieur" gui-description="les dimensions sont des mesures extérieures [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#outside)">true</param>
+<param name="top_depth" type="float" precision="2" max="9999" gui-text="profondeur haut" gui-description="profondeur en haut">50</param>
+<param name="bottom_depth" type="float" precision="2" max="9999" gui-text="profondeur bas" gui-description="profondeur en bas">35</param>
+</page>
+<page name="tab_1" gui-text="Par défaut"><param name="thickness" type="float" precision="2" max="9999" gui-text="épaisseur" gui-description="épaisseur du matériau (en mm) [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#thickness)">3.0</param>
+<param name="tabs" type="float" precision="2" max="9999" gui-text="brides" gui-description="largeur des attaches qui retiennent les pièces dans la plaque (en mm) (pas partout) [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#tabs)">0.0</param>
+<param name="qr_code" type="bool" gui-text="qr_code" gui-description="Ajouter un QR code avec le lien ou la ligne de commande au résultat">false</param>
+<param name="debug" type="bool" gui-text="débogage" gui-description="dessiner les boîtes englobantes de certaines structures [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#debug)">false</param>
+<param name="labels" type="bool" gui-text="étiquettes" gui-description="étiqueter les pièces (si possible)">true</param>
+<param name="reference" type="float" precision="2" max="9999" gui-text="référence" gui-description="dessiner un rectangle de référence de la longueur donnée (en mm) (0 pour désactiver) [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#reference)">100.0</param>
+<param name="inner_corners" type="optiongroup" appearance="combo" gui-text="inner_corners" gui-description="style des angles intérieurs [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#inner-corners)">
+<option value="loop">boucle</option>
+<option value="corner">angle</option>
+<option value="backarc">arc inversé</option>
+    </param>
+<param name="burn" type="float" precision="2" max="9999" gui-text="brûlage" gui-description="correction de brûlure (en mm) (plus grand = assemblage plus serré) [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#burn)">0.1</param>
+</page>
+<page name="tab_2" gui-text="Assemblages à entures"><param name="FingerJoint_style" type="optiongroup" appearance="combo" gui-text="style" gui-description="style des entures">
+<option value="rectangular">rectangulaire</option>
+<option value="springs">ressorts</option>
+<option value="barbs">crans</option>
+<option value="snap">clipsable</option>
+    </param>
+<param name="FingerJoint_surroundingspaces" type="float" precision="2" max="9999" gui-text="espaces autour" gui-description="espace au début et à la fin, en multiple des espaces normaux">2.0</param>
+<param name="FingerJoint_bottom_lip" type="float" precision="2" max="9999" gui-text="bottom_lip" gui-description="hauteur des lèvres inférieures qui dépassent (multiples de l'épaisseur), FingerHoleEdge seulement !">0.0</param>
+<param name="FingerJoint_edge_width" type="float" precision="2" max="9999" gui-text="largeur de bord" gui-description="espace sous les trous du FingerHoleEdge (multiples de l'épaisseur)">1.0</param>
+<param name="FingerJoint_extra_length" type="float" precision="2" max="9999" gui-text="extra_length" gui-description="matière en plus à poncer pour enlever les traces de brûlure (multiples de l'épaisseur)">0.0</param>
+<param name="FingerJoint_finger" type="float" precision="2" max="9999" gui-text="créneau" gui-description="largeur des entures (multiples de l'épaisseur)">2.0</param>
+<param name="FingerJoint_play" type="float" precision="2" max="9999" gui-text="jeu" gui-description="espace en plus pour que les entures entrent et sortent (multiples de l'épaisseur)">0.0</param>
+<param name="FingerJoint_space" type="float" precision="2" max="9999" gui-text="espace" gui-description="espace entre les entures (multiples de l'épaisseur)">2.0</param>
+<param name="FingerJoint_width" type="float" precision="2" max="9999" gui-text="largeur" gui-description="largeur des trous d'entures (multiples de l'épaisseur)">1.0</param>
+</page>
+<page name="tab_3" gui-text="Bords muraux simples"><param name="Wall_edge_width" type="float" precision="2" max="9999" gui-text="largeur de bord" gui-description="espace sous les trous du FingerHoleEdge (multiples de l'épaisseur)">1.0</param>
+</page>
+<page name="tab_4" gui-text="Bords pour panneau à rainures"><param name="SlatWall_bottom_hook" type="optiongroup" appearance="combo" gui-text="crochet bas" gui-description="&quot;ressort&quot;, &quot;clou&quot; or &quot;rien&quot;">
+<option value="hook">crochet</option>
+<option value="spring">ressort</option>
+<option value="stud">clou</option>
+<option value="none">aucun</option>
+    </param>
+<param name="SlatWall_hook_depth" type="float" precision="2" max="9999" gui-text="hook_depth" gui-description="largeur horizontale du crochet">4.0</param>
+<param name="SlatWall_hook_distance" type="float" precision="2" max="9999" gui-text="hook_distance" gui-description="espace horizontal jusqu'au crochet">5.5</param>
+<param name="SlatWall_hook_height" type="float" precision="2" max="9999" gui-text="hook_height" gui-description="hauteur de la barre horizontale du crochet">6.0</param>
+<param name="SlatWall_hook_overall_height" type="float" precision="2" max="9999" gui-text="hook_overall_height" gui-description="hauteur du crochet de haut en bas">12.0</param>
+<param name="SlatWall_pitch" type="float" precision="2" max="9999" gui-text="hauteur" gui-description="espacement vertical des rainures, d'axe en axe (en mm)">101.6</param>
+<param name="SlatWall_edge_width" type="float" precision="2" max="9999" gui-text="largeur de bord" gui-description="espace sous les trous du FingerHoleEdge (multiples de l'épaisseur)">1.0</param>
+<param name="SlatWall_hook_extra_height" type="float" precision="2" max="9999" gui-text="crochet hauteur extra" gui-description="espace autour des fixations (multiples de l'épaisseur)">2.0</param>
+</page>
+<page name="tab_5" gui-text="Bords pour rail DIN"><param name="DinRail_bottom" type="optiongroup" appearance="combo" gui-text="fond" gui-description="« stud » (appui) ou « none » (aucun)">
+<option value="stud">clou</option>
+<option value="none">aucun</option>
+    </param>
+<param name="DinRail_depth" type="float" precision="2" max="9999" gui-text="profondeur" gui-description="largeur horizontale du crochet">8.0</param>
+<param name="DinRail_edge_width" type="float" precision="2" max="9999" gui-text="largeur de bord" gui-description="espace sous les trous du FingerHoleEdge (multiples de l'épaisseur)">1.0</param>
+</page>
+<page name="tab_6" gui-text="Bords pour tasseau biseauté"><param name="FrenchCleat_angle" type="float" precision="2" max="9999" gui-text="angle" gui-description="angle de la coupe (0 = horizontale)">45.0</param>
+<param name="FrenchCleat_bottom" type="optiongroup" appearance="combo" gui-text="fond" gui-description="« stud » pour s'appuyer contre le mur, « hook » pour s'accrocher à un second tasseau, « none » pour un bord droit">
+<option value="stud">clou</option>
+<option value="hook">crochet</option>
+<option value="none">aucun</option>
+    </param>
+<param name="FrenchCleat_depth" type="float" precision="2" max="9999" gui-text="profondeur" gui-description="largeur horizontale du crochet en mm">18.0</param>
+<param name="FrenchCleat_spacing" type="float" precision="2" max="9999" gui-text="espacement" gui-description="distance entre les tasseaux en mm (pour le crochet du bas)">200.0</param>
+<param name="FrenchCleat_edge_width" type="float" precision="2" max="9999" gui-text="largeur de bord" gui-description="espace sous les trous du FingerHoleEdge (multiples de l'épaisseur)">1.0</param>
+</page>
+<page name="tab_7" gui-text="Bords pour Skådis"><param name="Skadis_board_thickness" type="float" precision="2" max="9999" gui-text="board_thickness" gui-description="Épaisseur du panneau Skådis">5.1</param>
+<param name="Skadis_style" type="optiongroup" appearance="combo" gui-text="style" gui-description="Mode d'accrochage au mur">
+<option value="hooks">crochets</option>
+<option value="hook+stud">crochet + appui</option>
+<option value="single">unique</option>
+    </param>
+<param name="Skadis_edge_width" type="float" precision="2" max="9999" gui-text="largeur de bord" gui-description="largeur de bord">1.0</param>
+</page>
+<page name="tab_8" gui-text="Exemple">
+<image>./WallConsole-thumb.jpg</image>
+</page>
+</param>
+<label appearance="url">https://boxes.hackerspace-bamberg.de/WallConsole</label>
+<effect>
+    <object-type>all</object-type>
+    <effects-menu>
+        <submenu name="FabLab Boc@l"><submenu name="Boîtes (Boxes.py)"><submenu name="Fixations murales" /></submenu></submenu></effects-menu>
+    <icon>WallConsole-thumb.svg</icon>
+</effect>
+<script>
+    <command location="inx" interpreter="python">boxes_proxy.py</command>
+</script>
+</inkscape-extension>

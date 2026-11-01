@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+<name>Boîte en papier (PaperBox)</name>
+<id>info.festi.boxes.py.PaperBox</id>
+<param name="generator" type="string" gui-hidden="true">paperbox</param>
+<param name="tab" type="notebook"><page name="tab_0" gui-text="Boîte en papier"><param name="x" type="float" precision="2" max="9999" gui-text="x" gui-description="largeur intérieure en mm">100.0</param>
+<param name="y" type="float" precision="2" max="9999" gui-text="y" gui-description="profondeur intérieure en mm">100.0</param>
+<param name="h" type="float" precision="2" max="9999" gui-text="h" gui-description="hauteur intérieure en mm">100.0</param>
+<param name="design" type="optiongroup" appearance="combo" gui-text="modèle" gui-description="modèles différents pour économiser le papier. La boîte à rabat a aussi une fente de fermeture pour son couvercle.">
+<option value="automatic">automatique</option>
+<option value="widebox">boîte large</option>
+<option value="tuckbox">boîte à rabat</option>
+    </param>
+<param name="lid_height" type="float" precision="2" max="9999" gui-text="lid_height" gui-description="Hauteur du couvercle (partie qui rentre dans la boîte)">15</param>
+<param name="lid_radius" type="float" precision="2" max="9999" gui-text="lid_radius" gui-description="Angle, en radians, du coin arrondi du couvercle">7</param>
+<param name="lid_sides" type="float" precision="2" max="9999" gui-text="lid_sides" gui-description="Largeur des deux côtés sur lesquels se pose le couvercle">20</param>
+<param name="margin" type="float" precision="2" max="9999" gui-text="marge" gui-description="Marge des côtés collés">0</param>
+<param name="mark_length" type="float" precision="2" max="9999" gui-text="mark_length" gui-description="Longueur du repère de pliage extérieur">1.5</param>
+<param name="tab_angle_rad" type="float" precision="2" max="9999" gui-text="tab_angle_rad" gui-description="Angle (en radians) des côtés à coller à l'intérieur de la boîte">0.07982998571223732</param>
+<param name="finger_hole_diameter" type="float" precision="2" max="9999" gui-text="finger_hole_diameter" gui-description="Diamètre du trou pour attraper le couvercle">15</param>
+</page>
+<page name="tab_1" gui-text="Par défaut"><param name="thickness" type="float" precision="2" max="9999" gui-text="épaisseur" gui-description="épaisseur du matériau (en mm) [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#thickness)">3.0</param>
+<param name="tabs" type="float" precision="2" max="9999" gui-text="brides" gui-description="largeur des attaches qui retiennent les pièces dans la plaque (en mm) (pas partout) [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#tabs)">0.0</param>
+<param name="qr_code" type="bool" gui-text="qr_code" gui-description="Ajouter un QR code avec le lien ou la ligne de commande au résultat">false</param>
+<param name="debug" type="bool" gui-text="débogage" gui-description="dessiner les boîtes englobantes de certaines structures [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#debug)">false</param>
+<param name="labels" type="bool" gui-text="étiquettes" gui-description="étiqueter les pièces (si possible)">true</param>
+<param name="reference" type="float" precision="2" max="9999" gui-text="référence" gui-description="dessiner un rectangle de référence de la longueur donnée (en mm) (0 pour désactiver) [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#reference)">100.0</param>
+<param name="inner_corners" type="optiongroup" appearance="combo" gui-text="inner_corners" gui-description="style des angles intérieurs [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#inner-corners)">
+<option value="loop">boucle</option>
+<option value="corner">angle</option>
+<option value="backarc">arc inversé</option>
+    </param>
+<param name="burn" type="float" precision="2" max="9999" gui-text="brûlage" gui-description="correction de brûlure (en mm) (plus grand = assemblage plus serré) [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#burn)">0.1</param>
+</page>
+<page name="tab_2" gui-text="Exemple">
+<image>./PaperBox-thumb.jpg</image>
+</page>
+</param>
+<label appearance="url">https://boxes.hackerspace-bamberg.de/PaperBox</label>
+<effect>
+    <object-type>all</object-type>
+    <effects-menu>
+        <submenu name="FabLab Boc@l"><submenu name="Boîtes (Boxes.py)"><submenu name="Objets divers" /></submenu></submenu></effects-menu>
+    <icon>PaperBox-thumb.svg</icon>
+</effect>
+<script>
+    <command location="inx" interpreter="python">boxes_proxy.py</command>
+</script>
+</inkscape-extension>

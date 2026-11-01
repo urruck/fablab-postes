@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Paille articulée</name>
+    <id>org.inkscape.Origami_patterns.cylindrical_bendy</id>
+    <param name="active-tab" type="notebook">
+        <page name="title" gui-text="Options">
+            <param name="pattern_type" type="optiongroup" appearance="combo" gui-text="Type de motif :">
+                <option value="origami">Origami régulier</option>
+                <option value="origami_bent">Origami plié</option>
+                <option value="kirigami1">Kirigami mode 1</option>
+                <option value="kirigami2">Kirigami mode 2</option>
+            </param>
+            <separator />
+            <param name="n" type="int" min="3" max="25" gui-text="Nombre de côtés du polygone">6</param>
+            <param name="lines" type="int" min="1" max="100" gui-text="Nombre de cellules">3</param>
+            <separator />
+            <param name="radius" type="float" max="10000" precision="3" gui-text="Rayon du grand polygone">25.0</param>
+            <param name="radial_ratio" type="float" max="1.0" min="0.0001" precision="3" gui-text="Rapport petit rayon / grand rayon">0.75</param>
+            <separator />
+            <param name="parameter_type" type="optiongroup" appearance="combo" gui-text="Paramètre :">
+                <option value="angles">Angles (alpha1, alpha2)</option>
+                <option value="heights">Hauteurs (h1, h2)</option>
+            </param>
+            <param name="alpha1" type="int" min="5" max="90" gui-text="Angle du cône supérieur (alpha1)">45</param>
+            <param name="alpha2" type="int" min="5" max="90" gui-text="Angle du cône inférieur (alpha2)">35</param>
+            <param name="h1" type="float" min="0" max="200.0" precision="3" gui-text="Hauteur du cône supérieur (h1)">1</param>
+            <param name="h2" type="float" min="0" max="200.0" precision="3" gui-text="Hauteur du cône inférieur (h2)">2</param>
+            <param name="units" type="optiongroup" appearance="combo" gui-text="Unités">
+                <option value="mm">mm</option>
+                <option value="cm">cm</option>
+                <option value="in">in</option>
+                <option value="pt">pt</option>
+                <option value="px">px</option>
+            </param>
+            <label>Publié dans : https://doi.org/10.1115/1.4052222</label>
+            <param name="simulation_mode" type="bool" gui-text="Mode simulation">true</param>
+        </page>
+        <page name="extra" gui-text="Extra">
+            <param name="add_attachment" type="bool" gui-text="Ajouter des fixations ?">false</param>
+            <separator />
+            <param name="base_height" type="float" max="10000" precision="3" gui-text="Hauteur de la base">5.0</param>
+            <param name="add_base_slot" type="bool" gui-text="Ajouter des fentes à la base ?">false</param>
+            <param name="center_base_slot" type="bool" gui-text="Centrer les fentes de la base ?">false</param>
+            <param name="base_slot_height" type="float" max="10000" precision="3" gui-text="Hauteur des fentes de la base">3.0</param>
+            <param name="base_slot_width" type="float" max="10000" precision="3" gui-text="Largeur des fentes de la base">3.0</param>
+            <separator />
+            <param name="distance" type="float" max="10000" precision="3" gui-text="Distance entre les cellules">3.0</param>
+            <param name="add_distance_slot" type="bool" gui-text="Ajouter des fentes entre les cellules ?">false</param>
+            <param name="distance_slot_height" type="float" max="10000" precision="3" gui-text="Hauteur des fentes entre cellules">3.0</param>
+            <param name="distance_slot_width" type="float" max="10000" precision="3" gui-text="Largeur des fentes entre cellules">3.0</param>
+        </page>
+        <page name="mountains" gui-text="Montagnes">
+            <param name="mountain_bool" type="bool" gui-text="Dessiner les plis montagne ?">true</param>
+            <param name="mountain_bool_only" type="bool" gui-text="Dessiner SEULEMENT les plis montagne ?">false</param>
+            <param name="mountain_dashes_bool" type="bool" gui-text="Contours en pointillés ?">true</param>
+            <param name="mountain_dashes_len" type="float" min="0.1" max="10" appearance="full" precision="2" gui-text="Plis montagne : longueur tiret + espace">1</param>
+            <param name="mountain_dashes_duty" type="float" min="0.1" max="1" appearance="full" precision="2" gui-text="Plis montagne : part du tiret">0.5</param>
+            <param name="mountain_stroke_width" type="float" min="0.01" max="3" appearance="full" gui-text="Épaisseur des plis montagne">0.1</param>
+            <param name="mountain_stroke_color" type="color" gui-text="Couleur des plis montagne :">4278190335</param>
+        </page>
+        <page name="valleys" gui-text="Vallées">
+            <param name="valley_bool" type="bool" gui-text="Dessiner les plis vallée ?">true</param>
+            <param name="valley_bool_only" type="bool" gui-text="Dessiner SEULEMENT les plis vallée ?">false</param>
+            <param name="valley_dashes_bool" type="bool" gui-text="Contours en pointillés ?">true</param>
+            <param name="valley_dashes_len" type="float" min="0.1" max="10" appearance="full" precision="2" gui-text="Plis vallée : longueur tiret + espace">1</param>
+            <param name="valley_dashes_duty" type="float" min="0.1" max="1" appearance="full" precision="2" gui-text="Plis vallée : part du tiret">0.25</param>
+            <param name="valley_stroke_width" type="float" min="0.01" max="3" appearance="full" gui-text="Épaisseur des plis vallée">0.1</param>
+            <param name="valley_stroke_color" type="color" gui-text="Couleur des plis vallée :">65535</param>
+        </page>
+        <page name="cuts" gui-text="Découpes">
+            <param name="cut_bool" type="bool" gui-text="Dessiner les découpes ?">true</param>
+            <param name="cut_dashes_bool" type="bool" gui-text="Contours en pointillés ?">false</param>
+            <param name="cut_dashes_len" type="float" min="0.1" max="10" appearance="full" precision="2" gui-text="Découpes : longueur tiret + espace">1</param>
+            <param name="cut_dashes_duty" type="float" min="0.1" max="1" appearance="full" precision="2" gui-text="Découpes : part du tiret">0.25</param>
+            <param name="cut_stroke_width" type="float" min="0.01" max="3" appearance="full" gui-text="Épaisseur des découpes">0.1</param>
+            <param name="cut_stroke_color" type="color" gui-text="Couleur des découpes :">16711935</param>
+        </page>
+        <page name="edge" gui-text="Bord">
+            <param name="edge_bool" type="bool" gui-text="Dessiner les bords ?">true</param>
+            <param name="edge_bool_only" type="bool" gui-text="Dessiner SEULEMENT les bords ?">false</param>
+            <param name="edge_single_path" type="bool" gui-text="Bords en un seul chemin ?">true</param>
+            <param name="edge_dashes_bool" type="bool" gui-text="Contours en pointillés ?">false</param>
+            <param name="edge_dashes_len" type="float" min="0.1" max="10" appearance="full" precision="2" gui-text="Bords : longueur tiret + espace">1</param>
+            <param name="edge_dashes_duty" type="float" min="0.1" max="1" appearance="full" precision="2" gui-text="Bords : part du tiret">0.25</param>
+            <param name="edge_stroke_width" type="float" min="0.01" max="3" appearance="full" gui-text="Épaisseur des bords">0.1</param>
+            <param name="edge_stroke_color" type="color" gui-text="Couleur des bords :">255</param>
+        </page>
+        <page name="vertices" gui-text="Sommets">
+            <param name="vertex_bool" type="bool" gui-text="Dessiner les sommets ?">true</param>
+            <param name="vertex_bool_only" type="bool" gui-text="Dessiner SEULEMENT les sommets ?">false</param>
+            <param name="vertex_base_outer_bool" type="bool" gui-text="Sommets extérieurs de la base ?">true</param>
+            <param name="vertex_base_inner_bool" type="bool" gui-text="Autres sommets de la base ?">true</param>
+            <param name="vertex_radius_outer_bool" type="bool" gui-text="Sommets du rayon extérieur ?">true</param>
+            <param name="vertex_radius_inner_bool" type="bool" gui-text="Sommets du rayon intérieur ?">true</param>
+            <param name="vertex_radius" type="float" min="0.01" max="50" appearance="full" gui-text="Rayon des sommets">0.1</param>
+            <param name="vertex_stroke_width" type="float" min="0.01" max="3" appearance="full" gui-text="Épaisseur du contour des sommets">0.1</param>
+            <param name="vertex_stroke_color" type="color" gui-text="Couleur des sommets :">255</param>
+        </page>
+    </param>
+    <effect>
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Papier et origami"><submenu name="Origami" /></submenu></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">OrigamiPatterns/Cylindrical_Bendy.py</command>
+    </script>
+</inkscape-extension>

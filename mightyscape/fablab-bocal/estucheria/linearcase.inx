@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Étuis carton - Étui linéaire</name>
+    <id>fablabchemnitz.de.linearcase</id>
+    <image>linearcase.svg</image>
+    <param name="unit" gui-text="Unité :" type="optiongroup" appearance="combo">
+        <option translatable="no" value="mm">mm</option>
+    </param>
+    <param name="width" type="float" min="0.1" max="300.0" gui-text="A - largeur :">25.0</param>
+    <param name="depth" type="float" min="0.1" max="300.0" gui-text="L - longueur :">25.0</param>
+    <param name="height" type="float" min="0.1" max="300.0" gui-text="H - hauteur :">25.0</param>
+    <param name="glue_tab" type="float" min="0.1" max="300.0" gui-text="P - Largeur de la patte de collage">5.0</param>
+    <param name="close_tab" type="float" min="0.1" max="300.0" gui-text="C - Rabat de fermeture du dessus :">5.0</param>
+    <param name="side_tabs" type="float" min="0.1" max="300.0" gui-text="T - Pattes de fermeture du dessus :">5.0</param>
+    <effect>
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Boîtes (autres modèles)"><submenu name="Carton et papier" /></submenu></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">linearcase.py</command>
+    </script>
+</inkscape-extension>

@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Alignement avec retrait</name>
+    <id>fablabchemnitz.de.inset_alignment</id>
+    <param name="anchor_node" type="optiongroup" appearance="combo" gui-text="Retrait par rapport à">
+        <option value="FIRST_SEL">Premier sélectionné</option>
+        <option value="LAST_SEL">Dernier sélectionné</option>
+        <option value="LARGEST">Le plus grand</option>
+    </param>
+    <param name="relative_to_v" type="optiongroup" appearance="radio" gui-text="Alignement vertical">
+        <option value="TOP">Haut</option>
+        <option value="CENTRE">Centre</option>
+        <option value="BOTTOM">Bas</option>
+    </param>
+    <param name="relative_to_h" type="optiongroup" appearance="radio" gui-text="Alignement horizontal">
+        <option value="LEFT">Gauche</option>
+        <option value="MIDDLE">Milieu</option>
+        <option value="RIGHT">Droite</option>
+    </param>
+    <param name="inset_x" type="float" precision="1" min="-1000" max="1000" gui-text="Retrait horizontal (mm)">10</param>
+    <param name="inset_y" type="float" precision="1" min="-1000" max="1000" gui-text="Retrait vertical (mm)">10</param>
+    <effect>
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Transformations" /></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">inset_alignment.py</command>
+    </script>
+</inkscape-extension>

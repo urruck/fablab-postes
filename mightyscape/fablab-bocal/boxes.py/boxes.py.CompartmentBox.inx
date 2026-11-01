@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+<name>Boîte à compartiments (CompartmentBox)</name>
+<id>info.festi.boxes.py.CompartmentBox</id>
+<param name="generator" type="string" gui-hidden="true">compartmentbox</param>
+<param name="tab" type="notebook"><page name="tab_0" gui-text="Boîte à compartiments"><param name="sx" type="string" gui-text="sx" gui-description="sections de gauche à droite en mm [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#section-parameters)">50*3</param>
+<param name="sy" type="string" gui-text="sy" gui-description="sections de l'arrière à l'avant en mm [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#section-parameters)">50*3</param>
+<param name="h" type="float" precision="2" max="9999" gui-text="h" gui-description="hauteur interieure en mm (si on ne choisit pas « extérieur »)">100.0</param>
+<param name="outside" type="bool" gui-text="extérieur" gui-description="les dimensions sont des mesures extérieures [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#outside)">true</param>
+        <param name="bottom_edge" type="optiongroup" appearance="combo" gui-text="bord du bas" gui-description="type de bord pour le bord du bas">
+            <option value="F">F Assemblage à entures (côté opposé)</option>
+            <option value="h">h Bord (trous d'entures parallèles)</option>
+            <option value="s">s Empilable (bas, trous d'entures)</option>
+            <option value="e">e Bord droit</option>
+      </param>
+<param name="handle" type="optiongroup" appearance="combo" gui-text="poignée" gui-description="comment saisir le couvercle pour l'enlever">
+<option value="lip">lèvre</option>
+<option value="hole">trou</option>
+<option value="none">aucun</option>
+    </param>
+<param name="radius" type="float" precision="2" max="9999" gui-text="rayon" gui-description="rayon du trou de prise en mm">10</param>
+<param name="holes" type="string" gui-text="trous" gui-description="largeur du ou des trous en pourcentage de la largeur maximale">70</param>
+<param name="margin_t" type="float" precision="2" max="9999" gui-text="margin_t" gui-description="marge verticale du couvercle coulissant (multiples de l'épaisseur)">0.1</param>
+<param name="margin_s" type="float" precision="2" max="9999" gui-text="margin_s" gui-description="marge à ajouter des deux côtés du couvercle coulissant (multiples de l'épaisseur)">0.05</param>
+<param name="split_lip" type="bool" gui-text="split_lip" gui-description="créer deux bandes pour réduire les chutes">true</param>
+</page>
+<page name="tab_1" gui-text="Par défaut"><param name="thickness" type="float" precision="2" max="9999" gui-text="épaisseur" gui-description="épaisseur du matériau (en mm) [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#thickness)">3.0</param>
+<param name="tabs" type="float" precision="2" max="9999" gui-text="brides" gui-description="largeur des attaches qui retiennent les pièces dans la plaque (en mm) (pas partout) [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#tabs)">0.0</param>
+<param name="qr_code" type="bool" gui-text="qr_code" gui-description="Ajouter un QR code avec le lien ou la ligne de commande au résultat">false</param>
+<param name="debug" type="bool" gui-text="débogage" gui-description="dessiner les boîtes englobantes de certaines structures [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#debug)">false</param>
+<param name="labels" type="bool" gui-text="étiquettes" gui-description="étiqueter les pièces (si possible)">true</param>
+<param name="reference" type="float" precision="2" max="9999" gui-text="référence" gui-description="dessiner un rectangle de référence de la longueur donnée (en mm) (0 pour désactiver) [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#reference)">100.0</param>
+<param name="inner_corners" type="optiongroup" appearance="combo" gui-text="inner_corners" gui-description="style des angles intérieurs [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#inner-corners)">
+<option value="loop">boucle</option>
+<option value="corner">angle</option>
+<option value="backarc">arc inversé</option>
+    </param>
+<param name="burn" type="float" precision="2" max="9999" gui-text="brûlage" gui-description="correction de brûlure (en mm) (plus grand = assemblage plus serré) [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#burn)">0.1</param>
+</page>
+<page name="tab_2" gui-text="Bords empilables"><param name="Stackable_angle" type="int" max="9999" gui-text="angle" gui-description="angle intérieur des pieds">60</param>
+<param name="Stackable_bottom_stabilizers" type="float" precision="2" max="9999" gui-text="bottom_stabilizers" gui-description="hauteur des bandes à coller à l'intérieur des bords du bas (multiples de l'épaisseur)">0.0</param>
+<param name="Stackable_height" type="float" precision="2" max="9999" gui-text="hauteur" gui-description="hauteur des pieds (multiples de l'épaisseur)">2.0</param>
+<param name="Stackable_holedistance" type="float" precision="2" max="9999" gui-text="distance des trous" gui-description="distance entre les trous d'entures et le bord du bas (multiples de l'épaisseur)">1.0</param>
+<param name="Stackable_width" type="float" precision="2" max="9999" gui-text="largeur" gui-description="largeur des pieds (multiples de l'épaisseur)">4.0</param>
+</page>
+<page name="tab_3" gui-text="Exemple">
+<image>./CompartmentBox-thumb.jpg</image>
+</page>
+</param>
+<label appearance="url">https://boxes.hackerspace-bamberg.de/CompartmentBox</label>
+<effect>
+    <object-type>all</object-type>
+    <effects-menu>
+        <submenu name="FabLab Boc@l"><submenu name="Boîtes (Boxes.py)"><submenu name="Plateaux et casiers" /></submenu></submenu></effects-menu>
+    <icon>CompartmentBox-thumb.svg</icon>
+</effect>
+<script>
+    <command location="inx" interpreter="python">boxes_proxy.py</command>
+</script>
+</inkscape-extension>

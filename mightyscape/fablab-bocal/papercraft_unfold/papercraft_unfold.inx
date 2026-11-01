@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Dépliage papercraft 3D</name>
+    <id>fablabchemnitz.de.papercraft_unfold</id>
+	<param name="tab" type="notebook">
+		<page name="tab_general" gui-text="Entrée / général">
+		    <param name="inputfile" type="path" gui-text="Fichier d'entrée" gui-description="Le modèle à déplier" filetypes="obj,off,ply,stl" mode="file">/your/beautiful/3dmodel/file</param>
+		    <param name="generatelabels" type="bool" gui-text="Numéroter les arêtes">true</param>
+		    <param name="resizetoimport" type="bool" gui-text="Redimensionner le canevas à la boîte englobante du dessin importé">true</param>
+		    <param name="extraborder" type="float" precision="3" gui-text="Ajouter une bordure autour du canevas ajusté">0.0</param>
+		    <param name="extraborder_units" type="optiongroup" appearance="combo" gui-text="Unités du décalage de bordure">
+		       <option value="mm">mm</option>
+		       <option value="cm">cm</option>
+		       <option value="in">in</option>
+		       <option value="pt">pt</option>
+		       <option value="px">px</option>
+		    </param>
+		    <param name="show_fstl" type="bool" gui-text="Afficher le STL converti (et réparé) dans la visionneuse fstl">true</param>
+        </page>
+		<page name="tab_meshfixing" gui-text="Réparation / ajustement du maillage (ADMesh)">
+		    <param name="exact" type="bool" gui-text="Vérifier seulement les arêtes parfaitement jointives">true</param>
+		    <param name="nearby" type="bool" gui-text="Trouver et relier les facettes proches. Corriger les mauvaises facettes">true</param>
+		    <param name="tolerance" type="float" min="0.0" max="10000.0" precision="4" gui-text="Tolérance initiale de recherche de proximité">0.0</param>
+		    <param name="iterations" type="int" min="1" max="1000" gui-text="Nombre d'itérations de recherche de proximité">1</param>
+		    <param name="increment" type="float" min="0.0" max="10000.0" precision="4" gui-text="Augmentation de la tolérance à chaque itération">0.0</param>
+		    <param name="remove_unconnected" type="bool" gui-text="Supprimer les facettes sans voisine">true</param>
+		    <param name="fill_holes" type="bool" gui-text="Ajouter des facettes pour boucher les trous">true</param>
+		    <param name="normal_directions" type="bool" gui-text="Vérifier et corriger le sens des normales (horaire, anti-horaire)">true</param>
+		    <param name="reverse_all" type="bool" gui-text="Inverser le sens de toutes les facettes et normales">true</param>
+		    <param name="normal_values" type="bool" gui-text="Vérifier et corriger les valeurs des normales">true</param>
+			<separator />
+		    <param name="xy_mirror" type="bool" gui-text="Miroir XY">false</param>
+		    <param name="yz_mirror" type="bool" gui-text="Miroir YZ">false</param>
+		    <param name="xz_mirror" type="bool" gui-text="Miroir XZ">false</param>
+		    <param name="scale" type="float" min="0.0001" max="10000.0" precision="4" gui-text="Échelle">1.0</param>
+        </page>
+        <page name="tab_about" gui-text="À propos">
+            <label appearance="header">Dépliage papercraft 3D</label>
+            <label>Ce projet est une chaîne d'outils (fragile) pour importer différents modèles et créer des patrons dépliés à partir de maillages triangulaires. Il utilise ADMesh pour réparer le STL et produire un STL binaire, la visionneuse fstl pour vérifier le fichier, puis osresearch/papercraft déplie le STL binaire et crée le patron.</label>
+            <label>2020 - 2023 / écrit par Mario Voigt (Stadtfabrikanten e.V. / FabLab Chemnitz)</label>
+            <spacer />
+            <label appearance="header">Documentation en ligne</label>
+            <label appearance="url">https://y.stadtfabrikanten.org/papercraftunfold</label>
+            <spacer />
+            <label appearance="header">Contribuer</label>
+            <label appearance="url">https://gitea.fablabchemnitz.de/FabLab_Chemnitz/mightyscape-1.2</label>
+            <label appearance="url">mailto:mario.voigt@stadtfabrikanten.org</label>
+            <spacer />
+            <label appearance="header">Modules tiers</label>
+            <label appearance="url">https://github.com/osresearch/papercraft</label>
+            <label appearance="url">https://github.com/fstl-app/fstl</label>
+            <label appearance="url">https://github.com/admesh/admesh</label>
+            <spacer />
+            <label appearance="header">Collection d'extensions MightyScape</label>
+            <label>Ce logiciel fait partie de la collection d'extensions MightyScape pour Inkscape, sous licence GNU GPL v3</label>
+            <label appearance="url">https://y.stadtfabrikanten.org/mightyscape-overview</label>
+        </page>
+        <page name="tab_donate" gui-text="Faire un don">
+            <label appearance="header">Café + pizza</label>
+            <label>Nous sommes les Stadtfabrikanten, qui font vivre le FabLab Chemnitz depuis 2016. Un FabLab est un atelier ouvert qui donne accès à des machines et des outils numériques : imprimantes 3D, découpeuses laser, fraiseuses CNC.</label>
+            <spacer />           
+            <label>Vous aimez notre travail et voulez nous soutenir ? Vous pouvez faire un don à notre association de différentes façons :</label>
+            <label appearance="url">https://y.stadtfabrikanten.org/donate</label>
+            <spacer />
+            <label>Merci d'utiliser notre extension et de nous aider !</label>
+            <image>../000_about_fablabchemnitz.svg</image>
+        </page>
+    </param>
+    <effect needs-live-preview="true">
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Papier et origami"><submenu name="Dépliage papercraft" /></submenu></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">papercraft_unfold.py</command>
+    </script>
+</inkscape-extension>

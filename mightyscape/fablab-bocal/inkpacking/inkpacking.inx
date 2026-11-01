@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>InkPACKING (emballages)</name>
+    <id>fablabchemnitz.de.inkpacking</id>
+    <param name="pages" type="notebook">
+        <page name="page1" gui-text="Réglages du corps">
+            <param name="width" type="float" min="0.1" max="1000.0" gui-text="Largeur (A)">40</param>
+            <param name="depth" type="float" min="0.1" max="1000.0" gui-text="Profondeur (B)">30</param>
+            <param name="height" type="float" min="0.1" max="1000.0" gui-text="Hauteur (C)">80</param>
+            <param name="paper_thickness" type="float" min="0.0" max="2.0" gui-text="Compensation d'épaisseur du papier">0.5</param>
+        </page>
+        <page name="page2" gui-text="Dessus et fond">
+            <param gui-text="Type de dessus" name="topscheme" type="optiongroup" appearance="combo">
+                <option value="notp">Sans dessus</option>
+                <option value="rwlf">Arrondi avec rabat de fermeture</option>
+                <option value="fwlf">Plat avec rabat de fermeture</option>
+                <option value="fwnf">Collé à chaud</option>
+            </param>
+            <param name="tfal" type="bool" gui-text="Rabat du dessus à gauche">true</param>
+            <param gui-text="Type de fond" name="botscheme" type="optiongroup" appearance="combo">
+                <option value="nobt">Sans fond</option>
+                <option value="rwlf">Arrondi avec rabat de fermeture</option>
+                <option value="fwlf">Plat avec rabat de fermeture</option>
+                <option value="fwnf">Collé à chaud</option>
+                
+            </param>
+            <param name="bfal" type="bool" gui-text="Rabat du fond à gauche">true</param>
+            <param name="hotmeltprop" type="float" min="0.5" max="1" gui-text="Proportion du collage à chaud">0.6</param>
+            <param name="roto" type="float" min="-360" max="360" gui-text="débogage rotation">0</param>
+            <param name="tab_proportion" type="float" min="5" max="18" gui-text="Taille du rabat de fermeture">14</param>
+            <param name="lockroundradius" type="float" min="12" max="20" gui-text="Rayon du rabat de fermeture">18</param>
+            <param name="fingergrepa" type="bool" gui-text="Encoches pour les doigts sur la face « A »">false</param>
+            <param name="fingergrepb" type="bool" gui-text="Encoches pour les doigts sur la face « B »">false</param>
+            <param name="fingergrepr" type="float" min="2" max="20" gui-text="Rayon des encoches pour les doigts">5</param>
+        </page>
+        <page name="page4" gui-text="Options des rabats anti-poussière">
+            <param name="dustpages" type="notebook">
+                <page name="top" gui-text="Rabats anti-poussière du dessus">
+                    <param name="glueflapinoff" type="float" min="0" max="10" gui-text="Décalage Y du rabat intérieur">0</param>
+                    <param name="glueflapin45" type="float" min="0" max="10" gui-text="Décalage à 45° du rabat intérieur">2</param>
+                    <param name="glueflapinang" type="float" min="0" max="30" gui-text="Angle du rabat intérieur">7</param>
+                    <param name="glueflapouoff" type="float" min="0" max="10" gui-text="Décalage Y du rabat extérieur">3</param>
+                    <param name="glueflapou45" type="float" min="0" max="10" gui-text="Décalage à 45° du rabat extérieur">3</param>
+                    <param name="glueflapouang" type="float" min="0" max="30" gui-text="Angle du rabat extérieur">12</param>
+                </page>
+                <page name="bottom" gui-text="Rabats anti-poussière du fond">
+                    <param name="usetop" type="bool" gui-text="Ignorer ces réglages et utiliser ceux du « dessus »">true</param>
+                    <param name="bglueflapinoff" type="float" min="0" max="10" gui-text="Décalage Y du rabat intérieur">0</param>
+                    <param name="bglueflapin45" type="float" min="0" max="10" gui-text="Décalage à 45° du rabat intérieur">2</param>
+                    <param name="bglueflapinang" type="float" min="0" max="30" gui-text="Angle du rabat intérieur">7</param>
+                    <param name="bglueflapouoff" type="float" min="0" max="10" gui-text="Décalage Y du rabat extérieur">3</param>
+                    <param name="bglueflapou45" type="float" min="0" max="10" gui-text="Décalage à 45° du rabat extérieur">3</param>
+                    <param name="bglueflapouang" type="float" min="0" max="30" gui-text="Angle du rabat extérieur">12</param>
+                </page>
+            </param>
+            <param name="clueflapsize" type="float" min="5" max="20" gui-text="Taille du rabat latéral">13</param>
+            <param name="clueflapangle" type="float" min="0" max="70" gui-text="Angle du rabat latéral">12</param>
+            <param name="clueflapside" type="bool" gui-text="Patte de collage du côté opposé">false</param>
+        </page>
+        <page name="desc" gui-text="À propos">
+            <label xml:space="preserve">InkPACKING - Emballages professionnels pour Inkscape
+        
+Auteur : Celso Junior (celsojr2008 at gmail dot com)
+
+Utilisation : saisir la largeur, la hauteur et la profondeur
+de la boîte, choisir les options de dessus, de fond, de patte
+de collage et d'encoches, pour des combinaisons infinies
+qui répondront à vos besoins : une solution d'emballage
+libre, complète et techniquement efficace,
+qui apporte aux utilisateurs d'Inkscape des avantages uniques.
+
+Brésil - 2009</label>
+        </page>
+    </param>
+    <param name="unit" gui-text="Unité" type="optiongroup" appearance="combo">
+        <option value="pt">pt</option>
+        <option value="in">in</option>
+        <option value="cm">cm</option>
+        <option value="mm">mm</option>
+    </param>
+    <effect>
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Boîtes (autres modèles)"><submenu name="Carton et papier" /></submenu></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">inkpacking.py</command>
+    </script>
+</inkscape-extension>

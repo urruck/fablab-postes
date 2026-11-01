@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Optimiser l'ordre : petits trous d'abord</name>
+    <id>fablabchemnitz.de.optimize_sequence_lasercut_sequence</id>
+    <effect>
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Découpe laser et traceur" /></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">optimize_sequence_lasercut_sequence.py</command>
+    </script>
+</inkscape-extension>

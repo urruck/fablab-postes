@@ -9,6 +9,20 @@ du FabLab Chemnitz, préparée pour les postes du Boc@l :
 - **traduites en français phrase par phrase** (4 180 textes), et non plus mot à mot ;
 - **rangées par usage** dans le menu *Extensions > FabLab Boc@l*.
 
+## Dossier prêt à copier : `fablab-bocal/`
+
+`mightyscape/fablab-bocal/` contient l'ensemble des extensions déjà
+construites (433 extensions MightyScape triées, corrigées et traduites,
+plus le Calepinage maison) : c'est exactement ce que `installer.sh` installe.
+Pour le consulter ou l'installer à la main, sans GitHub :
+
+```bash
+cp -r fablab-bocal ~/.var/app/org.inkscape.Inkscape/config/inkscape/extensions/
+```
+
+Une partie des extensions demande aussi les bibliothèques Python de
+`dependances.txt` : `installer.sh` les installe (étape 3).
+
 ## Installation
 
 Le script de poste `fablab-poste.sh` l'appelle tout seul. Pour l'installer ou
@@ -82,6 +96,7 @@ puis rouvrir le résultat dans Inkscape.
 | `traductions/boxes-mo.json` | traduction officielle de Boxes.py, reprise de son catalogue |
 | `dependances.txt` | bibliothèques Python des extensions |
 | `bocal/` | extensions maison (calepinage), copiées telles quelles |
+| `fablab-bocal/` | résultat de la construction, prêt à copier dans Inkscape |
 
 ## Corrections apportées
 
@@ -134,4 +149,8 @@ puis rouvrir le résultat dans Inkscape.
    les nouveaux textes à traduire : les ajouter à `traductions/fr.json`.
 3. Si `construire.py` s'arrête sur « Correctif à revoir » ou « Catégorie
    inconnue », adapter `correctifs.py` ou `classement.json`.
-4. Tester dans Inkscape, puis pousser.
+4. Régénérer le dossier prêt à copier :
+   `rm -rf fablab-bocal && python3 construire.py CLONE/extensions/fablabchemnitz fablab-bocal`
+   (à refaire aussi après chaque changement de `classement.json`,
+   `correctifs.py`, `traductions/` ou `bocal/`).
+5. Tester dans Inkscape, puis pousser.

@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Boîte englobante</name>
+    <id>fablabchemnitz.de.bounding_box</id>
+    <label>Dessine les boîtes englobantes des objets sélectionnés, utile pour le débogage. Auteur : Pawel Mosakowski. Modifié par Mario Voigt.</label>
+    <param name="unit" gui-text="Unité" type="optiongroup" appearance="combo" gui-description="L'unité s'applique à l'intervalle et aux seuils">
+        <option value="mm">mm</option>
+        <option value="cm">cm</option>
+        <option value="px">px</option>
+        <option value="pt">pt</option>
+        <option value="pc">pc</option>
+        <option value="in">in</option>
+    </param>
+    <param name="offset" min="-10000.000" max="10000.000" precision="3" type="float" gui-text="Décalage par rapport à l'objet (toutes directions)">0.000</param>
+    <param name="corner_radius" type="float" min="0.000" precision="3" max="10000.000" gui-text="Rayon des coins" gui-description="Seulement pour le type boîte">0.000</param>
+    <separator />
+    <param name="box" type="bool" gui-text="Dessiner des rectangles">true</param>
+    <param name="circle" type="bool" gui-text="Dessiner des cercles">false</param>
+    <separator />
+    <param name="split" type="bool" gui-text="Traiter la sélection comme un groupe">true</param>
+    <effect>
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Formes et motifs"><submenu name="À partir de chemins" /></submenu></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">bounding_box.py</command>
+    </script>
+</inkscape-extension>

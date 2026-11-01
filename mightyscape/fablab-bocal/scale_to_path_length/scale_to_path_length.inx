@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Mettre à l'échelle selon la longueur du chemin</name>
+    <id>fablabchemnitz.de.scale_to_path_length</id>
+    <param name="scaleFrom" type="optiongroup" appearance="combo" gui-text="Mettre à l'échelle depuis :">
+        <option value="center">Centre</option>
+        <option value="topLeft">En haut à gauche</option>
+        <option value="topRight">En haut à droite</option>
+        <option value="bottomLeft">En bas à gauche</option>
+        <option value="bottomRight">En bas à droite</option>
+    </param>
+    <param name="scale" type="float" precision="3" min="0.000" max="9999999.000" gui-text="Facteur d'échelle :">1.000</param>
+    <param name="precision" type="int" min="0" max="10" gui-text="Précision :">5</param>
+    <param name="override_selection" type="bool" gui-text="Utiliser la longueur saisie" gui-description="Utiliser une longueur personnalisée au lieu de celle du premier objet sélectionné">false</param>			
+	<param name="custom_length" type="float" min="0.001" max="9999999.000" precision="3" gui-text="Longueur personnalisée">100.000</param>
+	<param name="unit" type="optiongroup" appearance="combo" gui-text="Unités">
+		<option value="mm">mm</option>
+		<option value="cm">cm</option>
+		<option value="in">in</option>
+		<option value="pt">pt</option>
+		<option value="px">px</option>
+		<option value="pc">pc</option>
+	</param>
+    <spacer />
+    <label>Cet effet donne à tous les chemins cibles la même longueur que le chemin source (ou que la longueur saisie), en gardant leur forme. La source est le chemin le plus haut de la sélection. Le champ Précision indique le nombre de chiffres significatifs auxquels la longueur est arrondie.</label>
+    <effect>
+        <object-type>path</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Transformations" /></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">scale_to_path_length.py</command>
+    </script>
+</inkscape-extension>

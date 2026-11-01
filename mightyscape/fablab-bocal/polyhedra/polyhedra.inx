@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Polyèdres (patrons)</name>
+    <id>fablabchemnitz.de.polyhedra</id>
+    <param name="poly" gui-text="Polyèdre dont dessiner le patron" type="optiongroup" appearance="combo">
+        <option value="Tetrahedron">Platonicien - Tétraèdre</option>
+        <option value="Cube">Platonicien - Cube</option>
+        <option value="Octahedron">Platonicien - Octaèdre</option>
+        <option value="Dodecahedron">Platonicien - Dodécaèdre</option>
+        <option value="Icosahedron">Platonicien - Icosaèdre</option>
+        <option value="TruncatedTetrahedron">Archimédien - Tétraèdre tronqué</option>
+        <option value="TruncatedCube">Archimédien - Cube tronqué</option>
+        <option value="TruncatedOctahedron">Archimédien - Octaèdre tronqué</option>
+        <option value="TruncatedDodecahedron">Archimédien - Dodécaèdre tronqué</option>
+        <option value="TruncatedIcosahedron">Archimédien - Icosaèdre tronqué</option>
+        <option value="Cuboctahedron">Archimédien - Cuboctaèdre</option>
+        <option value="Icosidodecahedron">Archimédien - Icosidodécaèdre</option>
+        <option value="SmallRhombicosidodecahedron">Archimédien - Petit rhombicosidodécaèdre</option>
+        <option value="SmallRhombicuboctahedron">Archimédien - Petit rhombicuboctaèdre</option>
+        <option value="GreatRhombicosidodecahedron">Archimédien - Grand rhombicosidodécaèdre</option>
+        <option value="GreatRhombicuboctahedron">Archimédien - Grand rhombicuboctaèdre</option>
+        <option value="SnubCube">Archimédien - Cube adouci</option>
+        <option value="SnubDodecahedron">Archimédien - Dodécaèdre adouci</option>
+        <option value="DeltoidalHexecontahedron">Dual archimédien - Hexacontaèdre deltoïdal</option>
+        <option value="DeltoidalIcositetrahedron">Dual archimédien - Icositétraèdre deltoïdal</option>
+        <option value="DisdyakisDodecahedron">Dual archimédien - Hexakisoctaèdre</option>
+        <option value="DisdyakisTriacontahedron">Dual archimédien - Hexakisicosaèdre</option>
+        <option value="PentagonalIcositetrahedron">Dual archimédien - Icositétraèdre pentagonal</option>
+        <option value="PentagonalHexecontahedron">Dual archimédien - Hexacontaèdre pentagonal</option>
+        <option value="PentakisDodecahedron">Dual archimédien - Pentakisdodécaèdre</option>
+        <option value="RhombicDodecahedron">Dual archimédien - Dodécaèdre rhombique</option>
+        <option value="RhombicTriacontahedron">Dual archimédien - Triacontaèdre rhombique</option>
+        <option value="SmallTriakisOctahedron">Dual archimédien - Triakisoctaèdre</option>
+        <option value="TetrakisHexahedron">Dual archimédien - Tétrakishexaèdre</option>
+        <option value="TriakisIcosahedron">Dual archimédien - Triakisicosaèdre</option>
+        <option value="TriakisTetrahedron">Dual archimédien - Triakistétraèdre</option>
+        <option value="ElongatedDodecahedron">Autre - Dodécaèdre allongé</option>
+        <option value="MathematicaPolyhedron">Autre - Polyèdre Mathematica</option>
+    </param>
+    <param name="size" type="float" min="1.0" max="1000.0" gui-text="longueur de la première arête">100.0</param>
+    <param name="unit" type="optiongroup" appearance="combo" gui-text="Unités">
+        <option value="mm">mm</option>
+        <option value="cm">cm</option>
+        <option value="in">in</option>
+        <option value="pt">pt</option>
+        <option value="px">px</option>
+        <option value="pc">pc</option>
+    </param>
+    <param name="tabs" type="optiongroup" appearance="combo" gui-text="Style des pattes">
+        <option value="0">Patte et fente</option>
+        <option value="1">Pattes doubles</option>
+        <option value="2">Pattes simples</option>
+        <option value="3">Aucun</option>
+    </param>
+    <param name="material_thickness" type="float" min="0.01" max="1000.0" gui-text="épaisseur du matériau">1.0</param>
+    <label>Remarque : l'épaisseur des contours générés peut varier (à cause des mises à l'échelle). Ajustez-la à la main.</label>
+    <effect>
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Boîtes (autres modèles)"><submenu name="Carton et papier" /></submenu></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">polyhedra.py</command>
+    </script>
+</inkscape-extension>

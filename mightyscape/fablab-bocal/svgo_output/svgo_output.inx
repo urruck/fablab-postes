@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Sortie SVGO (SVG optimisé)</name>
+    <id>fablabchemnitz.de.svgo_output</id>
+    <param name="tabs" type="notebook">
+        <page name="plugins1" gui-text="Greffons 1">
+            <param name="cleanupAttrs" type="bool" gui-text="cleanupAttrs">true</param>
+            <param name="removeDoctype" type="bool" gui-text="removeDoctype">true</param>
+            <param name="removeXMLProcInst" type="bool" gui-text="removeXMLProcInst">true</param>
+            <param name="removeComments" type="bool" gui-text="removeComments">true</param>
+            <param name="removeMetadata" type="bool" gui-text="removeMetadata">true</param>
+            <param name="removeTitle" type="bool" gui-text="removeTitle">false</param>
+            <param name="removeDesc" type="bool" gui-text="removeDesc">true</param>
+            <param name="removeUselessDefs" type="bool" gui-text="removeUselessDefs">true</param>
+            <param name="removeEditorsNSData" type="bool" gui-text="removeEditorsNSData">true</param>
+            <param name="removeEmptyAttrs" type="bool" gui-text="removeEmptyAttrs">true</param>
+            <param name="removeHiddenElems" type="bool" gui-text="removeHiddenElems">true</param>
+            <param name="removeEmptyText" type="bool" gui-text="removeEmptyText">true</param>
+            <param name="removeEmptyContainers" type="bool" gui-text="removeEmptyContainers">true</param>
+            <param name="removeViewBox" type="bool" gui-text="removeViewBox">true</param>
+            <param name="cleanupEnableBackground" type="bool" gui-text="cleanupEnableBackground">true</param>
+            <param name="convertStyleToAttrs" type="bool" gui-text="convertStyleToAttrs">true</param>
+            <param name="convertColors" type="bool" gui-text="convertColors">true</param>
+            <param name="convertPathData" type="bool" gui-text="convertPathData">true</param>
+            <param name="convertTransform" type="bool" gui-text="convertTransform">true</param>
+            <param name="removeUnknownsAndDefaults" type="bool" gui-text="removeUnknownsAndDefaults">true</param>
+        </page>
+        <page name="plugins2" gui-text="Greffons 2">
+            <param name="removeNonInheritableGroupAttrs" type="bool" gui-text="removeNonInheritableGroupAttrs">true</param>
+            <param name="removeUselessStrokeAndFill" type="bool" gui-text="removeUselessStrokeAndFill">true</param>
+            <param name="removeUnusedNS" type="bool" gui-text="removeUnusedNS">true</param>
+            <param name="cleanupIDs" type="bool" gui-text="cleanupIDs">true</param>
+            <param name="cleanupNumericValues" type="bool" gui-text="cleanupNumericValues">true</param>
+            <param name="moveElemsAttrsToGroup" type="bool" gui-text="moveElemsAttrsToGroup">true</param>
+            <param name="moveGroupAttrsToElems" type="bool" gui-text="moveGroupAttrsToElems">true</param>
+            <param name="collapseGroups" type="bool" gui-text="collapseGroups">true</param>
+            <param name="removeRasterImages" type="bool" gui-text="removeRasterImages">false</param>
+            <param name="mergePaths" type="bool" gui-text="mergePaths">true</param>
+            <param name="convertShapeToPath" type="bool" gui-text="convertShapeToPath">true</param>
+            <param name="sortAttrs" type="bool" gui-text="sortAttrs">false</param>
+            <param name="transformsWithOnePath" type="bool" gui-text="transformsWithOnePath">false</param>
+            <param name="removeDimensions" type="bool" gui-text="removeDimensions">false</param>
+            <param name="removeAttrs" type="bool" gui-text="removeAttrs">false</param>
+            <param name="addClassesToSVGElement" type="bool" gui-text="addClassesToSVGElement">false</param>
+        </page>
+        <page name="pluginshelp1" gui-text="Aide (greffons 1)">
+            <label xml:space="preserve">[ cleanupAttrs ] nettoie les attributs : retours à la ligne, espaces en fin et en double
+[ removeDoctype ] retire la déclaration doctype
+[ removeXMLProcInst ] retire les instructions de traitement XML
+[ removeComments ] retire les commentaires
+[ removeMetadata ] retire les métadonnées
+[ removeTitle ] retire le titre (désactivé par défaut)
+[ removeDesc ] retire la description (seulement si sans intérêt, par défaut)
+[ removeUselessDefs ] retire les éléments de defs sans id
+[ removeEditorsNSData ] retire les espaces de noms, éléments et attributs des éditeurs
+[ removeEmptyAttrs ] retire les attributs vides
+[ removeHiddenElems ] retire les éléments masqués
+[ removeEmptyText ] retire les éléments texte vides
+[ removeEmptyContainers ] retire les conteneurs vides
+[ removeViewBox ] retire l'attribut viewBox si possible (désactivé par défaut)
+[ cleanUpEnableBackground ] retire ou nettoie l'attribut enable-background si possible
+[ convertStyleToAttrs ] convertit les styles en attributs
+[ convertColors ] convertit les couleurs (de rgb() vers #rrggbb, de #rrggbb vers #rgb)
+[ convertPathData ] convertit les données de chemin en relatif ou absolu (le plus court), convertit un type de segment en un autre, retire les séparateurs inutiles, arrondit intelligemment, et bien plus
+[ convertTransform ] fusionne plusieurs transformations en une, convertit les matrices en formes courtes, et bien plus
+[ removeUnknownsAndDefaults ] retire le contenu et les attributs inconnus, et les attributs à valeur par défaut</label>
+        </page>
+        <page name="pluginshelp2" gui-text="Aide (greffons 2)">
+            <label xml:space="preserve">[ removeNonInheritableGroupAttrs ] retire les attributs de « présentation » non héritables des groupes
+[ removeUselessStrokeAndFill ] retire les attributs stroke et fill inutiles
+[ removeUnusedNS ] retire les déclarations d'espaces de noms inutilisés
+[ cleanupIDs ] retire les identifiants inutilisés et raccourcit les autres
+[ cleanupNumericValues ] arrondit les valeurs numériques à la précision fixée, retire l'unité « px » par défaut
+[ moveElemsAttrsToGroup ] déplace les attributs des éléments vers le groupe qui les contient
+[ moveGroupAttrsToElems ] déplace certains attributs de groupe vers les éléments contenus
+[ collapseGroups ] supprime les groupes inutiles
+[ removeRasterImages ] retire les images matricielles (désactivé par défaut)
+[ mergePaths ] fusionne plusieurs chemins en un seul
+[ convertShapeToPath ] convertit certaines formes simples en chemins
+[ sortAttrs ] trie les attributs des éléments pour une lisibilité épique (désactivé par défaut)
+[ transformsWithOnePath ] applique les transformations, recadre à la largeur réelle, centre verticalement et redimensionne un SVG ne contenant qu'un chemin (désactivé par défaut)
+[ removeDimensions ] retire les attributs width/height si une viewBox existe (désactivé par défaut)
+[ removeAttrs ] retire des attributs selon un motif (désactivé par défaut)
+[ addClassesToSVGElement ] ajoute des noms de classes à l'élément svg principal (désactivé par défaut)</label>
+        </page>
+    </param>
+    <output>
+        <extension>.svg</extension>
+        <mimetype>image/svg+xml</mimetype>
+        <filetypename>Optimized with svgo (*.svg)</filetypename>
+        <filetypetooltip>Scalable Vector Graphics</filetypetooltip>
+    </output>
+    <script>
+        <command location="inx" interpreter="python">svgo_output.py</command>
+    </script>
+</inkscape-extension>

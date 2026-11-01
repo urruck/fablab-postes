@@ -1,0 +1,166 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>KVEC (vectorisation)</name>
+    <id>fablabchemnitz.de.kvec</id>    
+    <param name="tab" type="notebook">
+        <page name="tab_general" gui-text="KVEC (vectorisation)">
+            <label appearance="header">Réglages généraux</label>
+            <separator />
+            <hbox>
+                <vbox>
+                    <param name="keeporiginal" type="bool" gui-text="Garder l'image d'origine sur le canevas">false</param>
+                    <param name="fittooriginal" type="bool" gui-text="Ajuster aux dimensions d'origine">true</param>
+                    <param name="debug" type="bool" gui-text="Informations de débogage">false</param>
+                    <param name="sysmalloc" type="bool" gui-text="Utiliser les routines malloc du système">true</param>
+                </vbox>
+                <vbox>
+                    <param name="font" type="bool" gui-text="Générer un jeu de paramètres optimisé" gui-description="Pour les images avec du texte">false</param>
+                    <param name="text" type="bool" gui-text="Sortie texte">true</param>
+                    <param name="sort" appearance="combo" type="optiongroup" gui-text="Tri" gui-description="Ordre de tri des vecteurs"> 
+                        <option value="max">du plus grand au plus petit</option>
+                        <option value="min">du plus petit au plus grand</option>
+                        <option value="local">local</option>
+                        <option value="color">couleur</option>
+                        <option value="nosort">sans tri</option>
+                    </param>
+                </vbox>
+            </hbox>
+            <separator />
+            <hbox>
+                <vbox>
+                <label appearance="header">Géométrie / qualité</label>
+                <separator />
+                <param name="grit" type="int" min="0" max="256" gui-text="Ignorer les détails de moins de x pixels" gui-description="Les détails de moins de N pixels sont ignorés. 0 désactive l'option. Au-delà de 256, plantage.">0</param>
+                <param name="gapfill" type="int" min="0" max="30" gui-text="Comblement des trous (saut)" gui-description="Valeur en dixièmes de pixel">0</param>
+                <param name="centerline" appearance="combo" type="optiongroup" gui-text="Lignes centrales" gui-description="Génère des lignes simples si l'épaisseur est assez faible"> 
+                    <option value="off">non</option>
+                    <option value="mixed">mixte</option>
+                    <option value="lines">lignes</option>
+                </param>
+                <param name="winding" appearance="combo" type="optiongroup" gui-text="Sens de parcours" gui-description="Sens de parcours des polygones"> 
+                    <option value="original">d'origine</option>
+                    <option value="reversed">inversé</option>
+                    <option value="optimized">optimisé</option>
+                </param>
+                <param name="bezier" type="bool" gui-text="Générer des courbes de Bézier">false</param>
+                <param name="errbez" type="int" min="1" max="20" gui-text="Paramètre d'erreur des courbes de Bézier">3</param>
+                <param name="overlapp" type="bool" gui-text="Chevauchement des polygones (1 px)" gui-description="Incompatible avec la haute résolution de vectorisation">false</param>
+                <param name="smooth" type="bool" gui-text="Lissage des polylignes">false</param>
+                <param name="reduce" appearance="combo" type="optiongroup" gui-text="Type de réduction des lignes"> 
+                    <option value="orthogonal">réduire les orthogonales</option>
+                    <option value="all">tout réduire</option>
+                    <option value="off">pas de réduction</option>
+                </param>
+                <param name="high_resolution" type="bool" gui-text="Haute résolution de vectorisation" gui-description="Désactivée par défaut. Incompatible avec « Chevauchement des polygones (1 px) »">false</param>
+                <param name="subsampling" type="bool" gui-text="Sous-échantillonnage" gui-description="Si activé, les vecteurs sont sous-échantillonnés d'un facteur 2 : fichier plus léger et vecteurs lissés.">false</param>
+                <param name="lossless" type="bool" gui-text="Générer une image sans perte" gui-description="Peut demander énormément de mémoire. Désactive aussi d'autres options !">false</param>
+                <param name="progressive" type="bool" gui-text="Image progressive" gui-description="l'image est construite en deux couches successives (une image « grossière » sans détails et une image affinée qui ne contient que les détails).">false</param>
+                <param name="progressive_gritfactor" type="int" min="0" max="256" gui-text="Facteur de grain progressif" gui-description="La valeur de grain de la première couche est multipliée par ce facteur">2</param>
+                <param name="progressive_colorfactor" type="int" min="0" max="30" gui-text="Facteur de couleur progressif" gui-description="La valeur de quantification de la première couche est divisée par ce facteur">2</param>
+            </vbox>
+            <vbox>
+                <label appearance="header">Couleurs / styles</label>
+                <separator />
+                <hbox>
+                    <vbox>
+                    <param name="quantize" type="int" min="2" max="99999999" gui-text="Quantification des couleurs">32</param>
+                    <param name="delta" type="int" min="0" max="128" gui-text="Delta" gui-description="Écart de couleur maximal autorisé entre la couche grossière et la couche de détails.">0</param>
+                    <param name="fill" appearance="combo" type="optiongroup" gui-text="Remplissage">
+                        <option value="solid">plein</option>
+                        <option value="line">ligne</option>
+                        <option value="contour">contour</option>
+                    </param>
+                    <param name="lwidth" type="int" min="0" max="1000" gui-text="Épaisseur de trait" gui-description="Valeur en dixièmes de pixel">0</param>         
+                     <param name="palette" appearance="combo" type="optiongroup" gui-text="Palette"> 
+                        <option value="optimize">optimisée</option>
+                        <option value="fixed">fixe</option>
+                    </param>  
+                    <param name="black" type="bool" gui-text="Couleur de sortie toujours noire">false</param>
+                    <param name="color_vectorization" appearance="combo" type="optiongroup" gui-text="vectorisation en couleurs">
+                        <option value="normal">Normale</option>
+                        <option value="vblack">Seulement les couleurs aux valeurs RVB les plus « sombres »</option>
+                        <option value="voblack nwhite">Toutes les couleurs sauf la plus claire</option>
+                        <option value="voblack dark">Seulement la couleur la plus sombre et la plus claire</option>
+                    </param>
+                    <param name="colspace" appearance="combo" type="optiongroup" gui-text="Espace colorimétrique" gui-description="Paramètres de conversion d'espace colorimétrique"> 
+                        <option value="rgb">rgb</option>
+                        <option value="rb">rb</option>
+                        <option value="gb">gb</option>
+                        <option value="gr">gr</option>
+                        <option value="cmyk">cmyk</option>
+                        <option value="cy">cy</option>
+                        <option value="my">my</option>
+                        <option value="mc">mc</option>
+                    </param>
+                    <param name="colsep" appearance="combo" type="optiongroup" gui-text="Séparation des couleurs" gui-description="Paramètres de séparation des couleurs"> 
+                        <option value="rgb">rgb</option>
+                        <option value="rb">rb</option>
+                        <option value="gb">gb</option>
+                        <option value="gr">gr</option>
+                        <option value="cy">cy</option>
+                        <option value="my">my</option>
+                        <option value="mc">mc</option>
+                        <option value="gg">gg</option>
+                        <option value="bb">bb</option>
+                        <option value="cc">cc</option>
+                        <option value="mm">mm</option>          
+                        <option value="yy">yy</option>          
+                    </param>
+                </vbox>
+                <vbox>
+                    <param name="tcolor_mode" appearance="combo" type="optiongroup" gui-text="Couleur de transparence"> 
+                        <option value="none">aucun</option>
+                        <option value="auto">détection automatique</option>
+                        <option value="custom">couleur personnalisée</option>
+                    </param>    
+                    <param name="tcolor_custom" type="color" gui-text="Couleur de transparence personnalisée">255</param>
+                    <param name="vcolor_mode" appearance="combo" type="optiongroup" gui-text="Isoler des zones de couleur - mode" gui-description="Utiliser la pipette ci-dessous"> 
+                        <option value="none">aucun</option>
+                        <option value="matching">correspondance</option>
+                        <option value="not_matching">not_matching</option>
+                    </param>    
+                    <param name="vcolor" type="color" gui-text="Couleur de la zone">255</param> 
+                    </vbox>
+                </hbox> 
+            </vbox>
+        </hbox>
+        </page>
+        <page name="tab_about" gui-text="À propos">
+            <label appearance="header">KVEC (vectorisation)</label>
+            <label>Intègre l'outil de vectorisation KVEC v4.9 de Karl-Heinz Kuhl (KK-Software). KVEC est fourni avec MightyScape.</label>
+            <label>2021 - 2023 / écrit par Mario Voigt (Stadtfabrikanten e.V. / FabLab Chemnitz)</label>
+            <spacer />
+            <label appearance="header">Documentation en ligne</label>
+            <label appearance="url">https://y.stadtfabrikanten.org/kvec</label>
+            <spacer />
+            <label appearance="header">Contribuer</label>
+            <label appearance="url">https://gitea.fablabchemnitz.de/FabLab_Chemnitz/mightyscape-1.2</label>
+            <label appearance="url">mailto:mario.voigt@stadtfabrikanten.org</label>
+            <spacer />
+            <label appearance="header">Modules tiers</label>
+            <label appearance="url">https://www.kvec.de</label>
+            <spacer />
+            <label appearance="header">Collection d'extensions MightyScape</label>
+            <label>Ce logiciel fait partie de la collection d'extensions MightyScape pour Inkscape, sous licence GNU GPL v3</label>
+            <label appearance="url">https://y.stadtfabrikanten.org/mightyscape-overview</label>
+        </page>
+        <page name="tab_donate" gui-text="Faire un don">
+            <label appearance="header">Café + pizza</label>
+            <label>Nous sommes les Stadtfabrikanten, qui font vivre le FabLab Chemnitz depuis 2016. Un FabLab est un atelier ouvert qui donne accès à des machines et des outils numériques : imprimantes 3D, découpeuses laser, fraiseuses CNC.</label>
+            <spacer />           
+            <label>Vous aimez notre travail et voulez nous soutenir ? Vous pouvez faire un don à notre association de différentes façons :</label>
+            <label appearance="url">https://y.stadtfabrikanten.org/donate</label>
+            <spacer />
+            <label>Merci d'utiliser notre extension et de nous aider !</label>
+            <image>../000_about_fablabchemnitz.svg</image>
+        </page>
+    </param>
+    <effect needs-live-preview="true">
+        <object-type>all</object-type>
+		<effects-menu>
+         <submenu name="FabLab Boc@l"><submenu name="Images et vectorisation" /></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">kvec.py</command>
+    </script>
+</inkscape-extension>

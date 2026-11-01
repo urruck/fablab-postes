@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Créer une palette</name>
+    <id>fablabchemnitz.de.generate_palette</id>
+    <label>Sélectionner des objets pour créer une palette de couleurs personnalisée.</label>
+    <label appearance="header">Propriétés de la palette</label>
+    <label>Nom de la palette</label>
+    <param name="name" type="string" gui-text=" " />
+    <vbox>
+        <param name="property" type="optiongroup" appearance="combo" gui-text="Couleur à reprendre">
+            <option value="fill">Couleur de remplissage</option>
+            <option value="stroke">Couleur de contour</option>
+            <option value="both">Les deux</option>
+        </param>
+    </vbox>
+    <label appearance="header">Options</label>
+    <param name="default" type="bool" gui-text="Inclure les gris par défaut">false</param>
+    <param name="replace" type="bool" gui-text="Remplacer la palette existante">false</param>
+    <param name="sort" type="optiongroup" appearance="combo" gui-text="Trier les couleurs">
+        <option value="selection">Sélection / ordre z</option>
+        <option value="hsl">Par valeurs TSL</option>
+        <option value="rgb">Par valeurs RVB</option>
+        <option value="x_location">Position X</option>
+        <option value="y_location">Position Y</option>
+    </param>
+    <spacer />
+    <hbox>
+        <image>info.svg</image>
+        <label>Pensez à redémarrer Inkscape</label>
+    </hbox>
+    <effect needs-live-preview="false">
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Couleurs" /></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">generate_palette.py</command>
+    </script>
+</inkscape-extension>

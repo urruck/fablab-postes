@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+	<name>Triangulation de Delaunay</name>
+	<id>fablabchemnitz.de.delaunay_triangulation</id>
+	<param name="tab" type="notebook">
+		<page name="Options" gui-text="Options">
+			<param name="joggling" type="bool" gui-text="Gérer la concavité et les trous">false</param>
+			<param name="furthest" type="bool" gui-text="Triangulation par le point le plus éloigné">false</param>
+			<param name="elt_type" type="optiongroup" appearance="combo" gui-text="Type d'objets à créer">
+				<option value="poly">Triangles</option>
+				<option value="line">Lignes séparées</option>
+			</param>
+			<spacer />
+			<separator />
+			<spacer />
+			<hbox>
+				<param name="fill_type" type="optiongroup" appearance="combo" gui-text="Origine de la couleur de remplissage">
+					<option value="first_sel">Comme le premier objet sélectionné</option>
+					<option value="last_sel">Comme le dernier objet sélectionné</option>
+					<option value="random">Aléatoire</option>
+					<option value="specified">Indiquée explicitement</option>
+				</param>
+				<param name="fill_color" type="color" appearance="colorbutton" gui-text=" " gui-description="Couleur de remplissage choisie">-1</param>
+			</hbox>
+			<hbox>
+				<param name="stroke_type" type="optiongroup" appearance="combo" gui-text="Origine de la couleur de contour">
+					<option value="first_sel">Comme le premier objet sélectionné</option>
+					<option value="last_sel">Comme le dernier objet sélectionné</option>
+					<option value="random">Aléatoire</option>
+					<option value="specified">Indiquée explicitement</option>
+				</param>
+				<param name="stroke_color" type="color" appearance="colorbutton" gui-text=" " gui-description="Couleur de contour choisie">255</param>
+			</hbox>
+		</page>
+		<page name="Advanced" gui-text="Avancé">
+			<param name="qhull" type="string" gui-text="options qhull">Qbb Qc Qz Q12</param>
+			<label>Si « Gérer la concavité » est activé dans l'onglet Options, « QJ » est ajouté devant les options qhull ci-dessus. Options par défaut : « Qbb Qc Qz Q12 ». Le site suivant décrit les options disponibles.</label>
+			<label appearance="url">http://www.qhull.org/html/qhull.htm#options</label>
+		</page>
+		<page name="Help" gui-text="Aide">
+			<label>Cet effet utilise l'algorithme de triangulation de Delaunay pour créer des triangles à partir de tous les points des objets sélectionnés.</label>
+		</page>
+	</param>
+	<effect>
+		<object-type>all</object-type>
+		<effects-menu>
+        <submenu name="FabLab Boc@l"><submenu name="Formes et motifs"><submenu name="À partir de chemins" /></submenu></submenu></effects-menu>
+	</effect>
+	<script>
+		<command location="inx" interpreter="python">delaunay_triangulation.py</command>
+	</script>
+</inkscape-extension>

@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Robot roulant Cut-Craft</name>
+    <id>fablabchemnitz.de.cutcraft.rollerbot</id>
+    <param name="unit" gui-text="Unités de mesure" gui-description="Unité de mesure de toutes les valeurs saisies dans cette fenêtre" type="optiongroup" appearance="combo">
+        <option value="mm">mm</option>
+        <option value="cm">cm</option>
+        <option value="in">in</option>
+    </param>
+    <separator />
+    <param name="supwidth" type="float" min="0.1" max="1000.0" gui-text="Largeur des montants" gui-description="Largeur des montants qui tiennent le robot">12.0</param>
+    <separator />
+    <param name="thickness" type="float" min="0.1" max="1000.0" precision="3" gui-text="Épaisseur du matériau" gui-description="Épaisseur du matériau">5.0</param>
+    <param name="kerf" type="float" min="0.0" max="1000.0" precision="3" gui-text="Trait de coupe laser" gui-description="Trait de coupe laser (tolérance). Dépend de la machine et de l'épaisseur du matériau">0.01</param>
+    <param name="linethickness" gui-text="Épaisseur du trait" type="optiongroup" appearance="combo">
+        <option value="1px">1 pixel</option>
+        <option value="0.002in">trait fin</option>
+    </param>
+    <effect>
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Boîtes (autres modèles)"><submenu name="À encoches" /></submenu></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">cutcraftrollerbot.py</command>
+    </script>
+</inkscape-extension>

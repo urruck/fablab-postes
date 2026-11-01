@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Inverser l'ordre des sous-chemins</name>
+    <id>fablabchemnitz.de.reverse_order_of_subpaths</id>
+    <label>Inverse l'ordre des sous-chemins (chemins combinés) sans inverser l'ordre des nœuds ni celui des chemins.</label>      
+    <effect>
+        <object-type>path</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Chemins"><submenu name="Joindre et ordonner" /></submenu></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">reverse_order_of_subpaths.py</command>
+    </script>
+</inkscape-extension>

@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Formes amusantes</name>
+    <id>fablabchemnitz.de.fun_shapes</id>
+    <effect implements-custom-gui="true">
+        <object-type>path</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Formes et motifs"><submenu name="Textures et effets" /></submenu></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">fun_shapes.py</command>
+    </script>
+</inkscape-extension>

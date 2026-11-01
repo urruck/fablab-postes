@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Charnière souple (ajustée au rectangle)</name>
+    <id>fablabchemnitz.de.living_hinge</id>
+    <param name="direction" gui-text="Direction" type="optiongroup" appearance="combo">
+        <option value="y">découpes verticales</option>
+        <option value="x">découpes horizontales</option>
+    </param>
+    <param name="unit" gui-text="Unité" type="optiongroup" appearance="combo">
+        <option value="mm">mm</option>
+        <option value="cm">cm</option>
+        <option value="in">in</option>
+        <option value="px">px</option>
+    </param>
+    <param name="cut_length" type="float" precision="2" gui-text="longueur de découpe (y)" min="1" max="1000">19.0</param>
+    <param name="gap_length" type="float" precision="2" gui-text="longueur de pont (y)" min="1" max="1000">3.0</param>
+    <param name="sep_distance" type="float" precision="2" gui-text="écart entre rangées (x)" min="1" max="1000">1.5</param>
+    <label xml:space="preserve">Cette extension dessine les lignes de découpe d'une charnière souple, dans la direction choisie.
+
+- direction : direction des découpes.
+- longueur de découpe : longueur de chaque découpe.
+- longueur de pont : écart entre deux découpes d'une même ligne.
+- écart entre rangées : distance entre deux rangées de découpes voisines.
+
+La longueur de découpe saisie est ajustée pour qu'un nombre entier de découpes tienne dans le rectangle. L'écart entre rangées est ajusté de la même façon.</label>
+    <effect>
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Découpe laser et traceur"><submenu name="Charnières souples" /></submenu></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">living_hinge.py</command>
+    </script>
+</inkscape-extension>

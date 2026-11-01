@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Torsion</name>
+    <id>fablabchemnitz.de.twist</id>
+    <label>Tord et inscrit un polygone en lui-même, de façon répétée. Le nombre de torsions est le nombre d'itérations. Le rapport de pas est la fraction de chaque côté dont chaque sommet se déplace.</label>
+    <param name="nSteps" type="int" min="1" max="100" gui-text="Nombre de torsions">8</param>
+    <param name="fRatio" type="float" min="-10" max="10" precision="5" gui-text="Rapport de pas">0.15</param>
+    <effect needs-live-preview="true">
+        <object-type>all</object-type>
+        <effects-menu>
+              <submenu name="FabLab Boc@l"><submenu name="Formes et motifs"><submenu name="À partir de chemins" /></submenu></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">twist.py</command>
+    </script>
+</inkscape-extension>

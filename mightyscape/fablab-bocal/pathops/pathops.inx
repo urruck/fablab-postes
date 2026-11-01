@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Opérations booléennes personnalisées</name>
+    <id>fablabchemnitz.de.pathops</id>
+    <param name="ink_verb" type="optiongroup" appearance="radio" gui-text="Opération sur les chemins :">
+        <option value="path-union">Union</option>
+        <option value="path-difference">Différence</option>
+        <option value="path-intersection">Intersection</option>
+        <option value="path-exclusion">Exclusion</option>
+        <option value="path-division">Division</option>
+        <option value="path-cut">Couper le chemin</option>
+        <option value="path-combine">Combiner</option>
+    </param>
+    <param name="max_ops" type="int" min="2" max="9999" gui-text="Nombre max. d'opérations par passe">500</param>
+    <param name="recursive_sel" type="bool" gui-text="Parcourir les groupes" gui-description="Si décoché, seuls les enfants directs des groupes de premier niveau de la sélection sont traités.">true</param>
+    <param name="keep_top" type="bool" gui-text="Garder l'élément du dessus à la fin">true</param>
+    <param name="dry_run" type="bool" gui-text="Essai à blanc (sans rien modifier)">false</param>
+    <effect needs-document="true" needs-live-preview="false">
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Chemins"><submenu name="Opérations booléennes" /></submenu></submenu></effects-menu>
+        <menu-tip>Apply Inkscape path operations to multiple objects.</menu-tip>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">pathops.py</command>
+    </script>
+</inkscape-extension>

@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Grille de perspective</name>
+    <id>fablabchemnitz.de.perspective_grid</id>
+    <param name="size_unit" type="optiongroup" appearance="combo" gui-text="Unités de géométrie">
+        <option value="px">px</option>
+        <option value="pt">pt</option>
+        <option value="cm">cm</option>
+        <option value="mm">mm</option>
+        <option value="in">in</option>
+    </param>
+    <param name="width" type="int" min="1" max="1000" gui-text="Largeur de la fenêtre">500</param>
+    <param name="height" type="int" min="1" max="1000" gui-text="Hauteur de la fenêtre">300</param>
+    <param name="horizon" type="float" min="-1000" max="1000" gui-text="Coordonnée y de l'horizon">150</param>
+    <param name="left_x" type="float" min="-1000" max="1000" gui-text="Point de fuite gauche">-100.0</param>
+    <param name="right_x" type="float" min="-1000" max="1000" gui-text="Point de fuite droit">600</param>
+    <param name="p_divs" type="int" min="1" max="1000" gui-text="Divisions angulaires de la perspective">10</param>
+    <param name="border_th" type="float" min="0" max="1000" gui-text="Épaisseur de la bordure [px]">3</param>
+    <param name="div_th" type="float" min="0" max="1000" gui-text="Épaisseur des divisions principales [px]">2</param>
+    <param name="div_color" type="color" appearance="colorbutton" gui-text="Couleur de la grille">255</param>
+    <effect>
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Grilles, repères et mesures" /></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">perspective_grid.py</command>
+    </script>
+</inkscape-extension>

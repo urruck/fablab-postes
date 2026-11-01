@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Numéroter les sous-chemins</name>
+    <id>fablabchemnitz.de.number_subpaths</id>
+    <label xml:space="preserve">Cette extension marque les nœuds de début et de fin de chaque sous-chemin de la sélection et numérote les sous-chemins.</label>
+    <param name="fontsize" type="string" gui-text="Taille de police :">10px</param>
+    <param name="dotsize" type="string" gui-text="Taille des points :">10px</param>
+	<param name="showID" type="bool" gui-text="Afficher l'identifiant du chemin">false</param>
+	<label>Point vert = début, point rouge = fin.</label>    
+    <effect>
+        <object-type>path</object-type>
+            <effects-menu>
+         <submenu name="FabLab Boc@l"><submenu name="Formes et motifs"><submenu name="À partir de chemins" /></submenu></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">number_subpaths.py</command>
+    </script>
+</inkscape-extension>

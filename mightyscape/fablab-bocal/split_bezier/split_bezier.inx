@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Subdiviser les courbes de Bézier</name>
+    <id>fablabchemnitz.de.split_bezier</id>
+    <param name="tab" type="notebook">
+        <page name="subdividePath" gui-text="Subdiviser le chemin">
+            <param name="maxLength" type="float" min="0.001" max="99999" gui-text="Longueur max. / nombre de subdivisions :">10</param>
+            <param name="unit" type="optiongroup" appearance="combo" gui-text="Unité :">
+                <option value="px">px</option>
+                <option value="pt">pt</option>
+                <option value="in">in</option>
+                <option value="mm">mm</option>
+                <option value="cm">cm</option>
+                <option value="perc">%</option>
+                <option value="count">Nombre de subdivisions</option>
+            </param>
+            <param name="precision" type="int" min="1" max="10" gui-text="Précision (max. 5) :">5</param>
+            <param name="separateSegs" type="bool" gui-text="Séparer">true</param>
+        </page>
+        <page name="desc" gui-text="Aide">
+            <label xml:space="preserve">Cet effet découpe le chemin de Bézier en segments séparés, selon la longueur maximale ou le nombre de subdivisions indiqué. Le champ Précision indique le nombre de chiffres significatifs auxquels la longueur est arrondie.</label>
+        </page>
+    </param>
+    <effect needs-live-preview="true">
+        <object-type>path</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Chemins"><submenu name="Couper et nettoyer" /></submenu></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">split_bezier.py</command>
+    </script>
+</inkscape-extension>

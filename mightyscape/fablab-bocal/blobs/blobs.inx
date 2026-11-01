@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Texture de taches</name>
+    <id>fablabchemnitz.de.blobs</id>
+    <param type="notebook" name="Nmain">
+        <page name="top" gui-text="Toutes">
+            <label>Remplit un rectangle de taches.</label>
+            <param max="256" name="nb" type="int" gui-text="Combien de taches ?">10</param>
+            <param name="pgsizep" type="bool" gui-text="Rectangle par défaut à la taille de la page ?">true</param>
+            <param max="10000" name="rx" type="int" gui-text="Zone de travail x">1000</param>
+            <param max="10000" name="ry" type="int" gui-text="Zone de travail y">1000</param>
+        </page>
+        <page name="bottom" gui-text="Chacune">
+            <label>Chaque tache.</label>
+            <param max="256" name="num" type="int" gui-text="Points intérieurs">10</param>
+            <param max="10000." name="sz" type="float" gui-text="Taille d'une tache">50.</param>
+            <param max="1.0" name="cave" type="float" gui-text="Concavité">0.</param>
+            <param max="10.0" name="blunt" type="float" gui-text="Arrondi des angles">0.3</param>
+        </page>
+    </param>
+    <effect>
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Formes et motifs"><submenu name="Textures et effets" /></submenu></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">blobs.py</command>
+    </script>
+</inkscape-extension>

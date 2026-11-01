@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+   <name>Spirales affines</name>
+   <id>fablabchemnitz.de.affine_spirals</id>
+   <param name="active-tab" type="notebook">
+      <page name="title" gui-text="Paramètres">
+         <param name="num_lines" type="int" min="1" max="100" gui-text="Profondeur">3</param>
+         <param name="num_petals" type="int" min="2" max="100" gui-text="pétales">2</param>
+         <param name="shrink_ratio" type="float" min="0.01" max="0.99" precision="2" gui-text="facteur de réduction">0.8</param>
+         <param name="noses" type="bool" gui-text="Pointes activées">true</param>
+      </page>
+   </param>
+   <effect>
+      <object-type>all</object-type>
+      <effects-menu>
+         <submenu name="FabLab Boc@l"><submenu name="Jeux et puzzles" /></submenu></effects-menu>
+      <icon>icon.svg</icon>
+   </effect>
+   <script>
+      <command location="inx" interpreter="python">affine_spirals.py</command>
+   </script>
+</inkscape-extension>

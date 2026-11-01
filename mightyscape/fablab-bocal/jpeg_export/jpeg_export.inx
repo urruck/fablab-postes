@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Export JPEG</name>
+    <id>fablabchemnitz.de.jpeg_export</id>
+    <param name="path" type="path" gui-text="Chemin d'export" gui-description="Chemin complet du fichier, ex. « /home/utilisateur/Documents/plan.dxf »" filetypes="jpg" mode="file_new">C:\Users\</param>
+    <param name="bgcol" type="string" gui-text="Couleur de fond (vide = blanc)" gui-description="Code hexadécimal de la couleur de fond, ex. « #abc123 »" />
+    <param name="quality" type="int" min="0" max="100" gui-text="Qualité %" gui-description="Qualité de compression JPG">100</param>
+    <param name="density" type="int" min="30" max="2400" gui-text="Résolution (ppp)" gui-description="Conseillé : 90 (écran) ou 300 (impression)">90</param>
+    <param name="page" type="bool" gui-text="Exporter toute la page" gui-description="Si coché, toute la page est exportée, sinon la sélection.">true</param>
+    <param name="fast" type="bool" gui-text="Export rapide (conseillé)" gui-description="Utilise une boîte englobante approximative. Sinon l'export est plus long.">true</param>
+    <label appearance="header">Utilisation</label>
+    <label xml:space="preserve">Sélectionnez les objets à exporter, ou cochez « Exporter toute la page ».
+      
+Saisissez le nom du fichier JPG (chemin complet) et choisissez une couleur de fond (le JPG ne gère pas la transparence).
+      
+Laissez la couleur de fond vide pour du blanc.
+
+Cette extension nécessite ImageMagick : plus d'infos et téléchargement sur http://www.imagemagick.org.</label>
+    <effect needs-live-preview="false">
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Import et export" /></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">jpeg_export.py</command>
+    </script>
+</inkscape-extension>

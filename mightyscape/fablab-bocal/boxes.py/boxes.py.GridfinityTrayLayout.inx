@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+<name>Bac Gridfinity sur plan (GridfinityTrayLayout)</name>
+<id>info.festi.boxes.py.GridfinityTrayLayout</id>
+<param name="generator" type="string" gui-hidden="true">gridfinitytraylayout</param>
+<param name="tab" type="notebook"><page name="tab_0" gui-text="Bac Gridfinity sur plan"><param name="h" type="string" gui-text="h" gui-description="hauteur en mm, ou ajouter « u » à la fin pour des unités Gridfinity">50</param>
+<param name="hi" type="float" precision="2" max="9999" gui-text="hi" gui-description="hauteur intérieure des cloisons en mm (0 = comme les parois extérieures, avec réduction éventuelle pour l'empilage)">0</param>
+<param name="nx" type="int" max="9999" gui-text="nx" gui-description="nombre de cases Gridfinity en X">3</param>
+<param name="ny" type="int" max="9999" gui-text="ny" gui-description="nombre de cases Gridfinity en Y">2</param>
+<param name="countx" type="int" max="9999" gui-text="countx" gui-description="diviser x en ce nombre de sections. 0 = comme --nx">5</param>
+<param name="county" type="int" max="9999" gui-text="county" gui-description="diviser y en ce nombre de sections. 0 = comme --ny">3</param>
+<param name="margin" type="float" precision="2" max="9999" gui-text="marge" gui-description="Marge totale à laisser à l'extérieur, en mm">0.75</param>
+<param name="stacking" type="bool" gui-text="empilage" gui-description="empilage compatible Gridfinity">false</param>
+<param name="gen_pads" type="bool" gui-text="gen_pads" gui-description="créer des patins pour le dessous de la boîte">true</param>
+<param name="pad_radius" type="float" precision="2" max="9999" gui-text="pad_radius" gui-description="Rayon des coins de chaque case. 0,8 en général,">0.8</param>
+<param name="cut_pads_mag_diameter" type="float" precision="2" max="9999" gui-text="cut_pads_mag_diameter" gui-description="si des patins sont découpés, ajouter des trous pour aimants. 6,5 en général, 0 pour désactiver,">6.5</param>
+<param name="cut_pads_mag_offset" type="float" precision="2" max="9999" gui-text="cut_pads_mag_offset" gui-description="décalage des trous d'aimants depuis les coins du pas. 7,75 en général.">7.75</param>
+<param name="base_thickness" type="float" precision="2" max="9999" gui-text="base_thickness" gui-description="épaisseur du socle sur lequel repose la boîte. 0 pour l'épaisseur du matériau, 4,65 pour un socle Gridfinity standard imprimé en 3D">0.0</param>
+</page>
+<page name="tab_1" gui-text="Par défaut"><param name="thickness" type="float" precision="2" max="9999" gui-text="épaisseur" gui-description="épaisseur du matériau (en mm) [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#thickness)">3.0</param>
+<param name="tabs" type="float" precision="2" max="9999" gui-text="brides" gui-description="largeur des attaches qui retiennent les pièces dans la plaque (en mm) (pas partout) [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#tabs)">0.0</param>
+<param name="qr_code" type="bool" gui-text="qr_code" gui-description="Ajouter un QR code avec le lien ou la ligne de commande au résultat">false</param>
+<param name="debug" type="bool" gui-text="débogage" gui-description="dessiner les boîtes englobantes de certaines structures [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#debug)">false</param>
+<param name="labels" type="bool" gui-text="étiquettes" gui-description="étiqueter les pièces (si possible)">true</param>
+<param name="reference" type="float" precision="2" max="9999" gui-text="référence" gui-description="dessiner un rectangle de référence de la longueur donnée (en mm) (0 pour désactiver) [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#reference)">100.0</param>
+<param name="inner_corners" type="optiongroup" appearance="combo" gui-text="inner_corners" gui-description="style des angles intérieurs [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#inner-corners)">
+<option value="loop">boucle</option>
+<option value="corner">angle</option>
+<option value="backarc">arc inversé</option>
+    </param>
+<param name="burn" type="float" precision="2" max="9999" gui-text="brûlage" gui-description="correction de brûlure (en mm) (plus grand = assemblage plus serré) [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#burn)">0.1</param>
+</page>
+<page name="tab_2" gui-text="Assemblages à entures"><param name="FingerJoint_style" type="optiongroup" appearance="combo" gui-text="style" gui-description="style des entures">
+<option value="rectangular">rectangulaire</option>
+<option value="springs">ressorts</option>
+<option value="barbs">crans</option>
+<option value="snap">clipsable</option>
+    </param>
+<param name="FingerJoint_surroundingspaces" type="float" precision="2" max="9999" gui-text="espaces autour" gui-description="espace au début et à la fin, en multiple des espaces normaux">2.0</param>
+<param name="FingerJoint_bottom_lip" type="float" precision="2" max="9999" gui-text="bottom_lip" gui-description="hauteur des lèvres inférieures qui dépassent (multiples de l'épaisseur), FingerHoleEdge seulement !">0.0</param>
+<param name="FingerJoint_edge_width" type="float" precision="2" max="9999" gui-text="largeur de bord" gui-description="espace sous les trous du FingerHoleEdge (multiples de l'épaisseur)">1.0</param>
+<param name="FingerJoint_extra_length" type="float" precision="2" max="9999" gui-text="extra_length" gui-description="matière en plus à poncer pour enlever les traces de brûlure (multiples de l'épaisseur)">0.0</param>
+<param name="FingerJoint_finger" type="float" precision="2" max="9999" gui-text="créneau" gui-description="largeur des entures (multiples de l'épaisseur)">2.0</param>
+<param name="FingerJoint_play" type="float" precision="2" max="9999" gui-text="jeu" gui-description="espace en plus pour que les entures entrent et sortent (multiples de l'épaisseur)">0.0</param>
+<param name="FingerJoint_space" type="float" precision="2" max="9999" gui-text="espace" gui-description="espace entre les entures (multiples de l'épaisseur)">2.0</param>
+<param name="FingerJoint_width" type="float" precision="2" max="9999" gui-text="largeur" gui-description="largeur des trous d'entures (multiples de l'épaisseur)">1.0</param>
+</page>
+<page name="tab_3" gui-text="le couvercle"><param name="Lid_handle" type="optiongroup" appearance="combo" gui-text="poignée" gui-description="type de poignée">
+<option value="none">aucun</option>
+<option value="long_rounded">long_rounded</option>
+<option value="long_trapezoid">long_trapezoid</option>
+<option value="long_doublerounded">long_doublerounded</option>
+<option value="knob">bouton</option>
+    </param>
+<param name="Lid_style" type="optiongroup" appearance="combo" gui-text="style" gui-description="type de couvercle à créer">
+<option value="none">aucun</option>
+<option value="flat">plat</option>
+<option value="chest">coffre</option>
+<option value="overthetop">par-dessus</option>
+<option value="ontop">posé dessus</option>
+    </param>
+<param name="Lid_handle_height" type="float" precision="2" max="9999" gui-text="handle_height" gui-description="hauteur de la poignée (si applicable)">8.0</param>
+<param name="Lid_height" type="float" precision="2" max="9999" gui-text="hauteur" gui-description="hauteur du rebord (le cas échéant)">4.0</param>
+<param name="Lid_play" type="float" precision="2" max="9999" gui-text="jeu" gui-description="jeu pour faire glisser le couvercle (si applicable)">0.1</param>
+</page>
+<page name="tab_4" gui-text="Exemple">
+<image>./GridfinityTrayLayout-thumb.jpg</image>
+</page>
+</param>
+<label appearance="url">https://boxes.hackerspace-bamberg.de/GridfinityTrayLayout</label>
+<effect>
+    <object-type>all</object-type>
+    <effects-menu>
+        <submenu name="FabLab Boc@l"><submenu name="Boîtes (Boxes.py)"><submenu name="Plateaux et casiers" /></submenu></submenu></effects-menu>
+    <icon>GridfinityTrayLayout-thumb.svg</icon>
+</effect>
+<script>
+    <command location="inx" interpreter="python">boxes_proxy.py</command>
+</script>
+</inkscape-extension>

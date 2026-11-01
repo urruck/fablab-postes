@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Nettoyer les styles</name>
+    <id>fablabchemnitz.de.cleanup_styles</id>
+    <param name="tab" type="notebook">
+        <page name="tab_settings" gui-text="Paramètres">
+			<param name="dedicated_style_attributes" gui-text="Traitement des attributs de style séparés" gui-description="Les attributs séparés comme « fill » ou « stroke » sont supprimés. Choisissez ce qu'il faut faire de ces propriétés." type="optiongroup" appearance="combo">
+			   <option value="prefer_composed">Reprendre les attributs séparés, mais privilégier le style principal</option>
+			   <option value="prefer_dedicated">Reprendre les attributs séparés et les privilégier sur le style principal</option>
+			   <option value="ignore">Ignorer les attributs séparés</option>
+			</param>
+			<param name="stroke_width_override" type="bool" gui-text="Forcer l'épaisseur du contour">false</param>
+			<param name="stroke_width" type="float" precision="3" min="0.0000" max="5.000" gui-text="Épaisseur du contour">0.100</param>
+			<param name="stroke_width_units" gui-text="Unités" type="optiongroup" appearance="combo">
+			   <option value="px">px</option>
+			   <option value="pt">pt</option>
+			   <option value="in">in</option>
+			   <option value="cm">cm</option>
+			   <option value="mm">mm</option>
+			</param>
+			<param name="stroke_opacity_override" type="bool" gui-text="Forcer l'opacité du contour">false</param>
+			<param name="stroke_opacity" type="float" precision="1" min="0.0" max="100.0" gui-text="Opacité du contour (%)">100.0</param>
+            <param name="reset_opacity" type="bool" gui-text="Réinitialiser l'opacité dans l'attribut style" gui-description="Réinitialise l'attribut de style « opacity ». À ne pas confondre avec « fill-opacity » et « stroke-opacity »">true</param>
+			<param name="reset_stroke_attributes" type="bool" gui-text="Réinitialiser les valeurs stroke* de l'attribut style" gui-description="Retire « stroke-dasharray », « stroke-dashoffset », « stroke-linejoin », « stroke-linecap », « stroke-miterlimit » de l'attribut style">true</param>
+			<param name="reset_fill_attributes" type="bool" gui-text="Réinitialiser les valeurs fill* de l'attribut style" gui-description="Met « fill:none;fill-opacity:1; » dans l'attribut style">true</param>
+			<param name="apply_hairlines" type="bool" gui-text="Ajouter une définition de trait fin (hairline) au style" gui-description="Ajoute « vector-effect:non-scaling-stroke; » et « -inkscape-stroke:hairline; ». Remarque : l'épaisseur du contour est conservée en arrière-plan, tous les traits fins gardent une valeur d'épaisseur.">true</param>
+			<param name="apply_black_strokes" type="bool" gui-text="Mettre un contour noir là où il manque" gui-description="Ajoute « stroke:#000000; » à l'attribut style">true</param>
+			<param name="remove_group_styles" type="bool" gui-text="Retirer les styles des groupes" gui-description="Retire les attributs de style des groupes parents, pour avoir les styles directement sur les objets visibles !">false</param>
+            <param name="harmonize_colors" type="bool" gui-text="Harmoniser les couleurs" gui-description="Arrondit les couleurs à la « couleur pleine » la plus proche. Exemple : rgb(253,0,0) devient rgb(255,0,0), un rouge franc.">false</param>
+            <param name="allow_half_tones" type="bool" gui-text="Autoriser les demi-teintes (et des couleurs personnalisées)" gui-description="Autoriser l'arrondi vers les demi-teintes">false</param>
+			<param name="custom_colors" type="string" gui-text="Couleurs personnalisées supplémentaires" gui-description="Liste de couleurs hexadécimales séparées par des virgules, ex. « #00ffaa, #01b3ad »" />
+			<separator />
+			<label>Cette extension agit sur la sélection, ou sur tout le document</label>
+        </page>
+        <page name="tab_about" gui-text="À propos">
+            <label appearance="header">Nettoyer les styles</label>
+            <label>Cette extension sert à régler l'épaisseur et l'opacité des contours de grands groupes. En général, pour une bonne découpe laser, l'épaisseur du trait ne doit pas dépasser un maximum pour être reconnue comme trait fin. Des problèmes d'opacité font aussi souvent que la découpeuse ignore des lignes.</label>
+            <label>2020 - 2026 / écrit par Mario Voigt (Stadtfabrikanten e.V. / FabLab Chemnitz)</label>
+            <spacer />
+            <label appearance="header">Documentation en ligne</label>
+            <label appearance="url">https://y.stadtfabrikanten.org/cleanup-styles</label>
+            <spacer />
+            <label appearance="header">Contribuer</label>
+            <label appearance="url">https://gitea.fablabchemnitz.de/FabLab_Chemnitz/mightyscape-1.2</label>
+            <label appearance="url">mailto:mario.voigt@stadtfabrikanten.org</label>
+            <spacer />
+            <label appearance="header">Collection d'extensions MightyScape</label>
+            <label>Ce logiciel fait partie de la collection d'extensions MightyScape pour Inkscape, sous licence GNU GPL v3</label>
+            <label appearance="url">https://y.stadtfabrikanten.org/mightyscape-overview</label>
+        </page>
+        <page name="tab_donate" gui-text="Faire un don">
+            <label appearance="header">Café + pizza</label>
+            <label>Nous sommes les Stadtfabrikanten, qui font vivre le FabLab Chemnitz depuis 2016. Un FabLab est un atelier ouvert qui donne accès à des machines et des outils numériques : imprimantes 3D, découpeuses laser, fraiseuses CNC.</label>
+            <spacer />           
+            <label>Vous aimez notre travail et voulez nous soutenir ? Vous pouvez faire un don à notre association de différentes façons :</label>
+            <label appearance="url">https://y.stadtfabrikanten.org/donate</label>
+            <spacer />
+            <label>Merci d'utiliser notre extension et de nous aider !</label>
+            <image>../000_about_fablabchemnitz.svg</image>
+        </page>
+    </param>
+    <effect needs-live-preview="true">
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Couleurs" /></submenu></effects-menu>
+       <menu-tip>Adjust stroke width opacity and colors of large groups.</menu-tip>
+       <icon>icon.svg</icon>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">cleanup_styles.py</command>
+    </script>
+</inkscape-extension>

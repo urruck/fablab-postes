@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Groupe vers calque</name>
+    <id>fablabchemnitz.de.group_to_layer</id>
+    <param name="depth" type="int" gui-text="Profondeur max. de groupes imbriqués">1</param>
+    <effect>
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Calques et groupes" /></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">group_to_layer.py</command>
+    </script>
+</inkscape-extension>

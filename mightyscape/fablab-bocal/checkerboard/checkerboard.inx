@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Damier</name>
+    <id>fablabchemnitz.de.checkerboard</id>
+    <param name="tab" type="notebook">
+        <page name="params" gui-text="Paramètres">
+            <param name="size" type="string" gui-text="Taille des cases" gui-description="Valeur + unité, ex. px, pt, mm, cm, in">50px</param>
+            <param name="rows" type="int" min="2" max="1000" gui-text="Rangées">10</param>
+            <param name="cols" type="int" min="2" max="1000" gui-text="Colonnes">10</param>
+            <param name="layer" type="bool" gui-text="Créer dans le calque actif">true</param>
+        </page>
+        <page name="color1" gui-text="1re couleur">
+            <param name="color1" type="color" gui-text="Couleur 1">4286282751</param>
+        </page>
+        <page name="color2" gui-text="2e couleur">
+            <param name="color2" type="color" gui-text="Couleur 2">8092671</param>
+        </page>
+        <page name="help" gui-text="Aide">
+            <label>1. Dans l'onglet Paramètres, choisir la taille des cases, le nombre de rangées et de colonnes, et si le damier va dans le calque actif (sinon il est ajouté à la racine)</label>
+            <label>2. Dans les onglets 1re et 2e couleur, choisir les couleurs des deux séries de cases</label>
+            <label>3. Cliquer sur Appliquer</label>
+            <label>Plus d'informations et code source :</label>
+            <label appearance="url">https://github.com/jeffkayser/inkscape-checkerboard</label>
+        </page>
+    </param>
+    <effect>
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Grilles, repères et mesures" /></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">checkerboard.py</command>
+    </script>
+</inkscape-extension>

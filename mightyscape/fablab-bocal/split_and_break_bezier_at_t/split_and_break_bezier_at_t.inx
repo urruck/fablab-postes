@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Couper la courbe de Bézier à t</name>
+    <id>fablabchemnitz.de.split_and_break_bezier_at_t</id>
+    <param name="tab" type="notebook">
+        <page name="tab_settings" gui-text="Paramètres">
+            <param name="split_select" type="optiongroup" appearance="radio" gui-text="Couper selon" gui-description="Couper selon une longueur ou un pourcentage">
+                <option value="length">longueur</option>
+                <option value="t">pourcentage (t)</option>
+            </param>
+            <param name="unit" type="optiongroup" appearance="combo" gui-text="Unités">
+                <option value="mm">mm</option>
+                <option value="cm">cm</option>
+                <option value="in">in</option>
+                <option value="pt">pt</option>
+                <option value="px">px</option>
+                <option value="pc">pc</option>
+            </param>
+            <param name="target_length" type="float" min="0.0" max="99999.0000" precision="4" appearance="full" gui-text="Longueur">0.5000</param>
+            <param name="target_t" type="float" min="0.0001" max="0.9999" precision="4" appearance="full" gui-text="t">0.5000</param>
+            <param name="keep_start" type="bool" gui-text="Garder le début">true</param>
+            <param name="keep_end" type="bool" gui-text="Garder la fin">true</param>
+            <param name="keep_seg" type="bool" gui-text="Garder seulement le segment coupé" gui-description="Un chemin peut comporter plusieurs segments !">false</param>
+        </page>
+        <page name="tab_about" gui-text="À propos">
+            <label appearance="header">Couper la courbe de Bézier à t</label>
+            <label>Coupe un chemin à la valeur t = 0..1 (t = 0,5 = 50 %) ou à une longueur donnée avec son unité.
+S'applique séparément à chaque sous-chemin de la sélection. Utilisez « Chemin &gt; Inverser » pour changer le sens de coupe.</label>
+            <label>2021 - 2023 / écrit par Mario Voigt (Stadtfabrikanten e.V. / FabLab Chemnitz)</label>
+            <spacer />
+            <label appearance="header">Documentation en ligne</label>
+            <label appearance="url">https://y.stadtfabrikanten.org/splitandbreakbezieratt</label>
+            <spacer />
+            <label appearance="header">Contribuer</label>
+            <label appearance="url">https://gitea.fablabchemnitz.de/FabLab_Chemnitz/mightyscape-1.2</label>
+            <label appearance="url">mailto:mario.voigt@stadtfabrikanten.org</label>
+            <spacer />
+            <label appearance="header">Collection d'extensions MightyScape</label>
+            <label>Ce logiciel fait partie de la collection d'extensions MightyScape pour Inkscape, sous licence GNU GPL v3</label>
+            <label appearance="url">https://y.stadtfabrikanten.org/mightyscape-overview</label>
+        </page>
+        <page name="tab_donate" gui-text="Faire un don">
+            <label appearance="header">Café + pizza</label>
+            <label>Nous sommes les Stadtfabrikanten, qui font vivre le FabLab Chemnitz depuis 2016. Un FabLab est un atelier ouvert qui donne accès à des machines et des outils numériques : imprimantes 3D, découpeuses laser, fraiseuses CNC.</label>
+            <spacer />           
+            <label>Vous aimez notre travail et voulez nous soutenir ? Vous pouvez faire un don à notre association de différentes façons :</label>
+            <label appearance="url">https://y.stadtfabrikanten.org/donate</label>
+            <spacer />
+            <label>Merci d'utiliser notre extension et de nous aider !</label>
+            <image>../000_about_fablabchemnitz.svg</image>
+        </page>
+    </param>
+    <effect>
+        <object-type>path</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Chemins"><submenu name="Couper et nettoyer" /></submenu></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">split_and_break_bezier_at_t.py</command>
+    </script>
+</inkscape-extension>

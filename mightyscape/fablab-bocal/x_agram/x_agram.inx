@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Polygones étoilés (X-agramme)</name>
+    <id>fablabchemnitz.de.x_agram</id>
+    <param name="tab" type="notebook">
+        <page name="settings" gui-text="Paramètres">
+            <param name="points" type="int" min="3" max="1000" gui-text="Nombre de pointes (côtés)">5</param>
+            <param name="skip" type="int" min="1" max="999" gui-text="Nombre de sommets sautés">2</param>
+            <param name="rotate" type="float" min="0" max="360" gui-text="Rotation (sens horaire)">0</param>
+            <param name="inner_circle" type="bool" gui-text="Relier par le cercle intérieur">false</param>
+            <param name="show_inner_circle" type="bool" gui-text="Afficher le cercle intérieur">true</param>
+            <param name="inner_ratio" type="int" min="1" max="100" gui-text="Rayon du cercle intérieur %">50</param>
+        </page>
+        <page name="help" gui-text="Aide">
+            <label xml:space="preserve">Cette extension inscrit un polygone étoilé (pentagramme, hexagramme, etc.) dans le cercle ou l'ellipse sélectionné.
+
+Si le cercle intérieur est activé, les sommets extérieurs sont reliés par un point du cercle intérieur, à mi-angle entre les deux sommets extérieurs.
+
+Les éléments du x-agramme restent des objets séparés, pour pouvoir les retravailler.</label>
+        </page>
+    </param>
+    <effect>
+        <object-type>path</object-type>
+        <effects-menu>
+        <submenu name="FabLab Boc@l"><submenu name="Formes et motifs"><submenu name="À partir d'objets" /></submenu></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">x_agram.py</command>
+    </script>
+</inkscape-extension>

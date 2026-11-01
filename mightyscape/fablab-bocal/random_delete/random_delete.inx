@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Suppression aléatoire</name>
+    <id>fablabchemnitz.de.random_delete</id>
+    <param name="prob" type="float" gui-text="Probabilité de suppression (%) :" min="0.0" max="100.0">100.0</param>
+    <label>Cette extension supprime chaque objet sélectionné avec une probabilité donnée.</label>
+    <effect>
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l"><submenu name="Divers" /></submenu></effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">random_delete.py</command>
+    </script>
+</inkscape-extension>

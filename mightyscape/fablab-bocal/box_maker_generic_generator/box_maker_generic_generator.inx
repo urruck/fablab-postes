@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+	<name>Générateur de boîte - Générateur universel</name>
+	<id>fablabchemnitz.de.box_maker_generic_generator</id>
+	<param name="Topic" type="notebook">
+		<page name="dimensions" gui-text="Dimensions de la boîte">
+			<param name="unit" type="optiongroup" appearance="combo" gui-text="Unité">
+				<option value="mm">mm</option>
+				<option value="cm">cm</option>
+				<option value="in">in</option>
+				<option value="pt">pt</option>
+				<option value="px">px</option>
+				<option value="pc">pc</option>
+			</param>
+			<label appearance="header">Dimensions intérieures de la boîte</label>
+			<param name="x" type="float" min="10.0" max="1000.0" gui-text="largeur">80.0</param>
+			<param name="y" type="float" min="10.0" max="1000.0" gui-text="profondeur">60.0</param>
+			<param name="z" type="float" min="10.0" max="1000.0" gui-text="hauteur">40.0</param>
+            <label appearance="header">Matériau</label>
+			<param name="thickness" type="float" min="1.0" max="10.0" gui-text="épaisseur du matériau">3.0</param>
+			<param name="burn" type="float" min="0.0" max="2.0" gui-text="Compensation de brûlure (trait laser)">0.1</param>
+		</page>
+		<page name="corners" gui-text="Coins arrondis">
+			<param name="StraigthCorners" type="bool" gui-text="Coins droits">true</param>
+			<label>Si les coins ne sont pas droits, rayon de chaque coin</label>
+			<param name="back_left_radius" type="float" min="0.0" max="100.0" gui-text="Rayon arrière gauche">10.0</param>
+			<param name="back_right_radius" type="float" min="0.0" max="100.0" gui-text="Rayon arrière droit">10.0</param>
+			<param name="front_left_radius" type="float" min="0.0" max="100.0" gui-text="Rayon avant gauche">10.0</param>
+			<param name="front_right_radius" type="float" min="0.0" max="100.0" gui-text="Rayon avant droit">10.0</param>
+		</page>
+		<page name="Lid" gui-text="Type de couvercle">
+			<param name="lid_type" type="optiongroup" appearance="combo" gui-text="Type de couvercle">
+				<option value="Without">Sans couvercle</option>
+				<option value="Closed">Boîte fermée</option>				
+				<option value="Simple">Dessus simple</option>
+				<option value="Sliding">Couvercle coulissant</option>
+				<option value="WoodHinge">Charnière bois intégrée</option>
+				<option value="SteelHinge">Charnière acier</option>
+				<option value="Coffin">Cercueil</option>
+			</param>
+			<label appearance="header">Seulement avec un vrai couvercle</label>
+			<param name="z_lid" type="float" min="15.0" max="1000.0" gui-text="Hauteur du couvercle">20.0</param>
+			<label appearance="header">Seulement avec le couvercle cercueil</label>
+			<param name="z_dome_lid" type="float" min="15.0" max="1000.0" gui-text="hauteur du couvercle bombé">20.0</param>
+			<param name="SkipFlexLines" type="bool" gui-text="Ne pas faire les lignes de flexion si possible">true</param>
+		</page>
+		<page name="Slots" gui-text="Séparations intérieures">
+			<param name="n_slot_x" type="int" min="1" max="20" gui-text="Nombre de colonnes">1</param>
+			<param name="n_slot_y" type="int" min="1" max="20" gui-text="Nombre de rangées">1</param>
+            <param name="h_slot" type="int" min="40" max="100" gui-text="Hauteur des séparations (%)">1</param>
+		</page>
+		<page name="Joints" gui-text="Assemblages">
+			<param name="AutoSizeJoints" type="bool" gui-text="Taille des entures calculée d'après les dimensions de la boîte">true</param>
+			<param name="x_joint" type="float" min="1.0" max="100.0" gui-text="Taille des entures dans la direction X">5.0</param>
+			<param name="y_joint" type="float" min="1.0" max="100.0" gui-text="Taille des entures dans la direction Y">5.0</param>
+			<param name="z_joint" type="float" min="1.0" max="100.0" gui-text="Taille des entures dans la direction Z">5.0</param>
+		</page>
+	</param>
+	<separator />
+    <param name="as_layer" type="bool" gui-text="Résultat sur un nouveau calque">false</param>
+	<effect>
+		<object-type>all</object-type>
+		<effects-menu>
+             <submenu name="FabLab Boc@l"><submenu name="Boîtes (autres modèles)"><submenu name="À encoches" /></submenu></submenu></effects-menu>
+	</effect>
+	<script>
+		<command location="inx" interpreter="python">box_maker_generic_generator.py</command>
+	</script>
+</inkscape-extension>

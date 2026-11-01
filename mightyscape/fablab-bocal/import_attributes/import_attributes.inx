@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+	<name>Importer des attributs</name>
+	<id>fablabchemnitz.de.import_attributes</id>
+	<label>Modifie les attributs des éléments à partir des lignes d'un fichier texte.</label>
+	<label>Ligne : « idElement,nomAttribut,valeurAttribut ».</label>
+	<label>Pour les espaces de noms, utiliser {urlEspaceDeNoms}nomAttribut</label>	
+	<param name="data" type="path" gui-text="Fichier de données :" mode="file" filetypes="txt,csv" />
+	<effect>
+		<object-type>all</object-type>
+		<effects-menu>
+			<submenu name="FabLab Boc@l"><submenu name="Divers" /></submenu></effects-menu>
+	</effect>
+	<script>
+		<command location="inx" interpreter="python">import_attributes.py</command>
+	</script>
+</inkscape-extension>

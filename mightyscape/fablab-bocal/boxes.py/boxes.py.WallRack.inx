@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+<name>Étagère murale (WallRack)</name>
+<id>info.festi.boxes.py.WallRack</id>
+<param name="generator" type="string" gui-hidden="true">wallrack</param>
+<param name="tab" type="notebook"><page name="tab_0" gui-text="Étagère murale"><param name="x" type="float" precision="2" max="9999" gui-text="x" gui-description="largeur interieure en mm (si on ne choisit pas « extérieur »)">200</param>
+<param name="y" type="float" precision="2" max="9999" gui-text="y" gui-description="profondeur interieure en mm (si on ne choisit pas « extérieur »)">50</param>
+<param name="sh" type="string" gui-text="sh" gui-description="sections du bas vers le haut en mm [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#section-parameters)">100*3</param>
+<param name="outside" type="bool" gui-text="extérieur" gui-description="les dimensions sont des mesures extérieures [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#outside)">false</param>
+        <param name="top_edge" type="optiongroup" appearance="combo" gui-text="bord du haut" gui-description="type de bord pour le bord du haut">
+            <option value="e">e Bord droit</option>
+            <option value="E">E Bord droit (décalé de l'épaisseur)</option>
+            <option value="G">G Bord avec trous de fixation en forme de poire</option>
+            <option value="y">y Poignée, par ex. pour un tiroir</option>
+      </param>
+<param name="full_height_top" type="bool" gui-text="full_height_top" gui-description="Prolonger le panneau arrière sur toute la hauteur de l'étagère du haut">true</param>
+<param name="wall_height" type="float" precision="2" max="9999" gui-text="wall_height" gui-description="hauteur des parois">20.0</param>
+<param name="back_height" type="float" precision="2" max="9999" gui-text="hauteur derrière" gui-description="hauteur de l'arrière, en fraction de la hauteur avant">1.5</param>
+        <param name="side_edges" type="optiongroup" appearance="combo" gui-text="side_edges" gui-description="type de bord qui tient les étagères ensemble">
+            <option value="F">F Assemblage à entures (côté opposé)</option>
+            <option value="h">h Bord (trous d'entures parallèles)</option>
+      </param>
+<param name="flat_bottom" type="bool" gui-text="flat_bottom" gui-description="Fond plat, pour que l'étagère tienne aussi debout">false</param>
+</page>
+<page name="tab_1" gui-text="Par défaut"><param name="thickness" type="float" precision="2" max="9999" gui-text="épaisseur" gui-description="épaisseur du matériau (en mm) [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#thickness)">3.0</param>
+<param name="tabs" type="float" precision="2" max="9999" gui-text="brides" gui-description="largeur des attaches qui retiennent les pièces dans la plaque (en mm) (pas partout) [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#tabs)">0.0</param>
+<param name="qr_code" type="bool" gui-text="qr_code" gui-description="Ajouter un QR code avec le lien ou la ligne de commande au résultat">false</param>
+<param name="debug" type="bool" gui-text="débogage" gui-description="dessiner les boîtes englobantes de certaines structures [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#debug)">false</param>
+<param name="labels" type="bool" gui-text="étiquettes" gui-description="étiqueter les pièces (si possible)">true</param>
+<param name="reference" type="float" precision="2" max="9999" gui-text="référence" gui-description="dessiner un rectangle de référence de la longueur donnée (en mm) (0 pour désactiver) [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#reference)">100.0</param>
+<param name="inner_corners" type="optiongroup" appearance="combo" gui-text="inner_corners" gui-description="style des angles intérieurs [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#inner-corners)">
+<option value="loop">boucle</option>
+<option value="corner">angle</option>
+<option value="backarc">arc inversé</option>
+    </param>
+<param name="burn" type="float" precision="2" max="9999" gui-text="brûlage" gui-description="correction de brûlure (en mm) (plus grand = assemblage plus serré) [🛈](https://florianfesti.github.io/boxes/html/usermanual.html#burn)">0.1</param>
+</page>
+<page name="tab_2" gui-text="Assemblages à entures"><param name="FingerJoint_style" type="optiongroup" appearance="combo" gui-text="style" gui-description="style des entures">
+<option value="rectangular">rectangulaire</option>
+<option value="springs">ressorts</option>
+<option value="barbs">crans</option>
+<option value="snap">clipsable</option>
+    </param>
+<param name="FingerJoint_surroundingspaces" type="float" precision="2" max="9999" gui-text="espaces autour" gui-description="espace au début et à la fin, en multiple des espaces normaux">1.0</param>
+<param name="FingerJoint_bottom_lip" type="float" precision="2" max="9999" gui-text="bottom_lip" gui-description="hauteur des lèvres inférieures qui dépassent (multiples de l'épaisseur), FingerHoleEdge seulement !">0.0</param>
+<param name="FingerJoint_edge_width" type="float" precision="2" max="9999" gui-text="largeur de bord" gui-description="espace sous les trous du FingerHoleEdge (multiples de l'épaisseur)">1.0</param>
+<param name="FingerJoint_extra_length" type="float" precision="2" max="9999" gui-text="extra_length" gui-description="matière en plus à poncer pour enlever les traces de brûlure (multiples de l'épaisseur)">0.0</param>
+<param name="FingerJoint_finger" type="float" precision="2" max="9999" gui-text="créneau" gui-description="largeur des entures (multiples de l'épaisseur)">2.0</param>
+<param name="FingerJoint_play" type="float" precision="2" max="9999" gui-text="jeu" gui-description="espace en plus pour que les entures entrent et sortent (multiples de l'épaisseur)">0.0</param>
+<param name="FingerJoint_space" type="float" precision="2" max="9999" gui-text="espace" gui-description="espace entre les entures (multiples de l'épaisseur)">2.0</param>
+<param name="FingerJoint_width" type="float" precision="2" max="9999" gui-text="largeur" gui-description="largeur des trous d'entures (multiples de l'épaisseur)">1.0</param>
+</page>
+<page name="tab_3" gui-text="Bord de fixation"><param name="Mounting_d_head" type="float" precision="2" max="9999" gui-text="d_head" gui-description="diamètre de tête de la vis de fixation (en mm)">6.5</param>
+<param name="Mounting_d_shaft" type="float" precision="2" max="9999" gui-text="d_shaft" gui-description="diamètre de tige de la vis de fixation (en mm)">3.0</param>
+<param name="Mounting_margin" type="float" precision="2" max="9999" gui-text="marge" gui-description="espace minimal sans trou à gauche et à droite (fraction de la longueur du bord)">0.125</param>
+<param name="Mounting_num" type="int" max="9999" gui-text="nombre" gui-description="nombre de trous de fixation (entier)">2</param>
+<param name="Mounting_side" type="optiongroup" appearance="combo" gui-text="côté" gui-description="côté de la boîte (toutes les combinaisons n'ont pas de sens...)">
+<option value="back">arrière</option>
+<option value="left">gauche</option>
+<option value="right">droite</option>
+<option value="front">devant</option>
+    </param>
+<param name="Mounting_style" type="optiongroup" appearance="combo" gui-text="style" gui-description="style du bord">
+<option value="straight edge, within">bord droit, intérieur</option>
+<option value="straight edge, extended">bord droit, prolongé</option>
+<option value="mounting tab">patte de fixation</option>
+    </param>
+</page>
+<page name="tab_4" gui-text="Bord à poignée"><param name="HandleEdge_height" type="float" precision="2" max="9999" gui-text="hauteur" gui-description="hauteur au-dessus de la paroi en mm">20.0</param>
+<param name="HandleEdge_hole_height" type="float" precision="2" max="9999" gui-text="hole_height" gui-description="hauteur du ou des trous en pourcentage de la hauteur maximale (hauteur de poignée - 2 × épaisseur du matériau)">75.0</param>
+<param name="HandleEdge_hole_width" type="string" gui-text="hole_width" gui-description="largeur du ou des trous en pourcentage de la largeur maximale (largeur du bord - (n+1) × épaisseur du matériau)">40:40</param>
+<param name="HandleEdge_on_sides" type="bool" gui-text="on_sides" gui-description="si coché, ajouté aux côtés, sinon à l'avant et à l'arrière (seulement avec le paramètre top_edge)">true</param>
+<param name="HandleEdge_radius" type="float" precision="2" max="9999" gui-text="rayon" gui-description="rayon des coins en mm">10.0</param>
+<param name="HandleEdge_outset" type="float" precision="2" max="9999" gui-text="débord" gui-description="prolonger la poignée sur la longueur du bord (multiples de l'épaisseur)">1.0</param>
+</page>
+<page name="tab_5" gui-text="Exemple">
+<image>./WallRack-thumb.jpg</image>
+</page>
+</param>
+<label appearance="url">https://boxes.hackerspace-bamberg.de/WallRack</label>
+<effect>
+    <object-type>all</object-type>
+    <effects-menu>
+        <submenu name="FabLab Boc@l"><submenu name="Boîtes (Boxes.py)"><submenu name="Fixations murales" /></submenu></submenu></effects-menu>
+    <icon>WallRack-thumb.svg</icon>
+</effect>
+<script>
+    <command location="inx" interpreter="python">boxes_proxy.py</command>
+</script>
+</inkscape-extension>
