@@ -65,8 +65,10 @@ xTool F1 Ultra 220 × 220 mm ou taille libre) :
   leurs contours dans un calque verrouillé « ne pas découper ».
 
 Le rangement se fait par rectangles englobants : les formes ne s'emboîtent
-pas les unes dans les autres. Pour un vrai emboîtement de formes
-irrégulières, il faut un logiciel dédié comme Deepnest.
+pas les unes dans les autres. Pour emboîter des formes irrégulières, utiliser
+**Deepnest**, installé sur les postes par `fablab-poste.sh` (menu des
+applications) : enregistrer les pièces en SVG, les ouvrir dans Deepnest,
+puis rouvrir le résultat dans Inkscape.
 
 ## Fichiers
 

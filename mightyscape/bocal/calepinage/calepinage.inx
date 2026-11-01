@@ -21,7 +21,7 @@
             <param name="page" type="bool" gui-text="Mettre la page à la taille de la plaque">true</param>
         </page>
         <page name="aide" gui-text="Aide">
-            <label>Chaque pièce est rangée selon son rectangle englobant : les formes ne s'imbriquent pas les unes dans les autres. Groupez (Ctrl+G) ce qui doit rester ensemble et convertissez les textes en chemins (Maj+Ctrl+C) avant de lancer.</label>
+            <label>Chaque pièce est rangée selon son rectangle englobant : les formes ne s'imbriquent pas les unes dans les autres (pour cela, utilisez le logiciel Deepnest, dans le menu des applications). Groupez (Ctrl+G) ce qui doit rester ensemble et convertissez les textes en chemins (Maj+Ctrl+C) avant de lancer.</label>
             <label>La première plaque est placée sur la page. Les plaques suivantes sont posées à droite, et leurs contours sont dans le calque verrouillé « Calepinage – plaques (ne pas découper) ». Masquez ou supprimez ce calque avant d'envoyer à la découpe.</label>
             <label>L'écart entre les pièces doit couvrir la largeur du trait laser (environ 0,2 mm) et la solidité de la matière entre deux coupes.</label>
         </page>

@@ -176,7 +176,7 @@ else
 fi
 
 # =====================================================================
-titre "3. Découpe laser : xTool Studio + VisiCut"
+titre "3. Découpe laser : xTool Studio + VisiCut + Deepnest"
 # =====================================================================
 # xTool Studio n'est pas dans les dépôts : on prend d'abord un .deb déposé
 # dans paquets/, sinon on télécharge la version la plus récente depuis le
@@ -234,6 +234,47 @@ else
 fi
 
 deb_depuis_github "VisiCut" "t-oster/VisiCut" "\.deb$"
+
+# Deepnest (calepinage : emboîte les pièces de forme quelconque pour économiser
+# la matière). Ni paquet ni Flatpak : archive zip officielle dans /opt/deepnest.
+installer_deepnest() {
+  local url zip tmp dossier binaire
+  url="$(github_derniere_version "deepnest-next/deepnest" "linux-x64\.zip$")"
+  [[ -n "$url" ]] || { ko "Deepnest : archive Linux introuvable sur GitHub"; return 1; }
+  zip="/tmp/$(basename "$url")"
+  tmp="$(mktemp -d /opt/.deepnest.XXXXXX)"
+  if ! curl -fL -m 1800 --retry 2 -o "$zip" "$url" 2>>"$JOURNAL" \
+     || ! unzip -q "$zip" -d "$tmp" >>"$JOURNAL" 2>&1; then
+    rm -rf "$zip" "$tmp"; ko "Deepnest : téléchargement ou décompression impossible"; return 1
+  fi
+  rm -f "$zip"
+  dossier="$(find "$tmp" -mindepth 1 -maxdepth 1 -type d | head -n1)"
+  binaire="$(find "$dossier" -maxdepth 1 -type f -name 'deepnest*' -perm -u+x | head -n1)"
+  if [[ -z "$binaire" ]]; then
+    rm -rf "$tmp"; ko "Deepnest : exécutable introuvable dans l'archive"; return 1
+  fi
+  rm -rf /opt/deepnest && mv "$dossier" /opt/deepnest && rm -rf "$tmp"
+  chmod -R a+rX /opt/deepnest   # l'archive fournit un dossier en 700 : ouvrir à tous les comptes
+  ln -sf "/opt/deepnest/$(basename "$binaire")" /opt/deepnest/deepnest
+  # Bac à sable d'Electron : doit appartenir à root avec le bit setuid
+  # (Ubuntu 24.04 et dérivés bloquent sinon les espaces de noms utilisateur)
+  chown root:root /opt/deepnest/chrome-sandbox && chmod 4755 /opt/deepnest/chrome-sandbox
+  ln -sf /opt/deepnest/deepnest /usr/local/bin/deepnest
+  cat > /usr/share/applications/deepnest.desktop <<'DESKTOP'
+[Desktop Entry]
+Type=Application
+Name=Deepnest
+GenericName=Calepinage
+Comment=Emboîter les pièces sur la plaque pour la découpe laser
+Exec=/opt/deepnest/deepnest %U
+Icon=/opt/deepnest/resources/app/icons/512x512.png
+Terminal=false
+Categories=Graphics;Engineering;
+Keywords=nesting;calepinage;laser;découpe;imbrication;
+DESKTOP
+  ok "Deepnest ($(basename "$url"), menu des applications)"
+}
+installer_deepnest || true
 
 # =====================================================================
 titre "4. Modélisation 3D et CAO"

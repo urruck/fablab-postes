@@ -38,7 +38,7 @@ Journal complet : `/var/log/fablab-install.log`
 | Domaine | Logiciels |
 |---|---|
 | Vectoriel | Inkscape, Ink/Stitch (broderie machine, menu Extensions > Ink/Stitch), extensions FabLab Boc@l (MightyScape traduit + calepinage) |
-| Découpe laser | xTool Studio (téléchargé depuis le cloud du CSC), VisiCut |
+| Découpe laser | xTool Studio (téléchargé depuis le cloud du CSC), VisiCut, Deepnest (calepinage de formes quelconques) |
 | 3D et CAO | FreeCAD, Blender, OpenSCAD, MeshLab, LibreCAD, Sweet Home 3D |
 | Impression 3D | PrusaSlicer, Ultimaker Cura, OrcaSlicer |
 | Électronique | Arduino IDE 2, KiCad, Fritzing, Thonny, esptool |
