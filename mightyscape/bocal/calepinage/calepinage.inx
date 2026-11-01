@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <name>Calepinage (ranger les pièces sur la plaque)</name>
+    <id>bocal.calepinage</id>
+    <param name="onglets" type="notebook">
+        <page name="reglages" gui-text="Réglages">
+            <label>Range les objets sélectionnés sur une ou plusieurs plaques, en économisant la matière.</label>
+            <param name="plaque" type="optiongroup" appearance="combo" gui-text="Plaque">
+                <option value="page">Taille de la page actuelle</option>
+                <option value="p2">xTool P2 (600 × 308 mm)</option>
+                <option value="f1ultra">xTool F1 Ultra (220 × 220 mm)</option>
+                <option value="perso">Personnalisée (ci-dessous)</option>
+            </param>
+            <param name="largeur" type="float" min="10" max="5000" precision="1" gui-text="Largeur personnalisée (mm)">300</param>
+            <param name="hauteur" type="float" min="10" max="5000" precision="1" gui-text="Hauteur personnalisée (mm)">200</param>
+            <separator/>
+            <param name="ecart" type="float" min="0" max="50" precision="1" gui-text="Écart entre les pièces (mm)">2</param>
+            <param name="marge" type="float" min="0" max="100" precision="1" gui-text="Marge au bord de la plaque (mm)">3</param>
+            <param name="copies" type="int" min="1" max="500" gui-text="Nombre d'exemplaires de chaque pièce">1</param>
+            <param name="rotation" type="bool" gui-text="Autoriser la rotation d'un quart de tour">true</param>
+            <param name="page" type="bool" gui-text="Mettre la page à la taille de la plaque">true</param>
+        </page>
+        <page name="aide" gui-text="Aide">
+            <label>Chaque pièce est rangée selon son rectangle englobant : les formes ne s'imbriquent pas les unes dans les autres. Groupez (Ctrl+G) ce qui doit rester ensemble et convertissez les textes en chemins (Maj+Ctrl+C) avant de lancer.</label>
+            <label>La première plaque est placée sur la page. Les plaques suivantes sont posées à droite, et leurs contours sont dans le calque verrouillé « Calepinage – plaques (ne pas découper) ». Masquez ou supprimez ce calque avant d'envoyer à la découpe.</label>
+            <label>L'écart entre les pièces doit couvrir la largeur du trait laser (environ 0,2 mm) et la solidité de la matière entre deux coupes.</label>
+        </page>
+    </param>
+    <effect needs-live-preview="false">
+        <object-type>all</object-type>
+        <effects-menu>
+            <submenu name="FabLab Boc@l">
+                <submenu name="Découpe laser et traceur"/>
+            </submenu>
+        </effects-menu>
+    </effect>
+    <script>
+        <command location="inx" interpreter="python">calepinage.py</command>
+    </script>
+</inkscape-extension>

@@ -122,9 +122,7 @@ apt-get update >>"$JOURNAL" 2>&1
 apt-get -y full-upgrade >>"$JOURNAL" 2>&1 && ok "Système à jour" || ko "Mise à jour système"
 
 apt_install software-properties-common curl wget git unzip p7zip-full \
-  python3-venv python3-pip python3-tk flatpak ffmpeg htop \
-  python3.10 python3.10-dev python3.10-venv \
-  cmake ninja-build
+  python3-venv python3-pip python3-tk flatpak ffmpeg htop
 
 # Logithèque : Zorin et Ubuntu (GNOME) affichent les applis Flatpak via ce
 # greffon. Linux Mint gère déjà Flatpak dans sa propre logithèque.
@@ -146,156 +144,35 @@ titre "2. Dessin vectoriel : Inkscape + Ink/Stitch + MightyScape (FabLab Boc@l)"
 # et Ink/Stitch (testé sur Flatpak 1.4+).
 flatpak_install "Inkscape" org.inkscape.Inkscape
 
-# Ink/Stitch (broderie machine) : installé dans le répertoire d'extensions Flatpak
-INKSTITCH_URL="$(github_derniere_version "inkstitch/inkstitch" "linux\.sh$")"
+# Ink/Stitch (broderie machine) : l'archive Linux est décompressée dans le
+# dossier d'extensions d'Inkscape Flatpak (le .deb, lui, s'installe dans
+# /usr/share et reste invisible pour Inkscape Flatpak).
+INKSTITCH_URL="$(github_derniere_version "inkstitch/inkstitch" "linux-x86_64\.tar\.xz$")"
+INKSTITCH_EXT="$HOME_UTIL/.var/app/org.inkscape.Inkscape/config/inkscape/extensions"
 if [[ -n "$INKSTITCH_URL" ]]; then
-  INKSTITCH_SH="/tmp/inkstitch-install.sh"
-  curl -fsSL -o "$INKSTITCH_SH" "$INKSTITCH_URL" >>"$JOURNAL" 2>&1
-  chmod +x "$INKSTITCH_SH"
-  en_tant_que bash "$INKSTITCH_SH" >>"$JOURNAL" 2>&1 && ok "Ink/Stitch" || ko "Ink/Stitch"
-  rm -f "$INKSTITCH_SH"
-else
-  deb_depuis_github "Ink/Stitch" "inkstitch/inkstitch" "amd64\.deb$"
-fi
-
-# ------------------------------------------------------------------
-# MightyScape : ~240 extensions Boc@l (découpe laser, boîtes, tracés,
-# papercraft, 3D...). Menu Inkscape : Extensions > FabLab Boc@l
-# ------------------------------------------------------------------
-
-# Chemin extensions : Flatpak si disponible, sinon apt
-if flatpak list 2>/dev/null | grep -q "org.inkscape.Inkscape"; then
-  INK_USER_DIR="$(en_tant_que flatpak run org.inkscape.Inkscape --user-data-directory 2>/dev/null)"
-  EXT_DIR="${INK_USER_DIR}/extensions"
-else
-  EXT_DIR="$HOME_UTIL/.config/inkscape/extensions"
-fi
-MS_DIR="$EXT_DIR/mightyscape-1.2"
-
-en_tant_que mkdir -p "$EXT_DIR"
-if [[ -d "$MS_DIR/.git" ]]; then
-  en_tant_que git -C "$MS_DIR" pull >>"$JOURNAL" 2>&1 && ok "MightyScape mis à jour"
-else
-  en_tant_que git clone --depth 1 https://github.com/eridur-de/mightyscape-1.2.git "$MS_DIR" \
-    >>"$JOURNAL" 2>&1 && ok "MightyScape cloné"
-fi
-
-if [[ ! -d "$MS_DIR" ]]; then
-  ko "MightyScape : clonage impossible";
-else
-
-  # Personnalisation Boc@l : renommer le sous-menu et supprimer color_harmony
-  # (dépend de PyQt4 obsolète)
-  find "$MS_DIR/extensions/fablabchemnitz" -name "*.inx" \
-    -exec sed -i 's/FabLab Chemnitz/FabLab Boc@l/g' {} \; >>"$JOURNAL" 2>&1
-  rm -rf "$MS_DIR/extensions/fablabchemnitz/color_harmony"
-  ok "MightyScape : sous-menu renommé FabLab Boc@l, color_harmony retiré"
-
-  # Correction admesh : le wrapper libtool a un chemin LD_LIBRARY_PATH codé en
-  # dur avec le chemin du développeur original (/home/tomate/...). On le
-  # remplace par $progdir calculé dynamiquement, sans quoi papercraft_unfold
-  # échoue avec "libadmesh.so.1: cannot open shared object file".
-  ADMESH_WRAPPER="$MS_DIR/extensions/fablabchemnitz/papercraft_unfold/admesh/linux/admesh"
-  sed -i 's|LD_LIBRARY_PATH="/home/tomate/mightyscape/papercraft_unfold/admesh/linux/.libs:|LD_LIBRARY_PATH="$progdir:|' \
-    "$ADMESH_WRAPPER" >>"$JOURNAL" 2>&1 && ok "admesh : chemin LD_LIBRARY_PATH corrigé"
-
-  # Correction papercraft_unfold.py :
-  # 1. fstl : prévisualisation Qt5 ignorée si Qt5 absent (sandbox Flatpak)
-  # 2. bounding_box : try/except pour incompatibilité API inkex 1.4 (_Element lxml brut)
-  PU="$MS_DIR/extensions/fablabchemnitz/papercraft_unfold/papercraft_unfold.py"
-  python3 - "$PU" >>"$JOURNAL" 2>&1 <<'PYFIX'
-import sys
-path = sys.argv[1]
-src = open(path).read()
-old  = '            p = Popen(fstl_cmd, shell=True)\n            p.wait()'
-new  = '            try:\n                p = Popen(fstl_cmd, shell=True, stderr=subprocess.DEVNULL)\n                p.wait()\n                if p.returncode != 0:\n                    inkex.utils.debug("fstl viewer unavailable (Qt5 missing?) \xe2\x80\x94 skipping preview")\n            except Exception:\n                pass'
-old2 = '            bbox = inkex.elements._selected.ElementList.bounding_box(doc)'
-new2 = '            try:\n                bbox = inkex.elements._selected.ElementList.bounding_box(doc)\n            except (ValueError, AttributeError, TypeError):\n                bbox = None'
-if old in src:  src = src.replace(old, new)
-if old2 in src: src = src.replace(old2, new2)
-open(path, 'w').write(src)
-PYFIX
-  ok "papercraft_unfold.py : fstl et bounding_box corrigés"
-
-  # uv : gestionnaire Python rapide (installé en tant qu'utilisateur)
-  if [[ ! -f "$HOME_UTIL/.local/bin/uv" ]]; then
-    en_tant_que bash -c 'curl -LsSf https://astral.sh/uv/install.sh | sh' >>"$JOURNAL" 2>&1
-  fi
-  UV_CMD="$HOME_UTIL/.local/bin/uv"
-
-  # Environnement virtuel Python 3.10 isolé dans le dossier MightyScape
-  # (python3.10-dev et cmake sont requis pour compiler openmesh)
-  en_tant_que bash -c "
-    export UV_PROJECT_ENVIRONMENT='$MS_DIR'
-    '$UV_CMD' venv --python python3.10 --allow-existing '$MS_DIR'
-  " >>"$JOURNAL" 2>&1
-  PYTHON="$MS_DIR/bin/python3"
-
-  ms_pip() {
-    en_tant_que "$UV_CMD" pip install --python "$PYTHON" "$@" >>"$JOURNAL" 2>&1 \
-      && ok "Python: $*" || ko "Python: $*"
-  }
-
-  # Traitement d'image : export_selection_as, image_triangulation, kvec,
-  #   laser_check, low_poly_2, ocr, pixel2svg, pixels2objects, primitive,
-  #   raster_perspective, webp_import, imagetracerjs
-  ms_pip Pillow
-
-  # Calcul numérique (base de la quasi-totalité des extensions de tracé)
-  ms_pip numpy
-
-  # Analyse couleurs par clustering (color_harmony core → conservé pour usage futur)
-  ms_pip scikit-learn
-
-  # Graphes : paperfold (spanning tree pour le dépliage de maillages 3D)
-  ms_pip networkx
-
-  # Maillages 3D C++ : import_3d_mesh, paperfold, slic3r_stl_input
-  # → nécessite python3.10-dev + cmake + ninja-build pour compiler depuis les sources
-  echo "  Compilation openmesh (~90s)..." | tee -a "$JOURNAL"
-  ms_pip pybind11 openmesh
-
-  # Rendu 3D interactif : papercraft_unfold (prévisualisation OpenGL du modèle)
-  ms_pip pygame PyOpenGL
-
-  # Simulation optique : extension raytracing (lancer de rayons paraxial)
-  ms_pip raytracing
-
-  # Mise à jour MightyScape depuis Inkscape (bouton Upgrade MightyScape)
-  ms_pip GitPython
-
-  # Export multi-format avec interface Qt : output_pro
-  ms_pip PyQt5
-
-  # Optimisation de tracés vectoriels pour découpeuse laser / traceur
-  ms_pip vpype trimesh lxml
-
-  # Dépendances restantes des requirements.txt individuels (best-effort)
-  find "$MS_DIR/extensions/fablabchemnitz" -name "requirements.txt" | while read -r req; do
-    en_tant_que "$UV_CMD" pip install --python "$PYTHON" -r "$req" >>"$JOURNAL" 2>&1 || true
-  done
-  ok "MightyScape : dépendances Python installées"
-
-  # Configurer Inkscape pour utiliser le Python du venv MightyScape
-  PREFS="${INK_USER_DIR:-$HOME_UTIL/.config/inkscape}/preferences.xml"
-  PREF_VALUE="$MS_DIR/bin/python3"
-  if [[ ! -f "$PREFS" ]]; then
-    en_tant_que mkdir -p "$(dirname "$PREFS")"
-    en_tant_que bash -c "cat > '$PREFS'" <<EOF
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<inkscape version="1">
-  <group id="extensions" python-interpreter="$PREF_VALUE" />
-</inkscape>
-EOF
-    ok "Interpréteur Python MightyScape réglé dans Inkscape"
-  elif grep -q "python-interpreter" "$PREFS"; then
-    sed -i "s|python-interpreter=\"[^\"]*\"|python-interpreter=\"$PREF_VALUE\"|" "$PREFS"
-    ok "Interpréteur Python MightyScape mis à jour dans Inkscape"
+  INKSTITCH_TAR="/tmp/$(basename "$INKSTITCH_URL")"
+  if curl -fsSL -o "$INKSTITCH_TAR" "$INKSTITCH_URL" >>"$JOURNAL" 2>&1 \
+     && en_tant_que mkdir -p "$INKSTITCH_EXT" \
+     && en_tant_que rm -rf "$INKSTITCH_EXT/inkstitch" \
+     && en_tant_que tar -xJf "$INKSTITCH_TAR" -C "$INKSTITCH_EXT" >>"$JOURNAL" 2>&1; then
+    ok "Ink/Stitch ($(basename "$INKSTITCH_URL"), menu Extensions > Ink/Stitch)"
   else
-    sed -i "s|id=\"extensions\"|id=\"extensions\" python-interpreter=\"$PREF_VALUE\"|" "$PREFS"
-    ok "Interpréteur Python MightyScape ajouté dans Inkscape"
+    ko "Ink/Stitch : archive non installée"
   fi
+  rm -f "$INKSTITCH_TAR"
+else
+  ko "Ink/Stitch : archive Linux introuvable sur GitHub"
+fi
 
+# ------------------------------------------------------------------
+# Extensions « FabLab Boc@l » : MightyScape trié (433 extensions qui
+# fonctionnent avec Inkscape Flatpak) + calepinage maison, en français.
+# Menu Inkscape : Extensions > FabLab Boc@l. Détails : mightyscape/LISEZMOI.md
+# ------------------------------------------------------------------
+if en_tant_que bash "$DOSSIER_SCRIPT/mightyscape/installer.sh" >>"$JOURNAL" 2>&1; then
+  ok "Extensions FabLab Boc@l (MightyScape traduit)"
+else
+  ko "Extensions FabLab Boc@l : relancer « bash mightyscape/installer.sh » (voir le journal)"
 fi
 
 # =====================================================================

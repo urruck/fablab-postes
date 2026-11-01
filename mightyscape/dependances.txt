@@ -1,0 +1,16 @@
+# Bibliothèques Python des extensions FabLab Boc@l.
+# Installées pour le Python d'Inkscape Flatpak (pas de Python 3.10 à part).
+# numpy, Pillow et lxml sont déjà fournis par Inkscape : ne pas les ajouter.
+boxes @ git+https://github.com/florianfesti/boxes.git@116a5e06792d41370de1680535e016bec26a56e4
+vpype
+vpype-occult
+scipy
+shapely
+matplotlib
+svgpathtools
+networkx
+pyclipper
+svg-to-gcode
+ezdxf
+moderngl
+opencv-python-headless
